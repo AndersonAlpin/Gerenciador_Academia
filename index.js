@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
-const port = 3333;
+const port = 8080;
 
 //EXPRESS utilizará o EJS
 app.set('view engine', 'ejs');
