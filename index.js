@@ -25,5 +25,16 @@ app.get("/home", (req, res) => {
 app.get("/clientes", (req, res) => {
     res.render("clientes");
 });
+app.get("/pacotes", (req, res) => {
+    res.render("pacotes");
+});
+
+app.get("/relatorios", (req, res) => {
+    res.render("relatorios");
+});
+
+app.get("/mensalidades", (req, res) => {
+    res.render("mensalidades");
+});
 
 app.listen(port, () => {console.log("App rodando!")});
