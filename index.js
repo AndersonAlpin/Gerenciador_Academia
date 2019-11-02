@@ -22,4 +22,8 @@ app.get("/home", (req, res) => {
     res.render("home");
 });
 
+app.get("/clientes", (req, res) => {
+    res.render("clientes");
+});
+
 app.listen(port, () => {console.log("App rodando!")});
