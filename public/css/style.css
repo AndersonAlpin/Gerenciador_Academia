@@ -1,3 +1,29 @@
+<<<<<<< HEAD
+body {
+    /* font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-seri; */
+}
+
+body#home {
+    background: url('../img/fundo-joken.png') no-repeat center center fixed;
+    background-size: cover;
+}
+
+div.card {
+    padding: 10px 30px;
+    display: flex;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.formulario input{
+    height: 45px;
+    font-size: 1.1em;
+}
+
+.tabela {
+    padding: 17px 20px;
+    border-radius: 5px;
+=======
 * {
     box-sizing: border-box;
 }
@@ -219,4 +245,5 @@ body {
 
 #cards .card {
     margin-top: 25px;
+>>>>>>> b5356be761e9d1b3937f37d920ab564900b4d5e5
 }
