@@ -18,9 +18,31 @@ app.get("/", (req, res) => {
     res.render("index");
 });
 
+<<<<<<< HEAD
 app.get("/partida", (req, res) => {
     res.render("partida");
 });
 
+=======
+app.get("/home", (req, res) => {
+    res.render("home");
+});
+
+app.get("/clientes", (req, res) => {
+    res.render("clientes");
+});
+
+app.get("/mensalidades", (req, res) => {
+    res.render("mensalidades");
+});
+
+app.get("/pacotes", (req, res) => {
+    res.render("pacotes");
+});
+
+app.get("/relatorios", (req, res) => {
+    res.render("relatorios");
+});
+>>>>>>> b5356be761e9d1b3937f37d920ab564900b4d5e5
 
 app.listen(port, () => {console.log("App rodando!")});
