@@ -18,4 +18,9 @@ app.get("/", (req, res) => {
     res.render("index");
 });
 
+app.get("/partida", (req, res) => {
+    res.render("partida");
+});
+
+
 app.listen(port, () => {console.log("App rodando!")});
