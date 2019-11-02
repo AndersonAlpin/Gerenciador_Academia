@@ -1,0 +1,25 @@
+body {
+    /* font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-seri; */
+}
+
+body#home {
+    background: url('../img/fundo-joken.png') no-repeat center center fixed;
+    background-size: cover;
+}
+
+div.card {
+    padding: 10px 30px;
+    display: flex;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.formulario input{
+    height: 45px;
+    font-size: 1.1em;
+}
+
+.tabela {
+    padding: 17px 20px;
+    border-radius: 5px;
+}
