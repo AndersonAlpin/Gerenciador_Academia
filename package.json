@@ -1,7 +1,7 @@
 {
-  "name": "gerenciador-academia",
+  "name": "Jokenpo",
   "version": "1.0.0",
-  "description": "Um sistema de gerenciamento de Academia",
+  "description": "Projeto peso 20 de web",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
