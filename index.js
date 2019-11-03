@@ -10,7 +10,7 @@ app.set('view engine', 'ejs');
 app.use(express.static('public'));
 
 //Decofidicar os dados enviados pelo formulário
-app.use(bodyParser.urlencoded({extended:false}));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 //Rotas
@@ -25,6 +25,9 @@ app.get("/home", (req, res) => {
 app.get("/clientes", (req, res) => {
     res.render("clientes");
 });
+app.get("/cadastro-cliente", (req, res) => {
+    res.render("cadastro-cliente");
+});
 
 app.get("/mensalidades", (req, res) => {
     res.render("mensalidades");
@@ -38,4 +41,4 @@ app.get("/relatorios", (req, res) => {
     res.render("relatorios");
 });
 
-app.listen(port, () => {console.log("App rodando!")});
+app.listen(port, () => { console.log("App rodando!") });
