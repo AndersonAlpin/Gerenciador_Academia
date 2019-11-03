@@ -73,7 +73,7 @@ body {
     position: absolute;
     height: 55px;
     width: 100%;
-    /* background-color:#191970; */
+    background-color: rgb(15, 15, 15);
     z-index: 4;
     border-bottom: 1px solid #ffffff;
     color: #ffffff;
@@ -89,7 +89,7 @@ body {
 .side-nav {
     position: absolute;
     width: 100%;
-    background-color: #666;
+    background-color: rgb(20, 19, 19);
     height: 100vh;
     z-index: 3;
     padding-top: 55px;
@@ -116,7 +116,7 @@ body {
 }
 
 .side-nav ul li a:hover {
-    color: #58eb5f;
+    color: #000;
 }
 
 .main-content {
@@ -150,7 +150,7 @@ body {
     }
 
     .side-nav ul li i:hover {
-        color: #58eb5f;
+        color: #000;
     }
 }
 
