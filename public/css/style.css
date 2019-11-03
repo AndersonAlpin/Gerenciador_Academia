@@ -135,13 +135,21 @@ body {
 
 /* HOME */
 
-.card{
+.card-colors{
     background-color: #5bc0de;
 }
 
 .jumbotron {
     background-color: rgb(49, 48, 48);
     color: #ffffff;
+}
+
+#cards span {
+    font-size: 2em;
+}
+
+#cards .card {
+    margin-top: 25px;
 }
 
 
@@ -227,14 +235,4 @@ body {
         margin-left: 215px;
         margin-right: 15px;
     }
-}
-
-/* HOME */
-
-#cards span {
-    font-size: 2em;
-}
-
-#cards .card {
-    margin-top: 25px;
 }
