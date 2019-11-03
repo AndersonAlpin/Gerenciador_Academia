@@ -18,8 +18,13 @@ app.get("/", (req, res) => {
     res.render("index");
 });
 
-app.get("/home", (req, res) => {
-    res.render("home");
+app.post("/home", (req, res) => {
+    var email = req.body.email;
+    var senha = req.body.senha;
+    res.render("home", {
+        email: email,
+        senha: senha
+    });
 });
 
 app.get("/clientes", (req, res) => {

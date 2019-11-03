@@ -1,5 +1,31 @@
-<nav class="header navbar navbar-expand-sm">
-    
+<nav class="header navbar navbar-expand-sm navbar-dark">
+
+    <!-- LOGO -->
+    <div class="navbar-brand"></div>
+
+    <!-- MENU HAMBURGUER -->
+    <button class="navbar-toggler" data-toggle="collapse" data-target="#perfil">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- PERFIL -->
+    <div class="collapse navbar-collapse" id="perfil">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle text-light" data-toggle="dropdown">
+                    <span class="icon-user"><i class="fas fa-user-circle"></i></span>
+                    <%= email %>
+                    <!-- Fulano de Tal -->
+                </a>
+
+                <div class="dropdown-menu">
+                    <a href="#" class="dropdown-item">Meus Dados</a>
+                    <a href="http://localhost:8080/" class="dropdown-item">Sair</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+
     <!-- <a href="" class="navbar-brand font-weight-bold painel-controle">Painel de Controle</a> -->
 
     <!-- MENU HAMBURGUER -->
