@@ -5,17 +5,16 @@
     <%- include partials/sidebar.ejs %>
 
     <div class="main-content">
-
-        <div class="row mt-4">
+        <form class="form-group">
             <!-- FORMULÁRIO CLIENTE -->
-            <div class="col-md-6">
-                <div class="align-self-center">
-                    <div class="card" id="formulario-perguntas">
-                        <div class="card-header">
-                            <h3>Cadastro de clientes</h3>
-                        </div>
-                        <div class="card-body">
-                            <form class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="align-self-center">
+                        <div class="card" id="formulario-perguntas">
+                            <div class="card-header">
+                                <h3>Cadastro de clientes</h3>
+                            </div>
+                            <div class="card-body">
                                 <label>Nome:</label>
                                 <input type="text" placeholder="digite nome aqui" class="form-control">
                                 <br>
@@ -30,23 +29,32 @@
                                 <br>
                                 <label>Data de Nascimento:</label>
                                 <input type="text" placeholder="digite a data de nascimento aqui" class="form-control">
-                            </form>
+                            </div>
                         </div>
                     </div>
                 </div>
+
+                <!-- FORMULÁRIO ENDEREÇO -->
+                <div class="col-md-6">
+                    <div class="align-self-center">
+                        <div class="card" id="formulario-perguntas">
+                            <div class="card-header">
+                                <h3>Cadastro de clientes</h3>
+                            </div>
+                            <div class="card-body">
+                                <h1>Criar o Formulário de endereço aqui</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
-            <!-- FORMULÁRIO ENDEREÇO -->
-            <div class="col-md-6">
-                <h1>Testando formulário</h1>
+            <!-- BOTÕES  -->
+            <div class="row">
+                <button class="btn btn-primary btn-lg mt-3 ml-3">Salvar</button>
             </div>
-        </div>
-
-        <!-- BOTÕES -->
-        <div class="row">
-            <button class="btn btn-primary btn-lg mt-3 ml-3">Salvar</button>
-        </div>
-
+        </form>
     </div>
 </body>
 <%- include partials/footer.ejs %>
