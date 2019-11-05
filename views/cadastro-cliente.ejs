@@ -1,41 +1,42 @@
 <%- include partials/header.ejs %>
-<body>
-    <%- include partials/navbar.ejs %>
-    <%- include partials/sidebar.ejs %>
-    <!-- <nav class="navbar navbar-light bg-dark">
+
+    <body>
+        <%- include partials/navbar.ejs %>
+            <%- include partials/sidebar.ejs %>
+                <!-- <nav class="navbar navbar-light bg-dark">
         <a href="/">
             <img src="/img/aldo.png">
 
         </a>
 
     </nav> -->
-    <div class="main-content">
-        <div class="card" id="formulario-perguntas">
-            <div class="card-header">
-                <h3>Cadastro de clientes</h3>
-            </div>
-            <div class="card-body">
-                <form>
-                    <label>Nome:</label>
-                    <input type="text" placeholder="digite seu nome aqui" class="form-control">
-                    <br>
-                    <label>Sobrenome</label>
-                    <textarea placeholder="digite seu sobrenome aqui" class="form-control"></textarea>
-                    <br>
-                    <label>Email:</label>
-                    <input type="text" placeholder="digite seu email aqui" class="form-control">
-                    <br>
-                    <label>Cpf:</label>
-                    <input type="text" placeholder="digite seu cpf aqui" class="form-control">
-                    <br>
+                <div class="main-content">
+                    <div class="card" id="formulario-perguntas">
+                        <div class="card-header">
+                            <h3>Cadastro de clientes</h3>
+                        </div>
+                        <div class="card-body">
+                            <form class="form-group">
+                                <label>Nome:</label>
+                                <input type="text" placeholder="digite nome aqui" class="form-control">
+                                <br>
+                                <label>Sobrenome</label>
+                                <input placeholder="digite o sobrenome aqui" class="form-control">
+                                <br>
+                                <label>Email:</label>
+                                <input type="text" placeholder="digite o email aqui" class="form-control">
+                                <br>
+                                <label>Cpf:</label>
+                                <input type="text" placeholder="digite o cpf aqui" class="form-control">
+                                <br>
 
-                    <label>Data de Nascimento:</label>
-                    <input type="text" placeholder="digite sua data de nascimento aqui" class="form-control">
-                    <br>
-                    <button class="btn btn-primary">Salvar</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</body>
-<%- include partials/footer.ejs %>
+                                <label>Data de Nascimento:</label>
+                                <input type="text" placeholder="digite a data de nascimento aqui" class="form-control">
+                                <br>
+                                <button class="btn btn-primary btn-lg">Salvar</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+    </body>
+    <%- include partials/footer.ejs %>
