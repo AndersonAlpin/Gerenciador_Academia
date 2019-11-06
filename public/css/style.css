@@ -1,8 +1,11 @@
+/* ============================== */
+/* ======FORMATAÇÕES GERAIS====== */
 * {
     box-sizing: border-box;
 }
 
-/* Login */
+/* ================================ */
+/* ======FORMATAÇÕES DE LOGIN====== */
 body#login {
     background: url('../img/fundo.jpeg') no-repeat center center fixed;
     background-size: cover;
@@ -59,16 +62,8 @@ body#login {
     color: dodgerblue;
 }
 
-/* ==================================================== */
-
-body {
-    margin: 0;
-    padding: 0;
-    background: url('/img/fundo-caixa.png');
-}
-
-/* NAVBAR */
-
+/* ===================== */
+/* FORMATAÇÕES DO NAVBAR */
 .header {
     position: absolute;
     height: 55px;
@@ -93,9 +88,8 @@ body {
     background-color: rgb(15, 15, 15);
 }
 
-
-/* NAVSIDE */
-
+/* ====================== */
+/* FORMATAÇÕES DO SIDEBAR */
 .side-nav {
     position: absolute;
     width: 100%;
@@ -133,15 +127,12 @@ body {
     padding-top: 50px;
 }
 
-/* HOME */
-
-.card-colors{
-    background-color: #5bc0de;
-}
-
-.jumbotron {
-    background-color: rgb(49, 48, 48);
-    color: #ffffff;
+/* =================================== */
+/* =========FORMATAÇÕES DA HOME======= */
+body {
+    margin: 0;
+    padding: 0;
+    background: url('/img/fundo-caixa.png');
 }
 
 #cards span {
@@ -152,7 +143,17 @@ body {
     margin-top: 25px;
 }
 
+.card-colors{
+    background-color: #5bc0de;
+}
 
+.jumbotron {
+    background-color: rgb(49, 48, 48);
+    color: #ffffff;
+}
+
+/* ======================================== */
+/* FORMATAÇÕES DE RESPONSIVIDADE ESTRUTURAL */
 @media screen and (min-width: 200px) {
     .side-nav {
         width: 80px;
