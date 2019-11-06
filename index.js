@@ -3,42 +3,34 @@ const app = express();
 const bodyParser = require("body-parser");
 const port = 8080;
 
-//EXPRESS utilizará o EJS
+// IMPORTAR ROTAS
+const administradorController = require("./routes/administrador/administradorController");
+const clienteController = require("./routes/cliente/clienteController");
+const mensalidadeController = require("./routes/mensalidade/mensalidadeController");
+const pacoteController = require("./routes/pacote/pacoteController");
+const relatorioController = require("./routes/relatorio/relatorioController");
+
+// VIEW ENGINE
 app.set('view engine', 'ejs');
 
-//Utilizará arquivos estáticos
+// STATIC
 app.use(express.static('public'));
 
-//Decofidicar os dados enviados pelo formulário
+//BODY PARSERE
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-//Rotas
+// ROTAS IMPORTADAS
+app.use("/", administradorController);
+app.use("/", clienteController);
+app.use("/", mensalidadeController);
+app.use("/", pacoteController);
+app.use("/", relatorioController);
+
+// ROTA PRINCIPAL
 app.get("/", (req, res) => {
     res.render("index");
 });
 
-app.get("/home", (req, res) => {
-    res.render("home");
-});
-
-app.get("/clientes", (req, res) => {
-    res.render("clientes");
-});
-app.get("/cadastro-cliente", (req, res) => {
-    res.render("cadastro-cliente");
-});
-
-app.get("/mensalidades", (req, res) => {
-    res.render("mensalidades");
-});
-
-app.get("/pacotes", (req, res) => {
-    res.render("pacotes");
-});
-
-app.get("/relatorios", (req, res) => {
-    res.render("relatorios");
-});
-
+// APP SERVIDOR
 app.listen(port, () => { console.log("App rodando!") });
