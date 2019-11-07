@@ -1,27 +1,40 @@
-<nav class="header navbar navbar-expand-sm navbar-dark">
+<body>
+    <nav class="header navbar navbar-expand-sm navbar-dark">
 
-    <!-- LOGO -->
-    <div class="navbar-brand"></div>
+        <!-- LOGO -->
+        <div class="navbar-brand"></div>
 
-    <!-- MENU HAMBURGUER -->
-    <button class="navbar-toggler" data-toggle="collapse" data-target="#perfil">
-        <span class="navbar-toggler-icon"></span>
-    </button>
+        <!-- MENU HAMBURGUER -->
+        <button class="navbar-toggler" data-toggle="collapse" data-target="#perfil">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-    <!-- PERFIL -->
-    <div class="collapse navbar-collapse" id="perfil">
-        <ul class="navbar-nav ml-auto">
-            <li class="nav-item dropdown">
-                <a href="#" class="nav-link dropdown-toggle text-light" data-toggle="dropdown">
-                    <span class="icon-user"><i class="fas fa-user-circle"></i></span>
-                    Fulano de Tal
-                </a>
+        <!-- BARRA DE MENU -->
+        <div class="collapse navbar-collapse" id="perfil">
+            <ul class="navbar-nav ml-auto">
 
-                <div class="dropdown-menu">
-                    <a href="#" class="dropdown-item">Meus Dados</a>
-                    <a href="http://localhost:8080/" class="dropdown-item">Sair</a>
+                <!-- MENU TOPO -->
+                <div class="menu-topo m-auto">
+                    <a href="/administrador"><span><i class="fas fa-home"></i></span></a>
+                    <a href="/cliente"><span><i class="fas fa-users"></i></span></a>
+                    <a href="/mensalidade"><span><i class="far fa-credit-card"></i></span></a>
+                    <a href="/pacote"><span><i class="fas fa-cube"></i></span></a>
+                    <a id="border-none" href="/relatorio"><span><i class="fas fa-chart-pie"></i></span></a>
                 </div>
-            </li>
-        </ul>
-    </div>
-</nav>
+
+                <!-- PERFIL -->
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle text-light" data-toggle="dropdown">
+                        <span class="icon-user"><i class="fas fa-user-circle"></i></span>
+                        Fulano de Tal
+                    </a>
+
+                    <div class="dropdown-menu">
+                        <a href="#" class="dropdown-item">Meus Dados</a>
+                        <a href="http://localhost:8080/" class="dropdown-item">Sair</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</body>

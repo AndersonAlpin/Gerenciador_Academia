@@ -88,6 +88,24 @@ body#login {
     background-color: rgb(15, 15, 15);
 }
 
+#border-none {
+    border-right: none;
+}
+
+.menu-topo a {
+    border-right:1px solid #333;
+}
+
+.menu-topo i {
+    color: #D3D3D3;
+    margin: 0 10px;
+    font-size: 22px;
+}
+
+.menu-topo i:hover {
+    color: #5bc0de;
+}
+
 /* ====================== */
 /* FORMATAÇÕES DO SIDEBAR */
 .side-bar {
@@ -125,6 +143,7 @@ body#login {
 
 /* =================================== */
 /* =========FORMATAÇÕES DA HOME======= */
+
 body {
     margin: 0;
     padding: 0;
@@ -152,9 +171,13 @@ body {
     color: #ffffff;
 }
 
+#jumbotron {
+    display: none;
+}
+
 /* ======================================== */
 /* FORMATAÇÕES DE RESPONSIVIDADE ESTRUTURAL */
-@media screen and (min-width: 200px) {
+@media screen and (min-width: 0px) {
     .side-bar {
         width: 80px;
     }
@@ -172,8 +195,8 @@ body {
     }
 
     .main-content {
-        margin-left: 95px;
-        margin-right: 25px;
+        margin-right: 15px;
+        margin-left: 15px;
     }
 
     #form-busca {
@@ -183,9 +206,28 @@ body {
     .side-bar ul li i:hover {
         color: #5bc0de;
     }
+
+    .side-bar {
+        display: none;
+    }
+
+    .menu-topo {
+        display: flex;
+    }
+	.main-content {
+    }
+
 }
 
-@media screen and (min-width: 600px) {
+@media screen and (min-width: 356px) {
+    #jumbotron {
+        display: block;
+    }
+}
+
+
+
+@media screen and (min-width: 576px) {
     .side-bar {
         width: 80px;
     }
@@ -204,7 +246,15 @@ body {
 
     .main-content {
         margin-left: 95px;
-        margin-right: 25px;
+        margin-right: 15px;
+    }
+    
+    .side-bar {
+        display: inline;
+    }
+
+    .menu-topo {
+        display: none;
     }
 }
 
