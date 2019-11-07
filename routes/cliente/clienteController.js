@@ -5,8 +5,8 @@ router.get("/cliente", (req, res) => {
     res.render("cliente");
 });
 
-router.get("/cliente/cadastro-cliente", (req, res) => {
-    res.render("cadastro-cliente");
+router.get("/cliente/cadastro", (req, res) => {
+    res.render("cadastro");
 });
 
 module.exports = router;
