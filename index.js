@@ -4,11 +4,11 @@ const bodyParser = require("body-parser");
 const port = 8080;
 
 // IMPORTAR ROTAS
-const administradorController = require("./routes/administrador/administradorController");
-const clienteController = require("./routes/cliente/clienteController");
-const mensalidadeController = require("./routes/mensalidade/mensalidadeController");
-const pacoteController = require("./routes/pacote/pacoteController");
-const relatorioController = require("./routes/relatorio/relatorioController");
+const administradorController = require("./controllers/administradorController");
+const clienteController = require("./controllers/clienteController");
+const mensalidadeController = require("./controllers/mensalidadeController");
+const pacoteController = require("./controllers/pacoteController");
+const relatorioController = require("./controllers/relatorioController");
 
 // VIEW ENGINE
 app.set('view engine', 'ejs');
