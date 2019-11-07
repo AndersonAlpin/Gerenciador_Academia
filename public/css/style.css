@@ -90,7 +90,7 @@ body#login {
 
 /* ====================== */
 /* FORMATAÇÕES DO SIDEBAR */
-.side-nav {
+.side-bar {
     position: absolute;
     width: 100%;
     background-color: rgb(20, 19, 19);
@@ -99,32 +99,28 @@ body#login {
     padding-top: 55px;
 }
 
-.side-nav ul {
+.side-bar ul {
     list-style: none;
     padding: 0;
     margin: 0;
 }
 
-.side-nav ul li {
+.side-bar ul li {
     padding: 20px 10px;
     border-bottom: 1px solid #333;
 }
 
-.side-nav ul li a {
+.side-bar ul li a {
     color: #fff;
     text-decoration: none;
 }
 
-.side-nav ul li i {
+.side-bar ul li i {
     color: #D3D3D3;
 }
 
-.side-nav ul li a:hover {
+.side-bar ul li a:hover {
     color: #5bc0de;
-}
-
-.main-content {
-    padding-top: 50px;
 }
 
 /* =================================== */
@@ -143,6 +139,10 @@ body {
     margin-top: 25px;
 }
 
+.main-content {
+    padding-top: 50px;
+}
+
 .card-colors{
     background-color: #5bc0de;
 }
@@ -155,19 +155,19 @@ body {
 /* ======================================== */
 /* FORMATAÇÕES DE RESPONSIVIDADE ESTRUTURAL */
 @media screen and (min-width: 200px) {
-    .side-nav {
+    .side-bar {
         width: 80px;
     }
 
-    .side-nav ul li {
+    .side-bar ul li {
         text-align: center;
     }
 
-    .side-nav ul li span:nth-child(2) {
+    .side-bar ul li span:nth-child(2) {
         display: none;
     }
 
-    .side-nav ul li i {
+    .side-bar ul li i {
         font-size: 26px;
     }
 
@@ -180,31 +180,25 @@ body {
         display: none;
     }
 
-    .side-nav ul li i:hover {
+    .side-bar ul li i:hover {
         color: #5bc0de;
     }
 }
 
-@media screen and (min-width: 660px) {
-    #form-busca {
-        display: flex;
-    }
-}
-
 @media screen and (min-width: 600px) {
-    .side-nav {
+    .side-bar {
         width: 80px;
     }
 
-    .side-nav ul li {
+    .side-bar ul li {
         text-align: center;
     }
 
-    .side-nav ul li span:nth-child(2) {
+    .side-bar ul li span:nth-child(2) {
         display: none;
     }
 
-    .side-nav ul li i {
+    .side-bar ul li i {
         font-size: 26px;
     }
 
@@ -216,19 +210,19 @@ body {
 
 
 @media screen and (min-width: 1000px) {
-    .side-nav {
+    .side-bar {
         width: 200px;
     }
 
-    .side-nav ul li {
+    .side-bar ul li {
         text-align: left;
     }
 
-    .side-nav ul li span:nth-child(2) {
+    .side-bar ul li span:nth-child(2) {
         display: inline;
     }
 
-    .side-nav ul li i {
+    .side-bar ul li i {
         font-size: 16px;
     }
 
