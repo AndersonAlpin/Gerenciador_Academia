@@ -24,6 +24,6 @@ const Login = connection.define('login', {
 Login.belongsTo(Administrador, {foreignKey: 'administradorID', constraints: false, as: 'Administrador'});
 
 // Necessário para criar a base de dados. Comentar este trecho após executar o servidor
-Login.sync({force: true}); 
+// Login.sync({force: true}); 
 
 module.exports = Login;

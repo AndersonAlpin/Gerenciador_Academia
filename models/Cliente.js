@@ -39,6 +39,6 @@ Cliente.belongsTo(Academia, {foreignKey: 'academiaID', constraints: false, as: '
 Cliente.belongsTo(Pacote, {foreignKey: 'pacoteID', constraints: false, as: 'Pacote'});
 
 // Necessário para criar a base de dados. Comentar este trecho após executar o servidor
-Cliente.sync({force: true}); 
+// Cliente.sync({force: true}); 
 
 module.exports = Cliente;
