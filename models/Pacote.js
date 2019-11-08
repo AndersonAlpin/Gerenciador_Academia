@@ -3,6 +3,12 @@ const connection = require("../database/database");
 
 // Tabela Pacote
 const Pacote = connection.define('pacote', {
+    pacoteID: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true
+    },
     nome: {
         type: Sequelize.STRING,
         allowNull: false
