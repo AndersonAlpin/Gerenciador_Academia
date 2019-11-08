@@ -1,7 +1,15 @@
 const Sequelize = require("sequelize");
 const connection = require("../database/database");
+const Cliente = require("../models/Cliente"); // Importando Cliente para gerar chave estrangeira
 
-const enderecoCliente = connection.define('enderecoCliente', {
+// Tabela EnderecoCliente
+const EnderecoCliente = connection.define('enderecocliente', {
+    enderecoClienteID: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true
+    },
     logradouro: {
         type: Sequelize.STRING,
         allowNull: false
@@ -28,4 +36,10 @@ const enderecoCliente = connection.define('enderecoCliente', {
     }
 });
 
-module.exports = enderecoCliente;
+// Gerando chave estrangeira de Cliente na tabela EnderecoCliente
+EnderecoCliente.belongsTo(Cliente, {foreignKey: 'clienteID', constraints: false, as: 'Cliente'}); 
+
+// Necessário para criar a base de dados. Comentar este trecho após executar o servidor
+EnderecoCliente.sync({force: true}); 
+
+module.exports = EnderecoCliente;
