@@ -23,6 +23,7 @@ const Pacote = connection.define('pacote', {
     }
 });
 
-Pacote.sync({force: true}); // Necessário para criar a base de dados. Comentar este trecho após executar o servidor
+// Necessário para criar a base de dados. Comentar este trecho após executar o servidor
+// Pacote.sync({force: true});
 
 module.exports = Pacote;

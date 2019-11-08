@@ -36,6 +36,6 @@ const Administrador = connection.define('administrador', {
 Administrador.belongsTo(Academia, {foreignKey: 'academiaID', constraints: false, as: 'Academia'});
 
 // Necessário para criar a base de dados. Comentar este trecho após executar o servidor
-Administrador.sync({force: true}); 
+// Administrador.sync({force: true}); 
 
 module.exports = Administrador;

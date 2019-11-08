@@ -37,6 +37,6 @@ const Mensalidade = connection.define('mensalidade', {
 Mensalidade.belongsTo(Cliente, {foreignKey: 'clienteID', constraints: false, as: 'Cliente'});
 
 // Necessário para criar a base de dados. Comentar este trecho após executar o servidor
-Mensalidade.sync({force: true}); 
+// Mensalidade.sync({force: true}); 
 
 module.exports = Mensalidade;
