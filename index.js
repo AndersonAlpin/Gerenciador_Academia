@@ -11,10 +11,6 @@ const mensalidadeController = require("./controllers/mensalidadeController");
 const administradorController = require("./controllers/administradorController");
 /////////////////////////////////////////////////////////////////////////////////
 
-// IMPORTAR MODELS
-
-/////////////////////////////////////////////////////////////
-
 // VIEW ENGINE
 app.set('view engine', 'ejs');
 //////////////////////////////
@@ -43,7 +39,7 @@ const Administrador = require("./models/Administrador");
 const Pacote = require("./models/Pacote");
 const Cliente = require("./models/Cliente");
 const Mensalidade = require("./models/Mensalidade");
-const EndereEnderecoClientecoCliente = require("./models/EnderecoCliente");
+const EnderecoClientecoCliente = require("./models/EnderecoCliente");
 ////////////////////////////////////////////////////////////
 
 // ROTA PRINCIPAL
