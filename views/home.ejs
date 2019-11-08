@@ -1,0 +1,62 @@
+<%- include partials/header.ejs %>
+
+    <body>
+        <%- include partials/navbar.ejs %>
+            <%- include partials/sidebar.ejs %>
+
+                <!-- Área de Conteúdos -->
+                <div class="main-content">
+
+                    <div class="jumbotron mt-4 mb-1 d-none d-sm-block">
+
+                        <h1 class="display-3">Academia Teste</h1>
+                        <P class="lead">
+                            Bem-vindo ao seu painel de controle administrativo!
+                        </P>
+                        <p class="lead">
+                            Gerêncie aqui os clientes, os pacotes promocionais e as mensalidades.
+                        </p>
+
+                    </div>
+
+                    <div class="row" id="cards">
+
+                        <div class="col-sm-6 col-md-4">
+
+                            <div class="card card-colors">
+                                <div class="card-body text-center">
+                                    <h3 class="card-tittle">Clientes ativos</h3>
+                                    <span class="card-text display-4">47</span>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="col-sm-6 col-md-4">
+
+                            <div class="card card-colors">
+                                <div class="card-body text-center">
+                                    <h3 class="card-tittle">Pagamentos atrasados</h3>
+                                    <span class="card-text display-4">4</span>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="col-sm-12 col-md-4">
+
+                            <div class="card card-colors mb-4">
+                                <div class="card-body text-center">
+                                    <h3 class="card-tittle">Total de entradas</h3>
+                                    <span class="card-text display-4">R$ 2.320,00</span>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+    </body>
+    <%- include partials/footer.ejs %>

@@ -1,14 +1,37 @@
 <%- include partials/header.ejs %>
 
-<body>
-    <%- include partials/navbar.ejs %>
-    <%- include partials/sidebar.ejs %>
+    <body>
+        <%- include partials/navbar.ejs %>
+            <%- include partials/sidebar.ejs %>
 
-    <div class="main-content">
-        <div">
+                <div class="main-content">
+                    <div ">
             <h1>Pacotes</h1>
+            <table class="table table-hover table-bordee ">
+          <tr class="table-danger ">
+              <th class="bg-primary ">Nome</th>
+              <th>Descrição</th>
+              <th>valor do desconto</th>
+          </tr>
+           <tr>
+             
+            <td>Aldo Pacotes</td>
+            <td>basta ir com aldo</td>
+            <td>60%</td>
+           </tr>
+           <tr>
+            <td>Leo bomba</td>
+            <td>basta levar 3 pessoas</td>
+            <td>40%</td>
+           </tr>
+            <tr>
+             <td>paconte verao</td>
+            <td>natal</td>
+            <td>20%</td>
+            </tr>
+            </table>
         </div">
-    </div>
+                    </div>
 
-</body>
-<%- include partials/footer.ejs %>
+    </body>
+    <%- include partials/footer.ejs %>
