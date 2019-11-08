@@ -9,6 +9,7 @@ const clienteController = require("./controllers/clienteController");
 const relatorioController = require("./controllers/relatorioController");
 const mensalidadeController = require("./controllers/mensalidadeController");
 const administradorController = require("./controllers/administradorController");
+const validarLogin = require("./controllers/validarLogin");
 /////////////////////////////////////////////////////////////////////////////////
 
 // VIEW ENGINE
@@ -30,6 +31,7 @@ app.use("/", clienteController);
 app.use("/", relatorioController);
 app.use("/", mensalidadeController);
 app.use("/", administradorController);
+app.use("/", validarLogin);
 //////////////////////////////////////
 
 // IMPORTAR MODELS
