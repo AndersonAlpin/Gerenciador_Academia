@@ -1,11 +1,11 @@
-/*<script>
+
             function validar(){
-              var email = loginEmail.name.value;
-              var senha = loginEmail.senha.value;
+              var email = login.name.value;
+              var senha = login.senha.value;
           
-              if(nome == "k"){
-                  alert("digite seu email");
-                  loginEmail.name.focus();
+              if(nome == ""){
+                  alert("digite seu email")
+                  loginEmail.name.focus() 
                   return false;
               }
           
@@ -14,4 +14,4 @@
                   loginEmail.senha.focus();
               }
           }
-        </script>*/
+    
