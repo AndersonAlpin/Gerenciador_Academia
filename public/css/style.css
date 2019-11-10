@@ -4,11 +4,28 @@
     box-sizing: border-box;
 }
 
+.titulo-tabelas{
+    font-size: 1.2em;
+    font-weight: 500;
+}
+
+.tabelas {
+    height: 270px;
+    overflow: auto;
+    margin-bottom: 5px;
+    background-color: #868e96 ;
+    /* table-layout: fixed; */
+}
+
 /* ================================ */
 /* ======FORMATAÇÕES DE LOGIN====== */
 body#login {
     background: url('../img/fundo.jpeg') no-repeat center center fixed;
     background-size: cover;
+}
+
+.main-content {
+    padding-top: 80px;
 }
 
 .main-section {
@@ -156,10 +173,6 @@ body {
 
 #cards .card {
     margin-top: 25px;
-}
-
-.main-content {
-    padding-top: 50px;
 }
 
 .card-colors{
