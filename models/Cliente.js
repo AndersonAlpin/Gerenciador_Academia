@@ -31,7 +31,11 @@ const Cliente = connection.define('cliente', {
         type: Sequelize.STRING,
         allowNull: true
     },
-    
+    ativo: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+        defaultValue: true
+    }
 });
 
 // Gerando chave estrangeira de Academia na tabela Cliente
