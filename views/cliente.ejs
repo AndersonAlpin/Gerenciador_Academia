@@ -1,52 +1,51 @@
 <%- include partials/header.ejs %>
-
+<%- include partials/navbar.ejs %>
+<%- include partials/sidebar.ejs %>
 <body>
-    <%- include partials/navbar.ejs %>
-    <%- include partials/sidebar.ejs %>
+
     <div class="main-content">
-
-        <div class="container">
-
-            <!-- SELECT -->
-            <div class="form-group">
-                <label class="titulo-tabelas" for="clientes">Clientes</label>
-                <select class="form-control bg-dark text-light" id="clientes">
-                    <option value="">Todos</option>
-                    <option value="">Ativos</option>
-                    <option value="">Inativos</option>
-                </select>
-            </div>
-
-            <!-- TABELA -->
-            <div class="table-responsive tabelas">
+            <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Dropdown
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                        <button class="dropdown-item" type="button">Ativos</button>
+                        <button class="dropdown-item" type="button">Inativos</button>
+        
+                    </div>
+                </div>
+        
                 <table class=" table table-hover">
-                    <tr class=" bg-dark text-light">
-                        <th>Nome</th>
-                        <th>Sobrenone</th>
-                        <th>CPF</th>
-                        <th>Telefone</th>
-                        <th>Email</th>
-                    </tr>
-                    <% clientes.forEach(cliente => { %>
-                    <tr>
-                        <td><%= cliente.nome %></td>
-                        <td><%= cliente.sobrenome %></td>
-                        <td><%= cliente.cpf %></td>
-                        <td><%= cliente.telefone %></td>
-                        <td><%= cliente.email %></td>
-                    </tr>
-                    <% }) %>
-                </table>
-            </div> <!-- FIM TABELA -->
-
-            <div>
-                <button class="btn btn-dark mt-3">Visualizar</button>
-                <button class="btn btn-dark mt-3">Editar</button>
-                <button class="btn btn-dark mt-3">Adicionar</button>
-            </div>
-
-        </div>
-
+                        <tr class=" table-dark ">
+                            <th class=" bg-primary ">Nome</th>
+                            <th>Sobrenone</th>
+                            <th>CPF</th>
+                        </tr>
+                        <tr>
+                            <td>Aldo </td>
+                            <td>Santos</td>
+                            <td>999.888.888.88</td>
+                        </tr>
+                        <tr>
+                            <td>Leo </td>
+                            <td>lopes</td>
+                            <td>666.666.666.22</td>
+                        </tr>
+                        <tr>
+                            <td>Anderso</td>
+                            <td>Oliviera</td>
+                            <td>99.999.999.99</td>
+                        </tr>
+                    </table>
+                </div>
+                <!-- Example single danger button -->
+                <div class="btn-group">
+                    <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Clientes
+    </button>
     </div>
+
+    
 </body>
+
 <%- include partials/footer.ejs %>
