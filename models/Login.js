@@ -4,7 +4,7 @@ const Administrador = require("../models/Administrador"); // Importando Administ
 
 // Tabela Login
 const Login = connection.define('login', {
-    loginID: {
+    id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         autoIncrement: true,
@@ -21,9 +21,10 @@ const Login = connection.define('login', {
 });
 
 // Gerando chave estrangeira de Administrador na tabela Login
-Login.belongsTo(Administrador, {foreignKey: 'administradorID', constraints: false, as: 'Administrador'});
+Administrador.hasOne(Login);
+Login.belongsTo(Administrador);
 
 // Necessário para criar a base de dados. Comentar este trecho após executar o servidor
-// Login.sync({force: true}); 
+Login.sync({force: true}); 
 
 module.exports = Login;

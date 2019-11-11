@@ -4,7 +4,7 @@ const Cliente = require("../models/Cliente"); // Importando Cliente para gerar c
 
 // Tabela Mensalidade
 const Mensalidade = connection.define('mensalidade', {
-    mensalidadeID: {
+    id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         autoIncrement: true,
@@ -34,9 +34,10 @@ const Mensalidade = connection.define('mensalidade', {
 });
 
 // Gerando chave estrangeira de Cliente na tabela Mensalidade
-Mensalidade.belongsTo(Cliente, {foreignKey: 'clienteID', constraints: false, as: 'Cliente'});
+Cliente.hasMany(Mensalidade);
+Mensalidade.belongsTo(Cliente);
 
 // Necessário para criar a base de dados. Comentar este trecho após executar o servidor
-// Mensalidade.sync({force: true}); 
+Mensalidade.sync({force: true}); 
 
 module.exports = Mensalidade;

@@ -35,12 +35,12 @@ app.use("/", adminController);
 
 // IMPORTAR MODELS
 const Academia = require("./models/Academia");
-const Login = require("./models/Login");
 const Administrador = require("./models/Administrador");
+const Login = require("./models/Login");
 const Pacote = require("./models/Pacote");
 const Cliente = require("./models/Cliente");
-const Mensalidade = require("./models/Mensalidade");
 const EnderecoClientecoCliente = require("./models/EnderecoCliente");
+const Mensalidade = require("./models/Mensalidade");
 /////////////////////////////////////////////////////////////////////
 
 // Database

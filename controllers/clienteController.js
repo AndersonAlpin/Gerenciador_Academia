@@ -4,6 +4,7 @@ const Cliente = require("../models/Cliente");
 
 router.get("/administrador/clientes/listar", (req, res) => {
     Cliente.findAll({raw: true}).then(clientes => {
+        console.log(clientes)
         res.render("administrador/clientes/listar", {clientes: clientes});
     });
 });

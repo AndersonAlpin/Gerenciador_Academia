@@ -4,7 +4,7 @@ const Academia = require("../models/Academia"); // Importando Academia para gera
 
 // Tabela Administrador
 const Administrador = connection.define('administrador', {
-    administradorID: {
+    id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         autoIncrement: true,
@@ -20,22 +20,23 @@ const Administrador = connection.define('administrador', {
     },
     cpf: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: true
     },
     telefone: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: true
     },
     telefone: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: true
     }
 });
 
 // Gerando chave estrangeira de Academia na tabela Administrador
-Administrador.belongsTo(Academia, {foreignKey: 'academiaID', constraints: false, as: 'Academia'});
+Academia.hasMany(Administrador);
+Administrador.belongsTo(Academia);
 
 // Necessário para criar a base de dados. Comentar este trecho após executar o servidor
-// Administrador.sync({force: true}); 
+Administrador.sync({force: true}); 
 
 module.exports = Administrador;

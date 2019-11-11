@@ -4,7 +4,7 @@ const Cliente = require("../models/Cliente"); // Importando Cliente para gerar c
 
 // Tabela EnderecoCliente
 const EnderecoCliente = connection.define('enderecocliente', {
-    enderecoClienteID: {
+    id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         autoIncrement: true,
@@ -12,34 +12,35 @@ const EnderecoCliente = connection.define('enderecocliente', {
     },
     logradouro: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: true
     },
     numero: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: true
     },
     cidade: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: true
     },
     bairro: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: true
     },
     cep: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: true
     },
     uf: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: true
     }
 });
 
 // Gerando chave estrangeira de Cliente na tabela EnderecoCliente
-EnderecoCliente.belongsTo(Cliente, {foreignKey: 'clienteID', constraints: false, as: 'Cliente'}); 
+Cliente.hasOne(EnderecoCliente); 
+EnderecoCliente.belongsTo(Cliente); 
 
 // Necessário para criar a base de dados. Comentar este trecho após executar o servidor
-// EnderecoCliente.sync({force: true}); 
+EnderecoCliente.sync({force: true}); 
 
 module.exports = EnderecoCliente;

@@ -3,7 +3,7 @@ const connection = require("../database/database");
 
 // Tabela Pacote
 const Pacote = connection.define('pacote', {
-    pacoteID: {
+    id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         autoIncrement: true,
@@ -14,7 +14,7 @@ const Pacote = connection.define('pacote', {
         allowNull: false
     },
     descricao: {
-        type: Sequelize.STRING,
+        type: Sequelize.TEXT,
         allowNull: false
     },
     taxaDesconto: {
@@ -24,6 +24,6 @@ const Pacote = connection.define('pacote', {
 });
 
 // Necessário para criar a base de dados. Comentar este trecho após executar o servidor
-// Pacote.sync({force: true});
+Pacote.sync({force: true});
 
 module.exports = Pacote;

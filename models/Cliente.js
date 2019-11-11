@@ -5,7 +5,7 @@ const Academia = require("../models/Academia"); // Importando Pacote para gerar 
 
 // Tabela Cliente
 const Cliente = connection.define('cliente', {
-    clienteID: {
+    id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         autoIncrement: true,
@@ -39,10 +39,12 @@ const Cliente = connection.define('cliente', {
 });
 
 // Gerando chave estrangeira de Academia na tabela Cliente
-Cliente.belongsTo(Academia, {foreignKey: 'academiaID', constraints: false, as: 'Academia'});
-Cliente.belongsTo(Pacote, {foreignKey: 'pacoteID', constraints: false, as: 'Pacote'});
+Academia.hasMany(Cliente);
+Cliente.belongsTo(Academia);
+Pacote.hasMany(Cliente);
+Cliente.belongsTo(Pacote);
 
 // Necessário para criar a base de dados. Comentar este trecho após executar o servidor
-// Cliente.sync({force: true}); 
+Cliente.sync({force: true}); 
 
 module.exports = Cliente;
