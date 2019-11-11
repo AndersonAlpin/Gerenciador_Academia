@@ -1,19 +1,27 @@
 {
-  "name": "gerenciador-academia",
+  "name": "academia",
   "version": "1.0.0",
-  "description": "Um sistema de gerenciamento de Academia",
+  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Anderson Alpin",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AndersonAlpin/Academia.git"
+  },
+  "author": "",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AndersonAlpin/Academia/issues"
+  },
+  "homepage": "https://github.com/AndersonAlpin/Academia#readme",
   "dependencies": {
-    "body": "^5.1.0",
     "body-parser": "^1.19.0",
     "ejs": "^2.7.1",
     "express": "^4.17.1",
     "mysql2": "^2.0.0",
-    "sequelize": "^5.21.2"
+    "sequelize": "^5.21.2",
+    "slugify": "^1.3.6"
   }
 }

@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router();
 
-router.get("/relatorio", (req, res) => {
-    res.render("relatorio");
+router.get("/administrador/relatorios/listar", (req, res) => {
+    res.render("administrador/relatorios/listar")
 });
 
 module.exports = router;
