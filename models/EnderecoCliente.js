@@ -41,6 +41,6 @@ Cliente.hasOne(EnderecoCliente);
 EnderecoCliente.belongsTo(Cliente); 
 
 // Necessário para criar a base de dados. Comentar este trecho após executar o servidor
-EnderecoCliente.sync({force: true}); 
+EnderecoCliente.sync({force: false}); 
 
 module.exports = EnderecoCliente;

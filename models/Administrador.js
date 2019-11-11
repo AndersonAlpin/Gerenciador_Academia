@@ -37,6 +37,6 @@ Academia.hasMany(Administrador);
 Administrador.belongsTo(Academia);
 
 // Necessário para criar a base de dados. Comentar este trecho após executar o servidor
-Administrador.sync({force: true}); 
+Administrador.sync({force: false}); 
 
 module.exports = Administrador;
