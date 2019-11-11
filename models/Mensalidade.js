@@ -38,6 +38,6 @@ Cliente.hasMany(Mensalidade);
 Mensalidade.belongsTo(Cliente);
 
 // Necessário para criar a base de dados. Comentar este trecho após executar o servidor
-Mensalidade.sync({force: false}); 
+// Mensalidade.sync({force: false}); 
 
 module.exports = Mensalidade;

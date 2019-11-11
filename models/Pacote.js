@@ -19,11 +19,11 @@ const Pacote = connection.define('pacote', {
     },
     taxaDesconto: {
         type: Sequelize.DOUBLE,
-        allowNull: true
+        allowNull: false
     }
 });
 
 // Necessário para criar a base de dados. Comentar este trecho após executar o servidor
-Pacote.sync({force: false});
+// Pacote.sync({force: false});
 
 module.exports = Pacote;

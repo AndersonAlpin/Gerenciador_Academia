@@ -16,6 +16,6 @@ const Academia = connection.define('Academia', {
 });
 
 // Necessário para criar a base de dados. Comentar este trecho após executar o servidor
-Academia.sync({force: false}); 
+// Academia.sync({force: false}); 
 
 module.exports = Academia;
