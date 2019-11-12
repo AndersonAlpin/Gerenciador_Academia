@@ -3,7 +3,7 @@
               var email = login.name.value;
               var senha = login.senha.value;
           
-              if(nome == ""){
+              if(nome == "k"){
                   alert("digite seu email")
                   loginEmail.name.focus() 
                   return false;
