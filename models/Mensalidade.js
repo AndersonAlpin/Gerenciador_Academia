@@ -1,5 +1,5 @@
 const Sequelize = require("sequelize");
-const connection = require("../database/database");
+const connection = require("../database/connection");
 const Cliente = require("../models/Cliente"); // Importando Cliente para gerar chave estrangeira
 
 // Tabela Mensalidade
@@ -12,17 +12,16 @@ const Mensalidade = connection.define('mensalidade', {
     },
     valor: {
         type: Sequelize.DOUBLE,
-        allowNull: false
+        allowNull: false,
+        defaultValue: 50
     },
     dataEmissao: {
         type: Sequelize.DATE,
-        allowNull: false,
-        deefaultValue: Sequelize.DATEONLY
+        allowNull: false
     },
     dataVencimento: {
         type: Sequelize.DATE,
-        allowNull: false,
-        deefaultValue: Sequelize.DATEONLY
+        allowNull: false
     },
     dataPagamento: {
         type: Sequelize.DATE,
@@ -40,6 +39,6 @@ Cliente.hasMany(Mensalidade);
 Mensalidade.belongsTo(Cliente);
 
 // Necessário para criar a base de dados. Comentar este trecho após executar o servidor
-// Mensalidade.sync({force: false}); 
+// Mensalidade.sync({force: true}); 
 
 module.exports = Mensalidade;

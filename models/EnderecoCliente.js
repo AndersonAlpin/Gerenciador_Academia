@@ -1,5 +1,5 @@
 const Sequelize = require("sequelize");
-const connection = require("../database/database");
+const connection = require("../database/connection");
 const Cliente = require("../models/Cliente"); // Importando Cliente para gerar chave estrangeira
 
 // Tabela EnderecoCliente

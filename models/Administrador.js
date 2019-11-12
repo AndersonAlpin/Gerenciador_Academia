@@ -1,5 +1,5 @@
 const Sequelize = require("sequelize");
-const connection = require("../database/database");
+const connection = require("../database/connection");
 const Academia = require("../models/Academia"); // Importando Academia para gerar chave estrangeira
 
 // Tabela Administrador

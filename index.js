@@ -1,7 +1,8 @@
 const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
-const connection = require("./database/database");
+const connection = require("./database/connection");
+const Queries = require("./database/queries");
 const port = 8080;
 
 // IMPORTAR ROTAS

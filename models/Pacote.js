@@ -1,5 +1,5 @@
 const Sequelize = require("sequelize");
-const connection = require("../database/database");
+const connection = require("../database/connection");
 
 // Tabela Pacote
 const Pacote = connection.define('pacote', {

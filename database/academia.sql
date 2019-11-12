@@ -1,5 +1,5 @@
 ﻿# Host: localhost  (Version 5.7.26)
-# Date: 2019-11-11 13:46:16
+# Date: 2019-11-12 15:21:43
 # Generator: MySQL-Front 6.1  (Build 1.26)
 
 
@@ -7,23 +7,26 @@
 # Structure for table "academia"
 #
 
+DROP TABLE IF EXISTS `academia`;
 CREATE TABLE `academia` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(255) NOT NULL,
   `createdAt` datetime NOT NULL,
   `updatedAt` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 #
 # Data for table "academia"
 #
 
+INSERT INTO `academia` VALUES (1,'Academia Teste','2019-11-12 13:59:05','2019-11-12 13:59:05');
 
 #
 # Structure for table "administradors"
 #
 
+DROP TABLE IF EXISTS `administradors`;
 CREATE TABLE `administradors` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(255) NOT NULL,
@@ -47,6 +50,7 @@ CREATE TABLE `administradors` (
 # Structure for table "logins"
 #
 
+DROP TABLE IF EXISTS `logins`;
 CREATE TABLE `logins` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `email` varchar(255) NOT NULL,
@@ -68,25 +72,28 @@ CREATE TABLE `logins` (
 # Structure for table "pacotes"
 #
 
+DROP TABLE IF EXISTS `pacotes`;
 CREATE TABLE `pacotes` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(255) NOT NULL,
   `descricao` text NOT NULL,
-  `taxaDesconto` double DEFAULT NOT NULL,
+  `taxaDesconto` double NOT NULL,
   `createdAt` datetime NOT NULL,
   `updatedAt` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 #
 # Data for table "pacotes"
 #
 
+INSERT INTO `pacotes` VALUES (1,'Verão','Desconto especial de verão',10,'2019-11-12 13:59:34','2019-11-12 13:59:34');
 
 #
 # Structure for table "clientes"
 #
 
+DROP TABLE IF EXISTS `clientes`;
 CREATE TABLE `clientes` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(255) NOT NULL,
@@ -104,20 +111,22 @@ CREATE TABLE `clientes` (
   KEY `pacoteId` (`pacoteId`),
   CONSTRAINT `clientes_ibfk_1` FOREIGN KEY (`AcademiumId`) REFERENCES `academia` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
   CONSTRAINT `clientes_ibfk_2` FOREIGN KEY (`pacoteId`) REFERENCES `pacotes` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 #
 # Data for table "clientes"
 #
 
+INSERT INTO `clientes` VALUES (1,'Anderson','Alpin','777.777.777-77','(77)77777-7777','anderson@gmail.com',1,'2019-11-12 13:58:56','2019-11-12 13:58:56',1,1);
 
 #
 # Structure for table "mensalidades"
 #
 
+DROP TABLE IF EXISTS `mensalidades`;
 CREATE TABLE `mensalidades` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `valor` double NOT NULL,
+  `valor` double NOT NULL DEFAULT '50',
   `dataEmissao` datetime NOT NULL,
   `dataVencimento` datetime NOT NULL,
   `dataPagamento` datetime DEFAULT NULL,
@@ -128,7 +137,7 @@ CREATE TABLE `mensalidades` (
   PRIMARY KEY (`id`),
   KEY `clienteId` (`clienteId`),
   CONSTRAINT `mensalidades_ibfk_1` FOREIGN KEY (`clienteId`) REFERENCES `clientes` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 #
 # Data for table "mensalidades"
@@ -139,6 +148,7 @@ CREATE TABLE `mensalidades` (
 # Structure for table "enderecoclientes"
 #
 
+DROP TABLE IF EXISTS `enderecoclientes`;
 CREATE TABLE `enderecoclientes` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `logradouro` varchar(255) DEFAULT NULL,
@@ -153,9 +163,10 @@ CREATE TABLE `enderecoclientes` (
   PRIMARY KEY (`id`),
   KEY `clienteId` (`clienteId`),
   CONSTRAINT `enderecoclientes_ibfk_1` FOREIGN KEY (`clienteId`) REFERENCES `clientes` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 #
 # Data for table "enderecoclientes"
 #
 
+INSERT INTO `enderecoclientes` VALUES (1,'Logradouro Teste','22','Cidade Teste','Bairro Teste','00000-000','TE','2019-11-12 13:58:56','2019-11-12 13:58:56',1);

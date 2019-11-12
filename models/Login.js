@@ -1,5 +1,5 @@
 const Sequelize = require("sequelize");
-const connection = require("../database/database");
+const connection = require("../database/connection");
 const Administrador = require("../models/Administrador"); // Importando Administrador para gerar chave estrangeira
 
 // Tabela Login

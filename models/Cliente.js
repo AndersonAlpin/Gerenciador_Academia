@@ -1,5 +1,5 @@
 const Sequelize = require("sequelize");
-const connection = require("../database/database");
+const connection = require("../database/connection");
 const Pacote = require("../models/Pacote"); // Importando Pacote para gerar chave estrangeira
 const Academia = require("../models/Academia"); // Importando Pacote para gerar chave estrangeira
 
