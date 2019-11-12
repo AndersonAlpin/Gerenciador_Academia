@@ -16,11 +16,13 @@ const Mensalidade = connection.define('mensalidade', {
     },
     dataEmissao: {
         type: Sequelize.DATE,
-        allowNull: false
+        allowNull: false,
+        deefaultValue: Sequelize.DATEONLY
     },
     dataVencimento: {
         type: Sequelize.DATE,
-        allowNull: false
+        allowNull: false,
+        deefaultValue: Sequelize.DATEONLY
     },
     dataPagamento: {
         type: Sequelize.DATE,
