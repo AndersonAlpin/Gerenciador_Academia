@@ -16,6 +16,7 @@ router.get("/administrador/clientes/listar", (req, res) => {
     });
 });
 
+
 router.get("/administrador/clientes/cadastro", (req, res) => {
     res.render("administrador/clientes/cadastro");
 });

@@ -7,7 +7,7 @@
         <h2>Clientes</h2>
         <hr>
         <div class="table-responsive-md table-bordered tabelas">
-            <table class="table table-">
+            <table class="table">
                 <thead class="table-dark">
                     <tr>
                         <th>Nome</th>
@@ -17,13 +17,13 @@
                         <th>Ações</th>
                     </tr>
                 </thead>
-                <tbody class="table-secondary">
+                <tbody>
                     <% clientes.forEach(cliente => { %>
                         <tr>
                             <td> <%= cliente.nome %> </td>
                             <td> <%= cliente.sobrenome %> </td>
                             <td> <%= cliente.cpf %> </td>
-                            <td> <%= cliente.pacoteId %> </td>
+                            <td> <%= cliente%> </td>
                             <td>  </td>
                         </tr>
                     <% }) %>
