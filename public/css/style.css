@@ -10,7 +10,7 @@
 }
 
 .tabelas {
-    height: 270px;
+    height: 300px;
     overflow: auto;
     margin-bottom: 5px;
     background-color: #868e96 ;
@@ -226,8 +226,6 @@ body {
 
     .menu-topo {
         display: flex;
-    }
-	.main-content {
     }
 
 }

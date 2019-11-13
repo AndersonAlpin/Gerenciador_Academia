@@ -4,12 +4,14 @@ const connection = require("../database/connection");
 const mysql = require("mysql2/promise");
 const Cliente = require("../models/Cliente");
 const EnderecoCliente = require("../models/EnderecoCliente");
+const Pacote = require("../models/Pacote");
 
 router.get("/administrador/clientes/listar", (req, res) => {
     Cliente.findAll({
         raw: true,
-        include: [{model: EnderecoCliente}]
+        include: [{model: Pacote}]
     }).then(clientes => {
+        console.log(clientes)
         res.render("administrador/clientes/listar", {clientes: clientes});
     });
 });
