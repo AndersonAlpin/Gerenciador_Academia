@@ -19,13 +19,16 @@
                 </thead>
                 <tbody>
                     <% pacotes.forEach(pacote => { %>
-                        <tr class="tabelas-linhas">
+                    <tr class="tabelas-linhas">
                         <td> <%= pacote.nome %> </td>
                         <td> <%= pacote.descricao %> </td>
                         <td> <%= pacote.taxaDesconto %> </td>
                         <td>
-                            <button class="btn btn-sm btn-light">Editar</button>
-                            <button class="btn btn-sm btn-light">Deletar</button>
+                            <button class="btn btn-sm btn-warning">Editar</button>
+                            <form class="inline" method="POST" action="/pacotes/delete">
+                                <input type="hidden" name="id" value="<%= pacote.id %>">
+                                <button class="btn btn-sm btn-danger">Deletar</button>
+                            </form>
                         </td>
                     </tr>
                     <% }) %>

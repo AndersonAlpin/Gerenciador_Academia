@@ -22,6 +22,11 @@
     color: #fff;
 }
 
+/* FORMULÁRIOS */
+.inline {
+    display: inline;
+}
+
 /* ================================ */
 /* ======FORMATAÇÕES DE LOGIN====== */
 body#login {
