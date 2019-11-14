@@ -1,45 +1,36 @@
 <%- include ../../partials/header.ejs %>
 <%- include ../../partials/navbar.ejs %>
 <%- include ../../partials/sidebar.ejs %>
+
 <body>
     <div class="main-content">
-        <div class="table-responsive-sm">
-            <h1>Pacotes</h1>
-            <table class=" table table-hover">
-                <tr class=" table-danger ">
-                    <th class=" bg-primary ">Nome</th>
-                    <th>Descrição</th>
-                    <th>valor do desconto</th>
-                </tr>
-                <tr>
-                    <td>Aldo Pacotes</td>
-                    <td>basta ir com aldo</td>
-                    <td>60%</td>
-                </tr>
-                <tr>
-                    <td>Leo bomba</td>
-                    <td>basta levar 3 pessoas</td>
-                    <td>40%</td>
-                </tr>
-                <tr>
-                    <td>paconte verao</td>
-                    <td>natal</td>
-                    <td>20%</td>
-                </tr>
+        <h2>Pacotes</h2>
+        <a class="btn btn-info" href="/administrador/pacotes/cadastro">Adicionar pacote</a>
+        <hr>
+        <div class="table-responsive-sm table-bordered tabelas">
+            <table class=" table">
+                <thead class="table-dark">
+                    <tr class="">
+                        <th>Nome</th>
+                        <th>Descrição</th>
+                        <th>Taxa de Desconto</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% pacotes.forEach(pacote => { %>
+                        <tr class="tabelas-linhas">
+                        <td> <%= pacote.nome %> </td>
+                        <td> <%= pacote.descricao %> </td>
+                        <td> <%= pacote.taxaDesconto %> </td>
+                        <td>
+                            <button class="btn btn-sm btn-light">Editar</button>
+                            <button class="btn btn-sm btn-light">Deletar</button>
+                        </td>
+                    </tr>
+                    <% }) %>
+                </tbody>
             </table>
         </div>
-        <div>
-            <div class="row float-left">
-                <button class="btn btn-primary btn-lg mt-3 ml-3 ">Adicionar pacote</button>
-            </div>
-            <div class="row float-left">
-                <button class="btn btn-primary btn-lg mt-3 ml-3 ">Remover pacote</button>
-            </div>
-            <div class="row float-left">
-                <button class="btn btn-primary btn-lg mt-3 ml-3 ">Alterar pacote</button>
-            </div>
-        </div>
-    </div>
-
 </body>
 <%- include ../../partials/footer.ejs %>

@@ -5,6 +5,14 @@
 <body>
     <div class="main-content">
         <h2>Clientes</h2>
+        <a class="btn btn-info" href="/administrador/clientes/cadastro">Cadastrar cliente</a>
+        <br>
+        <br>
+        <select name="" id="" class="form-control">
+            <option value="">Todos</option>
+            <option value="">Ativos</option>
+            <option value="">Inativos</option>
+        </select>
         <hr>
         <div class="table-responsive-md table-bordered tabelas">
             <table class="table">
@@ -19,13 +27,15 @@
                 </thead>
                 <tbody>
                     <% clientes.forEach(cliente => { %>
-                        <tr class="tabelas-linhas">
-                            <td> <%= cliente.nome %> </td>
-                            <td> <%= cliente.sobrenome %> </td>
-                            <td> <%= cliente.cpf %> </td>
-                            <td> <%= cliente.pacote.nome %> </td>
-                            <td> <%= cliente.enderecocliente.bairro %> </td>
-                        </tr>
+                    <tr class="tabelas-linhas">
+                        <td> <%= cliente.nome %> </td>
+                        <td> <%= cliente.sobrenome %> </td>
+                        <td> <%= cliente.cpf %> </td>
+                        <td> <%= cliente.pacote.nome %> </td>
+                        <td>
+                            <button class="btn btn-sm btn-light">Detalhes</button>
+                        </td>
+                    </tr>
                     <% }) %>
                 </tbody>
             </table>
