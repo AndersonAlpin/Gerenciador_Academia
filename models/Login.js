@@ -25,6 +25,6 @@ Administrador.hasOne(Login);
 Login.belongsTo(Administrador);
 
 // Necessário para criar a base de dados. Comentar este trecho após executar o servidor
-// Login.sync({force: false}); 
+// Login.sync({force: true}); 
 
 module.exports = Login;

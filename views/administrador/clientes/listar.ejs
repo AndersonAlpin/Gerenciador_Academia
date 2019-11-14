@@ -19,12 +19,12 @@
                 </thead>
                 <tbody>
                     <% clientes.forEach(cliente => { %>
-                        <tr>
+                        <tr class="tabelas-linhas">
                             <td> <%= cliente.nome %> </td>
                             <td> <%= cliente.sobrenome %> </td>
                             <td> <%= cliente.cpf %> </td>
-                            <td> <%= cliente%> </td>
-                            <td>  </td>
+                            <td> <%= cliente.pacote.nome %> </td>
+                            <td> <%= cliente.enderecocliente.bairro %> </td>
                         </tr>
                     <% }) %>
                 </tbody>

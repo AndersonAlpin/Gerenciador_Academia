@@ -8,11 +8,17 @@ const Pacote = require("../models/Pacote");
 
 router.get("/administrador/clientes/listar", (req, res) => {
     Cliente.findAll({
-        raw: true,
-        include: [{model: Pacote}]
+        include: [
+            {
+                model: EnderecoCliente
+            },
+            {
+                model: Pacote
+            }
+        ]
     }).then(clientes => {
         console.log(clientes)
-        res.render("administrador/clientes/listar", {clientes: clientes});
+        res.render("administrador/clientes/listar", { clientes: clientes });
     });
 });
 
@@ -22,7 +28,7 @@ router.get("/administrador/clientes/cadastro", (req, res) => {
 });
 
 router.post("/clientes/salvar", (req, res) => {
-    
+
 });
 
 // var idPacote = 'indefinido no momento';

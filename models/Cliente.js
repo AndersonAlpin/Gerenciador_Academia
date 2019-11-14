@@ -45,6 +45,6 @@ Pacote.hasMany(Cliente);
 Cliente.belongsTo(Pacote);
 
 // Necessário para criar a base de dados. Comentar este trecho após executar o servidor
-// Cliente.sync({force: false}); 
+// Cliente.sync({force: true}); 
 
 module.exports = Cliente;

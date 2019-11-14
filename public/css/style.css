@@ -13,8 +13,13 @@
     height: 300px;
     overflow: auto;
     margin-bottom: 5px;
-    background-color: #868e96 ;
+    /* background-color: #868e96 ; */
     /* table-layout: fixed; */
+}
+
+.tabelas-linhas {
+    background-color: #363636;
+    color: #fff;
 }
 
 /* ================================ */
