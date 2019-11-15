@@ -35,6 +35,24 @@ router.post("/pacotes/delete", (req, res) => {
     }else{
         res.redirect("/administrador/pacotes/listar");
     }
-})
+});
+
+router.get("/administrador/pacotes/editar/:id", (req, res) => {
+    var id = req.params.id;
+
+    if(isNaN(id)){
+        res.redirect("/administrador/pacotes/listar")
+    }
+
+    Pacote.findByPk(id).then(pacote => {
+        if(pacote != undefined){
+            res.render("administrador/pacotes/editar", {pacote: pacote});
+        }else {
+            res.redirect("/administrador/pacotes/listar")
+        }
+    }).catch(erro => {
+        res.redirect("/administrador/pacotes/listar")
+    })
+});
 
 module.exports = router;

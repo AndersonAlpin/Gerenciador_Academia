@@ -60,6 +60,24 @@ router.post("/clientes/salvar", (req, res) => {
 
 });
 
+router.get("/administrador/clientes/detalhes/:id", (req, res) => {
+    var id = req.params.id;
+    
+    if(isNaN(id)){
+        res.redirect("/administrador/clientes/listar");
+    }
+    
+    Cliente.findByPk(id).then(cliente => {
+        if(cliente != undefined){
+            res.render("administrador/clientes/detalhes", {cliente: cliente});
+        }else{
+            res.redirect("/administrador/clientes/listar");
+        }
+    }).catch(erro => {
+        res.redirect("/administrador/clientes/listar");
+    });
+});
+
 // var idPacote = 'indefinido no momento';
 
 // mysql.createConnection({
