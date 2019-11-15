@@ -9,9 +9,9 @@
         <br>
         <br>
         <select id="select" name="marca" class="form-control" required>
-            <option value="/administrador/clientes/listar">Todos</option>
             <option value="/administrador/clientes/ativos">Ativos</option>
             <option value="/administrador/clientes/inativos">Inativos</option>
+            <option value="/administrador/clientes/listar">Todos</option>
         </select>
         <hr>
         <div class="table-responsive-md table-bordered tabelas">
@@ -27,6 +27,7 @@
                 </thead>
                 <tbody>
                     <% clientes.forEach(cliente => { %>
+                    <% if(cliente.ativo == 1 ) { %>
                     <tr class="tabelas-linhas">
                         <td> <%= cliente.nome %> </td>
                         <td> <%= cliente.sobrenome %> </td>
@@ -36,6 +37,7 @@
                             <button class="btn btn-sm btn-success">Detalhes</button>
                         </td>
                     </tr>
+                    <% } %>
                     <% }) %>
                 </tbody>
             </table>

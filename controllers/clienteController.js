@@ -22,6 +22,36 @@ router.get("/administrador/clientes/listar", (req, res) => {
 });
 
 
+router.get("/administrador/clientes/ativos", (req, res) => {
+    Cliente.findAll({
+        include: [
+            {
+                model: EnderecoCliente
+            },
+            {
+                model: Pacote
+            }
+        ]
+    }).then(clientes => {
+        res.render("administrador/clientes/ativos", { clientes: clientes });
+    });
+});
+
+router.get("/administrador/clientes/inativos", (req, res) => {
+    Cliente.findAll({
+        include: [
+            {
+                model: EnderecoCliente
+            },
+            {
+                model: Pacote
+            }
+        ]
+    }).then(clientes => {
+        res.render("administrador/clientes/inativos", { clientes: clientes });
+    });
+});
+
 router.get("/administrador/clientes/cadastro", (req, res) => {
     res.render("administrador/clientes/cadastro");
 });
