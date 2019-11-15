@@ -34,7 +34,8 @@
                         <td> <%= cliente.cpf %> </td>
                         <td> <%= cliente.pacote.nome %> </td>
                         <td>
-                            <button class="btn btn-sm btn-success">Detalhes</button>
+                            <a href="/administrador/clientes/detalhes/<%= cliente.id %>"
+                                class="btn btn-sm btn-success">Detalhes</a>
                         </td>
                     </tr>
                     <% } %>

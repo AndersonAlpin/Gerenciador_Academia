@@ -84,7 +84,7 @@ router.get("/administrador/clientes/detalhes/:id", (req, res) => {
 //     user: 'root',
 //     password: ''
 // }).then(() => {
-//     connection.query('call gerarMensalidades('+idPacote+')');
+//     connection.query('call primeiraMensalidade('+idPacote+')');
 // });
 
 module.exports = router;
