@@ -7,6 +7,7 @@ router.get("/administrador/", (req, res) => {
     var numClientes = 0;
     var numAtraso = 0;
 
+    // MENSALIDADES ATRASADAS
     Mensalidade.findAll({
         where: {status: 'Em atraso'}
     }).then(mensalidades => {
@@ -15,6 +16,7 @@ router.get("/administrador/", (req, res) => {
         });
     });
 
+    // CLIENTES ATIVOS
     Cliente.findAll().then(clientes => {
         clientes.forEach(cliente => {
             numClientes++;
