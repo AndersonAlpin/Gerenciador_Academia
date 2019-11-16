@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const Pacote = require("../models/Pacote")
 
+// LISTAR PACOTES
 router.get("/administrador/pacotes/listar", (req, res) => {
     Pacote.findAll({force: true}).then(pacotes => {
         res.render("administrador/pacotes/listar", {pacotes: pacotes});
@@ -16,6 +17,7 @@ router.post("/pacotes/salvar", (req, res) => {
     
 });
 
+// DELETAR UM PACOTE
 router.post("/pacotes/delete", (req, res) => {
     var id = req.body.id;
     if(id != undefined){ //SE FOR DIFERENTE DE NULO
@@ -37,6 +39,7 @@ router.post("/pacotes/delete", (req, res) => {
     }
 });
 
+// EDITAR OS DADOS DE UM PACOTE
 router.get("/administrador/pacotes/editar/:id", (req, res) => {
     var id = req.params.id;
 
