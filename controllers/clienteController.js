@@ -53,7 +53,9 @@ router.get("/administrador/clientes/inativos", (req, res) => {
 });
 
 router.get("/administrador/clientes/cadastro", (req, res) => {
-    res.render("administrador/clientes/cadastro");
+    Pacote.findAll().then(pacote => {
+        res.render("administrador/clientes/cadastro", {pacote: pacote});
+    });
 });
 
 router.post("/clientes/salvar", (req, res) => {

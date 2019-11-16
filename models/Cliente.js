@@ -19,6 +19,10 @@ const Cliente = connection.define('cliente', {
         type: Sequelize.STRING,
         allowNull: false
     },
+    dataNascimento: {
+        type: Sequelize.DATEONLY,
+        allowNull: true
+    },
     cpf: {
         type: Sequelize.STRING,
         allowNull: true
