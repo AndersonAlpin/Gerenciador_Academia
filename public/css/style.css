@@ -27,6 +27,11 @@
     display: inline;
 }
 
+#detalhesCliente div{
+    padding: 5px;
+    font-size: 18px;
+}
+
 /* ================================ */
 /* ======FORMATAÇÕES DE LOGIN====== */
 body#login {

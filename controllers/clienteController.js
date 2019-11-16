@@ -69,7 +69,16 @@ router.get("/administrador/clientes/detalhes/:id", (req, res) => {
         res.redirect("/administrador/clientes/listar");
     }
     
-    Cliente.findByPk(id).then(cliente => {
+    Cliente.findByPk(id, {
+        include: [
+            {
+                model: Pacote
+            },
+            {
+                model: EnderecoCliente
+            }
+        ]
+    }).then(cliente => {
         if(cliente != undefined){
             res.render("administrador/clientes/detalhes", {cliente: cliente});
         }else{

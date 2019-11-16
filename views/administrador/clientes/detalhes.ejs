@@ -5,7 +5,63 @@
 <body>
     <div class="main-content">
         <h2>Detalhes do Cliente</h2>
-        
+        <hr>
+        <div id="detalhesCliente">
+            <div class="row col-md-12">
+                <div class="col-md-4">
+                    <div class="col-md-12"><span class="font-weight-bold">Nome: </span> <%= cliente.nome %></div>
+                    <div class="col-md-12"><span class="font-weight-bold">Sobrenome: </span> <%= cliente.sobrenome %>
+                    </div>
+                    <% var dataNormal = new Date( cliente.dataNascimento) %>
+                    <% var dataAtualizada = dataNormal.toLocaleDateString('en-GB'); %>
+                    <div class="col-md-12"><span class="font-weight-bold">Data de Nascimento: </span>
+                        <%= dataAtualizada %> </div>
+                    <div class="col-md-12"><span class="font-weight-bold">CPF: </span> <%= cliente.cpf %></div>
+                    <div class="col-md-12"><span class="font-weight-bold">Telefone: </span> <%= cliente.telefone %>
+                    </div>
+                    <div class="col-md-12"><span class="font-weight-bold">Email: </span> <%= cliente.email %></div>
+                    <div class="col-md-12"><span class="font-weight-bold">Pacote: </span> <%= cliente.pacote.nome %>
+                    </div>
+                    <div class="col-md-12"><span class="font-weight-bold">Status: </span>
+                        <% if(cliente.ativo == 1){ %>
+                        Ativo
+                        <% }else{ %>
+                        Inativo
+                        <% } %>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="col-md-12"><span class="font-weight-bold">Logradouro: </span>
+                        <%= cliente.enderecocliente.logradouro %></div>
+                    <div class="col-md-12"><span class="font-weight-bold">Número: </span>
+                        <%= cliente.enderecocliente.numero %></div>
+                    <div class="col-md-12"><span class="font-weight-bold">Cidade: </span>
+                        <%= cliente.enderecocliente.cidade %></div>
+                    <div class="col-md-12"><span class="font-weight-bold">Bairro </span>
+                        <%= cliente.enderecocliente.bairro %></div>
+                    <div class="col-md-12"><span class="font-weight-bold">CEP: </span>
+                        <%= cliente.enderecocliente.cep %></div>
+                    <div class="col-md-12"><span class="font-weight-bold">UF: </span> <%= cliente.enderecocliente.uf %>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <form action="" class="form-group form-inline">
+                    <div>
+                        <button class="btn btn-warning">Editar</button>
+                    </div>
+                    <div>
+                        <% if(cliente.ativo == 1){ %>
+                            <button class="btn btn-success">Ativar</button>
+                        <% }else{ %>
+                            <button class="btn btn-danger">Inativar</button>
+                        <% } %>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 </body>
 
