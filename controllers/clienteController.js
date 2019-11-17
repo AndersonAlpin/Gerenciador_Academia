@@ -9,6 +9,9 @@ const Pacote = require("../models/Pacote");
 // LISTAR CLIENTES INCLUINDO O PACOTE E O ENDEREÇO
 router.get("/administrador/clientes/listar", (req, res) => {
     Cliente.findAll({
+        order: [
+            ['nome', 'ASC']
+        ],
         include: [
             {
                 model: EnderecoCliente
@@ -25,6 +28,9 @@ router.get("/administrador/clientes/listar", (req, res) => {
 // LISTAR OS CLIENTES ATIVOS INCLUINDO O PACOTE E O ENDEREÇO
 router.get("/administrador/clientes/ativos", (req, res) => {
     Cliente.findAll({
+        order: [
+            ['nome', 'ASC']
+        ],
         include: [
             {
                 model: EnderecoCliente
@@ -41,6 +47,9 @@ router.get("/administrador/clientes/ativos", (req, res) => {
 // LISTAR OS CLIENTES INATIVOS INCLUINDO O PACOTE E O ENDEREÇO
 router.get("/administrador/clientes/inativos", (req, res) => {
     Cliente.findAll({
+        order: [
+            ['nome', 'ASC']
+        ],
         include: [
             {
                 model: EnderecoCliente
