@@ -78,11 +78,13 @@ router.post("/clientes/salvar", (req, res) => {
         dataNascimento: req.body.inputDate,
         cpf: req.body.inputCPF,
         telefone: req.body.inputTelefone,
-        email: req.body.inputEmail
+        email: req.body.inputEmail,
+        AcademiumId: '1',
+        pacoteId: '1'
     }).then(function () {
-        res.re("cliente cadatrado")
+        res.redirect("/administrador/clientes/listar");
     }).catch(function (erro) {
-        res.send("nao foi cadastrado " + erro)
+        res.redirect("/administrador/clientes/cadastro");
     });
 });
 
