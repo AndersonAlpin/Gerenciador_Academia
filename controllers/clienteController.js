@@ -73,8 +73,8 @@ router.get("/administrador/clientes/cadastro", (req, res) => {
 // SALVAR O CLIENTE APÓS PREENCHER O FORMULÁRIO
 router.post("/clientes/salvar", (req, res) => {
    Cliente.create({
-       Nome: req.body.nome,
-       sobrenome: req.body.sobrenome,
+       Nome: req.body.Nome,
+       sobrenome: req.body.Sobrenome,
        dataNascimento: req.body.dataNascimento,
        cpf: req.body.cpf,
        telefone: req.body.telefone,
