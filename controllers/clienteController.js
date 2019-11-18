@@ -72,7 +72,6 @@ router.get("/administrador/clientes/cadastro", (req, res) => {
 
 // SALVAR O CLIENTE APÓS PREENCHER O FORMULÁRIO
 router.post("/clientes/salvar", (req, res) => {
-<<<<<<< HEAD
     Cliente.create({
         nome: req.body.inputNome,
         sobrenome: req.body.inputSobrenome,
@@ -81,29 +80,10 @@ router.post("/clientes/salvar", (req, res) => {
         telefone: req.body.inputTelefone,
         email: req.body.inputEmail
     }).then(function () {
-        res.redirect("/administrador/clientes/listar")
+        res.re("cliente cadatrado")
     }).catch(function (erro) {
-        res.redirect("/administrador/clientes/cadastro")
+        res.send("nao foi cadastrado " + erro)
     });
-=======
-   Cliente.create({
-       Nome: req.body.Nome,
-       sobrenome: req.body.Sobrenome,
-       dataNascimento: req.body.dataNascimento,
-       cpf: req.body.cpf,
-       telefone: req.body.telefone,
-        email: req.body.email
-        
-        
-       }).then(function(){
-           res.send("cliente cadatrado")
-       }).catch(function(erro){
-           res.send("nao foi cadastrado " + erro)
-       })
-
-       
-
->>>>>>> 393e76f8b828915e2e9aea6b3b5ba627fe1bf2ea
 });
 
 // DETALHAR O CLIENTE SELECIONADO NA TABELA
