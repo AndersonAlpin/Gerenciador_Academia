@@ -47,7 +47,7 @@ router.post("/pacote/salvar", (req, res) => {
     }).then(function(){
         res.redirect("/administrador/pacotes/listar")
     }).catch(function(erro){
-        res.send("/")
+        res.redirect("/administrador/pacotes/listar")
     })
 })
 
