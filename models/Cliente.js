@@ -13,11 +13,11 @@ const Cliente = connection.define('cliente', {
     },
     nome: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: true
     },
     sobrenome: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: true
     },
     dataNascimento: {
         type: Sequelize.DATEONLY,
@@ -49,6 +49,6 @@ Pacote.hasMany(Cliente);
 Cliente.belongsTo(Pacote);
 
 // Necessário para criar a base de dados. Comentar este trecho após executar o servidor
-// Cliente.sync({force: true}); 
+//Cliente.sync({force: true}); 
 
 module.exports = Cliente;
