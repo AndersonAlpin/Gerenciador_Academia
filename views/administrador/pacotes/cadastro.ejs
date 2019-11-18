@@ -1,11 +1,41 @@
 <%- include ../../partials/header.ejs %>
-<%- include ../../partials/navbar.ejs %>
-<%- include ../../partials/sidebar.ejs %>
-<body>
+    <%- include ../../partials/navbar.ejs %>
+        <%- include ../../partials/sidebar.ejs %>
 
-    <div class="main-content">
-        <h1>Cadastro de Pacote</h1>
-    </div>
+            <body>
+                <div class="main-content">
+                    <h2>Cadastro de pacotes</h2>
+                    <hr>
+                    <div class="formularios">
 
-</body>
-<%- include ../../partials/footer.ejs %>
+                        <div class="form-row">
+                            <div class="form-group col-md-3">
+                                <label for="inputNome">Nome do pacote</label>
+                                <input type="text" class="form-control" name="inputNome" placeholder="Nome">
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="inputSobrenome">Descriçao do pacote</label>
+                                <input type="text" class="form-control" name="inputDescriçao" placeholder="Descriçao">
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="inputDate">Data de validade do pacote </label>
+                                <input type="date" class="form-control" name="inputDate">
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="inputCPF">Valor do desconto</label>
+                                <input type="text" class="form-control" name="inputCPF" placeholder="Valor">
+                            </div>
+                        </div>
+
+
+
+
+
+
+                        <button type="submit" class="btn btn-success">Cadastrar</button>
+                        </form>
+                    </div>
+
+                </div>
+            </body>
+            <%- include ../../partials/footer.ejs %>
