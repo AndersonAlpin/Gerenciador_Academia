@@ -13,9 +13,7 @@ router.get("/administrador/pacotes/cadastro", (req, res) => {
     res.render("administrador/pacotes/cadastro")
 });
 
-router.post("/pacotes/salvar", (req, res) => {
-    
-});
+
 
 // DELETAR UM PACOTE
 router.post("/pacotes/delete", (req, res) => {
@@ -38,6 +36,20 @@ router.post("/pacotes/delete", (req, res) => {
         res.redirect("/administrador/pacotes/listar");
     }
 });
+
+// SALVAR O PACOTE APÓS PREENCHER O FORMULÁRIO
+router.post("/pacote/salvar", (req, res) => {
+
+    Pacote.create({
+        nome: req.body.inputNome,
+        descricao:req.body.inputDescricao,
+        taxaDesconto:req.body.inputDesconto
+    }).then(function(){
+        res.redirect("/administrador/pacotes/listar")
+    }).catch(function(erro){
+        res.redirect("/administrador/pacotes/listar")
+    })
+})
 
 // EDITAR OS DADOS DE UM PACOTE
 router.get("/administrador/pacotes/editar/:id", (req, res) => {

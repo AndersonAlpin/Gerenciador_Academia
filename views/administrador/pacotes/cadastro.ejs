@@ -7,7 +7,7 @@
                     <h2>Cadastro de pacotes</h2>
                     <hr>
                     <div class="formularios">
-
+                        <form action="/pacote/salvar" method="POST">
                         <div class="form-row">
                             <div class="form-group col-md-3">
                                 <label for="inputNome">Nome do pacote</label>
@@ -15,15 +15,12 @@
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="inputSobrenome">Descriçao do pacote</label>
-                                <input type="text" class="form-control" name="inputDescriçao" placeholder="Descriçao">
+                                <input type="text" class="form-control" name="inputDescricao" placeholder="Descriçao">
                             </div>
-                            <div class="form-group col-md-3">
-                                <label for="inputDate">Data de validade do pacote </label>
-                                <input type="date" class="form-control" name="inputDate">
-                            </div>
+                           
                             <div class="form-group col-md-3">
                                 <label for="inputCPF">Valor do desconto</label>
-                                <input type="text" class="form-control" name="inputCPF" placeholder="Valor">
+                                <input type="text" class="form-control" name="inputDesconto" placeholder="Valor">
                             </div>
                         </div>
 

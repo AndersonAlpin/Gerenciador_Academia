@@ -5,21 +5,21 @@ const connection = require("../database/connection");
 const Pacote = connection.define('pacote', {
     id: {
         type: Sequelize.INTEGER,
-        allowNull: false,
+        allowNull: true,
         autoIncrement: true,
         primaryKey: true
     },
     nome: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: true
     },
     descricao: {
         type: Sequelize.TEXT,
-        allowNull: false
+        allowNull: true
     },
     taxaDesconto: {
         type: Sequelize.DOUBLE,
-        allowNull: false
+        allowNull: true
     }
 });
 
