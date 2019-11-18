@@ -5,9 +5,16 @@ const mysql = require("mysql2/promise");
 const Cliente = require("../models/Cliente");
 const EnderecoCliente = require("../models/EnderecoCliente");
 const Pacote = require("../models/Pacote");
+const Sequelize = require("sequelize");
 
 // LISTAR CLIENTES INCLUINDO O PACOTE E O ENDEREÇO
 router.get("/administrador/clientes/listar", (req, res) => {
+    connection.query('INSERT INTO PACOTES (nome, descricao, taxaDesconto) VALUES (?), (?), (?);',{
+        replecements: [['nome', 'descricao', 'taxaDesconto'], ['Teste', 'Teste', '15']],
+        type: Sequelize.QueryTypes.INSERT
+    });
+
+
     Cliente.findAll({
         order: [
             ['nome', 'ASC']
@@ -72,6 +79,13 @@ router.get("/administrador/clientes/cadastro", (req, res) => {
 
 // SALVAR O CLIENTE APÓS PREENCHER O FORMULÁRIO
 router.post("/clientes/salvar", (req, res) => {
+    // var logradouro = req.body.inputLogradouro;
+    // var numero = req.body.inputNumero;
+    // var cidade = req.body.inputCidade;
+    // var bairro = req.body.inputBairro;
+    // var cep = req.body.inputCEP;
+    // var uf = req.body.inputUF;
+
     Cliente.create({
         nome: req.body.inputNome,
         sobrenome: req.body.inputSobrenome,
@@ -80,8 +94,16 @@ router.post("/clientes/salvar", (req, res) => {
         telefone: req.body.inputTelefone,
         email: req.body.inputEmail,
         AcademiumId: '1',
-        pacoteId: '1'
-    }).then(function () {
+        pacoteId: req.body.inputPacote
+    }).then(function () { //SE CADASTRAR O CLIENTE, CADASTRE O ENDEREÇO
+
+        mysql.createConnection({
+            user: 'root',
+            password: ''
+        }).then(() => {
+            connection.query('call cadastrarEndereco('+ logradouro+', '+numero+', '+cidade+', '+bairro+', '+cep+', '+uf+');');
+        });
+
         res.redirect("/administrador/clientes/listar");
     }).catch(function (erro) {
         res.redirect("/administrador/clientes/cadastro");
