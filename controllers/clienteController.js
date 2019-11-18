@@ -9,12 +9,6 @@ const Sequelize = require("sequelize");
 
 // LISTAR CLIENTES INCLUINDO O PACOTE E O ENDEREÇO
 router.get("/administrador/clientes/listar", (req, res) => {
-    connection.query('INSERT INTO PACOTES (nome, descricao, taxaDesconto) VALUES (?), (?), (?);',{
-        replecements: [['nome', 'descricao', 'taxaDesconto'], ['Teste', 'Teste', '15']],
-        type: Sequelize.QueryTypes.INSERT
-    });
-
-
     Cliente.findAll({
         order: [
             ['nome', 'ASC']
@@ -79,12 +73,6 @@ router.get("/administrador/clientes/cadastro", (req, res) => {
 
 // SALVAR O CLIENTE APÓS PREENCHER O FORMULÁRIO
 router.post("/clientes/salvar", (req, res) => {
-    // var logradouro = req.body.inputLogradouro;
-    // var numero = req.body.inputNumero;
-    // var cidade = req.body.inputCidade;
-    // var bairro = req.body.inputBairro;
-    // var cep = req.body.inputCEP;
-    // var uf = req.body.inputUF;
 
     Cliente.create({
         nome: req.body.inputNome,
@@ -106,7 +94,13 @@ router.post("/clientes/salvar", (req, res) => {
             uf: req.body.inputUF,
             clienteId: cliente.id
         }).then(() => { //SE CADASTRAR REDIRECIONE PARA A LISTA
-            res.redirect("/administrador/clientes/listar");
+            connection.query('call primeiraMensalidade('+req.body.inputPacote+')', {// CADASTRE A PRIMEIRA MENSALIDADE
+                type: Sequelize.DataTypes.INSERT
+            }).then(() => {
+                res.redirect("/administrador/clientes/listar");
+            }).catch((erro) => {
+                res.redirect("/administrador/clientes/cadastro");
+            });
         }).catch((erro) => {// SE NÃO CADASTRAR REDIRECIONE PARA O CADASTRO
             res.redirect("/administrador/clientes/cadastro");
         });
@@ -174,14 +168,5 @@ router.get("/administrador/clientes/editar/:id", (req, res) => {
     });
 
 });
-
-// var idPacote = 'indefinido no momento';
-
-// mysql.createConnection({
-//     user: 'root',
-//     password: ''
-// }).then(() => {
-//     connection.query('call primeiraMensalidade('+idPacote+')');
-// });
 
 module.exports = router;
