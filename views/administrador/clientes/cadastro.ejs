@@ -7,60 +7,61 @@
         <h2>Cadastro de Cliente</h2>
         <hr>
         <div class="formularios">
+            <form action="/clientes/salvar" method="POST" >
             <div class="form-row">
                 <div class="form-group col-md-3">
                     <label for="inputNome">Nome</label>
-                    <input type="text" class="form-control" id="inputNome" placeholder="Nome">
+                    <input type="text" class="form-control" name="inputNome" placeholder="Nome">
                 </div>
                 <div class="form-group col-md-3">
                     <label for="inputSobrenome">Sobrenome</label>
-                    <input type="text" class="form-control" id="inputSobrenome" placeholder="Sobrenome">
+                    <input type="text" class="form-control" name="inputSobrenome" placeholder="Sobrenome">
                 </div>
                 <div class="form-group col-md-3">
                     <label for="inputDate">Data de Nascimento</label>
-                    <input type="date" class="form-control" id="inputDate">
+                    <input type="date" class="form-control" name="inputDate">
                 </div>
                 <div class="form-group col-md-3">
                     <label for="inputCPF">CPF</label>
-                    <input type="text" class="form-control" id="inputCPF" placeholder="000.000.000-00">
+                    <input type="text" class="form-control" name="inputCPF" placeholder="000.000.000-00">
                 </div>
             </div>
 
             <div class="form-row">
                 <div class="form-group col-md-3">
                     <label for="inputTelefone">Telefone</label>
-                    <input type="text" class="form-control" id="inputTelefone" placeholder="(99)9999-9999">
+                    <input type="text" class="form-control" name="inputTelefone" placeholder="(99)9999-9999">
                 </div>
                 <div class="form-group col-md-4">
                     <label for="inputEmail">Email</label>
-                    <input type="email" class="form-control" id="inputEmail" placeholder="example@email.com">
+                    <input type="email" class="form-control" name="inputEmail" placeholder="example@email.com">
                 </div>
                 <div class="form-group col-md-3">
                     <label for="inputLogradouro">Logradouro</label>
-                    <input type="text" class="form-control" id="inputLogradouro" placeholder="Rua">
+                    <input type="text" class="form-control" name="inputLogradouro" placeholder="Rua">
                 </div>
                 <div class="form-group col-md-2">
                     <label for="inputNumero">Número</label>
-                    <input type="number" class="form-control" id="inputNumero" placeholder="00">
+                    <input type="number" class="form-control" name="inputNumero" placeholder="00">
                 </div>
             </div>
 
             <div class="form-row">
                 <div class="form-group col-md-3">
                     <label for="inputCidade">Cidade</label>
-                    <input type="text" class="form-control" id="inputCidade" placeholder="Cidade">
+                    <input type="text" class="form-control" name="inputCidade" placeholder="Cidade">
                 </div>
                 <div class="form-group col-md-3">
                     <label for="inputBairro">Bairro</label>
-                    <input type="text" class="form-control" id="inputBairro" placeholder="Bairro">
+                    <input type="text" class="form-control" name="inputBairro" placeholder="Bairro">
                 </div>
                 <div class="form-group col-md-3">
                     <label for="inputCEP">CEP</label>
-                    <input type="text" class="form-control" id="inputCEP" placeholder="00000-000">
+                    <input type="text" class="form-control" name="inputCEP" placeholder="00000-000">
                 </div>
                 <div class="form-group col-md-2">
                     <label for="inputUF">UF</label>
-                    <select class="form-control" name="" id="inputUF" aria-placeholder="">
+                    <select class="form-control" name="" name="inputUF" aria-placeholder="">
                         <option value="">Selecione</option>
                         <option value="">AC</option>
                         <option value="">AL</option>
@@ -103,8 +104,10 @@
                     </select>
                 </div>
             </div>
-            <button class="btn btn-success">Cadastrar</button>
+            <button type="submit"  class="btn btn-success">Cadastrar</button>
+        </form>
         </div>
+    
     </div>
 </body>
 <%- include ../../partials/footer.ejs %>

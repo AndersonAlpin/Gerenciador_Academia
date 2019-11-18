@@ -72,6 +72,22 @@ router.get("/administrador/clientes/cadastro", (req, res) => {
 
 // SALVAR O CLIENTE APÓS PREENCHER O FORMULÁRIO
 router.post("/clientes/salvar", (req, res) => {
+   Cliente.create({
+       Nome: req.body.nome,
+       sobrenome: req.body.sobrenome,
+       dataNascimento: req.body.dataNascimento,
+       cpf: req.body.cpf,
+       telefone: req.body.telefone,
+        email: req.body.email
+        
+        
+       }).then(function(){
+           res.send("cliente cadatrado")
+       }).catch(function(erro){
+           res.send("nao foi cadastrado " + erro)
+       })
+
+       
 
 });
 
