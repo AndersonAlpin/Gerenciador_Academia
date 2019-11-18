@@ -7,8 +7,8 @@
         <h2>Pacotes</h2>
         <a class="btn btn-info" href="/administrador/pacotes/cadastro">Cadastrar pacote</a>
         <hr>
-        <div class="table-responsive-sm table-bordered tabelas">
-            <table class=" table">
+        <div class="table-responsive-md table-bordered tabelas">
+            <table class="table">
                 <thead class="table-dark">
                     <tr class="">
                         <th>Nome</th>
@@ -23,9 +23,11 @@
                         <td> <%= pacote.nome %> </td>
                         <td> <%= pacote.descricao %> </td>
                         <td> <%= pacote.taxaDesconto %> </td>
-                        <td>
-                            <a href="/administrador/pacotes/editar/<%= pacote.id %>" class="btn btn-sm btn-warning">Editar</a>
-                            <form class="inline" method="POST" action="/pacotes/delete" onsubmit="confirmarDelecao(event, this)">
+                        <td width="150px">
+                            <a href="/administrador/pacotes/editar/<%= pacote.id %>"
+                                class="btn btn-sm btn-warning">Editar</a>
+                            <form class="inline" method="POST" action="/pacotes/delete"
+                                onsubmit="confirmarDelecao(event, this)">
                                 <input type="hidden" name="id" value="<%= pacote.id %>">
                                 <button class="btn btn-sm btn-danger">Deletar</button>
                             </form>
@@ -38,10 +40,10 @@
 </body>
 <%- include ../../partials/footer.ejs %>
 <script>
-    function confirmarDelecao(event, form){
+    function confirmarDelecao(event, form) {
         event.preventDefault();
         var decisao = confirm("Você quer deletar este pacote?");
-        if(decisao){
+        if (decisao) {
             form.submit();
         }
     }

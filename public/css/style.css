@@ -17,6 +17,10 @@
     /* table-layout: fixed; */
 }
 
+.table {
+    min-width: 450px;
+}
+
 .tabelas-linhas {
     background-color: #363636;
     color: #fff;
