@@ -95,17 +95,22 @@ router.post("/clientes/salvar", (req, res) => {
         email: req.body.inputEmail,
         AcademiumId: '1',
         pacoteId: req.body.inputPacote
-    }).then(function () { //SE CADASTRAR O CLIENTE, CADASTRE O ENDEREÇO
-
-        mysql.createConnection({
-            user: 'root',
-            password: ''
-        }).then(() => {
-            connection.query('call cadastrarEndereco('+ logradouro+', '+numero+', '+cidade+', '+bairro+', '+cep+', '+uf+');');
+    }).then((cliente) => { //SE CADASTRAR O CLIENTE, CADASTRE O ENDEREÇO
+        
+        EnderecoCliente.create({
+            logradouro: req.body.inputLogradouro,
+            numero: req.body.inputNumero,
+            cidade: req.body.inputCidade,
+            bairro: req.body.inputBairro,
+            cep: req.body.inputCEP,
+            uf: req.body.inputUF,
+            clienteId: cliente.id
+        }).then(() => { //SE CADASTRAR REDIRECIONE PARA A LISTA
+            res.redirect("/administrador/clientes/listar");
+        }).catch((erro) => {// SE NÃO CADASTRAR REDIRECIONE PARA O CADASTRO
+            res.redirect("/administrador/clientes/cadastro");
         });
-
-        res.redirect("/administrador/clientes/listar");
-    }).catch(function (erro) {
+    }).catch((erro) => {// SE DER ERRO REDIRECION PARA O CADASTRO
         res.redirect("/administrador/clientes/cadastro");
     });
 });
