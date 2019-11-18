@@ -27,6 +27,10 @@ const Mensalidade = connection.define('mensalidade', {
         type: Sequelize.DATE,
         allowNull: true
     },
+    formaPagamento: {
+        type: Sequelize.STRING,
+        allowNull: true
+    },
     status: {
         type: Sequelize.STRING,
         allowNull: false,

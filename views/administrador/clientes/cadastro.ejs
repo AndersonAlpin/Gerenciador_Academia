@@ -62,7 +62,7 @@
                     <div class="form-group col-md-2">
                         <label for="inputUF">UF</label>
                         <select class="form-control" id="selectUF" name="selectUF" aria-placeholder="">
-                            <option value="">Selecione</option>
+                            <option value="NN">Selecione</option>
                             <option value="AC">AC</option>
                             <option value="AL">AL</option>
                             <option value="AP">AP</option>
@@ -96,7 +96,7 @@
                 </div>
 
                 <div class="form-row">
-                    <div class="form-group col-md-4">
+                    <div class="form-group col-md-3">
                         <label for="inputPacote">Pacote</label>
                         <select class="form-control" name="selectPacote" id="selectPacote">
                             <% pacote.forEach(pacote => { %>
@@ -104,6 +104,17 @@
                             <% }) %>
                         </select>
                         <input name="inputPacote" id="inputPacote" type="hidden" value="1">
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="inputPagamento">Forma de Pagamento</label>
+                        <select class="form-control" name="selectPagamento" id="selectPagamento">
+                            <option value="">Selecione</option>
+                            <option value="">Cartão</option>
+                            <option value="">Depósito</option>
+                            <option value="">Dinheiro</option>
+                            <option value="">Transferência</option>
+                        </select>
+                        <input type="hidden" name="inputPagamento" value="Dinheiro" id="inputPagamento">
                     </div>
                 </div>
                 <button type="submit" class="btn btn-success">Cadastrar</button>
@@ -122,9 +133,16 @@
     }
 
     document.getElementById("selectUF").addEventListener("change", selecionarUF);
-    function selecionarUF(){
+    function selecionarUF() {
         var selectUF = document.getElementById("selectUF");
         var selecionadoUF = selectUF.options[selectUF.selectedIndex].text;
         document.getElementById("inputUF").value = selecionadoUF;
+    }
+
+    document.getElementById("selectPagamento").addEventListener("change", selectPagamento);
+    function selectPagamento() {
+        var selectPagamento = document.getElementById("selectPagamento");
+        var selecionandoPagamento = selectPagamento.options[selectPagamento.selectedIndex].text;
+        document.getElementById("inputPagamento").value = selecionandoPagamento;
     }
 </script>
