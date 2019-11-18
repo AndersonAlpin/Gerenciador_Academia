@@ -99,7 +99,7 @@ CREATE TABLE `clientes` (
   KEY `pacoteId` (`pacoteId`),
   CONSTRAINT `clientes_ibfk_1` FOREIGN KEY (`AcademiumId`) REFERENCES `academia` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
   CONSTRAINT `clientes_ibfk_2` FOREIGN KEY (`pacoteId`) REFERENCES `pacotes` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -108,7 +108,6 @@ CREATE TABLE `clientes` (
 
 LOCK TABLES `clientes` WRITE;
 /*!40000 ALTER TABLE `clientes` DISABLE KEYS */;
-INSERT INTO `clientes` VALUES (1,'Anderson','Alpin','1994-07-11','777.777.777-77','(77)77777-7777','anderson@gmail.com',1,'2019-11-12 13:58:56','2019-11-12 13:58:56',1,1),(2,'Testando','Santos','1999-01-22','555.555.555-55','(55)55555-5555','teste@gmail.com',0,'2019-11-13 15:28:00','2019-11-13 15:28:00',1,1);
 /*!40000 ALTER TABLE `clientes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -133,7 +132,7 @@ CREATE TABLE `enderecoclientes` (
   PRIMARY KEY (`id`),
   KEY `clienteId` (`clienteId`),
   CONSTRAINT `enderecoclientes_ibfk_1` FOREIGN KEY (`clienteId`) REFERENCES `clientes` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -142,7 +141,6 @@ CREATE TABLE `enderecoclientes` (
 
 LOCK TABLES `enderecoclientes` WRITE;
 /*!40000 ALTER TABLE `enderecoclientes` DISABLE KEYS */;
-INSERT INTO `enderecoclientes` VALUES (1,'Logradouro Teste','22','Cidade Teste','Bairro Teste','00000-000','TE','2019-11-12 13:58:56','2019-11-12 13:58:56',1),(2,'Loa','51','Cid','Bai','55550-000','VD','2019-11-12 13:58:56','2019-11-12 13:58:56',2);
 /*!40000 ALTER TABLE `enderecoclientes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -188,6 +186,7 @@ CREATE TABLE `mensalidades` (
   `dataEmissao` datetime NOT NULL,
   `dataVencimento` datetime NOT NULL,
   `dataPagamento` datetime DEFAULT NULL,
+  `formaPagamento` varchar(255) DEFAULT NULL,
   `status` varchar(255) NOT NULL DEFAULT 'Em aberto',
   `createdAt` datetime NOT NULL,
   `updatedAt` datetime NOT NULL,
@@ -195,7 +194,7 @@ CREATE TABLE `mensalidades` (
   PRIMARY KEY (`id`),
   KEY `clienteId` (`clienteId`),
   CONSTRAINT `mensalidades_ibfk_1` FOREIGN KEY (`clienteId`) REFERENCES `clientes` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=108 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -204,7 +203,6 @@ CREATE TABLE `mensalidades` (
 
 LOCK TABLES `mensalidades` WRITE;
 /*!40000 ALTER TABLE `mensalidades` DISABLE KEYS */;
-INSERT INTO `mensalidades` VALUES (65,45,'2019-11-15 00:00:00','2019-11-14 00:00:00',NULL,'Em atraso','2019-11-15 00:00:00','2019-11-15 00:00:00',1),(66,45,'2019-11-15 00:00:00','2019-12-15 00:00:00',NULL,'Em aberto','2019-11-15 00:00:00','2019-11-15 00:00:00',2),(67,45,'2019-11-15 00:00:00','2019-10-12 00:00:00',NULL,'Em atraso','2019-11-15 00:00:00','2019-11-15 00:00:00',1),(68,45,'2019-11-15 00:00:00','2019-10-13 00:00:00',NULL,'Em atraso','2019-11-15 00:00:00','2019-11-15 00:00:00',2),(79,45,'2019-11-15 14:22:35','2019-12-15 00:00:00',NULL,'Em aberto','2019-11-15 14:22:35','2019-11-15 14:22:35',1),(80,45,'2019-11-15 14:22:35','2019-12-15 00:00:00',NULL,'Em aberto','2019-11-15 14:22:35','2019-11-15 14:22:35',2),(81,45,'2019-11-15 14:27:35','2019-12-15 00:00:00',NULL,'Em aberto','2019-11-15 14:27:35','2019-11-15 14:27:35',1),(82,45,'2019-11-15 14:27:35','2019-12-15 00:00:00',NULL,'Em aberto','2019-11-15 14:27:35','2019-11-15 14:27:35',2),(83,45,'2019-11-15 14:30:33','2019-11-15 00:00:00','2019-11-15 14:30:33','Pago','2019-11-15 14:30:33','2019-11-15 14:30:33',2),(84,45,'2019-11-15 14:32:35','2019-12-15 00:00:00',NULL,'Em aberto','2019-11-15 14:32:35','2019-11-15 14:32:35',1),(85,45,'2019-11-15 14:32:35','2019-12-15 00:00:00',NULL,'Em aberto','2019-11-15 14:32:35','2019-11-15 14:32:35',2),(86,45,'2019-11-15 14:37:35','2019-12-15 00:00:00',NULL,'Em aberto','2019-11-15 14:37:35','2019-11-15 14:37:35',1),(87,45,'2019-11-15 14:37:35','2019-12-15 00:00:00',NULL,'Em aberto','2019-11-15 14:37:35','2019-11-15 14:37:35',2),(88,45,'2019-11-15 14:42:35','2019-12-15 00:00:00',NULL,'Em aberto','2019-11-15 14:42:35','2019-11-15 14:42:35',1),(89,45,'2019-11-15 14:42:35','2019-12-15 00:00:00',NULL,'Em aberto','2019-11-15 14:42:35','2019-11-15 14:42:35',2),(90,45,'2019-11-15 14:47:35','2019-12-15 00:00:00',NULL,'Em aberto','2019-11-15 14:47:35','2019-11-15 14:47:35',1),(91,45,'2019-11-15 14:47:35','2019-12-15 00:00:00',NULL,'Em aberto','2019-11-15 14:47:35','2019-11-15 14:47:35',2),(92,45,'2019-11-15 14:52:35','2019-12-15 00:00:00',NULL,'Em aberto','2019-11-15 14:52:35','2019-11-15 14:52:35',1),(93,45,'2019-11-15 14:52:35','2019-12-15 00:00:00',NULL,'Em aberto','2019-11-15 14:52:35','2019-11-15 14:52:35',2),(94,45,'2019-11-15 14:57:35','2019-12-15 00:00:00',NULL,'Em aberto','2019-11-15 14:57:35','2019-11-15 14:57:35',1),(95,45,'2019-11-15 14:57:35','2019-12-15 00:00:00',NULL,'Em aberto','2019-11-15 14:57:35','2019-11-15 14:57:35',2),(96,45,'2019-11-15 15:02:35','2019-12-15 00:00:00',NULL,'Em aberto','2019-11-15 15:02:35','2019-11-15 15:02:35',1),(97,45,'2019-11-15 15:02:35','2019-12-15 00:00:00',NULL,'Em aberto','2019-11-15 15:02:35','2019-11-15 15:02:35',2),(98,50,'2019-11-16 10:05:50','2019-12-16 00:00:00',NULL,'Em aberto','2019-11-16 10:05:50','2019-11-16 10:05:50',1),(99,50,'2019-11-16 10:05:59','2019-12-16 00:00:00',NULL,'Em aberto','2019-11-16 10:05:59','2019-11-16 10:05:59',1),(100,50,'2019-11-16 10:10:59','2019-12-16 00:00:00',NULL,'Em aberto','2019-11-16 10:10:59','2019-11-16 10:10:59',1),(101,50,'2019-11-16 10:15:59','2019-12-16 00:00:00',NULL,'Em aberto','2019-11-16 10:15:59','2019-11-16 10:15:59',1),(102,50,'2019-11-16 10:20:59','2019-12-16 00:00:00',NULL,'Em aberto','2019-11-16 10:20:59','2019-11-16 10:20:59',1),(103,50,'2019-11-16 10:25:59','2019-12-16 00:00:00',NULL,'Em aberto','2019-11-16 10:25:59','2019-11-16 10:25:59',1),(104,50,'2019-11-16 10:30:59','2019-12-16 00:00:00',NULL,'Em aberto','2019-11-16 10:30:59','2019-11-16 10:30:59',1),(105,50,'2019-11-16 10:35:59','2019-12-16 00:00:00',NULL,'Em aberto','2019-11-16 10:35:59','2019-11-16 10:35:59',1),(106,50,'2019-11-16 10:40:59','2019-12-16 00:00:00',NULL,'Em aberto','2019-11-16 10:40:59','2019-11-16 10:40:59',1),(107,50,'2019-11-16 10:45:59','2019-12-16 00:00:00',NULL,'Em aberto','2019-11-16 10:45:59','2019-11-16 10:45:59',1);
 /*!40000 ALTER TABLE `mensalidades` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -338,16 +336,18 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `primeiraMensalidade`(
-	idPacote int(11)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `primeiraMensalidade`(
+	idPacote int(11),
+  forma varchar(250)
 )
-BEGIN
-	SET @valor = (SELECT COLUMN_DEFAULT AS valor FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = 'academia'  AND TABLE_NAME = 'mensalidades' AND COLUMN_NAME = 'valor');
-	SET @taxaDesconto = (SELECT taxaDesconto FROM pacotes WHERE id = idPacote);
-	SET @ultimoID = (SELECT MAX(id) FROM Clientes);
-	SET @valorMensalidade = (@valor - @taxaDesconto / 100 * @valor);
-	INSERT INTO Mensalidades(valor, dataEmissao, dataVencimento, dataPagamento, status, createdAt, updatedAt, clienteID) 
-    VALUES (@valorMensalidade, now(), curdate(), now(), 'Pago', now(), now(), @ultimoID);
+BEGIN
+	SET @valor = (SELECT COLUMN_DEFAULT AS valor FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = 'academia'  AND TABLE_NAME = 'mensalidades' AND COLUMN_NAME = 'valor');
+	SET @taxaDesconto = (SELECT taxaDesconto FROM pacotes WHERE id = idPacote);
+	SET @ultimoID = (SELECT MAX(id) FROM Clientes);
+	SET @valorMensalidade = (@valor - @taxaDesconto / 100 * @valor);
+  SET @forma = forma;
+	INSERT INTO Mensalidades(valor, dataEmissao, dataVencimento, dataPagamento, formaPagamento, status, createdAt, updatedAt, clienteID) 
+    VALUES (@valorMensalidade, now(), curdate(), now(), 'Pago', @forma, now(), now(), @ultimoID);
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -364,4 +364,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-11-16 10:49:45
+-- Dump completed on 2019-11-18 10:50:00

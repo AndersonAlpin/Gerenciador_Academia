@@ -94,7 +94,7 @@ router.post("/clientes/salvar", (req, res) => {
             uf: req.body.inputUF,
             clienteId: cliente.id
         }).then(() => { //SE CADASTRAR REDIRECIONE PARA A LISTA
-            connection.query('call primeiraMensalidade('+req.body.inputPacote+')', {// CADASTRE A PRIMEIRA MENSALIDADE
+            connection.query('call primeiraMensalidade('+req.body.inputPacote+ ", '" + req.body.inputPagamento +"'" +')', {// CADASTRE A PRIMEIRA MENSALIDADE
                 type: Sequelize.DataTypes.INSERT
             }).then(() => {
                 res.redirect("/administrador/clientes/listar");
