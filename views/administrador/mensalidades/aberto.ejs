@@ -1,0 +1,64 @@
+<%- include ../../partials/header.ejs %>
+<%- include ../../partials/navbar.ejs %>
+<%- include ../../partials/sidebar.ejs %>
+
+<body>
+    <div class="main-content">
+        <h2>Mensalidades</h2>
+        <br>
+        <br>
+        <select id="select" name="marca" class="form-control" required>
+            <option value="/administrador/mensalidades/aberto">Em aberto</option>
+            <option value="/administrador/mensalidades/atraso">Em atraso</option>
+        </select>
+        <hr>
+        <div class="table-responsive-md table-bordered tabelas">
+            <table class="table">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Nome</th>
+                        <th>Sobrenome</th>
+                        <th>CPF</th>
+                        <th>Valor</th>
+                        <th>Vencimento</th>
+                        <th>Status</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% mensalidades.forEach(mensalidade => { %>
+                    <% var d = new Date(mensalidade.dataVencimento) %>
+                    <% var dataAtualizada = (d.getDate() + 1) + "/" + (d.getMonth()+1) + "/" + d.getFullYear(); %>
+                    <% if(mensalidade.status == 'Em aberto'){ %>
+                    <tr class="tabelas-linhas">
+                        <td> <%= mensalidade.cliente.nome %> </td>
+                        <td> <%= mensalidade.cliente.sobrenome %> </td>
+                        <td> <%= mensalidade.cliente.cpf %> </td>
+                        <td> <%= mensalidade.valor %> </td>
+                        <td> <%= dataAtualizada %> </td>
+                        <td> <%= mensalidade.status %> </td>
+                        <td>
+                            <a href="/administrador/mensalidades/detalhes/<%= mensalidade.id %>" class="btn btn-sm btn-success">Detalhes</a>
+                        </td>
+                    </tr>
+                    <% } %>
+                    <% }) %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function () {
+
+            $('#select').on('change', function () {
+                var url = $(this).val();
+                if (url) {
+                    window.open(url, '_self');
+                }
+                return false;
+            });
+        });
+    </script>
+</body>
+
+<%- include ../../partials/footer.ejs %>
