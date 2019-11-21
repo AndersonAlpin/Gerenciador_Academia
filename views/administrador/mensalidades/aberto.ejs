@@ -10,6 +10,7 @@
         <select id="select" name="marca" class="form-control" required>
             <option value="/administrador/mensalidades/aberto">Em aberto</option>
             <option value="/administrador/mensalidades/atraso">Em atraso</option>
+            <option value="/administrador/mensalidades/pago">Pagas</option>
         </select>
         <hr>
         <div class="table-responsive-md table-bordered tabelas">
@@ -29,12 +30,16 @@
                     <% mensalidades.forEach(mensalidade => { %>
                     <% var d = new Date(mensalidade.dataVencimento) %>
                     <% var dataAtualizada = (d.getDate() + 1) + "/" + (d.getMonth()+1) + "/" + d.getFullYear(); %>
+
+                    <% var v = mensalidade.valor %>
+                    <% var real = v.toLocaleString('pt-br', {style: 'currency', currency: 'BRL'}) %>
+                    
                     <% if(mensalidade.status == 'Em aberto'){ %>
                     <tr class="tabelas-linhas">
                         <td> <%= mensalidade.cliente.nome %> </td>
                         <td> <%= mensalidade.cliente.sobrenome %> </td>
                         <td> <%= mensalidade.cliente.cpf %> </td>
-                        <td> <%= mensalidade.valor %> </td>
+                        <td> <%= real %> </td>
                         <td> <%= dataAtualizada %> </td>
                         <td> <%= mensalidade.status %> </td>
                         <td>

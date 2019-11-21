@@ -16,7 +16,11 @@
                     </div>
                     <div class="col-md-12"><span class="font-weight-bold">CPF: </span> <%= mensalidade.cliente.cpf %>
                     </div>
-                    <div class="col-md-12"><span class="font-weight-bold">Valor: </span> <%= mensalidade.valor %>
+
+                    <% var v = mensalidade.valor %>
+                    <% var real = v.toLocaleString('pt-br', {style: 'currency', currency: 'BRL'}) %>
+
+                    <div class="col-md-12"><span class="font-weight-bold">Valor: </span> <%= real %>
                     </div>
 
                     <% var de = new Date(mensalidade.dataEmissao) %>

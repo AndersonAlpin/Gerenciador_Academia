@@ -37,6 +37,24 @@ router.get("/administrador/mensalidades/atraso", (req, res) => {
     });
 });
 
+// MENSALIDADES PAGAS
+router.get("/administrador/mensalidades/pago", (req, res) => {
+    Mensalidade.findAll({
+        order: [
+            ['dataVencimento', 'ASC']
+        ],
+        include: [
+            {
+                model: Cliente
+            }
+        ]
+    }).then(mensalidades => {
+        console.log(mensalidades)
+        res.render("administrador/mensalidades/pago", { mensalidades: mensalidades })
+    });
+});
+
+// DETALHAR A MENSALIDADE
 router.get("/administrador/mensalidades/detalhes/:id", (req, res) => {
     var id = req.params.id;
 
@@ -64,6 +82,7 @@ router.get("/administrador/mensalidades/detalhes/:id", (req, res) => {
     });
 });
 
+// VALIDAR A MENSALIDADE
 router.post("/mensalidades/validar", (req, res) => {
 
 });
