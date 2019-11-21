@@ -6,20 +6,20 @@
     <div class="main-content">
         <h2>Cadastro de pacotes</h2>
         <hr>
-        <div class="formularios">
+        <div class="formularios w-50">
             <form action="/pacote/salvar" method="POST">
                 <div class="form-row">
-                    <div class="form-group col-md-4">
+                    <div class="form-group col-md-7">
                         <label for="inputNome">Nome do pacote</label>
                         <input type="text" class="form-control" name="inputNome" placeholder="Nome">
                     </div>
-                    <div class="form-group col-md-3">
-                        <label for="inputCPF">Valor do desconto</label>
-                        <input type="text" class="form-control" name="inputDesconto" placeholder="Valor">
+                    <div class="form-group col-md-5">
+                        <label for="inputCPF">Taxa de desconto</label>
+                        <input type="text" class="form-control" name="inputDesconto" placeholder="0%">
                     </div>
                 </div>
                 <div class="form-row">
-                    <div class="form-group col-md-7">
+                    <div class="form-group col-md-12">
                         <label for="inputSobrenome">Descriçao do pacote</label>
                         <textarea name="inputDescricao" class="form-control" rows="3" placeholder="Descrição"></textarea>
                     </div>
