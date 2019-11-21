@@ -16,6 +16,7 @@
     height: 300px;
     overflow: auto;
     margin-bottom: 5px;
+    border: none;
     /* background-color: #868e96 ; */
     /* table-layout: fixed; */
 }
