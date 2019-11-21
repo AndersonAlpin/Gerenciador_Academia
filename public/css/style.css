@@ -1,10 +1,13 @@
 /* ============================== */
+
+
 /* ======FORMATAÇÕES GERAIS====== */
+
 * {
     box-sizing: border-box;
 }
 
-.titulo-tabelas{
+.titulo-tabelas {
     font-size: 1.2em;
     font-weight: 500;
 }
@@ -26,18 +29,24 @@
     color: #fff;
 }
 
+
 /* FORMULÁRIOS */
+
 .inline {
     display: inline;
 }
 
-#detalhesCliente div{
+#detalhesCliente div {
     padding: 5px;
     font-size: 18px;
 }
 
+
 /* ================================ */
+
+
 /* ======FORMATAÇÕES DE LOGIN====== */
+
 body#login {
     background: url('../img/fundo.jpeg') no-repeat center center fixed;
     background-size: cover;
@@ -93,13 +102,17 @@ body#login {
     transition: 2s;
 }
 
-.inputIcon input[type=text]:focus + i,
-.inputIcon input[type=password]:focus + i{
+.inputIcon input[type=text]:focus+i,
+.inputIcon input[type=password]:focus+i {
     color: dodgerblue;
 }
 
+
 /* ===================== */
+
+
 /* FORMATAÇÕES DO NAVBAR */
+
 .header {
     position: absolute;
     height: 55px;
@@ -129,7 +142,7 @@ body#login {
 }
 
 .menu-topo a {
-    border-right:1px solid #333;
+    border-right: 1px solid #333;
 }
 
 .menu-topo i {
@@ -142,8 +155,12 @@ body#login {
     color: #5bc0de;
 }
 
+
 /* ====================== */
+
+
 /* FORMATAÇÕES DO SIDEBAR */
+
 .side-bar {
     position: absolute;
     width: 100%;
@@ -177,13 +194,17 @@ body#login {
     color: #5bc0de;
 }
 
+
 /* =================================== */
+
+
 /* =========FORMATAÇÕES DA HOME======= */
 
 body {
     margin: 0;
     padding: 0;
-    background: url('/img/fundo-caixa.png');
+    background: url('/img/te.jpg');
+    /* background-color: #ffffff; */
 }
 
 #cards span {
@@ -194,7 +215,7 @@ body {
     margin-top: 25px;
 }
 
-.card-colors{
+.card-colors {
     background-color: #5bc0de;
 }
 
@@ -207,8 +228,12 @@ body {
     display: none;
 }
 
+
 /* ========================== */
+
+
 /* FORMATAÇÕES DE FORMULÁRIOS */
+
 .formularios {
     border-radius: 5px;
     background-color: rgb(49, 48, 48);
@@ -221,46 +246,41 @@ body {
     padding-left: 10px;
 }
 
+
 /* ======================================== */
+
+
 /* FORMATAÇÕES DE RESPONSIVIDADE ESTRUTURAL */
+
 @media screen and (min-width: 0px) {
     .side-bar {
         width: 80px;
     }
-
     .side-bar ul li {
         text-align: center;
     }
-
     .side-bar ul li span:nth-child(2) {
         display: none;
     }
-
     .side-bar ul li i {
         font-size: 26px;
     }
-
     .main-content {
         margin-right: 15px;
         margin-left: 15px;
     }
-
     #form-busca {
         display: none;
     }
-
     .side-bar ul li i:hover {
         color: #5bc0de;
     }
-
     .side-bar {
         display: none;
     }
-
     .menu-topo {
         display: flex;
     }
-
 }
 
 @media screen and (min-width: 356px) {
@@ -269,57 +289,44 @@ body {
     }
 }
 
-
-
 @media screen and (min-width: 576px) {
     .side-bar {
         width: 80px;
     }
-
     .side-bar ul li {
         text-align: center;
     }
-
     .side-bar ul li span:nth-child(2) {
         display: none;
     }
-
     .side-bar ul li i {
         font-size: 26px;
     }
-
     .main-content {
         margin-left: 95px;
         margin-right: 15px;
     }
-    
     .side-bar {
         display: inline;
     }
-
     .menu-topo {
         display: none;
     }
 }
 
-
 @media screen and (min-width: 1000px) {
     .side-bar {
         width: 200px;
     }
-
     .side-bar ul li {
         text-align: left;
     }
-
     .side-bar ul li span:nth-child(2) {
         display: inline;
     }
-
     .side-bar ul li i {
         font-size: 16px;
     }
-
     .main-content {
         margin-left: 215px;
         margin-right: 15px;
