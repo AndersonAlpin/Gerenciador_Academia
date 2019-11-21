@@ -115,13 +115,14 @@ body#login {
 /* FORMATAÇÕES DO NAVBAR */
 
 .header {
-    position: absolute;
+    /* position: absolute; */
     height: 55px;
     width: 100%;
+    margin-bottom: -55px;
     background-color: rgb(15, 15, 15);
+    color: #ffffff;
     z-index: 4;
     /* border-bottom: 1px solid #ffffff; */
-    color: #ffffff;
 }
 
 .header a {
