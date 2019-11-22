@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const connection = require("../database/connection");
-const mysql = require("mysql2/promise");
 const Cliente = require("../models/Cliente");
 const EnderecoCliente = require("../models/EnderecoCliente");
 const Pacote = require("../models/Pacote");
