@@ -19,6 +19,7 @@
                 </thead>
                 <tbody>
                     <% pacotes.forEach(pacote => { %>
+                    <% if(pacote.nome !== 'Nenhum'){ %>
                     <tr class="tabelas-linhas">
                         <td> <%= pacote.nome %> </td>
                         <td> <%= pacote.descricao %> </td>
@@ -33,6 +34,7 @@
                             </form>
                         </td>
                     </tr>
+                    <% } %>
                     <% }) %>
                 </tbody>
             </table>

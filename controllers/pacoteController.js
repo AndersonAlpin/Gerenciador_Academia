@@ -20,27 +20,23 @@ router.post("/pacotes/delete", (req, res) => {
     if (id != undefined) { //SE FOR DIFERENTE DE NULO
         if (!isNaN(id)) { //SE FOR UM NÚMERO  
 
-            if (id != 1) {
-                // ATUALIZAR OS CLIENTES QUE POSSUEM O PACOTE A SER DELETADO
-                Cliente.update({ pacoteId: 1 }, {
+            // ATUALIZAR OS CLIENTES QUE POSSUEM O PACOTE A SER DELETADO
+            Cliente.update({ pacoteId: 1 }, {
+                where: {
+                    pacoteId: id
+                }
+            }).then(() => {
+
+                // DELETE O PACOTE
+                Pacote.destroy({
                     where: {
-                        pacoteId: id
+                        id: id
                     }
                 }).then(() => {
-
-                    // DELETE O PACOTE
-                    Pacote.destroy({
-                        where: {
-                            id: id
-                        }
-                    }).then(() => {
-                        res.redirect("/administrador/pacotes/listar");
-                    });
-
+                    res.redirect("/administrador/pacotes/listar");
                 });
-            }else {
-                res.redirect("/administrador/pacotes/listar");
-            }
+
+            });
 
         } else {
             res.redirect("/administrador/pacotes/listar");
