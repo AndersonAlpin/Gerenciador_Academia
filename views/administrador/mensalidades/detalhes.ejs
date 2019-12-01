@@ -6,7 +6,7 @@
     <div class="main-content">
         <h2>Detalhes da Mensalidade</h2>
         <hr>
-        <div id="detalhesCliente" class="formularios">
+        <div id="detalhesCliente">
             <div class="row">
                 <div class="col-md-4">
                     <div class="col-md-12"><span class="font-weight-bold">Nome: </span> <%= mensalidade.cliente.nome %>
@@ -57,7 +57,7 @@
                 <div class="col-md-3">
                     <form action="" class="form-group">
                         <div class="form-group col-md-12 inline">
-                            <label for="inputPagamento">Forma de Pagamento</label>
+                            <label for="inputPagamento" class="font-weight-bold">Forma de Pagamento</label>
                             <select class="form-control" name="selectPagamento" id="selectPagamento">
                                 <option value="">Selecione</option>
                                 <option value="">Cartão</option>

@@ -248,16 +248,20 @@ body {
 
 .formularios {
     border-radius: 5px;
-    background-color: rgb(49, 48, 48);
-    color: #ffffff;
+    /* background-color: rgb(56, 55, 55); */
+    color: #000;
     padding: 15px;
 }
 
-.formularios input {
+.formularios input, .formularios select {
     height: 40px;
     padding-left: 10px;
+    border:1px solid #aaa;
 }
 
+.formularios label {
+    font-size: 17px;
+}
 
 /* ======================================== */
 
