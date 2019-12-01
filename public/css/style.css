@@ -41,6 +41,10 @@ body {
     color: #fff;
 }
 
+.tabelas td {
+    font-size: 17px;
+}
+
 /* FORMULÁRIOS */
 
 .inline {
@@ -50,6 +54,11 @@ body {
 #detalhesCliente div {
     padding: 5px;
     font-size: 18px;
+}
+
+/* TELA DETALHES */
+#detalhesCliente span {
+    color: #000;
 }
 
 
