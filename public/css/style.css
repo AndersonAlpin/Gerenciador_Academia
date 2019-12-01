@@ -164,6 +164,7 @@ body#login {
 
 .menu-topo a {
     border-right: 1px solid #333;
+    padding: 5px;
 }
 
 .menu-topo i {
@@ -172,10 +173,13 @@ body#login {
     font-size: 22px;
 }
 
-.menu-topo i:hover {
-    color: #5bc0de;
+#menu-topo li {
+    padding: 4px 0;
 }
 
+#menu-topo li:hover {
+    background: #103346;
+}
 
 /* ====================== */
 
@@ -315,6 +319,11 @@ body {
     .menu-topo {
         display: flex;
     }
+    #perfil {
+        background-color: #0D1D26;
+        padding: 0 15px;
+        margin: 0 -16px;
+    }
 }
 
 @media screen and (min-width: 356px) {
@@ -345,6 +354,9 @@ body {
     }
     .menu-topo {
         display: none;
+    }
+    #perfil {
+        background-color: transparent;
     }
 }
 
