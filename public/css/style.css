@@ -9,6 +9,7 @@
 
 body {
     min-width: 260px;
+    font-family: "Trebuchet MS", Helvetica, sans-serif;
 }
 
 /* ===== TABELAS ============== */
@@ -201,9 +202,20 @@ body#login {
     color: #D3D3D3;
 }
 
-.side-bar ul li a:hover {
-    color: #5bc0de;
+#side-bar li:hover {
+    background: #103346;
 }
+
+/* ====== MARCAR PÁGINA ATUAL ======== */
+/* #side-bar li#atual{
+    color: #D3D3D3;
+    background: #103346;
+    cursor: text;
+}
+
+ #side-bar li#atual a{
+    cursor: text;
+} */
 
 
 /* =================================== */
@@ -287,9 +299,6 @@ body {
     }
     #form-busca {
         display: none;
-    }
-    .side-bar ul li i:hover {
-        color: #5bc0de;
     }
     .side-bar {
         display: none;

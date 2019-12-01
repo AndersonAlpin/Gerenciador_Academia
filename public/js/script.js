@@ -21,3 +21,4 @@ function selectPagamento() {
     var selecionandoPagamento = selectPagamento.options[selectPagamento.selectedIndex].text;
     document.getElementById("inputPagamento").value = selecionandoPagamento;
 }
+
