@@ -31,10 +31,14 @@ body {
 }
 
 .tabelas-linhas {
+    background-color: #ffffff;
+    color: #333;
+}
+
+.tabela-head {
     background-color: #363636;
     color: #fff;
 }
-
 
 /* FORMULÁRIOS */
 
@@ -140,8 +144,8 @@ body#login {
     margin-right: 2px;
 }
 
-#perfil {
-    background-color: rgb(15, 15, 15);
+.navbar-color {
+    background-color: rgba(8, 24, 34, 0.979);
 }
 
 #border-none {
@@ -171,7 +175,7 @@ body#login {
 .side-bar {
     position: absolute;
     width: 100%;
-    background-color: rgb(20, 19, 19);
+    background-color: #081922;
     height: 100vh;
     z-index: 3;
     padding-top: 55px;
@@ -210,8 +214,8 @@ body#login {
 body {
     margin: 0;
     padding: 0;
-    background: url('/img/te.jpg');
-    /* background-color: #ffffff; */
+    /* background: url('/img/te.jpg'); */
+    background-color: #EAEAEA;
 }
 
 #cards span {
@@ -223,12 +227,13 @@ body {
 }
 
 .card-colors {
-    background-color: #5bc0de;
+    background-color: #ffffff;
+    border:1px solid rgb(148, 155, 161);
 }
 
 .jumbotron {
-    background-color: rgb(49, 48, 48);
-    color: #ffffff;
+    background-color: #343A40;
+    color: #e9e6e6;
 }
 
 #jumbotron {
