@@ -49,7 +49,6 @@ router.get("/administrador/mensalidades/pago", (req, res) => {
             }
         ]
     }).then(mensalidades => {
-        console.log(mensalidades)
         res.render("administrador/mensalidades/pago", { mensalidades: mensalidades })
     });
 });

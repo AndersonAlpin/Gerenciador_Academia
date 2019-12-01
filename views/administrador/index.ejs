@@ -23,7 +23,7 @@
             <div class="row" id="cards">
                 <div class="col-sm-6 col-md-4">
                     <div class="card card-colors">
-                        <h4 class="card-header bg-dark"><a class="nav-link text-light"
+                        <h4 class="card-header"><a class="nav-link text-light"
                                 href="/administrador/clientes/ativos">Clientes ativos</a></h4>
                         <div class="card-body text-center">
                             <span class="card-text display-4"><%= numClientes %></span>
@@ -33,7 +33,7 @@
 
                 <div class="col-sm-6 col-md-4">
                     <div class="card card-colors">
-                        <h4 class="card-header bg-dark"><a class="nav-link text-light"
+                        <h4 class="card-header"><a class="nav-link text-light"
                                 href="/administrador/mensalidades/atraso">Mensalidades atrasadas</a></h4>
                         <div class="card-body text-center">
                             <span class="card-text display-4"><%= numAtraso %></span>
@@ -43,7 +43,7 @@
 
                 <div class="col-sm-12 col-md-4">
                     <div class="card card-colors mb-4">
-                        <h4 class="card-header bg-dark"><a class="nav-link text-light"
+                        <h4 class="card-header"><a class="nav-link text-light"
                                 href="/administrador/mensalidades/pago">Entradas do mês</a></h4>
                         <div class="card-body text-center">
                             <% var real = totalEntradas.toLocaleString('pt-br', {style: 'currency', currency: 'BRL'}) %>
