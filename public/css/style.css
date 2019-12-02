@@ -9,7 +9,6 @@
 
 body {
     min-width: 260px;
-    font-family: "Trebuchet MS", Helvetica, sans-serif;
 }
 
 /* ===== TABELAS ============== */
@@ -154,11 +153,29 @@ body#login {
 }
 
 .navbar-color {
-    background-color: rgba(20, 20, 20, 0.993);
+    background-color: rgba(20, 20, 20);
 }
 
 #border-none {
     border-right: none;
+}
+
+#menu-topo li {
+    padding: 4px 0;
+}
+
+#menu-topo li:hover {
+    background: #363636;
+}
+
+.logo {
+    width: 182px;
+    height: 55px;
+    margin-left: -10px;
+    margin-top: 10px;
+    background: url('../img/logo.png') no-repeat center;
+    text-indent: -3000px;
+    filter: invert();
 }
 
 .menu-topo a {
@@ -170,14 +187,6 @@ body#login {
     color: #D3D3D3;
     margin: 0 10px;
     font-size: 22px;
-}
-
-#menu-topo li {
-    padding: 4px 0;
-}
-
-#menu-topo li:hover {
-    background: #363636;
 }
 
 /* ====================== */
@@ -327,10 +336,17 @@ body {
         padding: 0 15px;
         margin: 0 -16px;
     }
+    .logo {
+        display: none;
+    }
 }
 
 @media screen and (min-width: 356px) {
     #jumbotron {
+        display: block;
+    }
+    .logo {
+        margin-top: -12px;
         display: block;
     }
 }
@@ -360,6 +376,9 @@ body {
     }
     #perfil {
         background-color: transparent;
+    }
+    .logo{
+        margin-top: 10px;
     }
 }
 
