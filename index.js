@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
-
+const session = require("express-session");
 const connection = require("./database/connection");
 const port = 8080;
 
@@ -16,6 +16,12 @@ const adminController = require("./controllers/administradorController");
 // VIEW ENGINE
 app.set('view engine', 'ejs');
 //////////////////////////////
+
+// SESSÕES
+app.use(session({
+    secret: "lksmsdaoifnsd", cookie: {maxAge: 450000}
+}));
+// //////////////////////////////////////////////////
 
 // STATIC
 app.use(express.static('public'));
@@ -33,6 +39,7 @@ app.use("/", relatorioController);
 app.use("/", mensalidadeController);
 app.use("/", adminController);
 //////////////////////////////////////
+
 
 // IMPORTAR MODELS
 const Academia = require("./models/Academia");

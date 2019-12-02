@@ -1,26 +1,27 @@
 <%- include partials/header.ejs %>
+
 <body id="login">
   <div class="modal-dialog text-center">
     <div class="col-sm-10 main-section">
       <div class="modal-content">
-        
+
         <div class="col-12 user-img">
           <img src="/img/user.png">
         </div>
 
         <span class="h4 mb-3 text-light">Login</span>
-        
-        <form class="col-12">
+
+        <form action="/autenticacao" method="POST" class="col-12">
           <div class="form-group inputIcon" id="user-group">
-            <input type="email" name="email" class="form-control" placeholder="Email" required>
+            <input type="email" name="email" class="form-control" placeholder="Email" value="adminironfit@gmail.com" required>
             <i class="fas fa-at fa-lg fa-fw" aria-hidden="true"></i>
           </div>
-         
+
           <div class="form-group inputIcon" id="password-group">
-            <input type="password" name="senha" class="form-control" placeholder="Senha" required>
+            <input type="password" name="senha" class="form-control" placeholder="Senha" value="admin2001" required>
             <i class="fas fa-lock fa-lg fa-fw" aria-hidden="true"></i>
           </div>
-          <a href="/administrador/" type="submit" class="btn btn-primary btn-block btn-lg mt-4"><i class="fas fa-sign-in-alt"></i> Entrar</a>
+            <input type="submit" class="btn btn-primary btn-block btn-lg mt-4" value="Entrar">
         </form>
 
       </div>

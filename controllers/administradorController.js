@@ -39,6 +39,31 @@ router.get("/administrador/", (req, res) => {
     });
 });
 
+router.post("/autenticacao", (req, res) => {
+    var email = req.body.email;
+    var senha = req.body.senha;
+
+    Login.findOne({
+        where: { email: email }
+    }).then(login => {
+        if (login != undefined) { // SE O EMAIL EXISTIR
+            // VALIDAR SENHA
+            var correct = bcrypt.compareSync(senha, login.senha);
+
+            if (correct){
+                req.session.login = {
+                    id: login.id,
+                    email: login.email
+                }
+                res.json(req.session.login);
+            }else {
+                res.redirect("/"); 
+            }
+        } else {
+            res.redirect("/");
+        }
+    });
+});
 
 // GERAR UM ADMINISTRADOR
 // var nome = 'Admin';
