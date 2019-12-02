@@ -71,7 +71,7 @@ CREATE TABLE `administradors` (
 
 LOCK TABLES `administradors` WRITE;
 /*!40000 ALTER TABLE `administradors` DISABLE KEYS */;
-INSERT INTO `administradors` VALUES (1,'Admin','IronFit','045.123.451-15','(73)95543-1256','2019-12-01 19:19:53','2019-12-01 19:19:53',1);
+INSERT INTO `administradors` VALUES (1,'Leonaldo','Gonvalho','045.123.451-15','(73)95543-1256','2019-12-01 19:19:53','2019-12-01 19:19:53',1);
 /*!40000 ALTER TABLE `administradors` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -369,4 +369,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-12-02  2:47:34
+-- Dump completed on 2019-12-02 13:13:35
