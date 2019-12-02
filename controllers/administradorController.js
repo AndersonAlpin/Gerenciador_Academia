@@ -5,9 +5,10 @@ const Cliente = require("../models/Cliente");
 const Mensalidade = require("../models/Mensalidade");
 const Administrador = require("../models/Administrador");
 const Login = require("../models/Login");
+const adminAut = require("../middlewares/adminAut");
 
 // HOME DO ADMINISTRADOR
-router.get("/administrador/", (req, res) => {
+router.get("/administrador/", adminAut, (req, res) => {
     var numClientes = 0;
     var numAtraso = 0;
     var totalEntradas = 0;
@@ -39,30 +40,47 @@ router.get("/administrador/", (req, res) => {
     });
 });
 
+// AUTENTICAÇÃO
 router.post("/autenticacao", (req, res) => {
     var email = req.body.email;
     var senha = req.body.senha;
 
     Login.findOne({
-        where: { email: email }
+        where: { email: email },
+        include: [
+            {
+                model: Administrador
+            }
+        ]
     }).then(login => {
         if (login != undefined) { // SE O EMAIL EXISTIR
             // VALIDAR SENHA
             var correct = bcrypt.compareSync(senha, login.senha);
 
-            if (correct){
+            if (correct) {
                 req.session.login = {
                     id: login.id,
-                    email: login.email
+                    idAdmin: login.administrador.id,
+                    email: login.email,
+                    nome: login.administrador.nome,
+                    sobrenome: login.administrador.sobrenome,
+                    cpf: login.administrador.cpf,
+                    telefone: login.administrador.telefone,
                 }
-                res.json(req.session.login);
-            }else {
-                res.redirect("/"); 
+                res.redirect("/administrador/");
+            } else {
+                res.redirect("/");
             }
         } else {
             res.redirect("/");
         }
     });
+});
+
+// DESLOGAR
+router.get("/logout", (req, res) => {
+    req.session.login = undefined;
+    res.redirect("/");
 });
 
 // GERAR UM ADMINISTRADOR

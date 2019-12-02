@@ -19,7 +19,7 @@ app.set('view engine', 'ejs');
 
 // SESSÕES
 app.use(session({
-    secret: "lksmsdaoifnsd", cookie: {maxAge: 450000}
+    secret: "lksmsdaoifnsd", cookie: {maxAge: 150000}
 }));
 // //////////////////////////////////////////////////
 

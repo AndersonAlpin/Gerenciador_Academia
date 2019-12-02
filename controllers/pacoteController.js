@@ -2,9 +2,10 @@ const express = require("express");
 const router = express.Router();
 const Pacote = require("../models/Pacote");
 const Cliente = require("../models/Cliente");
+const adminAut = require("../middlewares/adminAut");
 
 // LISTAR PACOTES
-router.get("/administrador/pacotes/listar", (req, res) => {
+router.get("/administrador/pacotes/listar", adminAut, (req, res) => {
     Pacote.findAll({ force: true }).then(pacotes => {
         res.render("administrador/pacotes/listar", { pacotes: pacotes });
     });
@@ -15,7 +16,7 @@ router.get("/administrador/pacotes/cadastro", (req, res) => {
 });
 
 // DELETAR UM PACOTE
-router.post("/pacotes/delete", (req, res) => {
+router.post("/pacotes/delete", adminAut, (req, res) => {
     var id = req.body.id;
     if (id != undefined) { //SE FOR DIFERENTE DE NULO
         if (!isNaN(id)) { //SE FOR UM NÚMERO  
@@ -47,7 +48,7 @@ router.post("/pacotes/delete", (req, res) => {
 });
 
 // SALVAR O PACOTE APÓS PREENCHER O FORMULÁRIO
-router.post("/pacote/salvar", (req, res) => {
+router.post("/pacote/salvar", adminAut, (req, res) => {
 
     Pacote.create({
         nome: req.body.inputNome,
@@ -61,7 +62,7 @@ router.post("/pacote/salvar", (req, res) => {
 })
 
 // EDITAR OS DADOS DE UM PACOTE
-router.get("/administrador/pacotes/editar/:id", (req, res) => {
+router.get("/administrador/pacotes/editar/:id", adminAut, (req, res) => {
     var id = req.params.id;
 
     if (isNaN(id)) {

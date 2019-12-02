@@ -5,9 +5,10 @@ const Cliente = require("../models/Cliente");
 const EnderecoCliente = require("../models/EnderecoCliente");
 const Pacote = require("../models/Pacote");
 const Sequelize = require("sequelize");
+const adminAut = require("../middlewares/adminAut");
 
-// LISTAR CLIENTES INCLUINDO O PACOTE E O ENDEREÇO
-router.get("/administrador/clientes/listar", (req, res) => {
+// LISTAR TODOS OS CLIENTES INCLUINDO O PACOTE E O ENDEREÇO
+router.get("/administrador/clientes/listar", adminAut, (req, res) => {
     Cliente.findAll({
         order: [
             ['nome', 'ASC']
@@ -26,7 +27,7 @@ router.get("/administrador/clientes/listar", (req, res) => {
 });
 
 // LISTAR OS CLIENTES ATIVOS INCLUINDO O PACOTE E O ENDEREÇO
-router.get("/administrador/clientes/ativos", (req, res) => {
+router.get("/administrador/clientes/ativos", adminAut, (req, res) => {
     Cliente.findAll({
         order: [
             ['nome', 'ASC']
@@ -45,7 +46,7 @@ router.get("/administrador/clientes/ativos", (req, res) => {
 });
 
 // LISTAR OS CLIENTES INATIVOS INCLUINDO O PACOTE E O ENDEREÇO
-router.get("/administrador/clientes/inativos", (req, res) => {
+router.get("/administrador/clientes/inativos", adminAut, (req, res) => {
     Cliente.findAll({
         order: [
             ['nome', 'ASC']
@@ -64,14 +65,14 @@ router.get("/administrador/clientes/inativos", (req, res) => {
 });
 
 // FORMULÁRIO DE CADASTRO DO CLIENTE INCLUINDO O PACOTE
-router.get("/administrador/clientes/cadastro", (req, res) => {
+router.get("/administrador/clientes/cadastro", adminAut, (req, res) => {
     Pacote.findAll().then(pacote => {
         res.render("administrador/clientes/cadastro", { pacote: pacote });
     });
 });
 
 // SALVAR O CLIENTE APÓS PREENCHER O FORMULÁRIO
-router.post("/clientes/salvar", (req, res) => {
+router.post("/clientes/salvar", adminAut,  (req, res) => {
 
     Cliente.create({
         nome: req.body.inputNome,
@@ -109,7 +110,7 @@ router.post("/clientes/salvar", (req, res) => {
 });
 
 // DETALHAR O CLIENTE SELECIONADO NA TABELA
-router.get("/administrador/clientes/detalhes/:id", (req, res) => {
+router.get("/administrador/clientes/detalhes/:id", adminAut, (req, res) => {
     var id = req.params.id;
 
     if (isNaN(id)) {
@@ -137,7 +138,7 @@ router.get("/administrador/clientes/detalhes/:id", (req, res) => {
 });
 
 // EDITAR UM CLIENTE SELECIONADO NA TABELA
-router.get("/administrador/clientes/editar/:id", (req, res) => {
+router.get("/administrador/clientes/editar/:id", adminAut, (req, res) => {
     Pacote.findAll().then(pacote => {
 
         var id = req.params.id;

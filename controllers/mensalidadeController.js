@@ -1,10 +1,11 @@
 const express = require("express");
 const router = express.Router();
-const Cliente = require("../models/Cliente")
-const Mensalidade = require("../models/Mensalidade")
+const Cliente = require("../models/Cliente");
+const Mensalidade = require("../models/Mensalidade");
+const adminAut = require("../middlewares/adminAut");
 
 // MENSALIDADES EM ABERTO
-router.get("/administrador/mensalidades/aberto", (req, res) => {
+router.get("/administrador/mensalidades/aberto", adminAut, (req, res) => {
     Mensalidade.findAll({
         order: [
             ['dataVencimento', 'ASC']
@@ -21,7 +22,7 @@ router.get("/administrador/mensalidades/aberto", (req, res) => {
 });
 
 // MENSALIDADES EM ATRASO
-router.get("/administrador/mensalidades/atraso", (req, res) => {
+router.get("/administrador/mensalidades/atraso", adminAut, (req, res) => {
     Mensalidade.findAll({
         order: [
             ['dataVencimento', 'ASC']
@@ -38,7 +39,7 @@ router.get("/administrador/mensalidades/atraso", (req, res) => {
 });
 
 // MENSALIDADES PAGAS
-router.get("/administrador/mensalidades/pago", (req, res) => {
+router.get("/administrador/mensalidades/pago", adminAut, (req, res) => {
     Mensalidade.findAll({
         order: [
             ['dataVencimento', 'ASC']
@@ -54,7 +55,7 @@ router.get("/administrador/mensalidades/pago", (req, res) => {
 });
 
 // DETALHAR A MENSALIDADE
-router.get("/administrador/mensalidades/detalhes/:id", (req, res) => {
+router.get("/administrador/mensalidades/detalhes/:id", adminAut, (req, res) => {
     var id = req.params.id;
 
     if (isNaN(id)) {
@@ -82,7 +83,7 @@ router.get("/administrador/mensalidades/detalhes/:id", (req, res) => {
 });
 
 // VALIDAR A MENSALIDADE
-router.post("/mensalidades/validar", (req, res) => {
+router.post("/mensalidades/validar", adminAut, (req, res) => {
 
 });
 
