@@ -18,7 +18,8 @@ var mailOptions = {
     from: $usuario,
     to: $destinatario,
     subject: 'Bem vindo a academia!!!!',
-    text: 'Bem vindo a academia, agora você faz parte da nossa equipe!!!!!'
+    html: '<h1 style="color: blue; ">Bem vindo a academia, agora você faz parte da nossa equipe!!!!!</h1>'
+
 };
 
 transporter.sendMail(mailOptions, function(error, info){
