@@ -21,7 +21,14 @@
             <input type="password" name="senha" class="form-control" placeholder="Senha" value="admin2001" required>
             <i class="fas fa-lock fa-lg fa-fw" aria-hidden="true"></i>
           </div>
-            <input type="submit" class="btn btn-primary btn-block btn-lg mt-4" value="Entrar">
+
+          <div class="error" style="color: red;">
+            <%= messages.error %>
+          </div>
+
+            <div class="form-group">
+              <input type="submit" class="btn btn-primary btn-block btn-lg mt-4" value="Entrar">
+            </div>
         </form>
 
       </div>

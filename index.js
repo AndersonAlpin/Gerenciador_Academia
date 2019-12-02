@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 const session = require("express-session");
+const flash = require("express-flash");
 const connection = require("./database/connection");
 const port = 8080;
 
@@ -19,9 +20,15 @@ app.set('view engine', 'ejs');
 
 // SESSÕES
 app.use(session({
-    secret: "lksmsdaoifnsd", cookie: {maxAge: 150000}
+    secret: "pode digitar qualquer coisa aqui", cookie: {maxAge: 150000},
+    resave: false,
+    saveUninitialized: true
 }));
 // //////////////////////////////////////////////////
+
+// INICIALIZAR O FLASH
+app.use(flash());
+// ///////////////////
 
 // STATIC
 app.use(express.static('public'));

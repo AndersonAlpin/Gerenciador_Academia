@@ -70,9 +70,11 @@ router.post("/autenticacao", (req, res) => {
                 res.redirect("/administrador/home");
                 global.admin = req.session.login;
             } else {
+                req.flash('error', 'Senha incorreta!');
                 res.redirect("/login");
             }
         } else {
+            req.flash('error', 'Este email não existe!');
             res.redirect("/login");
         }
     });
