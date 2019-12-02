@@ -304,6 +304,10 @@ body {
     font-size: 17px;
 }
 
+#detalhesCliente span {
+    font-weight: bold;
+}
+
 /* ======================================== */
 
 

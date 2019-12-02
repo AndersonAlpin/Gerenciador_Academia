@@ -9,20 +9,20 @@
         <div id="detalhesCliente">
             <div class="row col-md-12">
                 <div class="col-md-4">
-                    <div class="col-md-12"><span class="font-weight-bold">Nome: </span> <%= cliente.nome %></div>
-                    <div class="col-md-12"><span class="font-weight-bold">Sobrenome: </span> <%= cliente.sobrenome %>
+                    <div class="col-md-12"><span >Nome: </span> <%= cliente.nome %></div>
+                    <div class="col-md-12"><span >Sobrenome: </span> <%= cliente.sobrenome %>
                     </div>
                     <% var dataNormal = new Date( cliente.dataNascimento) %>
                     <% var dataAtualizada = dataNormal.toLocaleDateString('en-GB'); %>
-                    <div class="col-md-12"><span class="font-weight-bold">Data de Nascimento: </span>
+                    <div class="col-md-12"><span >Data de Nascimento: </span>
                         <%= dataAtualizada %> </div>
-                    <div class="col-md-12"><span class="font-weight-bold">CPF: </span> <%= cliente.cpf %></div>
-                    <div class="col-md-12"><span class="font-weight-bold">Telefone: </span> <%= cliente.telefone %>
+                    <div class="col-md-12"><span >CPF: </span> <%= cliente.cpf %></div>
+                    <div class="col-md-12"><span >Telefone: </span> <%= cliente.telefone %>
                     </div>
-                    <div class="col-md-12"><span class="font-weight-bold">Email: </span> <%= cliente.email %></div>
-                    <div class="col-md-12"><span class="font-weight-bold">Pacote: </span> <%= cliente.pacote.nome %>
+                    <div class="col-md-12"><span >Email: </span> <%= cliente.email %></div>
+                    <div class="col-md-12"><span >Pacote: </span> <%= cliente.pacote.nome %>
                     </div>
-                    <div class="col-md-12"><span class="font-weight-bold">Status: </span>
+                    <div class="col-md-12"><span >Status: </span>
                         <% if(cliente.ativo == 1){ %>
                         Ativo
                         <% }else{ %>
@@ -32,17 +32,17 @@
                 </div>
 
                 <div class="col-md-6">
-                    <div class="col-md-12"><span class="font-weight-bold">Logradouro: </span>
+                    <div class="col-md-12"><span >Logradouro: </span>
                         <%= cliente.enderecocliente.logradouro %></div>
-                    <div class="col-md-12"><span class="font-weight-bold">Número: </span>
+                    <div class="col-md-12"><span >Número: </span>
                         <%= cliente.enderecocliente.numero %></div>
-                    <div class="col-md-12"><span class="font-weight-bold">Cidade: </span>
+                    <div class="col-md-12"><span >Cidade: </span>
                         <%= cliente.enderecocliente.cidade %></div>
-                    <div class="col-md-12"><span class="font-weight-bold">Bairro </span>
+                    <div class="col-md-12"><span >Bairro </span>
                         <%= cliente.enderecocliente.bairro %></div>
-                    <div class="col-md-12"><span class="font-weight-bold">CEP: </span>
+                    <div class="col-md-12"><span >CEP: </span>
                         <%= cliente.enderecocliente.cep %></div>
-                    <div class="col-md-12"><span class="font-weight-bold">UF: </span> <%= cliente.enderecocliente.uf %>
+                    <div class="col-md-12"><span >UF: </span> <%= cliente.enderecocliente.uf %>
                     </div>
                 </div>
             </div>
