@@ -17,8 +17,9 @@ var $destinatario = 'leonardocamacan@gmail.com';
 var mailOptions = {
     from: $usuario,
     to: $destinatario,
-    subject: 'Bem vindo a academia!!!!',
-    html: '<h1 style="color: blue; ">Bem vindo a academia, agora você faz parte da nossa equipe!!!!!</h1>'
+    subject: 'Mensalidade paga com sucesso!! ',
+    text: 'Tudo certo',
+    html: '<h1 style="color: blue; ">Olá, identificamos o pagamento refente ao mês de Dezembro. OBRIGADO!!!!!</h1>'
 
 };
 
