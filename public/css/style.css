@@ -8,7 +8,7 @@
 }
 
 body {
-    min-width: 260px;
+    min-width: 308px;
 }
 
 /* ===== TABELAS ============== */
@@ -156,18 +156,6 @@ body#login {
     background-color: rgba(20, 20, 20);
 }
 
-#border-none {
-    border-right: none;
-}
-
-#menu-topo li {
-    padding: 4px 0;
-}
-
-#menu-topo li:hover {
-    background: #363636;
-}
-
 .logo {
     width: 182px;
     height: 55px;
@@ -187,6 +175,22 @@ body#login {
     color: #D3D3D3;
     margin: 0 10px;
     font-size: 22px;
+}
+
+#border-none {
+    border-right: none;
+}
+
+#menu-topo li {
+    padding: 4px 0;
+}
+
+#menu-topo li:hover {
+    background: #363636;
+}
+
+#perfil ul {
+    margin-top: 20px;
 }
 
 /* ====================== */
@@ -332,22 +336,35 @@ body {
         display: flex;
     }
     #perfil {
-        background-color: #0D1D26;
+        background-color: rgba(20, 20, 20);
         padding: 0 15px;
         margin: 0 -16px;
     }
     .logo {
         display: none;
     }
+    .navbar-toggler {
+        margin-top: 0px;
+    }
+    
 }
 
 @media screen and (min-width: 356px) {
     #jumbotron {
         display: block;
     }
+    #perfil {
+        background-color: rgba(20, 20, 20);
+        padding: 0 15px;
+        margin: 0 -16px;
+        margin-top: -15px;
+    }
     .logo {
         margin-top: -12px;
         display: block;
+    }
+    .navbar-toggler {
+        margin-top: -22px;
     }
 }
 
