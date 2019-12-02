@@ -20,7 +20,7 @@ app.set('view engine', 'ejs');
 
 // SESSÕES
 app.use(session({
-    secret: "pode digitar qualquer coisa aqui", cookie: {maxAge: 150000},
+    secret: "pode digitar qualquer coisa aqui", cookie: {maxAge: 300000},
     resave: false,
     saveUninitialized: true
 }));

@@ -69,6 +69,9 @@ router.post("/autenticacao", (req, res) => {
                 }
                 res.redirect("/administrador/home");
                 global.admin = req.session.login;
+                // var milisegundos = req.session.cookie.maxAge;
+                // var minuto = (milisegundos / 60000) % 60;
+                // global.sessao = minuto.toFixed(0);
             } else {
                 req.flash('error', 'Senha incorreta!');
                 res.redirect("/login");
