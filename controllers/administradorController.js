@@ -68,6 +68,7 @@ router.post("/autenticacao", (req, res) => {
                     telefone: login.administrador.telefone,
                 }
                 res.redirect("/administrador/");
+                global.admin = req.session.login;
             } else {
                 res.redirect("/");
             }
