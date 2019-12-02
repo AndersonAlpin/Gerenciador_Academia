@@ -8,7 +8,7 @@ const Login = require("../models/Login");
 const adminAut = require("../middlewares/adminAut");
 
 // HOME DO ADMINISTRADOR
-router.get("/administrador/", adminAut, (req, res) => {
+router.get("/administrador/home", adminAut, (req, res) => {
     var numClientes = 0;
     var numAtraso = 0;
     var totalEntradas = 0;
@@ -36,7 +36,7 @@ router.get("/administrador/", adminAut, (req, res) => {
         clientes.forEach(cliente => {
             numClientes++;
         });
-        res.render("administrador/", { numClientes: numClientes, numAtraso: numAtraso, totalEntradas: totalEntradas });
+        res.render("administrador/home", { numClientes: numClientes, numAtraso: numAtraso, totalEntradas: totalEntradas });
     });
 });
 
@@ -67,13 +67,13 @@ router.post("/autenticacao", (req, res) => {
                     cpf: login.administrador.cpf,
                     telefone: login.administrador.telefone,
                 }
-                res.redirect("/administrador/");
+                res.redirect("/administrador/home");
                 global.admin = req.session.login;
             } else {
-                res.redirect("/");
+                res.redirect("/login");
             }
         } else {
-            res.redirect("/");
+            res.redirect("/login");
         }
     });
 });
@@ -81,7 +81,7 @@ router.post("/autenticacao", (req, res) => {
 // DESLOGAR
 router.get("/logout", (req, res) => {
     req.session.login = undefined;
-    res.redirect("/");
+    res.redirect("/login");
 });
 
 // GERAR UM ADMINISTRADOR
