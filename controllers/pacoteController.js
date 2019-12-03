@@ -55,11 +55,11 @@ router.post("/pacote/salvar", adminAut, (req, res) => {
         descricao: req.body.inputDescricao,
         taxaDesconto: req.body.inputDesconto
     }).then(function () {
-        res.redirect("/administrador/pacotes/listar")
+        res.redirect("/administrador/pacotes/listar");
     }).catch(function (erro) {
-        res.redirect("/administrador/pacotes/listar")
-    })
-})
+        res.redirect("/administrador/pacotes/listar");
+    });
+});
 
 // EDITAR OS DADOS DE UM PACOTE
 router.get("/administrador/pacotes/editar/:id", adminAut, (req, res) => {

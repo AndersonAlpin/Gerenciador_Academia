@@ -21,7 +21,7 @@ app.set('view engine', 'ejs');
 
 // SESSÕES
 app.use(session({
-    secret: "pode digitar qualquer coisa aqui", cookie: {maxAge: 300000},
+    secret: "pode digitar qualquer coisa aqui", cookie: {maxAge: 600000},
     resave: false,
     saveUninitialized: true
 }));
@@ -46,6 +46,7 @@ app.use("/", clienteController);
 app.use("/", relatorioController);
 app.use("/", mensalidadeController);
 app.use("/", adminController);
+app.use("/", email);
 //////////////////////////////////////
 
 

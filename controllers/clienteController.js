@@ -7,6 +7,7 @@ const Pacote = require("../models/Pacote");
 const Sequelize = require("sequelize");
 const adminAut = require("../middlewares/adminAut");
 
+
 // LISTAR TODOS OS CLIENTES INCLUINDO O PACOTE E O ENDEREÇO
 router.get("/administrador/clientes/listar", adminAut, (req, res) => {
     Cliente.findAll({
@@ -97,7 +98,7 @@ router.post("/clientes/salvar", adminAut,  (req, res) => {
             connection.query('call primeiraMensalidade('+req.body.inputPacote+ ", '" + req.body.inputPagamento +"'" +')', {// CADASTRE A PRIMEIRA MENSALIDADE
                 type: Sequelize.DataTypes.INSERT
             }).then(() => {
-                res.redirect("/administrador/clientes/listar");
+                res.redirect("/email/send/bemvindo");
             }).catch((erro) => {
                 res.redirect("/administrador/clientes/cadastro");
             });
