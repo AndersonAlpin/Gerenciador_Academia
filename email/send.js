@@ -18,19 +18,20 @@ var transporter = nodemailer.createTransport({
 var $destinatario = 'andersonalpim@gmail.com';
 
 
-var emailBemVindo = ` 
-    
-`;
 
 
 // ENVIAR EMAIL DE BOAS VINDAS
 router.get("/email/send/bemvindo", adminAut, (req, res) => {
+    var emailBemVindo = ` 
+        
+    `;
+
     var mailOptions = {
         from: $usuario,
         to: $destinatario,
         subject: 'Bem-vindo(a)!! ',
         text: 'Bem-vindo',
-        html: 'Bem-vindo(a)',
+        html: 'emailBemVindo',
         attachments: [
             {
                 filename: 'banner-verao.jpeg',
