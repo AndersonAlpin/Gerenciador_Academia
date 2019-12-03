@@ -17,9 +17,18 @@ body {
 
 /* ======FORMATAÇÕES DE LOGIN====== */
 
-body#login {
-    background: url('../img/fundo.jpeg') no-repeat center center fixed;
-    background-size: cover;
+.logo-login{
+    width: 100%;
+}
+
+.login-texto {
+    margin: 0 auto;
+    margin-top: 5%;
+    padding: 0;
+}
+
+.login-titulo {
+    padding-top: 30px;
 }
 
 .main-content {
@@ -37,11 +46,6 @@ body#login {
     opacity: .97;
     padding: 0 20px 40px;
     box-shadow: 0px 0px 3px #848484;
-}
-
-.user-img {
-    margin-top: -50px;
-    margin-bottom: 35px;
 }
 
 .user-img img {
@@ -78,8 +82,6 @@ body#login {
 }
 
 /* ===================== */
-
-
 
 /* FORMATAÇÕES DO NAVBAR */
 
@@ -184,8 +186,6 @@ body#login {
 }
 
 /* =================================== */
-
-
 
 /* =========RELATÓRIOS======= */
 
