@@ -28,9 +28,15 @@ router.get("/email/send/bemvindo", adminAut, (req, res) => {
     var mailOptions = {
         from: $usuario,
         to: $destinatario,
-        subject: 'Welcome!! ',
-        text: 'Tudo certo',
-        html: emailBemVindo
+        subject: 'Bem-vindo(a)!! ',
+        text: 'Bem-vindo',
+        html: 'Bem-vindo(a)',
+        attachments: [
+            {
+                filename: 'banner-verao.jpeg',
+                path: __dirname + '/banner-verao.jpeg'
+            }
+        ]
     };
 
     transporter.sendMail(mailOptions, function (error, info) {
