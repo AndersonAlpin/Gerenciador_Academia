@@ -2,6 +2,8 @@ const express = require("express");
 const router = express.Router();
 const adminAut = require("../middlewares/adminAut");
 var nodemailer = require('nodemailer');
+const Cliente = require("../models/Cliente");
+const Mensalidade = require("../models/Mensalidade");
 
 var $usuario = 'academiaprojetoweb@gmail.com';
 var $senha = 'Web123321';
@@ -15,13 +17,12 @@ var transporter = nodemailer.createTransport({
 });
 
 
-var $destinatario = 'andersonalpim@gmail.com';
-
-
-
 
 // ENVIAR EMAIL DE BOAS VINDAS
 router.get("/email/send/bemvindo", adminAut, (req, res) => {
+    
+    var $destinatario = 'andersonalpim@gmail.com';
+
     var emailBemVindo = ` 
         
     `;
@@ -41,6 +42,7 @@ router.get("/email/send/bemvindo", adminAut, (req, res) => {
     };
 
     transporter.sendMail(mailOptions, function (error, info) {
+
         if (error) {
             console.log(error);
         } else {
