@@ -1,11 +1,119 @@
 <%- include ../../partials/header.ejs %>
 <%- include ../../partials/navbar.ejs %>
 <%- include ../../partials/sidebar.ejs %>
+
 <body>
 
     <div class="main-content">
-        <h1>Exibir Relatórios</h1>
-    </div>
+        <div class="container">
+            <!-- CARDS -->
 
+            <!-- REFERENTE A CLIENTES -->
+            <div class="row lista-cards">
+                <div class="col-sm-6 col-md-4">
+                    <div class="card card-colors">
+                        <h5 class="card-header"><a class="nav-link text-light"
+                                href="/administrador/clientes/listar">Total de clientes</a></h5>
+                        <div class="card-body text-center">
+                            <span class="card-text display-4"><%= relatorio.numClientes %></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6 col-md-4">
+                    <div class="card card-colors">
+                        <h5 class="card-header"><a class="nav-link text-light"
+                                href="/administrador/clientes/ativos">Clientes ativos</a></h5>
+                        <div class="card-body text-center">
+                            <span class="card-text display-4"><%= relatorio.numClientesAtivos %></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-12 col-md-4">
+                    <div class="card card-colors">
+                        <h5 class="card-header"><a class="nav-link text-light"
+                                href="/administrador/clientes/inativos">Clientes inativos</a></h5>
+                        <div class="card-body text-center">
+                            <span class="card-text display-4"><%= relatorio.numClientesInativos %></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- REFERENTE A MENSALIDADES -->
+            <div class="row lista-cards">
+                <div class="col-sm-6 col-md-4">
+                    <div class="card card-colors">
+                        <h5 class="card-header"><a class="nav-link text-light"
+                                href="/administrador/mensalidades/aberto">Mensalidades em aberto</a></h5>
+                        <div class="card-body text-center">
+                            <span class="card-text display-4"><%= relatorio.numMensalidadeReceber %></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6 col-md-4">
+                    <div class="card card-colors">
+                        <h5 class="card-header"><a class="nav-link text-light"
+                                href="/administrador/mensalidades/pago">Mensalidades pagas</a></h5>
+                        <div class="card-body text-center">
+                            <span class="card-text display-4"><%= relatorio.numMensalidadePago %></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-12 col-md-4">
+                    <div class="card card-colors">
+                        <h5 class="card-header"><a class="nav-link text-light"
+                                href="/administrador/mensalidades/atraso">Mensalidades atrasadas</a></h5>
+                        <div class="card-body text-center">
+                            <span class="card-text display-4"><%= relatorio.numMensalidadeAtraso %></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- REFERENTE A VALOR DAS MENSALIDADES -->
+            <div class="row lista-cards">
+                <div class="col-sm-6 col-md-4">
+                    <div class="card card-colors">
+                        <h5 class="card-header"><a class="nav-link text-light"
+                                href="">Valor a receber</a></h5>
+                        <div class="card-body text-center">
+                            <% var valorReceber = relatorio.totalReceber.toLocaleString('pt-br', {style: 'currency', currency: 'BRL'}) %>
+
+                            <span class="card-text display-4"><%= valorReceber %></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6 col-md-4">
+                    <div class="card card-colors">
+                        <h5 class="card-header"><a class="nav-link text-light"
+                                href="">Valor recebido</a></h5>
+                        <div class="card-body text-center">
+                            <% var valorPago = relatorio.totalEntradas.toLocaleString('pt-br', {style: 'currency', currency: 'BRL'}) %>
+
+                            <span class="card-text display-4"><%= valorPago %></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-12 col-md-4">
+                    <div class="card card-colors">
+                        <h5 class="card-header"><a class="nav-link text-light"
+                                href="">Valor em atraso</a></h5>
+                        <div class="card-body text-center">
+                            <% var valorAtraso = relatorio.totalAtraso.toLocaleString('pt-br', {style: 'currency', currency: 'BRL'}) %>
+
+                            <span class="card-text display-4"><%= valorAtraso %></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
 </body>
 <%- include ../../partials/footer.ejs %>
