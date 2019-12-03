@@ -17,13 +17,22 @@ body {
 
 /* ======FORMATAÇÕES DE LOGIN====== */
 
+body#login {
+    background: url('../img/fundo.jpeg') no-repeat center center fixed;
+    background-size: cover;
+}
+
+.jumbotron {
+    height: 350px;
+}
+
 .logo-login{
     width: 100%;
 }
 
 .login-texto {
     margin: 0 auto;
-    margin-top: 5%;
+    margin-top: 9%;
     padding: 0;
 }
 
