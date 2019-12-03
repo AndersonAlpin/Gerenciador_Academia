@@ -6,54 +6,37 @@
 
     <!-- Área de Conteúdos -->
     <div class="main-content">
-        <div class="container">
-            <!-- JUMBOTRON -->
-            <div id="jumbotron" class="jumbotron mb-1">
-                <h1 class="display-3">Academia IronFit</h1>
-                <hr>
-                <P class="lead">
-                    Bem-vindo ao seu painel de controle administrativo!
-                </P>
-                <p class="lead">
-                    Gerêncie aqui os clientes, os pacotes promocionais e as mensalidades.
-                </p>
-            </div>
 
-            <!-- CARDS -->
-            <div class="row" id="cards">
-                <div class="col-sm-6 col-md-4">
-                    <div class="card card-colors">
-                        <h4 class="card-header"><a class="nav-link text-light"
-                                href="/administrador/clientes/ativos">Clientes ativos</a></h4>
-                        <div class="card-body text-center">
-                            <span class="card-text display-4"><%= numClientes %></span>
-                        </div>
-                    </div>
+        <div id="carouselHome" class="carousel slide carousel-fade" data-ride="carousel">
+
+            <ol class="carousel-indicators">
+                <li data-target="#carouselHome" data-slide-to="0" class="active"></li>
+                <li data-target="#carouselHome" data-slide-to="1"></li>
+                <li data-target="#carouselHome" data-slide-to="2"></li>
+            </ol>
+
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="/img/banner-verao.jpeg" class="img-fluid">
                 </div>
 
-                <div class="col-sm-6 col-md-4">
-                    <div class="card card-colors">
-                        <h4 class="card-header"><a class="nav-link text-light"
-                                href="/administrador/mensalidades/atraso">Mensalidades atrasadas</a></h4>
-                        <div class="card-body text-center">
-                            <span class="card-text display-4"><%= numAtraso %></span>
-                        </div>
-                    </div>
+                <div class="carousel-item">
+                    <img src="/img/banner-premium.jpeg" class="img-fluid">
                 </div>
 
-                <div class="col-sm-12 col-md-4">
-                    <div class="card card-colors mb-4">
-                        <h4 class="card-header"><a class="nav-link text-light"
-                                href="/administrador/mensalidades/pago">Entradas do mês</a></h4>
-                        <div class="card-body text-center">
-                            <% var real = totalEntradas.toLocaleString('pt-br', {style: 'currency', currency: 'BRL'}) %>
+            <a class="carousel-control-prev" href="#carouselHome" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+                <span class="sr-only">Anterior</span>
+            </a>
 
-                            <span class="card-text display-4"><%= real %></span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <a class="carousel-control-next" href="#carouselHome" role="button" data-slide="next">
+                <span class="carousel-control-next-icon"></span>
+                <span class="sr-only">Avançar</span>
+            </a>
+
         </div>
+
     </div>
+
 </body>
 <%- include ../partials/footer.ejs %>
