@@ -4,7 +4,6 @@ const bodyParser = require("body-parser");
 const session = require("express-session");
 const flash = require("express-flash");
 const connection = require("./database/connection");
-const email =  require("./email/send");
 const port = 8080;
 
 // IMPORTAR ROTAS
@@ -46,7 +45,6 @@ app.use("/", clienteController);
 app.use("/", relatorioController);
 app.use("/", mensalidadeController);
 app.use("/", adminController);
-app.use("/", email);
 //////////////////////////////////////
 
 
