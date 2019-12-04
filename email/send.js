@@ -1,6 +1,3 @@
-const express = require("express");
-const router = express.Router();
-const adminAut = require("../middlewares/adminAut");
 var nodemailer = require('nodemailer');
 
 var $usuario = 'academiaprojetoweb@gmail.com';
@@ -15,7 +12,6 @@ var transporter = nodemailer.createTransport({
 });
 
 
-// EXPORTANDO AS FUNÇÕES DE ENVIAR EMAIL
 module.exports = {
 
     bemvindo: function (email, nome, sobrenome) {
@@ -29,14 +25,13 @@ module.exports = {
             html: '',
             attachments: [
                 {
-                    filename: 'banner-verao.jpeg',
-                    path: __dirname + '/banner-verao.jpeg'
+                    filename: 'bemvindo.jpg',
+                    path: __dirname + '/bemvindo.jpg'
                 }
             ]
         };
 
         transporter.sendMail(mailOptions, function (error, info) {
-
             if (error) {
                 console.log(error);
             } else {
@@ -44,5 +39,4 @@ module.exports = {
             }
         });
     }
-
 }
