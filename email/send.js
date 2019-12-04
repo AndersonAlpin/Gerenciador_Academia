@@ -15,7 +15,7 @@ var transporter = nodemailer.createTransport({
 });
 
 
-var $destinatario = 'andersonalpim@gmail.com';
+var $destinatario = 'aldinho-reges@hotmail.com';
 
 
 
@@ -31,11 +31,11 @@ router.get("/email/send/bemvindo", adminAut, (req, res) => {
         to: $destinatario,
         subject: 'Bem-vindo(a)!! ',
         text: 'Bem-vindo',
-        html: 'emailBemVindo',
+        html: '<h1>Bem vindo<h1>',
         attachments: [
             {
-                filename: 'banner-verao.jpeg',
-                path: __dirname + '/banner-verao.jpeg'
+                filename: '**',
+                path: __dirname + '/bemvindo.jpg'
             }
         ]
     };
