@@ -24,7 +24,7 @@ module.exports = {
         var mailOptions = {
             from: $usuario,
             to: $destinatario,
-            subject: 'Bem-vindo(a) ',
+            subject: 'Academia IronFit',
             text: 'Bem-vindo(a) ' + nome + ' ' + sobrenome,
             html: '',
             attachments: [
