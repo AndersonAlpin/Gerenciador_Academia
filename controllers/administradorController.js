@@ -69,7 +69,7 @@ router.post("/autenticacao", (req, res) => {
                 }
                 res.redirect("/administrador/home");
                 global.admin = req.session.login;
-            } else {
+            } else {  
                 req.flash('error', 'Senha incorreta!');
                 res.redirect("/login");
             }

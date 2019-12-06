@@ -15,13 +15,14 @@
                     </div>
                     <div class="form-group col-md-5">
                         <label for="inputCPF">Taxa de desconto</label>
-                        <input type="text" class="form-control" name="inputDesconto" placeholder="0%">
+                        <input type="text" class="form-control" name="inputDesconto" id="inputDesconto"">
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-12">
                         <label for="inputSobrenome">Descriçao do pacote</label>
-                        <textarea name="inputDescricao" class="form-control" rows="3" placeholder="Descrição"></textarea>
+                        <textarea name="inputDescricao" class="form-control" rows="3"
+                            placeholder="Descrição"></textarea>
                     </div>
                 </div>
                 <button type="submit" class="btn btn-success">Cadastrar</button>
@@ -29,5 +30,8 @@
         </div>
 
     </div>
+    <script>
+        $('#inputDesconto').mask("999", { placeholder: "0" });
+    </script>
 </body>
 <%- include ../../partials/footer.ejs %>

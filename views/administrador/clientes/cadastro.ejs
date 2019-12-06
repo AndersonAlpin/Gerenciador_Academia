@@ -1,4 +1,5 @@
 <%- include ../../partials/header.ejs %>
+
 <body>
     <%- include ../../partials/navbar.ejs %>
     <%- include ../../partials/sidebar.ejs %>
@@ -22,14 +23,14 @@
                     </div>
                     <div class="form-group col-md-3">
                         <label for="inputCPF">CPF</label>
-                        <input type="text" class="form-control" name="inputCPF" placeholder="000.000.000-00">
+                        <input type="text" class="form-control" name="inputCPF" id="inputCPF">
                     </div>
                 </div>
 
                 <div class="form-row">
                     <div class="form-group col-md-3">
                         <label for="inputTelefone">Telefone</label>
-                        <input type="text" class="form-control" name="inputTelefone" placeholder="(99)9999-9999">
+                        <input type="text" class="form-control" name="inputTelefone" id="inputTelefone">
                     </div>
                     <div class="form-group col-md-4">
                         <label for="inputEmail">Email</label>
@@ -56,7 +57,7 @@
                     </div>
                     <div class="form-group col-md-3">
                         <label for="inputCEP">CEP</label>
-                        <input type="text" class="form-control" name="inputCEP" placeholder="00000-000">
+                        <input type="text" class="form-control" name="inputCEP" id="inputCEP">
                     </div>
                     <div class="form-group col-md-2">
                         <label for="inputUF">UF</label>
@@ -121,5 +122,10 @@
         </div>
 
     </div>
+    <script>
+        $('#inputCPF').mask("999.999.999.99", { placeholder: "000.000.000-00" });
+        $('#inputTelefone').mask("(99)99999-9999", { placeholder: "(00)00000-0000" });
+        $('#inputCEP').mask("99999-999", { placeholder: "00000-000" });
+    </script>
 </body>
 <%- include ../../partials/footer.ejs %>
