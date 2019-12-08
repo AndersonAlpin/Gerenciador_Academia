@@ -71,11 +71,11 @@ router.post("/autenticacao", (req, res) => {
                 global.admin = req.session.login;
             } else {  
                 req.flash('error', 'Senha incorreta!');
-                res.redirect("/login");
+                res.redirect("/");
             }
         } else {
             req.flash('error', 'Este email não existe!');
-            res.redirect("/login");
+            res.redirect("/");
         }
     });
 });
@@ -83,7 +83,7 @@ router.post("/autenticacao", (req, res) => {
 // DESLOGAR
 router.get("/logout", (req, res) => {
     req.session.login = undefined;
-    res.redirect("/login");
+    res.redirect("/");
 });
 
 // GERAR UM ADMINISTRADOR
