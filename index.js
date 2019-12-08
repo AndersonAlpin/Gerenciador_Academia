@@ -4,7 +4,7 @@ const bodyParser = require("body-parser");
 const session = require("express-session");
 const flash = require("express-flash");
 const connection = require("./database/connection");
-const port = 3000;
+const port = 8080;
 
 // IMPORTAR ROTAS
 const pacoteController = require("./controllers/pacoteController");
