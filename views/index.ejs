@@ -31,17 +31,17 @@
 
                   <form action="/autenticacao" method="POST" class="col-12">
                     <div class="form-group inputIcon" id="user-group">
-                      <input type="email" name="email" class="form-control" placeholder="Email"
+                      <input id="email" type="email" name="email" class="form-control" placeholder="Email"
                         required>
                       <i class="fas fa-at fa-lg fa-fw" aria-hidden="true"></i>
                     </div>
 
                     <div class="form-group inputIcon" id="password-group">
-                      <input type="password" name="senha" class="form-control" placeholder="Senha" required>
+                      <input id="senha" type="password" name="senha" class="form-control" placeholder="Senha" required>
                       <i class="fas fa-lock fa-lg fa-fw" aria-hidden="true"></i>
                     </div>
 
-                    <div class="error" style="color: red;">
+                    <div id="error" class="error" style="color: red;">
                       <%= messages.error %>
                     </div>
 
@@ -63,10 +63,16 @@
       </div>
     </div>
   </section>
+<script>
+  var mensagemEmail = document.getElementById("email");
+  var mensagemSenha = document.getElementById("senha");
 
+  mensagemEmail.addEventListener("focus", apagarMensagem, true);
+  mensagemSenha.addEventListener("focus", apagarMensagem, true);
 
-
-
-
+  function apagarMensagem(){
+    document.getElementById("error").innerHTML = "";
+  }
+</script>
 </body>
 <%- include partials/footer.ejs %>
