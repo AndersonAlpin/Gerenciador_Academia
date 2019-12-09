@@ -91,6 +91,64 @@ router.get("/administrador/editar/dados", adminAut, (req, res) => {
     res.render("administrador/editarDados");
 });
 
+// EDITAR SENHA DO ADMINISTRADOR
+router.get("/administrador/editar/senha", adminAut, (req, res) => {
+    res.render("administrador/editarSenha");
+});
+
+// SALVAR NOVA SENHA
+router.post("/administrador/senha/update", (req, res) => {
+    console.log("certo")
+
+    var senhaAtual = req.body.senhaAtual;
+    var novaSenha = req.body.novaSenha;
+    var confirmarNovaSenha = req.body.confirmarNovaSenha;
+
+    var salt = bcrypt.genSaltSync(10);
+    var hash = bcrypt.hashSync(novaSenha, salt);
+
+    if (senhaAtual == "" || novaSenha == "" || confirmarNovaSenha == "") {
+        req.flash('error', 'Preencha todos os campos!');
+        res.redirect("/administrador/editar/senha");
+    }
+
+    if (novaSenha != confirmarNovaSenha) {
+        req.flash('error', 'As senhas não coincidem!');
+        res.redirect("/administrador/editar/senha");
+    }
+
+    Login.findOne({
+        where: {
+            id: admin.id
+        }
+    }).then(login => {
+        if (login != undefined) {
+
+            var correct = bcrypt.compareSync(senhaAtual, login.senha);
+
+            if (correct) {
+                Login.update({
+                    senha: hash
+                }, {
+                    where: {
+                        id: admin.id
+                    }
+                }).then(() => {
+                    res.redirect("/administrador/perfil")
+                });
+            } else {
+                req.flash('error', 'Senha inválida!');
+                res.redirect("/administrador/editar/senha");
+            }
+
+        } else {
+            res.redirect("/administrador/editar/senha");
+        }
+    });
+
+});
+
+// SALVAR DADOS DA EDIÇÃO
 router.post("/administrador/dados/update", (req, res) => {
     var nome = req.body.inputNome;
     var sobrenome = req.body.inputSobrenome;

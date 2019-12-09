@@ -8,41 +8,27 @@
         <hr>
         <div class="formularios">
             <div class="form-row">
-                <div class="form-group col-md-3">
-                    <label for="inputNome">Nome</label>
-                    <input value="<%= admin.nome %>" type="text" class="form-control" id="inputNome"
-                        placeholder="Nome">
-                </div>
-                <div class="form-group col-md-3">
-                    <label for="inputSobrenome">Sobrenome</label>
-                    <input value="<%= admin.sobrenome %>" type="text" class="form-control" id="inputSobrenome"
-                        placeholder="Sobrenome">
-                </div>
-                <div class="form-group col-md-3">
-                    <label for="inputDate">Data de Nascimento</label>
-                    <input value="<%= admin.dataNascimento %>" type="date" class="form-control" id="inputDate">
-                </div>
-                <div class="form-group col-md-3">
-                    <label for="inputCPF">CPF</label>
-                    <input value="<%= admin.cpf %>" type="text" class="form-control" id="inputCPF"
-                        placeholder="000.000.000-00">
-                </div>
+                <form action="/administrador/senha/update" method="POST">
+                    <div class="form-group col-md-12">
+                        <label for="inputSenhaAtual">Senha Atual</label>
+                        <input name="senhaAtual" type="password" class="form-control" id="inputSenhaAtual">
+                    </div>
+                    <div class=" form-group col-md-12">
+                        <label for="inputNovaSenha">Nova Senha</label>
+                        <input name="novaSenha" type="password" class="form-control" id="inputNovaSenha">
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label for="inputConfirmarNovaSenha">Confirmar Nova Senha</label>
+                        <input name="confirmarNovaSenha" type="password" class="form-control" id="inputConfirmarNovaSenha">
+                    </div>
+                    <div id="error" class="error form-group col-md-12" style="color: red;">
+                        <%= messages.error %>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <button class="btn btn-success">Atualizar</button>
+                    </div>
+                </form>
             </div>
-
-            <div class="form-row">
-                <div class="form-group col-md-3">
-                    <label for="inputTelefone">Telefone</label>
-                    <input value="<%= admin.telefone %>" type="text" class="form-control" id="inputTelefone"
-                        placeholder="(99)9999-9999">
-                </div>
-                <div class="form-group col-md-4">
-                    <label for="inputEmail">Email</label>
-                    <input value="<%= admin.email %>" type="email" class="form-control" id="inputEmail"
-                        placeholder="example@email.com">
-                </div>
-            </div>
-            <button class="btn btn-success">Atualizar</button>
         </div>
-    </div>
 </body>
 <%- include ../partials/footer.ejs %>
