@@ -1,11 +1,45 @@
 <%- include ../../partials/header.ejs %>
 <%- include ../../partials/navbar.ejs %>
 <%- include ../../partials/sidebar.ejs %>
+
 <body>
-
     <div class="main-content">
-        <h1>Edição de Pacote</h1>
-    </div>
+        <h2>Edição de Pacotes</h2>
+        <hr>
+        <div class="formularios w-50">
+            <form action="/pacote/update" method="POST">
+                <div class="form-row">
+                    <div class="form-group col-md-7">
+                        <label for="inputNomePacote">Nome do pacote</label>
+                        <input value="<%= pacote.nome %>" type="text" class="form-control" name="inputNome"
+                            id="inputNomePacote" placeholder="Nome">
+                    </div>
+                    <div class="form-group col-md-5">
+                        <label for="inputDesconto">Taxa de desconto</label>
+                        <input value="<%= pacote.taxaDesconto %>" type="text" class="form-control" name="inputDesconto"
+                            id="inputDesconto"">
+                    </div>
+                </div>
+                <div class=" form-row">
+                        <div class="form-group col-md-12">
+                            <label for="inputDescricao">Descriçao do pacote</label>
+                            <textarea name="inputDescricao" class="form-control" rows="3" placeholder="Descrição"
+                                id="inputDescricao"><%= pacote.descricao %></textarea>
+                        </div>
+                        <div>
+                            <input name="inputID" type="hidden" value="<%= pacote.id %>">
+                        </div>
+                    </div>
+                    <div id="error" class="error form-group" style="color: red;">
+                        <%= messages.error %>
+                    </div>
+                    <button type="submit" class="btn btn-success">Atualizar</button>
+            </form>
+        </div>
 
+    </div>
+    <script>
+        $('#inputDesconto').mask("999", { placeholder: "0" });
+    </script>
 </body>
 <%- include ../../partials/footer.ejs %>

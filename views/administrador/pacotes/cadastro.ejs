@@ -4,28 +4,32 @@
 
 <body>
     <div class="main-content">
-        <h2>Cadastro de pacotes</h2>
+        <h2>Cadastro de Pacotes</h2>
         <hr>
         <div class="formularios w-50">
             <form action="/pacote/salvar" method="POST">
                 <div class="form-row">
                     <div class="form-group col-md-7">
-                        <label for="inputNome">Nome do pacote</label>
-                        <input type="text" class="form-control" name="inputNome" placeholder="Nome">
+                        <label for="inputNomePacote">Nome do pacote</label>
+                        <input type="text" class="form-control" name="inputNome" placeholder="Nome"
+                            id="inputNomePacote">
                     </div>
                     <div class="form-group col-md-5">
-                        <label for="inputCPF">Taxa de desconto</label>
+                        <label for="inputDesconto">Taxa de desconto</label>
                         <input type="text" class="form-control" name="inputDesconto" id="inputDesconto"">
                     </div>
                 </div>
-                <div class="form-row">
-                    <div class="form-group col-md-12">
-                        <label for="inputSobrenome">Descriçao do pacote</label>
-                        <textarea name="inputDescricao" class="form-control" rows="3"
-                            placeholder="Descrição"></textarea>
+                <div class=" form-row">
+                        <div class="form-group col-md-12">
+                            <label for="inputDescricao">Descriçao do pacote</label>
+                            <textarea name="inputDescricao" class="form-control" rows="3" placeholder="Descrição"
+                                id="inputDescricao"></textarea>
+                        </div>
                     </div>
-                </div>
-                <button type="submit" class="btn btn-success">Cadastrar</button>
+                    <div id="error" class="error form-group" style="color: red;">
+                        <%= messages.error %>
+                    </div>
+                    <button type="submit" class="btn btn-success">Cadastrar</button>
             </form>
         </div>
 

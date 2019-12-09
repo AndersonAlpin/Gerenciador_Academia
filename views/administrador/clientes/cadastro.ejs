@@ -15,11 +15,11 @@
                     </div>
                     <div class="form-group col-md-3">
                         <label for="inputSobrenome">Sobrenome</label>
-                        <input type="text" class="form-control" name="inputSobrenome" placeholder="Sobrenome">
+                        <input type="text" class="form-control" name="inputSobrenome" placeholder="Sobrenome" id="inputSobrenome">
                     </div>
                     <div class="form-group col-md-3">
                         <label for="inputDate">Data de Nascimento</label>
-                        <input type="date" class="form-control" name="inputDate">
+                        <input type="date" class="form-control" name="inputDate" id="inputDate">
                     </div>
                     <div class="form-group col-md-3">
                         <label for="inputCPF">CPF</label>
@@ -34,33 +34,33 @@
                     </div>
                     <div class="form-group col-md-4">
                         <label for="inputEmail">Email</label>
-                        <input type="email" class="form-control" name="inputEmail" placeholder="example@email.com">
+                        <input type="email" class="form-control" name="inputEmail" placeholder="example@email.com" id="inputEmail">
                     </div>
                     <div class="form-group col-md-3">
                         <label for="inputLogradouro">Logradouro</label>
-                        <input type="text" class="form-control" name="inputLogradouro" placeholder="Rua">
+                        <input type="text" class="form-control" name="inputLogradouro" placeholder="Rua" id="inputLogradouro">
                     </div>
                     <div class="form-group col-md-2">
                         <label for="inputNumero">Número</label>
-                        <input type="number" class="form-control" name="inputNumero" placeholder="00">
+                        <input type="number" class="form-control" name="inputNumero" placeholder="00" id="inputNumero">
                     </div>
                 </div>
 
                 <div class="form-row">
                     <div class="form-group col-md-3">
                         <label for="inputCidade">Cidade</label>
-                        <input type="text" class="form-control" name="inputCidade" placeholder="Cidade">
+                        <input type="text" class="form-control" name="inputCidade" placeholder="Cidade" id="inputCidade">
                     </div>
                     <div class="form-group col-md-3">
                         <label for="inputBairro">Bairro</label>
-                        <input type="text" class="form-control" name="inputBairro" placeholder="Bairro">
+                        <input type="text" class="form-control" name="inputBairro" placeholder="Bairro" id="inputBairro">
                     </div>
                     <div class="form-group col-md-3">
                         <label for="inputCEP">CEP</label>
                         <input type="text" class="form-control" name="inputCEP" id="inputCEP">
                     </div>
                     <div class="form-group col-md-2">
-                        <label for="inputUF">UF</label>
+                        <label for="selectUF">UF</label>
                         <select class="form-control" id="selectUF" name="selectUF" aria-placeholder="">
                             <option value="NN">Selecione</option>
                             <option value="AC">AC</option>
@@ -97,7 +97,7 @@
 
                 <div class="form-row">
                     <div class="form-group col-md-3">
-                        <label for="inputPacote">Pacote</label>
+                        <label for="selectPacote">Pacote</label>
                         <select class="form-control" name="selectPacote" id="selectPacote">
                             <% pacote.forEach(pacote => { %>
                             <option value="<%= pacote.id %>"><%= pacote.nome %></option>
@@ -106,7 +106,7 @@
                         <input name="inputPacote" id="inputPacote" type="hidden" value="1">
                     </div>
                     <div class="form-group col-md-3">
-                        <label for="inputPagamento">Forma de Pagamento</label>
+                        <label for="selectPagamento">Forma de Pagamento</label>
                         <select class="form-control" name="selectPagamento" id="selectPagamento">
                             <option value="">Selecione</option>
                             <option value="">Cartão</option>

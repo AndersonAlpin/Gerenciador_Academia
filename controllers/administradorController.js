@@ -97,7 +97,7 @@ router.get("/administrador/editar/senha", adminAut, (req, res) => {
 });
 
 // SALVAR NOVA SENHA
-router.post("/administrador/senha/update", (req, res) => {
+router.post("/administrador/senha/update", adminAut, (req, res) => {
     console.log("certo")
 
     var senhaAtual = req.body.senhaAtual;
@@ -149,7 +149,7 @@ router.post("/administrador/senha/update", (req, res) => {
 });
 
 // SALVAR DADOS DA EDIÇÃO
-router.post("/administrador/dados/update", (req, res) => {
+router.post("/administrador/dados/update", adminAut, (req, res) => {
     var nome = req.body.inputNome;
     var sobrenome = req.body.inputSobrenome;
     var dataNascimento = req.body.inputDate;
@@ -229,6 +229,5 @@ router.get("/logout", (req, res) => {
 //     })
 
 // });
-
 
 module.exports = router;

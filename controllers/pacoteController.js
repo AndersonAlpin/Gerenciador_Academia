@@ -49,16 +49,31 @@ router.post("/pacotes/delete", adminAut, (req, res) => {
 
 // SALVAR O PACOTE APÓS PREENCHER O FORMULÁRIO
 router.post("/pacote/salvar", adminAut, (req, res) => {
+    var nome = req.body.inputNome;
+    var descricao = req.body.inputDescricao;
+    var desconto = req.body.inputDesconto;
 
-    Pacote.create({
-        nome: req.body.inputNome,
-        descricao: req.body.inputDescricao,
-        taxaDesconto: req.body.inputDesconto
-    }).then(function () {
-        res.redirect("/administrador/pacotes/listar");
-    }).catch(function (erro) {
-        res.redirect("/administrador/pacotes/listar");
-    });
+    validar = 1;
+
+    if (nome == "" || descricao == "" || desconto == "") {
+        validar = 0;
+    }
+
+    if (validar == 1) {
+        Pacote.create({
+            nome: nome,
+            descricao: descricao,
+            taxaDesconto: desconto
+        }).then(function () {
+            res.redirect("/administrador/pacotes/listar");
+        }).catch(function (erro) {
+            res.redirect("/administrador/pacotes/listar");
+        });
+    } else {
+        req.flash('error', 'Preencha todos os campos!');
+        res.redirect("/administrador/pacotes/cadastro/");
+    }
+
 });
 
 // EDITAR OS DADOS DE UM PACOTE
@@ -78,6 +93,38 @@ router.get("/administrador/pacotes/editar/:id", adminAut, (req, res) => {
     }).catch(erro => {
         res.redirect("/administrador/pacotes/listar")
     })
+});
+
+// SALVAR PACOTE APÓS EDIÇÃO
+router.post("/pacote/update", adminAut, (req, res) => {
+    var nome = req.body.inputNome;
+    var descricao = req.body.inputDescricao;
+    var desconto = req.body.inputDesconto
+    var id = req.body.inputID;
+
+    var validar = 1;
+
+    if (nome == "" || descricao == "" || desconto == "") {
+        validar = 0;
+    }
+
+    if (validar == 1) {
+        Pacote.update({
+            nome: nome,
+            descricao: descricao,
+            taxaDesconto: desconto
+        }, {
+            where: {
+                id: id
+            }
+        }).then(function () {
+            res.redirect("/administrador/pacotes/listar");
+        });
+    } else {
+        req.flash('error', 'Preencha todos os campos!');
+        res.redirect("/administrador/pacotes/editar/" + id);
+    }
+
 });
 
 module.exports = router;
