@@ -7,39 +7,42 @@
         <h2>Edição de Administrador</h2>
         <hr>
         <div class="formularios">
-            <div class="form-row">
-                <div class="form-group col-md-3">
-                    <label for="inputNome">Nome</label>
-                    <input value="<%= admin.nome %>" type="text" class="form-control" id="inputNome" placeholder="Nome">
+            <form method="POST" action="/administrador/dados/update">
+                <div class="form-row">
+                    <div class="form-group col-md-3">
+                        <label for="inputNome">Nome</label>
+                        <input name="inputNome" value="<%= admin.nome %>" type="text" class="form-control" id="inputNome"
+                            placeholder="Nome">
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="inputSobrenome">Sobrenome</label>
+                        <input name="inputSobrenome" value="<%= admin.sobrenome %>" type="text" class="form-control" id="inputSobrenome"
+                            placeholder="Sobrenome">
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="inputDate">Data de Nascimento</label>
+                        <input name="inputDate" value="<%= admin.dataNascimento %>" type="date" class="form-control" id="inputDate">
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="inputCPF">CPF</label>
+                        <input name="inputCPF" value="<%= admin.cpf %>" type="text" class="form-control" id="inputCPF">
+                    </div>
                 </div>
-                <div class="form-group col-md-3">
-                    <label for="inputSobrenome">Sobrenome</label>
-                    <input value="<%= admin.sobrenome %>" type="text" class="form-control" id="inputSobrenome"
-                        placeholder="Sobrenome">
-                </div>
-                <div class="form-group col-md-3">
-                    <label for="inputDate">Data de Nascimento</label>
-                    <input value="<%= admin.dataNascimento %>" type="date" class="form-control" id="inputDate">
-                </div>
-                <div class="form-group col-md-3">
-                    <label for="inputCPF">CPF</label>
-                    <input value="<%= admin.cpf %>" type="text" class="form-control" id="inputCPF">
-                </div>
-            </div>
 
-            <div class="form-row">
-                <div class="form-group col-md-3">
-                    <label for="inputTelefone">Telefone</label>
-                    <input value="<%= admin.telefone %>" type="text" class="form-control" id="inputTelefone"
-                        placeholder="(99)9999-9999">
+                <div class="form-row">
+                    <div class="form-group col-md-3">
+                        <label for="inputTelefone">Telefone</label>
+                        <input name="inputTelefone" value="<%= admin.telefone %>" type="text" class="form-control" id="inputTelefone"
+                            placeholder="(99)9999-9999">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="inputEmail">Email</label>
+                        <input name="inputEmail" value="<%= admin.email %>" type="email" class="form-control" id="inputEmail"
+                            placeholder="example@email.com">
+                    </div>
                 </div>
-                <div class="form-group col-md-4">
-                    <label for="inputEmail">Email</label>
-                    <input value="<%= admin.email %>" type="email" class="form-control" id="inputEmail"
-                        placeholder="example@email.com">
-                </div>
-            </div>
-            <button class="btn btn-success">Atualizar</button>
+                <button class="btn btn-success">Atualizar</button>
+            </form>
         </div>
     </div>
     <script>

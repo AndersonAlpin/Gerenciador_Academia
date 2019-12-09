@@ -91,6 +91,30 @@ router.get("/administrador/editar/dados", adminAut, (req, res) => {
     res.render("administrador/editarDados");
 });
 
+router.post("/administrador/dados/update", (req, res) => {
+    var nome = req.body.inputNome;
+    var sobrenome = req.body.inputSobrenome;
+    var dataNascimento = req.body.inputDate;
+    var cpf = req.body.inputCPF;
+    var telefone = req.body.inputTelefone;
+    var email = req.body.inputEmail;
+
+    Administrador.update({
+        nome: nome,
+        sobrenome: sobrenome,
+        dataNascimento: dataNascimento,
+        cpf: cpf,
+        telefone: telefone,
+        email: email
+    }, {
+        where: {
+            id: admin.id
+        }
+    }).then(() => {
+        res.redirect("/administrador/perfil");
+    })
+});
+
 // DESLOGAR
 router.get("/logout", (req, res) => {
     req.session.login = undefined;
