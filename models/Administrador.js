@@ -18,11 +18,11 @@ const Administrador = connection.define('administrador', {
         type: Sequelize.STRING,
         allowNull: false
     },
-    cpf: {
-        type: Sequelize.STRING,
+    dataNascimento: {
+        type: Sequelize.DATEONLY,
         allowNull: true
     },
-    telefone: {
+    cpf: {
         type: Sequelize.STRING,
         allowNull: true
     },

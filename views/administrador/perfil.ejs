@@ -1,0 +1,40 @@
+<%- include ../partials/header.ejs %>
+<%- include ../partials/navbar.ejs %>
+<%- include ../partials/sidebar.ejs %>
+
+<body>
+    <div class="main-content">
+        <h2>Meus Dados</h2>
+        <hr>
+        <div id="detalhesCliente">
+            <div class="row col-md-12">
+                <div class="col-md-4">
+                    <div class="col-md-12"><span >Nome: </span> <%= admin.nome %></div>
+                    <div class="col-md-12"><span >Sobrenome: </span> <%= admin.sobrenome %>
+                    </div>
+                    <% var dataNormal = new Date( admin.dataNascimento) %>
+                    <% var dataAtualizada = dataNormal.toLocaleDateString('en-GB'); %>
+                    <div class="col-md-12"><span >Data de Nascimento: </span>
+                        <%= dataAtualizada %> </div>
+                    <div class="col-md-12"><span >CPF: </span> <%= admin.cpf %></div>
+                    <div class="col-md-12"><span >Telefone: </span> <%= admin.telefone %>
+                    </div>
+                    <div class="col-md-12"><span >Email: </span> <%= admin.email %></div>
+                </div>
+            </div>
+
+            <div class="row">
+                <form action="" class="form-group form-inline">
+                    <div>
+                        <a href="/administrador/editar/dados" class="btn btn-warning">Editar dados</a>
+                    </div>
+                    <div>
+                        <a href="/administrador/editar/senha/" class="btn btn-danger">Editar senha</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+<%- include ../partials/footer.ejs %>

@@ -18,8 +18,9 @@ body {
 /* ======FORMATAÇÕES DE LOGIN====== */
 
 body#login {
-    background: url('../img/fundo.jpeg') no-repeat center center fixed;
+    background: url('../img/fundo.jpeg') no-repeat center fixed;
     background-size: cover;
+
 }
 
 .jumbotron {

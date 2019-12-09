@@ -1,0 +1,50 @@
+<%- include ../partials/header.ejs %>
+<%- include ../partials/navbar.ejs %>
+<%- include ../partials/sidebar.ejs %>
+
+<body>
+    <div class="main-content">
+        <h2>Edição de Administrador</h2>
+        <hr>
+        <div class="formularios">
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <label for="inputNome">Nome</label>
+                    <input value="<%= admin.nome %>" type="text" class="form-control" id="inputNome" placeholder="Nome">
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="inputSobrenome">Sobrenome</label>
+                    <input value="<%= admin.sobrenome %>" type="text" class="form-control" id="inputSobrenome"
+                        placeholder="Sobrenome">
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="inputDate">Data de Nascimento</label>
+                    <input value="<%= admin.dataNascimento %>" type="date" class="form-control" id="inputDate">
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="inputCPF">CPF</label>
+                    <input value="<%= admin.cpf %>" type="text" class="form-control" id="inputCPF">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <label for="inputTelefone">Telefone</label>
+                    <input value="<%= admin.telefone %>" type="text" class="form-control" id="inputTelefone"
+                        placeholder="(99)9999-9999">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="inputEmail">Email</label>
+                    <input value="<%= admin.email %>" type="email" class="form-control" id="inputEmail"
+                        placeholder="example@email.com">
+                </div>
+            </div>
+            <button class="btn btn-success">Atualizar</button>
+        </div>
+    </div>
+    <script>
+        $('#inputCPF').mask("999.999.999.99", { placeholder: "000.000.000-00" });
+        $('#inputTelefone').mask("(99)99999-9999", { placeholder: "(00)00000-0000" });
+    </script>
+</body>
+<%- include ../partials/footer.ejs %>

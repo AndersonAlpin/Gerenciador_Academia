@@ -64,12 +64,13 @@ router.post("/autenticacao", (req, res) => {
                     email: login.email,
                     nome: login.administrador.nome,
                     sobrenome: login.administrador.sobrenome,
+                    dataNascimento: login.administrador.dataNascimento,
                     cpf: login.administrador.cpf,
                     telefone: login.administrador.telefone,
                 }
                 res.redirect("/administrador/home");
                 global.admin = req.session.login;
-            } else {  
+            } else {
                 req.flash('error', 'Senha incorreta!');
                 res.redirect("/");
             }
@@ -78,6 +79,16 @@ router.post("/autenticacao", (req, res) => {
             res.redirect("/");
         }
     });
+});
+
+// PERFIL
+router.get("/administrador/perfil", adminAut, (req, res) => {
+    res.render("administrador/perfil")
+});
+
+// EDITAR OS DADOS DO ADMINISTRADOR
+router.get("/administrador/editar/dados", adminAut, (req, res) => {
+    res.render("administrador/editarDados");
 });
 
 // DESLOGAR
