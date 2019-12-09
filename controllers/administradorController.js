@@ -157,31 +157,44 @@ router.post("/administrador/dados/update", (req, res) => {
     var telefone = req.body.inputTelefone;
     var email = req.body.inputEmail;
 
-    Administrador.update({
-        nome: nome,
-        sobrenome: sobrenome,
-        dataNascimento: dataNascimento,
-        cpf: cpf,
-        telefone: telefone,
-        email: email
-    }, {
-        where: {
-            id: admin.idAdmin
-        }
-    }).then(() => {
+    var validar = 1;
 
-        global.admin = {
-            id: admin.id,
-            idAdmin: admin.idAdmin,
-            email: email,
+    if (nome == "" || sobrenome == "" || dataNascimento == ""
+        || cpf == "" || telefone == "" || email == "") {
+        validar = 0;
+    }
+
+
+    if (validar == 1) {
+        Administrador.update({
             nome: nome,
             sobrenome: sobrenome,
             dataNascimento: dataNascimento,
             cpf: cpf,
             telefone: telefone,
-        }
-        res.redirect("/administrador/perfil");
-    })
+            email: email
+        }, {
+            where: {
+                id: admin.idAdmin
+            }
+        }).then(() => {
+
+            global.admin = {
+                id: admin.id,
+                idAdmin: admin.idAdmin,
+                email: email,
+                nome: nome,
+                sobrenome: sobrenome,
+                dataNascimento: dataNascimento,
+                cpf: cpf,
+                telefone: telefone,
+            }
+            res.redirect("/administrador/perfil");
+        });
+    } else {
+        req.flash('error', 'Preencha todos os campos!');
+        res.redirect("/administrador/editar/dados");
+    }
 });
 
 // DESLOGAR
