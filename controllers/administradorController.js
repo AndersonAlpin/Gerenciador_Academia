@@ -108,9 +108,20 @@ router.post("/administrador/dados/update", (req, res) => {
         email: email
     }, {
         where: {
-            id: admin.id
+            id: admin.idAdmin
         }
     }).then(() => {
+
+        global.admin = {
+            id: admin.id,
+            idAdmin: admin.idAdmin,
+            email: email,
+            nome: nome,
+            sobrenome: sobrenome,
+            dataNascimento: dataNascimento,
+            cpf: cpf,
+            telefone: telefone,
+        }
         res.redirect("/administrador/perfil");
     })
 });
