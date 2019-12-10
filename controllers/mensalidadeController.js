@@ -84,6 +84,31 @@ router.get("/administrador/mensalidades/detalhes/:id", adminAut, (req, res) => {
 
 // VALIDAR A MENSALIDADE
 router.post("/mensalidades/validar", adminAut, (req, res) => {
+    var id = req.body.inputID;
+    var forma = req.body.inputPagamento;
+    
+    validar = 1;
+
+    if(forma == ""){
+        validar = 0;
+    }
+
+    if(validar == 1){
+        Mensalidade.update({
+            formaPagamento: forma,
+            status: 'Pago',
+            dataPagamento: Date()
+        }, {
+            where: {
+                id: id
+            }
+        }).then(() => {
+            res.redirect("/administrador/mensalidades/detalhes/" + id);
+        });
+    }else {
+        req.flash('error', 'Selecione uma forma de pagamento!');
+        res.redirect("/administrador/mensalidades/detalhes/" + id);
+    }
 
 });
 

@@ -7,113 +7,124 @@
         <h2 class="titulos">Alteração de Dados</h2>
         <hr>
         <div class="formularios">
-            <div class="form-row">
-                <div class="form-group col-md-3">
-                    <label for="inputNome">Nome</label>
-                    <input value="<%= cliente.nome %>" type="text" class="form-control" id="inputNome"
-                        placeholder="Nome">
+            <form action="/administrador/clientes/update" method="POST">
+                <div class="form-row">
+                    <div>
+                        <input value="<%= cliente.id %>" type="hidden" class="form-control" name="inputID">
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="inputNome">Nome</label>
+                        <input value="<%= cliente.nome %>" type="text" class="form-control" id="inputNome"
+                            placeholder="Nome" name="inputNome">
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="inputSobrenome">Sobrenome</label>
+                        <input value="<%= cliente.sobrenome %>" type="text" class="form-control" id="inputSobrenome"
+                            placeholder="Sobrenome" name="inputSobrenome">
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="inputDate">Data de Nascimento</label>
+                        <input value="<%= cliente.dataNascimento %>" type="date" class="form-control" id="inputDate"
+                            name="inputDate">
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="inputCPF">CPF</label>
+                        <input value="<%= cliente.cpf %>" type="text" class="form-control" id="inputCPF"
+                            placeholder="000.000.000-00" name="inputCPF">
+                    </div>
                 </div>
-                <div class="form-group col-md-3">
-                    <label for="inputSobrenome">Sobrenome</label>
-                    <input value="<%= cliente.sobrenome %>" type="text" class="form-control" id="inputSobrenome"
-                        placeholder="Sobrenome">
-                </div>
-                <div class="form-group col-md-3">
-                    <label for="inputDate">Data de Nascimento</label>
-                    <input value="<%= cliente.dataNascimento %>" type="date" class="form-control" id="inputDate">
-                </div>
-                <div class="form-group col-md-3">
-                    <label for="inputCPF">CPF</label>
-                    <input value="<%= cliente.cpf %>" type="text" class="form-control" id="inputCPF"
-                        placeholder="000.000.000-00">
-                </div>
-            </div>
 
-            <div class="form-row">
-                <div class="form-group col-md-3">
-                    <label for="inputTelefone">Telefone</label>
-                    <input value="<%= cliente.telefone %>" type="text" class="form-control" id="inputTelefone"
-                        placeholder="(99)9999-9999">
+                <div class="form-row">
+                    <div class="form-group col-md-3">
+                        <label for="inputTelefone">Telefone</label>
+                        <input value="<%= cliente.telefone %>" type="text" class="form-control" id="inputTelefone"
+                            placeholder="(99)9999-9999" name="inputTelefone">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="inputEmail">Email</label>
+                        <input value="<%= cliente.email %>" type="email" class="form-control" id="inputEmail"
+                            placeholder="example@email.com" name="inputEmail">
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="inputLogradouro">Logradouro</label>
+                        <input value="<%= cliente.enderecocliente.logradouro %>" type="text" class="form-control"
+                            id="inputLogradouro" placeholder="Rua" name="inputLogradouro">
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label for="inputNumero">Número</label>
+                        <input value="<%= cliente.enderecocliente.numero %>" type="number" class="form-control"
+                            id="inputNumero" placeholder="00" name="inputNumero">
+                    </div>
                 </div>
-                <div class="form-group col-md-4">
-                    <label for="inputEmail">Email</label>
-                    <input value="<%= cliente.email %>" type="email" class="form-control" id="inputEmail"
-                        placeholder="example@email.com">
-                </div>
-                <div class="form-group col-md-3">
-                    <label for="inputLogradouro">Logradouro</label>
-                    <input value="<%= cliente.enderecocliente.logradouro %>" type="text" class="form-control"
-                        id="inputLogradouro" placeholder="Rua">
-                </div>
-                <div class="form-group col-md-2">
-                    <label for="inputNumero">Número</label>
-                    <input value="<%= cliente.enderecocliente.numero %>" type="number" class="form-control"
-                        id="inputNumero" placeholder="00">
-                </div>
-            </div>
 
-            <div class="form-row">
-                <div class="form-group col-md-3">
-                    <label for="inputCidade">Cidade</label>
-                    <input value="<%= cliente.enderecocliente.cidade %>" type="text" class="form-control"
-                        id="inputCidade" placeholder="Cidade">
+                <div class="form-row">
+                    <div class="form-group col-md-3">
+                        <label for="inputCidade">Cidade</label>
+                        <input value="<%= cliente.enderecocliente.cidade %>" type="text" class="form-control"
+                            id="inputCidade" placeholder="Cidade" name="inputCidade">
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="inputBairro">Bairro</label>
+                        <input value="<%= cliente.enderecocliente.bairro %>" type="text" class="form-control"
+                            id="inputBairro" placeholder="Bairro" name="inputBairro">
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="inputCEP">CEP</label>
+                        <input value="<%= cliente.enderecocliente.cep %>" type="text" class="form-control" id="inputCEP"
+                            placeholder="00000-000" name="inputCEP">
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label for="inputUF">UF</label>
+                        <select class="form-control" name="" id="selectUF" aria-placeholder="">
+                            <option value="">Selecione</option>
+                            <option value="">AC</option>
+                            <option value="">AL</option>
+                            <option value="">AP</option>
+                            <option value="">AM</option>
+                            <option value="">BA</option>
+                            <option value="">CE</option>
+                            <option value="">DF</option>
+                            <option value="">ES</option>
+                            <option value="">GO</option>
+                            <option value="">MA</option>
+                            <option value="">MT</option>
+                            <option value="">MS</option>
+                            <option value="">MG</option>
+                            <option value="">PA</option>
+                            <option value="">PB</option>
+                            <option value="">PR</option>
+                            <option value="">PE</option>
+                            <option value="">PI</option>
+                            <option value="">RJ</option>
+                            <option value="">RN</option>
+                            <option value="">RS</option>
+                            <option value="">RO</option>
+                            <option value="">RR</option>
+                            <option value="">SC</option>
+                            <option value="">SP</option>
+                            <option value="">SE</option>
+                            <option value="">TO</option>
+                        </select>
+                        <input type="hidden" name="inputUF" id="inputUF" value="NN">
+                    </div>
                 </div>
-                <div class="form-group col-md-3">
-                    <label for="inputBairro">Bairro</label>
-                    <input value="<%= cliente.enderecocliente.bairro %>" type="text" class="form-control"
-                        id="inputBairro" placeholder="Bairro">
-                </div>
-                <div class="form-group col-md-3">
-                    <label for="inputCEP">CEP</label>
-                    <input value="<%= cliente.enderecocliente.cep %>" type="text" class="form-control" id="inputCEP"
-                        placeholder="00000-000">
-                </div>
-                <div class="form-group col-md-2">
-                    <label for="inputUF">UF</label>
-                    <select class="form-control" name="" id="inputUF" aria-placeholder="">
-                        <option value="">Selecione</option>
-                        <option value="">AC</option>
-                        <option value="">AL</option>
-                        <option value="">AP</option>
-                        <option value="">AM</option>
-                        <option value="">BA</option>
-                        <option value="">CE</option>
-                        <option value="">DF</option>
-                        <option value="">ES</option>
-                        <option value="">GO</option>
-                        <option value="">MA</option>
-                        <option value="">MT</option>
-                        <option value="">MS</option>
-                        <option value="">MG</option>
-                        <option value="">PA</option>
-                        <option value="">PB</option>
-                        <option value="">PR</option>
-                        <option value="">PE</option>
-                        <option value="">PI</option>
-                        <option value="">RJ</option>
-                        <option value="">RN</option>
-                        <option value="">RS</option>
-                        <option value="">RO</option>
-                        <option value="">RR</option>
-                        <option value="">SC</option>
-                        <option value="">SP</option>
-                        <option value="">SE</option>
-                        <option value="">TO</option>
-                    </select>
-                </div>
-            </div>
 
-            <div class="form-row">
-                <div class="form-group col-md-4">
-                    <label for="inputPacote">Pacote</label>
-                    <select class="form-control" name="" id="inputPacote">
-                        <% pacote.forEach(pacote => { %>
-                        <option value="<%= pacote.id %>"><%= pacote.nome %></option>
-                        <% }) %>
-                    </select>
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label for="inputPacote">Pacote</label>
+                        <select class="form-control" name="" id="selectPacote">
+                            <% pacote.forEach(pacote => { %>
+                            <option value="<%= pacote.id %>"><%= pacote.nome %></option>
+                            <% }) %>
+                        </select>
+                        <input name="inputPacote" id="inputPacote" type="hidden" value="1">
+                    </div>
                 </div>
-            </div>
-            <button class="btn btn-success">Atualizar</button>
+                <div id="error" class="error form-group" style="color: red;">
+                    <%= messages.error %>
+                </div>
+                <button class="btn btn-success">Atualizar</button>
+            </form>
         </div>
     </div>
 </body>

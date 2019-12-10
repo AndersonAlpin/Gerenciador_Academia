@@ -74,44 +74,73 @@ router.get("/administrador/clientes/cadastro", adminAut, (req, res) => {
 });
 
 // SALVAR O CLIENTE APÓS PREENCHER O FORMULÁRIO
-router.post("/clientes/salvar", adminAut,  (req, res) => {
+router.post("/clientes/salvar", adminAut, (req, res) => {
 
-    Cliente.create({
-        nome: req.body.inputNome,
-        sobrenome: req.body.inputSobrenome,
-        dataNascimento: req.body.inputDate,
-        cpf: req.body.inputCPF,
-        telefone: req.body.inputTelefone,
-        email: req.body.inputEmail,
-        AcademiumId: '1',
-        pacoteId: req.body.inputPacote
-    }).then((cliente) => { //SE CADASTRAR O CLIENTE, CADASTRE O ENDEREÇO
-        
-        EnderecoCliente.create({
-            logradouro: req.body.inputLogradouro,
-            numero: req.body.inputNumero,
-            cidade: req.body.inputCidade,
-            bairro: req.body.inputBairro,
-            cep: req.body.inputCEP,
-            uf: req.body.inputUF,
-            clienteId: cliente.id
-        }).then(() => { //SE CADASTRAR REDIRECIONE PARA A LISTA
-            connection.query('call primeiraMensalidade('+req.body.inputPacote+ ", '" + req.body.inputPagamento +"'" +')', {// CADASTRE A PRIMEIRA MENSALIDADE
-                type: Sequelize.DataTypes.INSERT
-            }).then(() => {
+    var nome = req.body.inputNome
+    var sobrenome = req.body.inputSobrenome;
+    var dataNascimento = req.body.inputDate;
+    var cpf = req.body.inputCPF;
+    var telefone = req.body.inputTelefone;
+    var email = req.body.inputEmail;
+    var pacoteId = req.body.inputPacote;
+    var logradouro = req.body.inputLogradouro;
+    var numero = req.body.inputNumero;
+    var cidade = req.body.inputCidade;
+    var bairro = req.body.inputBairro;
+    var cep = req.body.inputCEP;
+    var uf = req.body.inputUF;
 
-                email.bemvindo(req.body.inputEmail, req.body.inputNome, req.body.inputSobrenome);
-                res.redirect("/administrador/clientes/listar");
+    var validar = 1;
 
-            }).catch((erro) => {
+    if (nome == "" || sobrenome == "" || dataNascimento == ""
+        || cpf == "" || telefone == "" || email == "" || pacoteId == ""
+        || logradouro == "" || numero == "" || cidade == "" || bairro == ""
+        || cep == "" || uf == "") {
+        validar = 0;
+    }
+
+    if (validar == 1) {
+        Cliente.create({
+            nome: nome,
+            sobrenome: sobrenome,
+            dataNascimento: dataNascimento,
+            cpf: cpf,
+            telefone: telefone,
+            email: email,
+            AcademiumId: '1',
+            pacoteId: pacoteId
+        }).then((cliente) => { //SE CADASTRAR O CLIENTE, CADASTRE O ENDEREÇO
+
+            EnderecoCliente.create({
+                logradouro: logradouro,
+                numero: numero,
+                cidade: cidade,
+                bairro: bairro,
+                cep: cep,
+                uf: uf,
+                clienteId: cliente.id
+            }).then(() => { //SE CADASTRAR REDIRECIONE PARA A LISTA
+                connection.query('call primeiraMensalidade(' + req.body.inputPacote + ", '" + req.body.inputPagamento + "'" + ')', {// CADASTRE A PRIMEIRA MENSALIDADE
+                    type: Sequelize.DataTypes.INSERT
+                }).then(() => {
+
+                    email.bemvindo(req.body.inputEmail, req.body.inputNome, req.body.inputSobrenome);
+                    res.redirect("/administrador/clientes/listar");
+
+                }).catch((erro) => {
+                    res.redirect("/administrador/clientes/cadastro");
+                });
+            }).catch((erro) => {// SE NÃO CADASTRAR REDIRECIONE PARA O CADASTRO
                 res.redirect("/administrador/clientes/cadastro");
             });
-        }).catch((erro) => {// SE NÃO CADASTRAR REDIRECIONE PARA O CADASTRO
+        }).catch((erro) => {// SE DER ERRO REDIRECION PARA O CADASTRO
             res.redirect("/administrador/clientes/cadastro");
         });
-    }).catch((erro) => {// SE DER ERRO REDIRECION PARA O CADASTRO
+    } else {
+        req.flash('error', 'Preencha todos os campos!');
         res.redirect("/administrador/clientes/cadastro");
-    });
+    }
+
 });
 
 // DETALHAR O CLIENTE SELECIONADO NA TABELA
@@ -172,6 +201,69 @@ router.get("/administrador/clientes/editar/:id", adminAut, (req, res) => {
         });
     });
 
+});
+
+// SALVAR DADOS DA EDIÇÃO
+router.post("/administrador/clientes/update", adminAut, (req, res) => {
+    var id = req.body.inputID;
+    var nome = req.body.inputNome
+    var sobrenome = req.body.inputSobrenome;
+    var dataNascimento = req.body.inputDate;
+    var cpf = req.body.inputCPF;
+    var telefone = req.body.inputTelefone;
+    var email = req.body.inputEmail;
+    var pacoteId = req.body.inputPacote;
+    var logradouro = req.body.inputLogradouro;
+    var numero = req.body.inputNumero;
+    var cidade = req.body.inputCidade;
+    var bairro = req.body.inputBairro;
+    var cep = req.body.inputCEP;
+    var uf = req.body.inputUF;
+
+    var validar = 1;
+
+    if (nome == "" || sobrenome == "" || dataNascimento == ""
+        || cpf == "" || telefone == "" || email == "" || pacoteId == ""
+        || logradouro == "" || numero == "" || cidade == "" || bairro == ""
+        || cep == "" || uf == "") {
+        validar = 0;
+    }
+
+    if (validar == 1) {
+        Cliente.update({
+            nome: nome,
+            sobrenome: sobrenome,
+            dataNascimento: dataNascimento,
+            cpf: cpf,
+            telefone: telefone,
+            email: email,
+            pacoteId: pacoteId
+        }, {
+            where: {
+                id: id
+            }
+        }).then(() => {
+
+            EnderecoCliente.update({
+                logradouro: logradouro,
+                numero: numero,
+                cidade: cidade,
+                bairro: bairro,
+                cep: cep,
+                uf: uf
+            }, {
+                where: {
+                    clienteId: id
+                }
+            }).then(() => {
+                res.redirect("/administrador/clientes/detalhes/" + id)
+            });
+
+        });
+    } else {
+        req.flash('error', 'Preencha todos os campos!');
+        res.redirect("/administrador/clientes/editar/" + id);
+    }
 });
 
 module.exports = router;
