@@ -335,6 +335,10 @@ body#login {
     .navbar-toggler {
         margin-top: 0px;
     }
+    body#login {
+        background: url('../img/fundo.jpeg') no-repeat center fixed;
+        background-size: auto 100%;
+    }
     
 }
 
@@ -354,6 +358,10 @@ body#login {
     }
     .navbar-toggler {
         margin-top: -22px;
+    }
+    body#login {
+        background: url('../img/fundo.jpeg') no-repeat center fixed;
+        background-size: cover;
     }
 }
 
