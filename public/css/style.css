@@ -17,10 +17,31 @@ body {
 
 /* ======FORMATAÇÕES DE LOGIN====== */
 
-body#login {
-    background: url('../img/fundo.jpeg') no-repeat center fixed;
+/* html {
+    background: url('../img/fundo.jpeg') no-repeat center center fixed;
     background-size: cover;
+    height: 100%;
+    overflow: hidden;
 
+} */
+
+#bg {
+    position: fixed;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+}
+
+#bg img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    min-width: 50%;
+    min-height: 50%;
 }
 
 .jumbotron {
@@ -335,10 +356,6 @@ body#login {
     .navbar-toggler {
         margin-top: 0px;
     }
-    body#login {
-        background: url('../img/fundo.jpeg') no-repeat center fixed;
-        background-size: auto 100%;
-    }
     
 }
 
@@ -361,12 +378,6 @@ body#login {
     }
 }
 
-@media screen and (min-width: 400px) {
-    body#login {
-        background: url('../img/fundo.jpeg') no-repeat center fixed;
-        background-size: cover;
-    }
-}
 
 @media screen and (min-width: 576px) {
     .side-bar {
