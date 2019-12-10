@@ -21,7 +21,7 @@
                         <th>CPF</th>
                         <th>Valor</th>
                         <th>Vencimento</th>
-                        <th>Status</th>
+                        <th class="ocultar-colunas">Status</th>
                         <th>Ações</th>
                     </tr>
                 </thead>
@@ -41,7 +41,7 @@
                         <td> <%= mensalidade.cliente.cpf %> </td>
                         <td> <%= real %> </td>
                         <td> <%= dataAtualizada %> </td>
-                        <td> <%= mensalidade.status %> </td>
+                        <td class="ocultar-colunas"> <%= mensalidade.status %> </td>
                         <td>
                             <a href="/administrador/mensalidades/detalhes/<%= mensalidade.id %>" class="btn btn-sm btn-success">Detalhes</a>
                         </td>

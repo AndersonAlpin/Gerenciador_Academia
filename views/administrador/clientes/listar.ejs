@@ -20,7 +20,7 @@
                         <th>Nome</th>
                         <th>Sobrenome</th>
                         <th>CPF</th>
-                        <th>Pacote</th>
+                        <th class="ocultar-colunas">Pacote</th>
                         <th>Ações</th>
                     </tr>
                 </thead>
@@ -30,7 +30,7 @@
                         <td> <%= cliente.nome %> </td>
                         <td> <%= cliente.sobrenome %> </td>
                         <td> <%= cliente.cpf %> </td>
-                        <td> <%= cliente.pacote.nome %> </td>
+                        <td class="ocultar-colunas"> <%= cliente.pacote.nome %> </td>
                         <td>
                             <a href="/administrador/clientes/detalhes/<%= cliente.id %>"
                                 class="btn btn-sm btn-success">Detalhes</a>
