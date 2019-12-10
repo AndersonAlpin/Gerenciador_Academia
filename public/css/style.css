@@ -14,6 +14,10 @@ body {
     background-color: #ffffff;
 }
 
+.titulos {
+    text-align: center;
+}
+
 
 /* ======FORMATAÇÕES DE LOGIN====== */
 
@@ -247,14 +251,13 @@ body {
 }
 
 .tabelas {
-    height: 300px;
-    overflow: auto;
-    margin-bottom: 5px;
-    border: none;
+    /* height: 300px; */
+    /* overflow: auto; */
+    margin-bottom: 15px;
 }
 
 .table {
-    min-width: 450px;
+    min-width: 700px;
 }
 
 .tabelas-linhas {
@@ -267,8 +270,13 @@ body {
     color: #fff;
 }
 
+.tabelas tr {
+    text-align: center;
+}
+
 .tabelas td {
     font-size: 17px;
+    text-align: center;
 }
 
 /* FORMULÁRIOS */
