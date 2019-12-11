@@ -5,10 +5,13 @@
 <body>
     <div class="main-content">
         <h2 class="titulos">Pacotes</h2>
-        
+
         <hr>
+        <div class="form-group">
+            <input id="buscar" type="text" class="form-control" placeholder="Buscar">
+        </div>
         <div class="table-responsive-md tabelas">
-            <table class="table">
+            <table class="table" id="tabela">
                 <thead class="tabela-head">
                     <tr class="">
                         <th>Nome</th>
@@ -38,7 +41,7 @@
                     <% }) %>
                 </tbody>
             </table>
-            
+
         </div>
         <a class="btn btn-info" href="/administrador/pacotes/cadastro">Cadastrar pacote</a>
 </body>

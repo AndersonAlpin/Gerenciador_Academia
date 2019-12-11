@@ -37,32 +37,15 @@ function selectPagamento() {
     document.getElementById("inputPagamento").value = selecionandoPagamento;
 }
 
-// TABELAS
-var tbody = document.getElementById("tbody");
-var tr = tbody.childNodes;
-
-document.getElementById("busca").addEventListener("keyup", function () {
-    var busca = document.getElementById("busca").value.toLowerCase();
-    console.log(busca)
-
-    for (var i = 0; i < tbody.childNodes.length; i++) {
-        var achou = false;
-        var tr = tbody.childNodes[i];
-        var td = tr.childNodes;
-
-        for (var j = 0; j < td.length; j++) {
-            var value = td[j].childNodes[0].nodeValue.toLowerCase();
-            console.log(value);
-            if (value.indexOf(busca) >= 0) {
-                achou = true;
-            }
+window.onload = function () {
+    var filtro = document.getElementById('buscar');
+    var tabela = document.getElementById('tabela');
+    filtro.onkeyup = function () {
+        var nomeFiltro = filtro.value;
+        for (var i = 1; i < tabela.rows.length; i++) {
+            var conteudoCelula = tabela.rows[i].cells[0].innerText;
+            var corresponde = conteudoCelula.toLowerCase().indexOf(nomeFiltro) >= 0;
+            tabela.rows[i].style.display = corresponde ? '' : 'none';
         }
-
-        if (achou) {
-            tr.style.display = "table-row";
-        } else {
-            tr.style.display = "none";
-        }
-
-    }
-});
+    };
+}

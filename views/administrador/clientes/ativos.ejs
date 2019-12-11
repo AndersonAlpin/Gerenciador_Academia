@@ -5,7 +5,7 @@
 <body>
     <div class="main-content">
         <h2 class="titulos">Clientes</h2>
-        
+
         <br>
         <select id="select" name="marca" class="form-control" required>
             <option value="/administrador/clientes/ativos">Ativos</option>
@@ -13,8 +13,11 @@
             <option value="/administrador/clientes/listar">Todos</option>
         </select>
         <hr>
+        <div class="form-group">
+            <input id="buscar" type="text" class="form-control" placeholder="Buscar">
+        </div>
         <div class="table-responsive-md tabelas">
-            <table class="table">
+            <table class="table" id="tabela">
                 <thead class="tabela-head">
                     <tr>
                         <th>Nome</th>

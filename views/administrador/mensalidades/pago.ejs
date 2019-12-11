@@ -12,8 +12,11 @@
             <option value="/administrador/mensalidades/atraso">Em atraso</option>
         </select>
         <hr>
+        <div class="form-group">
+            <input id="buscar" type="text" class="form-control" placeholder="Buscar">
+        </div>
         <div class="table-responsive-md tabelas">
-            <table class="table">
+            <table class="table" id="tabela">
                 <thead class="tabela-head">
                     <tr>
                         <th>Nome</th>
@@ -43,7 +46,8 @@
                         <td> <%= dataAtualizada %> </td>
                         <td class="ocultar-colunas"> <%= mensalidade.status %> </td>
                         <td>
-                            <a href="/administrador/mensalidades/detalhes/<%= mensalidade.id %>" class="btn btn-sm btn-success">Detalhes</a>
+                            <a href="/administrador/mensalidades/detalhes/<%= mensalidade.id %>"
+                                class="btn btn-sm btn-success">Detalhes</a>
                         </td>
                     </tr>
                     <% } %>
