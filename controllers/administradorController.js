@@ -182,12 +182,12 @@ router.post("/administrador/dados/update", adminAut, (req, res) => {
 });
 
 // ENVIAR CÓDIGO DE RECUPERAÇÃO PARA O EMAIL
-router.get("/administrador/resetPassword/code", adminAut, (req, res) => {
+router.get("/administrador/resetPassword/code", (req, res) => {
     res.render("administrador/resetPassword/code");
 });
 
 // ALTERAR A SENHA
-router.get("/administrador/resetPassword/alterPassword", adminAut, (req, res) => {
+router.get("/administrador/resetPassword/alterPassword", (req, res) => {
     res.render("administrador/resetPassword/alterPassword");
 });
 
