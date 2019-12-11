@@ -3,7 +3,7 @@
 //CADASTRO CLIENTE
 var pacote = document.getElementById("selectPacote");
 
-if(pacote){
+if (pacote) {
     document.getElementById("selectPacote").addEventListener("change", selecionarPacote);
 }
 
@@ -15,7 +15,7 @@ function selecionarPacote() {
 
 var UF = document.getElementById("selectUF");
 
-if(UF){
+if (UF) {
     document.getElementById("selectUF").addEventListener("change", selecionarUF);
 }
 
@@ -27,7 +27,7 @@ function selecionarUF() {
 
 var pagamento = document.getElementById("selectPagamento");
 
-if(pagamento){
+if (pagamento) {
     document.getElementById("selectPagamento").addEventListener("change", selectPagamento);
 }
 
@@ -37,3 +37,34 @@ function selectPagamento() {
     document.getElementById("inputPagamento").value = selecionandoPagamento;
 }
 
+// TABELAS
+var tbody = document.getElementById("tbody");
+var tr = tbody.childNodes;
+
+document.getElementById("busca").addEventListener("keyup", buscar());
+
+function buscar() {
+    var busca = document.getElementById("busca").value.toLowerCase();
+    console.clear();
+
+    for (var i = 0; i < tbody.childNodes.length; i++) {
+        var achou = false;
+        var tr = tbody.childNodes[i];
+        var td = tr.childNodes;
+
+        for (var j = 0; j < td.length; j++) {
+            var value = td[j].childNodes[0].nodeValue.toLowerCase();
+            console.log(value);
+            if (value.indexOf(busca) >= 0) {
+                achou = true;
+            }
+        }
+
+        if (achou) {
+            tr.style.display = "table-row";
+        } else {
+            tr.style.display = "none";
+        }
+
+    }
+}

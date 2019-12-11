@@ -23,7 +23,6 @@ body {
     font-size: 2.2em;
 }
 
-
 /* ======FORMATAÇÕES DE LOGIN====== */
 
 #bg {
@@ -307,7 +306,7 @@ body {
     padding: 15px;
 }
 
-.formularios input, #select{
+.formularios input, #select, #buscar{
     height: 40px;
     padding-left: 10px;
     border:1px solid #aaa;
