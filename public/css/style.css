@@ -11,8 +11,8 @@ body {
     margin: 0;
     padding: 0;
     min-width: 308px;
-    background: url('../img/fundo-desfocado-branco-2.jpg') no-repeat center center fixed;
-    background-size: cover;
+    /* background: url('../img/fundo-desfocado-branco-2.jpg') no-repeat center center fixed;
+    background-size: cover; */
 }
 
 .titulos {
@@ -306,14 +306,10 @@ body {
     padding: 15px;
 }
 
-.formularios input, #select, #buscar{
+.formularios input, #select, #buscar, #selectUF, #selectPacote, #selectPagamento{
     height: 40px;
     padding-left: 10px;
-    border:1px solid #aaa;
-}
-
-#select {
-    border:2px solid #aaa;
+    border: 2px solid rgb(192, 187, 187);
 }
 
 .formularios label {

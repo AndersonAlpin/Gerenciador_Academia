@@ -6,6 +6,7 @@ const Mensalidade = require("../models/Mensalidade");
 const Administrador = require("../models/Administrador");
 const Login = require("../models/Login");
 const adminAut = require("../middlewares/adminAut");
+const email = require("../email/send");
 
 // HOME DO ADMINISTRADOR
 router.get("/administrador/home", adminAut, (req, res) => {
@@ -178,6 +179,16 @@ router.post("/administrador/dados/update", adminAut, (req, res) => {
         res.redirect("/administrador/perfil");
     });
 
+});
+
+// ENVIAR CÓDIGO DE RECUPERAÇÃO PARA O EMAIL
+router.get("/administrador/resetPassword/code", adminAut, (req, res) => {
+    res.render("administrador/resetPassword/code");
+});
+
+// ALTERAR A SENHA
+router.get("/administrador/resetPassword/alterPassword", adminAut, (req, res) => {
+    res.render("administrador/resetPassword/alterPassword");
 });
 
 // DESLOGAR
