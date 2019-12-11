@@ -239,4 +239,27 @@ router.post("/administrador/clientes/update", adminAut, (req, res) => {
 
 });
 
+// ATIVAR/INATIVAR CLIENTE
+router.post("/administrador/clientes/status/update", (req, res) => {
+    var id = req.body.inputID;
+    var status = req.body.inputStatus;
+    var newStatus;
+
+    if(status.toString() == 'false'){
+        newStatus = true;
+    }else {
+        newStatus = false;
+    }
+    
+    Cliente.update({
+        ativo: newStatus
+    }, {
+        where: {
+            id: id
+        }
+    }).then(() => {
+        res.redirect("/administrador/clientes/detalhes/" + id);
+    });
+});
+
 module.exports = router;
