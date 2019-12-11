@@ -17,7 +17,7 @@
             <input id="busca" type="text" class="form-control" placeholder="Buscar">
         </div>
         <div class="table-responsive-md tabelas">
-            <table class="table" id="minhaTabela">
+            <table class="table">
                 <thead class="tabela-head">
                     <tr>
                         <th>Nome</th>
@@ -49,10 +49,6 @@
     <link rel="stylesheet" href="//cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
     <script src="//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
     <script>
-        $(document).ready(function () {
-            $('#minhaTabela').DataTable();
-        });
-
         $(document).ready(function () {
 
             $('#select').on('change', function () {

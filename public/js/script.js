@@ -41,11 +41,9 @@ function selectPagamento() {
 var tbody = document.getElementById("tbody");
 var tr = tbody.childNodes;
 
-document.getElementById("busca").addEventListener("keyup", buscar());
-
-function buscar() {
+document.getElementById("busca").addEventListener("keyup", function () {
     var busca = document.getElementById("busca").value.toLowerCase();
-    console.clear();
+    console.log(busca)
 
     for (var i = 0; i < tbody.childNodes.length; i++) {
         var achou = false;
@@ -67,4 +65,4 @@ function buscar() {
         }
 
     }
-}
+});

@@ -145,7 +145,7 @@ body {
     height: 55px;
     margin-left: -10px;
     margin-top: 10px;
-    background: url('../img/logo-branco.png') no-repeat center;
+    background: url('../img/logo.png') no-repeat center;
     text-indent: -3000px;
 }
 
@@ -306,7 +306,7 @@ body {
     padding: 15px;
 }
 
-.formularios input, #select, #buscar{
+.formularios input, #select, #busca{
     height: 40px;
     padding-left: 10px;
     border:1px solid #aaa;
