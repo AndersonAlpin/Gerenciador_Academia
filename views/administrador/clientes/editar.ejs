@@ -10,72 +10,62 @@
             <form action="/administrador/clientes/update" method="POST">
                 <div class="form-row">
                     <div>
-                        <input value="<%= cliente.id %>" type="hidden" class="form-control" name="inputID">
+                        <input value="<%= cliente.id %>" type="hidden" class="form-control" name="inputID" required>
                     </div>
                     <div class="form-group col-md-3">
                         <label for="inputNome">Nome</label>
-                        <input value="<%= cliente.nome %>" type="text" class="form-control" id="inputNome"
-                            placeholder="Nome" name="inputNome">
+                        <input value="<%= cliente.nome %>" type="text" class="form-control" id="inputNome" placeholder="Nome" name="inputNome" required>
                     </div>
                     <div class="form-group col-md-3">
                         <label for="inputSobrenome">Sobrenome</label>
-                        <input value="<%= cliente.sobrenome %>" type="text" class="form-control" id="inputSobrenome"
-                            placeholder="Sobrenome" name="inputSobrenome">
+                        <input value="<%= cliente.sobrenome %>" type="text" class="form-control" id="inputSobrenome" placeholder="Sobrenome" name="inputSobrenome" required>
                     </div>
                     <div class="form-group col-md-3">
                         <label for="inputDate">Data de Nascimento</label>
-                        <input value="<%= cliente.dataNascimento %>" type="date" class="form-control" id="inputDate"
-                            name="inputDate">
+                        <input value="<%= cliente.dataNascimento %>" type="date" class="form-control" id="inputDate" name="inputDate" required>
                     </div>
                     <div class="form-group col-md-3">
                         <label for="inputCPF">CPF</label>
                         <input value="<%= cliente.cpf %>" type="text" class="form-control" id="inputCPF"
-                            placeholder="000.000.000-00" name="inputCPF">
+                            placeholder="000.000.000-00" name="inputCPF" required>
                     </div>
                 </div>
 
                 <div class="form-row">
                     <div class="form-group col-md-3">
                         <label for="inputTelefone">Telefone</label>
-                        <input value="<%= cliente.telefone %>" type="text" class="form-control" id="inputTelefone"
-                            placeholder="(99)9999-9999" name="inputTelefone">
+                        <input value="<%= cliente.telefone %>" type="text" class="form-control" id="inputTelefone" placeholder="(99)9999-9999" name="inputTelefone" required>
                     </div>
                     <div class="form-group col-md-4">
                         <label for="inputEmail">Email</label>
-                        <input value="<%= cliente.email %>" type="email" class="form-control" id="inputEmail"
-                            placeholder="example@email.com" name="inputEmail">
+                        <input value="<%= cliente.email %>" type="email" class="form-control" id="inputEmail" placeholder="example@email.com" name="inputEmail" required>
                     </div>
                     <div class="form-group col-md-3">
                         <label for="inputLogradouro">Logradouro</label>
-                        <input value="<%= cliente.enderecocliente.logradouro %>" type="text" class="form-control"
-                            id="inputLogradouro" placeholder="Rua" name="inputLogradouro">
+                        <input value="<%= cliente.enderecocliente.logradouro %>" type="text" class="form-control" id="inputLogradouro" placeholder="Rua" name="inputLogradouro" required>
                     </div>
                     <div class="form-group col-md-2">
                         <label for="inputNumero">Número</label>
-                        <input value="<%= cliente.enderecocliente.numero %>" type="number" class="form-control"
-                            id="inputNumero" placeholder="00" name="inputNumero">
+                        <input value="<%= cliente.enderecocliente.numero %>" type="number" class="form-control" id="inputNumero" placeholder="00" name="inputNumero" required>
                     </div>
                 </div>
 
                 <div class="form-row">
                     <div class="form-group col-md-3">
                         <label for="inputCidade">Cidade</label>
-                        <input value="<%= cliente.enderecocliente.cidade %>" type="text" class="form-control"
-                            id="inputCidade" placeholder="Cidade" name="inputCidade">
+                        <input value="<%= cliente.enderecocliente.cidade %>" type="text" class="form-control" id="inputCidade" placeholder="Cidade" name="inputCidade" required>
                     </div>
                     <div class="form-group col-md-3">
                         <label for="inputBairro">Bairro</label>
-                        <input value="<%= cliente.enderecocliente.bairro %>" type="text" class="form-control"
-                            id="inputBairro" placeholder="Bairro" name="inputBairro">
+                        <input value="<%= cliente.enderecocliente.bairro %>" type="text" class="form-control" id="inputBairro" placeholder="Bairro" name="inputBairro" required>
                     </div>
                     <div class="form-group col-md-3">
                         <label for="inputCEP">CEP</label>
-                        <input value="<%= cliente.enderecocliente.cep %>" type="text" class="form-control" id="inputCEP"
-                            placeholder="00000-000" name="inputCEP">
+                        <input value="<%= cliente.enderecocliente.cep %>" type="text" class="form-control" id="inputCEP" placeholder="00000-000" name="inputCEP" required>
                     </div>
                     <div class="form-group col-md-2">
                         <label for="inputUF">UF</label>
-                        <select class="form-control" name="" id="selectUF" aria-placeholder="">
+                        <select class="form-control" name="" id="selectUF" required>
                             <option value="">Selecione</option>
                             <option value="">AC</option>
                             <option value="">AL</option>
@@ -105,23 +95,20 @@
                             <option value="">SE</option>
                             <option value="">TO</option>
                         </select>
-                        <input type="hidden" name="inputUF" id="inputUF" value="NN">
+                        <input type="hidden" name="inputUF" id="inputUF" required>
                     </div>
                 </div>
 
                 <div class="form-row">
                     <div class="form-group col-md-4">
                         <label for="inputPacote">Pacote</label>
-                        <select class="form-control" name="" id="selectPacote">
+                        <select class="form-control" name="" id="selectPacote" required>
                             <% pacote.forEach(pacote => { %>
                             <option value="<%= pacote.id %>"><%= pacote.nome %></option>
                             <% }) %>
                         </select>
-                        <input name="inputPacote" id="inputPacote" type="hidden" value="1">
+                        <input name="inputPacote" id="inputPacote" type="hidden" value="1" required>
                     </div>
-                </div>
-                <div id="error" class="error form-group" style="color: red;">
-                    <%= messages.error %>
                 </div>
                 <button class="btn btn-success">Atualizar</button>
                 <a href="/administrador/clientes/detalhes/<%= cliente.id %>" class="btn btn-success ml-1">Voltar</a>

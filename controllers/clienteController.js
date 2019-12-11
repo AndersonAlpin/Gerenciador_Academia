@@ -90,56 +90,42 @@ router.post("/clientes/salvar", adminAut, (req, res) => {
     var cep = req.body.inputCEP;
     var uf = req.body.inputUF;
 
-    var validar = 1;
+    Cliente.create({
+        nome: nome,
+        sobrenome: sobrenome,
+        dataNascimento: dataNascimento,
+        cpf: cpf,
+        telefone: telefone,
+        email: email,
+        AcademiumId: '1',
+        pacoteId: pacoteId
+    }).then((cliente) => { //SE CADASTRAR O CLIENTE, CADASTRE O ENDEREÇO
 
-    if (nome == "" || sobrenome == "" || dataNascimento == ""
-        || cpf == "" || telefone == "" || email == "" || pacoteId == ""
-        || logradouro == "" || numero == "" || cidade == "" || bairro == ""
-        || cep == "" || uf == "") {
-        validar = 0;
-    }
+        EnderecoCliente.create({
+            logradouro: logradouro,
+            numero: numero,
+            cidade: cidade,
+            bairro: bairro,
+            cep: cep,
+            uf: uf,
+            clienteId: cliente.id
+        }).then(() => { //SE CADASTRAR REDIRECIONE PARA A LISTA
+            connection.query('call primeiraMensalidade(' + req.body.inputPacote + ", '" + req.body.inputPagamento + "'" + ')', {// CADASTRE A PRIMEIRA MENSALIDADE
+                type: Sequelize.DataTypes.INSERT
+            }).then(() => {
 
-    if (validar == 1) {
-        Cliente.create({
-            nome: nome,
-            sobrenome: sobrenome,
-            dataNascimento: dataNascimento,
-            cpf: cpf,
-            telefone: telefone,
-            email: email,
-            AcademiumId: '1',
-            pacoteId: pacoteId
-        }).then((cliente) => { //SE CADASTRAR O CLIENTE, CADASTRE O ENDEREÇO
+                email.bemvindo(req.body.inputEmail, req.body.inputNome, req.body.inputSobrenome);
+                res.redirect("/administrador/clientes/listar");
 
-            EnderecoCliente.create({
-                logradouro: logradouro,
-                numero: numero,
-                cidade: cidade,
-                bairro: bairro,
-                cep: cep,
-                uf: uf,
-                clienteId: cliente.id
-            }).then(() => { //SE CADASTRAR REDIRECIONE PARA A LISTA
-                connection.query('call primeiraMensalidade(' + req.body.inputPacote + ", '" + req.body.inputPagamento + "'" + ')', {// CADASTRE A PRIMEIRA MENSALIDADE
-                    type: Sequelize.DataTypes.INSERT
-                }).then(() => {
-
-                    email.bemvindo(req.body.inputEmail, req.body.inputNome, req.body.inputSobrenome);
-                    res.redirect("/administrador/clientes/listar");
-
-                }).catch((erro) => {
-                    res.redirect("/administrador/clientes/cadastro");
-                });
-            }).catch((erro) => {// SE NÃO CADASTRAR REDIRECIONE PARA O CADASTRO
+            }).catch((erro) => {
                 res.redirect("/administrador/clientes/cadastro");
             });
-        }).catch((erro) => {// SE DER ERRO REDIRECION PARA O CADASTRO
+        }).catch((erro) => {// SE NÃO CADASTRAR REDIRECIONE PARA O CADASTRO
             res.redirect("/administrador/clientes/cadastro");
         });
-    } else {
-        req.flash('error', 'Preencha todos os campos!');
+    }).catch((erro) => {// SE DER ERRO REDIRECION PARA O CADASTRO
         res.redirect("/administrador/clientes/cadastro");
-    }
+    });
 
 });
 
@@ -220,50 +206,37 @@ router.post("/administrador/clientes/update", adminAut, (req, res) => {
     var cep = req.body.inputCEP;
     var uf = req.body.inputUF;
 
-    var validar = 1;
+    Cliente.update({
+        nome: nome,
+        sobrenome: sobrenome,
+        dataNascimento: dataNascimento,
+        cpf: cpf,
+        telefone: telefone,
+        email: email,
+        pacoteId: pacoteId
+    }, {
+        where: {
+            id: id
+        }
+    }).then(() => {
 
-    if (nome == "" || sobrenome == "" || dataNascimento == ""
-        || cpf == "" || telefone == "" || email == "" || pacoteId == ""
-        || logradouro == "" || numero == "" || cidade == "" || bairro == ""
-        || cep == "" || uf == "") {
-        validar = 0;
-    }
-
-    if (validar == 1) {
-        Cliente.update({
-            nome: nome,
-            sobrenome: sobrenome,
-            dataNascimento: dataNascimento,
-            cpf: cpf,
-            telefone: telefone,
-            email: email,
-            pacoteId: pacoteId
+        EnderecoCliente.update({
+            logradouro: logradouro,
+            numero: numero,
+            cidade: cidade,
+            bairro: bairro,
+            cep: cep,
+            uf: uf
         }, {
             where: {
-                id: id
+                clienteId: id
             }
         }).then(() => {
-
-            EnderecoCliente.update({
-                logradouro: logradouro,
-                numero: numero,
-                cidade: cidade,
-                bairro: bairro,
-                cep: cep,
-                uf: uf
-            }, {
-                where: {
-                    clienteId: id
-                }
-            }).then(() => {
-                res.redirect("/administrador/clientes/detalhes/" + id)
-            });
-
+            res.redirect("/administrador/clientes/detalhes/" + id)
         });
-    } else {
-        req.flash('error', 'Preencha todos os campos!');
-        res.redirect("/administrador/clientes/editar/" + id);
-    }
+
+    });
+
 });
 
 module.exports = router;

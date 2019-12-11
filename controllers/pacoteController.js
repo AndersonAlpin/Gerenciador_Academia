@@ -102,28 +102,17 @@ router.post("/pacote/update", adminAut, (req, res) => {
     var desconto = req.body.inputDesconto
     var id = req.body.inputID;
 
-    var validar = 1;
-
-    if (nome == "" || descricao == "" || desconto == "") {
-        validar = 0;
-    }
-
-    if (validar == 1) {
-        Pacote.update({
-            nome: nome,
-            descricao: descricao,
-            taxaDesconto: desconto
-        }, {
-            where: {
-                id: id
-            }
-        }).then(function () {
-            res.redirect("/administrador/pacotes/listar");
-        });
-    } else {
-        req.flash('error', 'Preencha todos os campos!');
-        res.redirect("/administrador/pacotes/editar/" + id);
-    }
+    Pacote.update({
+        nome: nome,
+        descricao: descricao,
+        taxaDesconto: desconto
+    }, {
+        where: {
+            id: id
+        }
+    }).then(function () {
+        res.redirect("/administrador/pacotes/listar");
+    });
 
 });
 

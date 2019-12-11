@@ -11,38 +11,31 @@
                 <div class="form-row">
                     <div class="form-group col-md-3">
                         <label for="inputNome">Nome</label>
-                        <input name="inputNome" value="<%= admin.nome %>" type="text" class="form-control"
-                            id="inputNome" placeholder="Nome">
+                        <input name="inputNome" value="<%= admin.nome %>" type="text" class="form-control" id="inputNome" placeholder="Nome" required>
                     </div>
                     <div class="form-group col-md-3">
                         <label for="inputSobrenome">Sobrenome</label>
-                        <input name="inputSobrenome" value="<%= admin.sobrenome %>" type="text" class="form-control" placeholder="Sobrenome">
+                        <input name="inputSobrenome" value="<%= admin.sobrenome %>" type="text" class="form-control" placeholder="Sobrenome" required>
                     </div>
                     <div class="form-group col-md-3">
                         <label for="inputDate">Data de Nascimento</label>
-                        <input name="inputDate" value="<%= admin.dataNascimento %>" type="date" class="form-control"
-                            id="inputDate">
+                        <input name="inputDate" value="<%= admin.dataNascimento %>" type="date" class="form-control" id="inputDate" required>
                     </div>
                     <div class="form-group col-md-3">
                         <label for="inputCPF">CPF</label>
-                        <input name="inputCPF" value="<%= admin.cpf %>" type="text" class="form-control" id="inputCPF">
+                        <input name="inputCPF" value="<%= admin.cpf %>" type="text" class="form-control" id="inputCPF" required>
                     </div>
                 </div>
 
                 <div class="form-row">
                     <div class="form-group col-md-3">
                         <label for="inputTelefone">Telefone</label>
-                        <input name="inputTelefone" value="<%= admin.telefone %>" type="text" class="form-control"
-                            id="inputTelefone" placeholder="(99)9999-9999">
+                        <input name="inputTelefone" value="<%= admin.telefone %>" type="text" class="form-control" id="inputTelefone" placeholder="(99)9999-9999" required>
                     </div>
                     <div class="form-group col-md-4">
                         <label for="inputEmail">Email</label>
-                        <input name="inputEmail" value="<%= admin.email %>" type="email" class="form-control"
-                            id="inputEmail" placeholder="example@email.com">
+                        <input name="inputEmail" value="<%= admin.email %>" type="email" class="form-control" id="inputEmail" placeholder="example@email.com" required>
                     </div>
-                </div>
-                <div id="error" class="error form-group" style="color: red;">
-                    <%= messages.error %>
                 </div>
                 <button class="btn btn-success">Atualizar</button>
                 <a href="/administrador/perfil" class="btn btn-success ml-1">Voltar</a>

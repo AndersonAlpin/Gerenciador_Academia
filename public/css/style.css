@@ -11,11 +11,16 @@ body {
     margin: 0;
     padding: 0;
     min-width: 308px;
-    background: url('../img/bg.png');
+    background: url('../img/fundo-desfocado-branco-2.jpg') no-repeat center center fixed;
+    background-size: cover;
 }
 
 .titulos {
     text-align: center;
+    color: #000;
+    /* -webkit-text-stroke-color: #000; */
+    /* -webkit-text-stroke-width: 2px; */
+    font-size: 2.2em;
 }
 
 
@@ -141,10 +146,8 @@ body {
     height: 55px;
     margin-left: -10px;
     margin-top: 10px;
-    background: url('../img/logo.png') no-repeat center;
+    background: url('../img/logo-branco.png') no-repeat center;
     text-indent: -3000px;
-    filter: invert();
-    -webkit-filter: invert();
 }
 
 .menu-topo a {
@@ -304,10 +307,14 @@ body {
     padding: 15px;
 }
 
-.formularios input, .formularios select {
+.formularios input, #select{
     height: 40px;
     padding-left: 10px;
     border:1px solid #aaa;
+}
+
+#select {
+    border:2px solid #aaa;
 }
 
 .formularios label {

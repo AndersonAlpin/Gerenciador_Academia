@@ -107,11 +107,6 @@ router.post("/administrador/senha/update", adminAut, (req, res) => {
     var salt = bcrypt.genSaltSync(10);
     var hash = bcrypt.hashSync(novaSenha, salt);
 
-    if (senhaAtual == "" || novaSenha == "" || confirmarNovaSenha == "") {
-        req.flash('error', 'Preencha todos os campos!');
-        res.redirect("/administrador/editar/senha");
-    }
-
     if (novaSenha != confirmarNovaSenha) {
         req.flash('error', 'As senhas não coincidem!');
         res.redirect("/administrador/editar/senha");
@@ -157,44 +152,32 @@ router.post("/administrador/dados/update", adminAut, (req, res) => {
     var telefone = req.body.inputTelefone;
     var email = req.body.inputEmail;
 
-    var validar = 1;
+    Administrador.update({
+        nome: nome,
+        sobrenome: sobrenome,
+        dataNascimento: dataNascimento,
+        cpf: cpf,
+        telefone: telefone,
+        email: email
+    }, {
+        where: {
+            id: admin.idAdmin
+        }
+    }).then(() => {
 
-    if (nome == "" || sobrenome == "" || dataNascimento == ""
-        || cpf == "" || telefone == "" || email == "") {
-        validar = 0;
-    }
-
-
-    if (validar == 1) {
-        Administrador.update({
+        global.admin = {
+            id: admin.id,
+            idAdmin: admin.idAdmin,
+            email: email,
             nome: nome,
             sobrenome: sobrenome,
             dataNascimento: dataNascimento,
             cpf: cpf,
             telefone: telefone,
-            email: email
-        }, {
-            where: {
-                id: admin.idAdmin
-            }
-        }).then(() => {
+        }
+        res.redirect("/administrador/perfil");
+    });
 
-            global.admin = {
-                id: admin.id,
-                idAdmin: admin.idAdmin,
-                email: email,
-                nome: nome,
-                sobrenome: sobrenome,
-                dataNascimento: dataNascimento,
-                cpf: cpf,
-                telefone: telefone,
-            }
-            res.redirect("/administrador/perfil");
-        });
-    } else {
-        req.flash('error', 'Preencha todos os campos!');
-        res.redirect("/administrador/editar/dados");
-    }
 });
 
 // DESLOGAR
