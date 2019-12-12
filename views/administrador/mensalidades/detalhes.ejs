@@ -61,7 +61,11 @@
                         <% var dpAtualizada = (de.getDate() + 1) + "/" + (de.getMonth()+1) + "/" + de.getFullYear(); %>
 
                         <label for="inputCPF">Data de Pagamento</label>
-                        <input value="<%= dpAtualizada %>" type="text" class="form-control" name="inputCPF" disabled>
+                        <% if(mensalidade.status == 'Em aberto'){ %>
+                        <input value="" type="text" class="form-control" name="inputCPF" disabled>
+                        <% }else { %>
+                            <input value="<%= dpAtualizada %>" type="text" class="form-control" name="inputCPF" disabled>
+                        <% } %>
                     </div>
                 </div>
                 <% if(mensalidade.status != 'Pago'){ %>
