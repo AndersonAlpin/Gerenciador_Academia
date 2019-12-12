@@ -16,7 +16,7 @@ body {
 
 .titulos {
     text-align: center;
-    color: #000;
+    color: #fff;
     font-size: 2.2em;
 }
 
@@ -300,7 +300,7 @@ body {
 
 .formularios {
     border-radius: 5px;
-    color: #000;
+    color: #fff;
     padding: 15px;
 }
 
