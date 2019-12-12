@@ -6,11 +6,12 @@ const EnderecoCliente = require("../models/EnderecoCliente");
 const Pacote = require("../models/Pacote");
 const Sequelize = require("sequelize");
 const adminAut = require("../middlewares/adminAut");
-const email = require("../email/send");
+const enviarEmail = require("../email/send");
 
 
 // LISTAR TODOS OS CLIENTES INCLUINDO O PACOTE E O ENDEREÇO
 router.get("/administrador/clientes/listar", adminAut, (req, res) => {
+    
     Cliente.findAll({
         order: [
             ['nome', 'ASC']
@@ -24,6 +25,7 @@ router.get("/administrador/clientes/listar", adminAut, (req, res) => {
             }
         ]
     }).then(clientes => {
+        
         res.render("administrador/clientes/listar", { clientes: clientes });
     });
 });
@@ -75,7 +77,7 @@ router.get("/administrador/clientes/cadastro", adminAut, (req, res) => {
 
 // SALVAR O CLIENTE APÓS PREENCHER O FORMULÁRIO
 router.post("/clientes/salvar", adminAut, (req, res) => {
-
+    
     var nome = req.body.inputNome
     var sobrenome = req.body.inputSobrenome;
     var dataNascimento = req.body.inputDate;
@@ -100,7 +102,7 @@ router.post("/clientes/salvar", adminAut, (req, res) => {
         AcademiumId: '1',
         pacoteId: pacoteId
     }).then((cliente) => { //SE CADASTRAR O CLIENTE, CADASTRE O ENDEREÇO
-
+        
         EnderecoCliente.create({
             logradouro: logradouro,
             numero: numero,
@@ -109,15 +111,14 @@ router.post("/clientes/salvar", adminAut, (req, res) => {
             cep: cep,
             uf: uf,
             clienteId: cliente.id
-        }).then(() => { //SE CADASTRAR REDIRECIONE PARA GERAR MENSALIDADE
-            email.bemvindo(email, nome, sobrenome);
-            
+        }).then(() => { //SE CADASTRAR REDIRECIONE PARA A LISTA
             connection.query('call primeiraMensalidadePaga(' + req.body.inputPacote + ", '" + req.body.inputPagamento + "'" + ')', {// CADASTRE A PRIMEIRA MENSALIDADE
                 type: Sequelize.DataTypes.INSERT
             }).then(() => {
+                enviarEmail.bemvindo(email, nome, sobrenome);
                 res.redirect("/administrador/clientes/listar");
             }).catch((erro) => {
-                res.redirect("/administrador/clientes/listar");
+                res.redirect("/administrador/clientes/cadastro");
             });
         }).catch((erro) => {// SE NÃO CADASTRAR REDIRECIONE PARA O CADASTRO
             res.redirect("/administrador/clientes/cadastro");
