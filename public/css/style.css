@@ -12,6 +12,11 @@ body {
     padding: 0;
     min-width: 308px;
     position: relative;
+    font-family: 'Corier New', Arial, Helvetica;
+}
+
+.fonte-perfil {
+    font-family: 'Corier New', Arial, Helvetica;
 }
 
 .titulos {

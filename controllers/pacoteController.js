@@ -6,7 +6,11 @@ const adminAut = require("../middlewares/adminAut");
 
 // LISTAR PACOTES
 router.get("/administrador/pacotes/listar", adminAut, (req, res) => {
-    Pacote.findAll({ force: true }).then(pacotes => {
+    Pacote.findAll({
+        order: [
+            ['taxaDesconto', 'DESC']
+        ]
+    }).then(pacotes => {
         res.render("administrador/pacotes/listar", { pacotes: pacotes });
     });
 });
