@@ -1,8 +1,10 @@
 <%- include ../../partials/header.ejs %>
+<%- include ../../partials/navbar.ejs %>
+<%- include ../../partials/sidebar.ejs %>
+<%- include ../../partials/background.ejs %>
 
 <body>
-    <%- include ../../partials/navbar.ejs %>
-    <%- include ../../partials/sidebar.ejs %>
+
     <div class="main-content">
         <h2 class="titulos">Cadastro de Cliente</h2>
         <hr>
@@ -11,11 +13,13 @@
                 <div class="form-row">
                     <div class="form-group col-md-3">
                         <label for="inputNome">Nome</label>
-                        <input type="text" class="form-control" name="inputNome" id="inputNome" placeholder="Nome" required>
+                        <input type="text" class="form-control" name="inputNome" id="inputNome" placeholder="Nome"
+                            required>
                     </div>
                     <div class="form-group col-md-3">
                         <label for="inputSobrenome">Sobrenome</label>
-                        <input type="text" class="form-control" name="inputSobrenome" placeholder="Sobrenome" id="inputSobrenome" required>
+                        <input type="text" class="form-control" name="inputSobrenome" placeholder="Sobrenome"
+                            id="inputSobrenome" required>
                     </div>
                     <div class="form-group col-md-3">
                         <label for="inputDate">Data de Nascimento</label>
@@ -34,7 +38,8 @@
                     </div>
                     <div class="form-group col-md-4">
                         <label for="inputEmail">Email</label>
-                        <input type="email" class="form-control" name="inputEmail" placeholder="example@email.com" id="inputEmail" required>
+                        <input type="email" class="form-control" name="inputEmail" placeholder="example@email.com"
+                            id="inputEmail" required>
                     </div>
                     <div class="form-group col-md-3">
                         <label for="inputLogradouro">Logradouro</label>
@@ -43,20 +48,21 @@
                     </div>
                     <div class="form-group col-md-2">
                         <label for="inputNumero">Número</label>
-                        <input type="number" class="form-control" name="inputNumero" placeholder="00" id="inputNumero" required>
+                        <input type="number" class="form-control" name="inputNumero" placeholder="00" id="inputNumero"
+                            required>
                     </div>
                 </div>
 
                 <div class="form-row">
                     <div class="form-group col-md-3">
                         <label for="inputCidade">Cidade</label>
-                        <input type="text" class="form-control" name="inputCidade" placeholder="Cidade"
-                            id="inputCidade" required>
+                        <input type="text" class="form-control" name="inputCidade" placeholder="Cidade" id="inputCidade"
+                            required>
                     </div>
                     <div class="form-group col-md-3">
                         <label for="inputBairro">Bairro</label>
-                        <input type="text" class="form-control" name="inputBairro" placeholder="Bairro"
-                            id="inputBairro" required>
+                        <input type="text" class="form-control" name="inputBairro" placeholder="Bairro" id="inputBairro"
+                            required>
                     </div>
                     <div class="form-group col-md-3">
                         <label for="inputCEP">CEP</label>

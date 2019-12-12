@@ -11,15 +11,13 @@ body {
     margin: 0;
     padding: 0;
     min-width: 308px;
-    /* background: url('../img/fundo-desfocado-branco-2.jpg') no-repeat center center fixed;
+    /* background: url('../img/fundo-desfocado-preto-2.jpg') no-repeat center center fixed;
     background-size: cover; */
 }
 
 .titulos {
     text-align: center;
     color: #000;
-    /* -webkit-text-stroke-color: #000; */
-    /* -webkit-text-stroke-width: 2px; */
     font-size: 2.2em;
 }
 
@@ -42,6 +40,7 @@ body {
     margin: auto;
     min-width: 50%;
     min-height: 50%;
+    z-index: 1;
 }
 
 .jumbotron {
@@ -64,6 +63,7 @@ body {
 
 .main-content {
     padding-top: 80px;
+    position: relative;
 }
 
 .main-section {
