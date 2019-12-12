@@ -11,8 +11,7 @@ body {
     margin: 0;
     padding: 0;
     min-width: 308px;
-    /* background: url('../img/fundo-desfocado-preto-2.jpg') no-repeat center center fixed;
-    background-size: cover; */
+    position: relative;
 }
 
 .titulos {
@@ -301,7 +300,6 @@ body {
 
 .formularios {
     border-radius: 5px;
-    /* background-color: rgb(56, 55, 55); */
     color: #000;
     padding: 15px;
 }
