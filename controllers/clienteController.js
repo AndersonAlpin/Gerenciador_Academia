@@ -114,10 +114,12 @@ router.post("/clientes/salvar", adminAut, (req, res) => {
                 type: Sequelize.DataTypes.INSERT
             }).then(() => {
                 email.bemvindo(email, nome, sobrenome);
+                console.log("email enviado")
                 res.redirect("/administrador/clientes/listar");
                 console.log("redirecionando");
             }).catch((erro) => {
-                res.redirect("/administrador/clientes/cadastro");
+                res.redirect("/administrador/clientes/listar");
+                console.log("deu erro")
             });
         }).catch((erro) => {// SE NÃO CADASTRAR REDIRECIONE PARA O CADASTRO
             res.redirect("/administrador/clientes/cadastro");
