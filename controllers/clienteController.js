@@ -109,17 +109,15 @@ router.post("/clientes/salvar", adminAut, (req, res) => {
             cep: cep,
             uf: uf,
             clienteId: cliente.id
-        }).then(() => { //SE CADASTRAR REDIRECIONE PARA A LISTA
+        }).then(() => { //SE CADASTRAR REDIRECIONE PARA GERAR MENSALIDADE
+            email.bemvindo(email, nome, sobrenome);
+            
             connection.query('call primeiraMensalidadePaga(' + req.body.inputPacote + ", '" + req.body.inputPagamento + "'" + ')', {// CADASTRE A PRIMEIRA MENSALIDADE
                 type: Sequelize.DataTypes.INSERT
             }).then(() => {
-                email.bemvindo(email, nome, sobrenome);
-                console.log("email enviado")
                 res.redirect("/administrador/clientes/listar");
-                console.log("redirecionando");
             }).catch((erro) => {
                 res.redirect("/administrador/clientes/listar");
-                console.log("deu erro")
             });
         }).catch((erro) => {// SE NÃO CADASTRAR REDIRECIONE PARA O CADASTRO
             res.redirect("/administrador/clientes/cadastro");
