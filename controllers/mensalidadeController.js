@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const Cliente = require("../models/Cliente");
 const Mensalidade = require("../models/Mensalidade");
+const Pacote = require("../models/Pacote");
 const adminAut = require("../middlewares/adminAut");
 
 // MENSALIDADES EM ABERTO
@@ -73,7 +74,9 @@ router.get("/administrador/mensalidades/detalhes/:id", adminAut, (req, res) => {
         ]
     }).then(mensalidade => {
         if (mensalidade != undefined) {
-            res.render("administrador/mensalidades/detalhes", { mensalidade: mensalidade })
+            Pacote.findByPk(mensalidade.cliente.pacoteId, {}).then(pacote => {
+                res.render("administrador/mensalidades/detalhes", { mensalidade: mensalidade, pacote: pacote });
+            });
         } else {
             res.redirect("/administrador/mensalidades/aberto");
         }

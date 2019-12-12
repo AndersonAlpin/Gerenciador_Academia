@@ -7,90 +7,84 @@
     <div class="main-content">
         <h2 class="titulos">Detalhes da Mensalidade</h2>
         <hr>
-        <div id="detalhesCliente">
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="col-md-12"><span class="font-weight-bold">Nome: </span> <%= mensalidade.cliente.nome %>
+        <div class="formularios">
+            <form action="/mensalidades/validar" method="POST">
+                <input type="hidden" name="inputID" value="<%= mensalidade.id %>">
+                <input type="hidden" name="inputPagamento" id="inputPagamento">
+                <div class="form-row">
+                    <div class="form-group col-md-3">
+                        <label for="inputNome">Nome</label>
+                        <input value="<%= mensalidade.cliente.nome %>" type="text" class="form-control" name="inputNome"
+                            disabled>
                     </div>
-                    <div class="col-md-12"><span class="font-weight-bold">Sobrenome: </span>
-                        <%= mensalidade.cliente.sobrenome %>
+                    <div class="form-group col-md-3">
+                        <label for="inputSobrenome">Sobrenome</label>
+                        <input value="<%= mensalidade.cliente.sobrenome %>" type="text" class="form-control"
+                            name="inputSobrenome" disabled>
                     </div>
-                    <div class="col-md-12"><span class="font-weight-bold">CPF: </span> <%= mensalidade.cliente.cpf %>
+                    <div class="form-group col-md-3">
+                        <label for="inputCPF">CPF</label>
+                        <input value="<%= mensalidade.cliente.cpf %>" type="text" class="form-control" name="inputCPF"
+                            disabled>
                     </div>
-
-                    <% var v = mensalidade.valor %>
-                    <% var real = v.toLocaleString('pt-br', {style: 'currency', currency: 'BRL'}) %>
-
-                    <div class="col-md-12"><span class="font-weight-bold">Valor: </span> <%= real %>
+                    <div class="form-group col-md-3">
+                        <label for="inputCPF">Pacote</label>
+                        <input value="<%= pacote.nome %>" type="text" class="form-control" name="inputCPF" disabled>
                     </div>
-
-                    <% var de = new Date(mensalidade.dataEmissao) %>
-                    <% var deAtualizada = (de.getDate() + 1) + "/" + (de.getMonth()+1) + "/" + de.getFullYear(); %>
-                    <div class="col-md-12"><span class="font-weight-bold">Data de Emissão: </span> <%= deAtualizada %>
-                    </div>
-
-                    <% var dv = new Date(mensalidade.dataVencimento) %>
-                    <% var dvAtualizada = (dv.getDate() + 1) + "/" + (dv.getMonth()+1) + "/" + dv.getFullYear(); %>
-                    <div class="col-md-12"><span class="font-weight-bold">Data de Vencimento: </span>
-                        <%= dvAtualizada %>
-                    </div>
-
-                    <% var dp = new Date(mensalidade.dataPagamento) %>
-                    <% var dpAtualizada = (dp.getDate() + 1) + "/" + (dp.getMonth()+1) + "/" + dp.getFullYear(); %>
-                    <div class="col-md-12"><span class="font-weight-bold">Data de Pagamento: </span>
-                        <% if(dpAtualizada != 'NaN/NaN/NaN'){ %>
-                        <%= dpAtualizada %>
-                        <% } %>
-                    </div>
-
-                    <div class="col-md-12"><span class="font-weight-bold">Forma de Pagamento: </span>
-                        <% if( mensalidade.formaPagamento != undefined){ %>
-                        <%= mensalidade.formaPagamento %>
-                        <% } %>
-                    </div>
-
-                    <div class="col-md-12"><span class="font-weight-bold">Status: </span>
-                        <%= mensalidade.status %>
-                    </div>
-                    <a href="/administrador/mensalidades/aberto" class="btn btn-success ml-1 mt-2">Voltar</a>
                 </div>
 
+                <div class="form-row">
+                    <div class="form-group col-md-3">
+                        <% var v = mensalidade.valor %>
+                        <% var real = v.toLocaleString('pt-br', {style: 'currency', currency: 'BRL'}) %>
+
+                        <label for="inputNome">Valor</label>
+                        <input value="<%= real %>" type="text" class="form-control" name="inputNome" disabled>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <% var de = new Date(mensalidade.dataEmissao) %>
+                        <% var deAtualizada = (de.getDate() + 1) + "/" + (de.getMonth()+1) + "/" + de.getFullYear(); %>
+
+                        <label for="inputSobrenome">Data de Emissão</label>
+                        <input value="<%= deAtualizada %>" type="text" class="form-control" name="inputSobrenome"
+                            disabled>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <% var dv = new Date(mensalidade.dataVencimento) %>
+                        <% var dvAtualizada = (dv.getDate() + 1) + "/" + (dv.getMonth()+1) + "/" + dv.getFullYear(); %>
+
+                        <label for="inputCPF">Data de Vencimento</label>
+                        <input value="<%= dvAtualizada %>" type="text" class="form-control" name="inputCPF" disabled>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <% var dp = new Date(mensalidade.dataPagamento) %>
+                        <% var dpAtualizada = (de.getDate() + 1) + "/" + (de.getMonth()+1) + "/" + de.getFullYear(); %>
+
+                        <label for="inputCPF">Data de Pagamento</label>
+                        <input value="<%= dpAtualizada %>" type="text" class="form-control" name="inputCPF" disabled>
+                    </div>
+                </div>
                 <% if(mensalidade.status != 'Pago'){ %>
-                <div class="col-md-3">
-                    <form action="/mensalidades/validar" method="POST" class="form-group">
-                        <div>
-                            <input type="hidden" name="inputID" value="<%= mensalidade.id %>">
-                        </div>
-                        <div class="form-group col-md-12 inline">
-                            <label for="inputPagamento" class="font-weight-bold">Forma de Pagamento</label>
-                            <select class="form-control" name="selectPagamento" id="selectPagamento" required>
-                                <option value="">Selecione</option>
-                                <option value="">Cartão</option>
-                                <option value="">Depósito</option>
-                                <option value="">Dinheiro</option>
-                                <option value="">Transferência</option>
-                            </select>
-                            <input type="hidden" name="inputPagamento" id="inputPagamento">
-                        </div>
-                        <div>
-                            <button class="btn btn-success">Validar</button>
-                        </div>
-                    </form>
+                <div class="form-row">
+                    <div class="form-group col-md-3">
+                        <label for="inputCPF">Forma de Pagamento</label>
+                        <select class="form-control" name="selectPagamento" id="selectPagamento" required>
+                            <option value="">Selecione</option>
+                            <option value="">Cartão</option>
+                            <option value="">Depósito</option>
+                            <option value="">Dinheiro</option>
+                            <option value="">Transferência</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-3">
+                        <button class="btn btn-success">Validar</button>
+                    </div>
                 </div>
                 <% } %>
-
-            </div>
-
+            </form>
         </div>
     </div>
 </body>
-
 <%- include ../../partials/footer.ejs %>
-<script>
-    document.getElementById("selectPagamento").addEventListener("change", selectPagamento);
-    function selectPagamento() {
-        var selectPagamento = document.getElementById("selectPagamento");
-        var selecionandoPagamento = selectPagamento.options[selectPagamento.selectedIndex].text;
-        document.getElementById("inputPagamento").value = selecionandoPagamento;
-    }
-</script>

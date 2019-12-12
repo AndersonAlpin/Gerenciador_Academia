@@ -32,27 +32,7 @@ module.exports = {
         };
 
         transporter.sendMail(mailOptions, function (error, info) {
-            if (error) {
-                console.log(error);
-            } else {
-                console.log('Email enviado: ' + info.response);
-            }
-        });
-    },
 
-    sendCode: function () {
-        var $destinatario = email;
-        var codigo = Math.floor(Math.random() * 65536);
-
-        var mailOptions = {
-            from: $usuario,
-            to: $destinatario,
-            subject: 'Academia IronFit - Recuperar senha',
-            text: 'Esse é o seu código de recuperação: ' + codigo,
-            html: ''
-        };
-
-        transporter.sendMail(mailOptions, function (error, info) {
             if (error) {
                 console.log(error);
             } else {
