@@ -248,7 +248,7 @@ body {
 .tabelas {
     overflow: auto;
     margin-bottom: 15px;
-    max-height: 350px;
+    max-height: 255px;
 }
 
 .table {

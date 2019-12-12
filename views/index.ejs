@@ -1,10 +1,10 @@
 <%- include partials/header.ejs %>
 
 <body>
-  
-    <div id="bg">
-        <img src="../img/fundo.jpeg" alt="">
-      </div>
+
+  <div id="bg">
+    <img src="../img/fundo.jpeg" alt="">
+  </div>
 
   <section>
     <div class="container">
@@ -36,8 +36,7 @@
 
                   <form action="/autenticacao" method="POST" class="col-12">
                     <div class="form-group inputIcon" id="user-group">
-                      <input id="email" type="email" name="email" class="form-control" placeholder="Email"
-                        required>
+                      <input id="email" type="email" name="email" class="form-control" placeholder="Email" required>
                       <i class="fas fa-at fa-lg fa-fw" aria-hidden="true"></i>
                     </div>
 
@@ -50,8 +49,11 @@
                       <%= messages.error %>
                     </div>
 
-                    <div class="form-group" style="margin-bottom: 34px;">
+                    <div class="form-group">
                       <input type="submit" class="btn btn-primary btn-block btn-lg mt-4" value="Entrar">
+                    </div>
+                    <div class="">
+                      <span class="text-light">Esqueceu sua senha? <a href="#">Clique aqui!</a></span>
                     </div>
                   </form>
                 </div>
@@ -65,16 +67,16 @@
       </div>
     </div>
   </section>
-<script>
-  var mensagemEmail = document.getElementById("email");
-  var mensagemSenha = document.getElementById("senha");
+  <script>
+    var mensagemEmail = document.getElementById("email");
+    var mensagemSenha = document.getElementById("senha");
 
-  mensagemEmail.addEventListener("focus", apagarMensagem, true);
-  mensagemSenha.addEventListener("focus", apagarMensagem, true);
+    mensagemEmail.addEventListener("focus", apagarMensagem, true);
+    mensagemSenha.addEventListener("focus", apagarMensagem, true);
 
-  function apagarMensagem(){
-    document.getElementById("error").innerHTML = "";
-  }
-</script>
+    function apagarMensagem() {
+      document.getElementById("error").innerHTML = "";
+    }
+  </script>
 </body>
 <%- include partials/footer.ejs %>

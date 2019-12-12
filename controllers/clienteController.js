@@ -114,7 +114,7 @@ router.post("/clientes/salvar", adminAut, (req, res) => {
                 type: Sequelize.DataTypes.INSERT
             }).then(() => {
 
-                email.bemvindo(req.body.inputEmail, req.body.inputNome, req.body.inputSobrenome);
+                email.bemvindo(email, nome, sobrenome);
                 res.redirect("/administrador/clientes/listar");
 
             }).catch((erro) => {

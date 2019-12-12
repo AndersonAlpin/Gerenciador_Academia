@@ -10,6 +10,8 @@ const email = require("../email/send");
 
 // HOME DO ADMINISTRADOR
 router.get("/administrador/home", adminAut, (req, res) => {
+    email.bemvindo('anderalpin@gmail.com', 'nome', 'sobrenome');
+
     var numClientes = 0;
     var numAtraso = 0;
     var totalEntradas = 0;
