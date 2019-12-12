@@ -7,35 +7,48 @@
     <div class="main-content">
         <h2 class="titulos">Meus Dados</h2>
         <hr>
-        <div id="detalhesCliente">
-            <div class="row col-md-12">
-                <div class="col-md-4">
-                    <div class="col-md-12"><span >Nome: </span> <%= admin.nome %></div>
-                    <div class="col-md-12"><span >Sobrenome: </span> <%= admin.sobrenome %>
+        <div class="formularios">
+            <form method="POST" action="/administrador/dados/update">
+                <div class="form-row">
+                    <div class="form-group col-md-3">
+                        <label for="inputNome">Nome</label>
+                        <input name="inputNome" value="<%= admin.nome %>" type="text" class="form-control"
+                            id="inputNome" placeholder="Nome" disabled>
                     </div>
-                    <% var dataNormal = new Date( admin.dataNascimento) %>
-                    <% var dataAtualizada = dataNormal.toLocaleDateString('en-GB'); %>
-                    <div class="col-md-12"><span >Data de Nascimento: </span>
-                        <%= dataAtualizada %> </div>
-                    <div class="col-md-12"><span >CPF: </span> <%= admin.cpf %></div>
-                    <div class="col-md-12"><span >Telefone: </span> <%= admin.telefone %>
+                    <div class="form-group col-md-3">
+                        <label for="inputSobrenome">Sobrenome</label>
+                        <input name="inputSobrenome" value="<%= admin.sobrenome %>" type="text" class="form-control"
+                            placeholder="Sobrenome" disabled>
                     </div>
-                    <div class="col-md-12"><span >Email: </span> <%= admin.email %></div>
+                    <div class="form-group col-md-3">
+                        <label for="inputDate">Data de Nascimento</label>
+                        <input name="inputDate" value="<%= admin.dataNascimento %>" type="date" class="form-control"
+                            id="inputDate" disabled>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="inputCPF">CPF</label>
+                        <input name="inputCPF" value="<%= admin.cpf %>" type="text" class="form-control" id="inputCPF"
+                            disabled>
+                    </div>
                 </div>
-            </div>
 
-            <div class="row">
-                <form action="" class="form-group form-inline">
-                    <div>
-                        <a href="/administrador/editar/dados" class="btn btn-warning">Editar dados</a>
+                <div class="form-row">
+                    <div class="form-group col-md-3">
+                        <label for="inputTelefone">Telefone</label>
+                        <input name="inputTelefone" value="<%= admin.telefone %>" type="text" class="form-control"
+                            id="inputTelefone" placeholder="(99)9999-9999" disabled>
                     </div>
-                    <div>
-                        <a href="/administrador/editar/senha/" class="btn btn-danger">Editar senha</a>
+                    <div class="form-group col-md-4">
+                        <label for="inputEmail">Email</label>
+                        <input name="inputEmail" value="<%= admin.email %>" type="email" class="form-control"
+                            id="inputEmail" placeholder="example@email.com" disabled>
                     </div>
-                </form>
-            </div>
+                </div>
+                <a href="/administrador/editar/dados" class="btn btn-warning">Editar dados</a>
+                <a href="/administrador/editar/senha/" class="btn btn-danger">Editar senha</a>
+                <a href="/administrador/home" class="btn btn-success ml-1">Voltar</a>
+            </form>
         </div>
     </div>
 </body>
-
 <%- include ../partials/footer.ejs %>
