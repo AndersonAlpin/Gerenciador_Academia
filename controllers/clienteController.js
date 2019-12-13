@@ -25,7 +25,6 @@ router.get("/administrador/clientes/listar", adminAut, (req, res) => {
             }
         ]
     }).then(clientes => {
-        
         res.render("administrador/clientes/listar", { clientes: clientes });
     });
 });

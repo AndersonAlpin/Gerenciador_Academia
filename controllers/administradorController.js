@@ -10,37 +10,7 @@ const email = require("../email/send");
 
 // HOME DO ADMINISTRADOR
 router.get("/administrador/home", adminAut, (req, res) => {
-    email.bemvindo('anderalpin@gmail.com', 'nome', 'sobrenome');
-
-    var numClientes = 0;
-    var numAtraso = 0;
-    var totalEntradas = 0;
-
-    // MENSALIDADES ATRASADAS
-    Mensalidade.findAll({
-        where: { status: 'Em atraso' }
-    }).then(mensalidades => {
-        mensalidades.forEach(mensalidade => {
-            numAtraso++;
-        });
-    });
-
-    // TOTAL DE ENTRADAS
-    Mensalidade.findAll({
-        where: { status: 'Pago' }
-    }).then(valores => {
-        valores.forEach(valor => {
-            totalEntradas += valor.valor
-        });
-    });
-
-    // CLIENTES ATIVOS
-    Cliente.findAll().then(clientes => {
-        clientes.forEach(cliente => {
-            numClientes++;
-        });
-        res.render("administrador/home", { numClientes: numClientes, numAtraso: numAtraso, totalEntradas: totalEntradas });
-    });
+    res.render("administrador/home");
 });
 
 // AUTENTICAÇÃO
