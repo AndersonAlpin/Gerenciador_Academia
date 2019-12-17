@@ -6,7 +6,6 @@ const EnderecoCliente = require("../models/EnderecoCliente");
 const Pacote = require("../models/Pacote");
 const Sequelize = require("sequelize");
 const adminAut = require("../middlewares/adminAut");
-const enviarEmail = require("../email/send");
 
 
 // LISTAR TODOS OS CLIENTES INCLUINDO O PACOTE E O ENDEREÇO
@@ -79,11 +78,13 @@ router.post("/clientes/salvar", adminAut, (req, res) => {
     
     var nome = req.body.inputNome
     var sobrenome = req.body.inputSobrenome;
+    var sexo = req.body.inputSexo;
     var dataNascimento = req.body.inputDate;
     var cpf = req.body.inputCPF;
     var telefone = req.body.inputTelefone;
     var email = req.body.inputEmail;
     var pacoteId = req.body.inputPacote;
+    var formaPagamento = req.body.inputPagamento;
     var logradouro = req.body.inputLogradouro;
     var numero = req.body.inputNumero;
     var cidade = req.body.inputCidade;
@@ -94,6 +95,7 @@ router.post("/clientes/salvar", adminAut, (req, res) => {
     Cliente.create({
         nome: nome,
         sobrenome: sobrenome,
+        sexo: sexo,
         dataNascimento: dataNascimento,
         cpf: cpf,
         telefone: telefone,
@@ -111,19 +113,21 @@ router.post("/clientes/salvar", adminAut, (req, res) => {
             uf: uf,
             clienteId: cliente.id
         }).then(() => { //SE CADASTRAR REDIRECIONE PARA A LISTA
-            connection.query('call primeiraMensalidadePaga(' + req.body.inputPacote + ", '" + req.body.inputPagamento + "'" + ')', {// CADASTRE A PRIMEIRA MENSALIDADE
+            connection.query(`call primeiraMensalidadePaga('${pacoteId}', '${formaPagamento}')`, {
                 type: Sequelize.DataTypes.INSERT
             }).then(() => {
-                enviarEmail.bemvindo(email, nome, sobrenome);
                 res.redirect("/administrador/clientes/listar");
             }).catch((erro) => {
                 res.redirect("/administrador/clientes/cadastro");
+                console.log('Não foi possível gerar mensalidade: ' + erro);
             });
         }).catch((erro) => {// SE NÃO CADASTRAR REDIRECIONE PARA O CADASTRO
             res.redirect("/administrador/clientes/cadastro");
+            console.log('Não foi possível cadastrar o endereço: ' + erro);
         });
     }).catch((erro) => {// SE DER ERRO REDIRECION PARA O CADASTRO
         res.redirect("/administrador/clientes/cadastro");
+        console.log('Não foi possível cadastrar o cliente: ' + erro);
     });
 
 });
@@ -193,6 +197,7 @@ router.post("/administrador/clientes/update", adminAut, (req, res) => {
     var id = req.body.inputID;
     var nome = req.body.inputNome
     var sobrenome = req.body.inputSobrenome;
+    var sexo = req.body.inputSexo;
     var dataNascimento = req.body.inputDate;
     var cpf = req.body.inputCPF;
     var telefone = req.body.inputTelefone;
@@ -208,6 +213,7 @@ router.post("/administrador/clientes/update", adminAut, (req, res) => {
     Cliente.update({
         nome: nome,
         sobrenome: sobrenome,
+        sexo: sexo,
         dataNascimento: dataNascimento,
         cpf: cpf,
         telefone: telefone,

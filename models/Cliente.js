@@ -19,6 +19,10 @@ const Cliente = connection.define('cliente', {
         type: Sequelize.STRING,
         allowNull: true
     },
+    sexo: {
+        type: Sequelize.STRING,
+        allowNull: true
+    },
         dataNascimento: {
             type: Sequelize.DATEONLY,
             allowNull: true

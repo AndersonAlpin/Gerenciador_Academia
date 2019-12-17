@@ -44,6 +44,21 @@ function selectPagamento() {
 }
 ////////////////////////////////////////////////////////////////////////////////////////////
 
+// PEGAR VALOR DO SELECT E COLOCAR NO INPUT
+var sexo = document.getElementById("selectSexo");
+
+if (sexo) {
+    document.getElementById("selectSexo").addEventListener("change", selectSexo);
+}
+
+
+function selectSexo() {
+    var selectSexo = document.getElementById("selectSexo");
+    var selecionandoSexo = selectSexo.options[selectSexo.selectedIndex].text;
+    document.getElementById("inputSexo").value = selecionandoSexo;
+}
+////////////////////////////////////////////////////////////////////////////////////////////
+
 // BUSCA NAS TABELAS
 window.onload = function () {
     var filtro = document.getElementById('buscar');

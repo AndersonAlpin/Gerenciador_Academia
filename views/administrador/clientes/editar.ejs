@@ -15,59 +15,81 @@
                     </div>
                     <div class="form-group col-md-3">
                         <label for="inputNome">Nome</label>
-                        <input value="<%= cliente.nome %>" type="text" class="form-control" id="inputNome" placeholder="Nome" name="inputNome" required>
+                        <input value="<%= cliente.nome %>" type="text" class="form-control" id="inputNome"
+                            placeholder="Nome" name="inputNome" required>
                     </div>
                     <div class="form-group col-md-3">
                         <label for="inputSobrenome">Sobrenome</label>
-                        <input value="<%= cliente.sobrenome %>" type="text" class="form-control" id="inputSobrenome" placeholder="Sobrenome" name="inputSobrenome" required>
+                        <input value="<%= cliente.sobrenome %>" type="text" class="form-control" id="inputSobrenome"
+                            placeholder="Sobrenome" name="inputSobrenome" required>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="selectSexo">Sexo</label>
+                        <select class="form-control" name="selectSexo" id="selectSexo" required>
+                            <option value="" selected disabled>Selecione</option>
+                            <option value="">Masculino</option>
+                            <option value="">Feminino</option>
+                        </select>
+                        <input type="hidden" name="inputSexo" value="" id="inputSexo" required>
                     </div>
                     <div class="form-group col-md-3">
                         <label for="inputDate">Data de Nascimento</label>
-                        <input value="<%= cliente.dataNascimento %>" type="date" class="form-control" id="inputDate" name="inputDate" required>
+                        <input value="<%= cliente.dataNascimento %>" type="date" class="form-control" id="inputDate"
+                            name="inputDate" required>
                     </div>
+                </div>
+
+                <div class="form-row">
                     <div class="form-group col-md-3">
                         <label for="inputCPF">CPF</label>
                         <input value="<%= cliente.cpf %>" type="text" class="form-control" id="inputCPF"
                             placeholder="000.000.000-00" name="inputCPF" required>
                     </div>
-                </div>
-
-                <div class="form-row">
                     <div class="form-group col-md-3">
                         <label for="inputTelefone">Telefone</label>
-                        <input value="<%= cliente.telefone %>" type="text" class="form-control" id="inputTelefone" placeholder="(99)9999-9999" name="inputTelefone" required>
+                        <input value="<%= cliente.telefone %>" type="text" class="form-control" id="inputTelefone"
+                            placeholder="(99)9999-9999" name="inputTelefone" required>
                     </div>
                     <div class="form-group col-md-4">
                         <label for="inputEmail">Email</label>
-                        <input value="<%= cliente.email %>" type="email" class="form-control" id="inputEmail" placeholder="example@email.com" name="inputEmail" required>
-                    </div>
-                    <div class="form-group col-md-3">
-                        <label for="inputLogradouro">Logradouro</label>
-                        <input value="<%= cliente.enderecocliente.logradouro %>" type="text" class="form-control" id="inputLogradouro" placeholder="Rua" name="inputLogradouro" required>
+                        <input value="<%= cliente.email %>" type="email" class="form-control" id="inputEmail"
+                            placeholder="example@email.com" name="inputEmail" required>
                     </div>
                     <div class="form-group col-md-2">
-                        <label for="inputNumero">Número</label>
-                        <input value="<%= cliente.enderecocliente.numero %>" type="number" class="form-control" id="inputNumero" placeholder="00" name="inputNumero" required>
+                        <label for="inputCEP">CEP</label>
+                        <input value="<%= cliente.enderecocliente.cep %>" type="text" class="form-control" id="inputCEP"
+                            placeholder="00000-000" name="inputCEP" required>
                     </div>
                 </div>
 
                 <div class="form-row">
                     <div class="form-group col-md-3">
+                        <label for="inputLogradouro">Logradouro</label>
+                        <input value="<%= cliente.enderecocliente.logradouro %>" type="text" class="form-control"
+                            id="inputLogradouro" placeholder="Rua" name="inputLogradouro" required>
+                    </div>
+                    <div class="form-group col-md-3">
                         <label for="inputCidade">Cidade</label>
-                        <input value="<%= cliente.enderecocliente.cidade %>" type="text" class="form-control" id="inputCidade" placeholder="Cidade" name="inputCidade" required>
+                        <input value="<%= cliente.enderecocliente.cidade %>" type="text" class="form-control"
+                            id="inputCidade" placeholder="Cidade" name="inputCidade" required>
                     </div>
                     <div class="form-group col-md-3">
                         <label for="inputBairro">Bairro</label>
-                        <input value="<%= cliente.enderecocliente.bairro %>" type="text" class="form-control" id="inputBairro" placeholder="Bairro" name="inputBairro" required>
-                    </div>
-                    <div class="form-group col-md-3">
-                        <label for="inputCEP">CEP</label>
-                        <input value="<%= cliente.enderecocliente.cep %>" type="text" class="form-control" id="inputCEP" placeholder="00000-000" name="inputCEP" required>
+                        <input value="<%= cliente.enderecocliente.bairro %>" type="text" class="form-control"
+                            id="inputBairro" placeholder="Bairro" name="inputBairro" required>
                     </div>
                     <div class="form-group col-md-2">
+                        <label for="inputNumero">Número</label>
+                        <input value="<%= cliente.enderecocliente.numero %>" type="number" class="form-control"
+                            id="inputNumero" placeholder="00" name="inputNumero" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-3">
                         <label for="inputUF">UF</label>
                         <select class="form-control" name="" id="selectUF" required>
-                            <option value="">Selecione</option>
+                            <option selected disabled value="">Selecione</option>
                             <option value="">AC</option>
                             <option value="">AL</option>
                             <option value="">AP</option>
@@ -98,9 +120,6 @@
                         </select>
                         <input type="hidden" name="inputUF" id="inputUF" required>
                     </div>
-                </div>
-
-                <div class="form-row">
                     <div class="form-group col-md-3">
                         <label for="inputPacote">Pacote</label>
                         <select class="form-control" name="" id="selectPacote" required>
@@ -115,5 +134,10 @@
             </form>
         </div>
     </div>
+    <script>
+        $('#inputCPF').mask("999.999.999.99", { placeholder: "000.000.000-00" });
+        $('#inputTelefone').mask("(99)99999-9999", { placeholder: "(00)00000-0000" });
+        $('#inputCEP').mask("99999-999", { placeholder: "00000-000" });
+    </script>
 </body>
 <%- include ../../partials/footer.ejs %>
