@@ -423,6 +423,48 @@ body {
     }
 }
 
+@media screen and (min-width: 570px){
+    .side-bar {
+        height: 1200px;
+    }
+}
+
+@media screen and (min-width: 606px){
+    .side-bar {
+        height: 1175px;
+    }
+}
+
+@media screen and (min-width: 623px){
+    .side-bar {
+        height: 1150px;
+    }
+}
+
+@media screen and (min-width: 768px){
+    .side-bar {
+        height: 710px;
+    }
+}
+
+@media screen and (min-width: 780px){
+    .side-bar {
+        height: 690px;
+    }
+}
+
+@media screen and (min-width: 993px){
+    .side-bar {
+        height: 640px;
+    }
+}
+
+@media screen and (min-width: 1219px){
+    .side-bar {
+        height: 100vh;
+    }
+}
+
 @media screen and (min-width: 1000px) {
     .side-bar {
         width: 200px;
