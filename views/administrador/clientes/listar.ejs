@@ -14,16 +14,26 @@
             <option value="/administrador/clientes/inativos">Inativos</option>
         </select>
         <hr>
-        <div class="form-group">
-            <input id="buscar" type="text" class="form-control" placeholder="Buscar">
+
+        <div class="form-group" id="filtros">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Filtro</span>
+                </div>
+                <input id="buscarNome" type="text" class="form-control d-none d-md-block" placeholder="Nome">
+                <input id="buscarCPF" type="text" class="form-control  d-none d-sm-block" placeholder="CPF">
+                <input id="buscarEmail" type="text" class="form-control" placeholder="Email">
+            </div>
         </div>
+        
         <div class="table-responsive-md tabelas">
-            <table class="table" id="tabela">
+            <table class="table table-sm" id="tabela">
                 <thead class="tabela-head">
                     <tr>
                         <th>Nome</th>
                         <th>Sobrenome</th>
                         <th>CPF</th>
+                        <th>Email</th>
                         <th class="ocultar-colunas">Pacote</th>
                         <th>Ações</th>
                     </tr>
@@ -34,6 +44,7 @@
                         <td> <%= cliente.nome %> </td>
                         <td> <%= cliente.sobrenome %> </td>
                         <td> <%= cliente.cpf %> </td>
+                        <td> <%= cliente.email %> </td>
                         <td class="ocultar-colunas"> <%= cliente.pacote.nome %> </td>
                         <td>
                             <a href="/administrador/clientes/detalhes/<%= cliente.id %>"

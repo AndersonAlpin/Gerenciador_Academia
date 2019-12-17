@@ -6,13 +6,20 @@
 <body>
     <div class="main-content">
         <h2 class="titulos">Pacotes</h2>
+        <br>
 
-        <hr>
-        <div class="form-group">
-            <input id="buscar" type="text" class="form-control" placeholder="Buscar">
+        <div class="form-group" id="filtros">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Filtro</span>
+                </div>
+                <input id="buscarNome" type="text" class="form-control  d-none d-md-block" placeholder="Nome">
+                <input id="buscarDesconto" type="text" class="form-control" placeholder="Taxa de Desconto">
+            </div>
         </div>
+
         <div class="table-responsive-md tabelas">
-            <table class="table" id="tabela">
+            <table class="table table-sm" id="tabela">
                 <thead class="tabela-head">
                     <tr class="">
                         <th>Nome</th>
