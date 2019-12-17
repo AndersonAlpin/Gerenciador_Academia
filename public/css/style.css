@@ -303,11 +303,6 @@ body {
     color: #000;
 }
 
-
-/* ================================ */
-
-/* FORMATAÇÕES DE FORMULÁRIOS */
-
 .formularios {
     border-radius: 5px;
     color: #fff;
@@ -467,6 +462,12 @@ body {
 @media screen and (min-width: 1219px){
     .side-bar {
         height: 625px;
+    }
+}
+
+@media screen and (min-width: 1366px){
+    .side-bar {
+        height: 100vh;
     }
 }
 
