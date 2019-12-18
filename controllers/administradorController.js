@@ -1,12 +1,10 @@
 const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcryptjs");
-const Cliente = require("../models/Cliente");
-const Mensalidade = require("../models/Mensalidade");
 const Administrador = require("../models/Administrador");
 const Login = require("../models/Login");
 const adminAut = require("../middlewares/adminAut");
-const email = require("../email/send");
+const enviarEmail = require("../email/send");
 
 // HOME DO ADMINISTRADOR
 router.get("/administrador/home", adminAut, (req, res) => {
