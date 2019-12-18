@@ -5,6 +5,7 @@ const Administrador = require("../models/Administrador");
 const Login = require("../models/Login");
 const adminAut = require("../middlewares/adminAut");
 const enviarEmail = require("../email/send");
+const connection = require("../database/connection");
 
 // HOME DO ADMINISTRADOR
 router.get("/administrador/home", adminAut, (req, res) => {
@@ -27,20 +28,25 @@ router.post("/autenticacao", (req, res) => {
         if (login != undefined) { // SE O EMAIL EXISTIR
             // VALIDAR SENHA
             var correct = bcrypt.compareSync(senha, login.senha);
-
+            
             if (correct) {
                 req.session.login = {
                     id: login.id,
                     idAdmin: login.administrador.id,
+                    idAcademia: login.administrador.AcademiumId,
                     email: login.email,
                     nome: login.administrador.nome,
                     sobrenome: login.administrador.sobrenome,
                     dataNascimento: login.administrador.dataNascimento,
                     cpf: login.administrador.cpf,
                     telefone: login.administrador.telefone,
+                    email: login.administrador.email,
+                    tipo: login.administrador.tipo,
+                    ativo: login.administrador.ativo
                 }
                 res.redirect("/administrador/home");
                 global.admin = req.session.login;
+                console.log(admin.idAcademia);
             } else {
                 req.flash('error', 'Senha incorreta!');
                 res.redirect("/");
@@ -136,17 +142,26 @@ router.post("/administrador/dados/update", adminAut, (req, res) => {
         }
     }).then(() => {
 
-        global.admin = {
-            id: admin.id,
-            idAdmin: admin.idAdmin,
-            email: email,
-            nome: nome,
-            sobrenome: sobrenome,
-            dataNascimento: dataNascimento,
-            cpf: cpf,
-            telefone: telefone,
-        }
-        res.redirect("/administrador/perfil");
+        Login.update({
+            email: email
+        }, {
+            where: {
+                administradorId: admin.idAdmin
+            }
+        }).then(() => {
+            global.admin = {
+                id: admin.id,
+                idAdmin: admin.idAdmin,
+                email: email,
+                nome: nome,
+                sobrenome: sobrenome,
+                dataNascimento: dataNascimento,
+                cpf: cpf,
+                telefone: telefone,
+            }
+            res.redirect("/administrador/perfil");
+        });
+
     });
 
 });

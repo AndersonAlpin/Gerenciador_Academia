@@ -113,6 +113,7 @@
                     <div class="form-group col-md-3">
                         <label for="selectPacote">Pacote</label>
                         <select class="form-control" name="selectPacote" id="selectPacote">
+                            <option value="">Nenhum</option>
                             <% pacote.forEach(pacote => { %>
                             <option value="<%= pacote.id %>"><%= pacote.nome %></option>
                             <% }) %>

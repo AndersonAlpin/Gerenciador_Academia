@@ -29,12 +29,26 @@ const Administrador = connection.define('administrador', {
     telefone: {
         type: Sequelize.STRING,
         allowNull: true
+    },
+    email: {
+        type: Sequelize.STRING,
+        allowNull: true
+    },
+    tipo: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        defaultValue: 'chefe'
+    },
+    ativo: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+        defaultValue: true
     }
 });
 
 // Gerando chave estrangeira de Academia na tabela Administrador
 Academia.hasMany(Administrador);
-Administrador.belongsTo(Academia);
+Administrador.belongsTo(Academia); 
 
 // Necessário para criar a base de dados. Comentar este trecho após executar o servidor
 // Administrador.sync({force: true}); 

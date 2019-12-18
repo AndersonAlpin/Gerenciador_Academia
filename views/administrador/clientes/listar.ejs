@@ -25,7 +25,7 @@
                 <input id="buscarEmail" type="text" class="form-control" placeholder="Email">
             </div>
         </div>
-        
+
         <div class="table-responsive-md tabelas">
             <table class="table table-sm" id="tabela">
                 <thead class="tabela-head">
@@ -45,7 +45,13 @@
                         <td> <%= cliente.sobrenome %> </td>
                         <td> <%= cliente.cpf %> </td>
                         <td> <%= cliente.email %> </td>
-                        <td class="ocultar-colunas"> <%= cliente.pacote.nome %> </td>
+                        <td class="ocultar-colunas">
+                            <% if(cliente.pacote != null){ %>
+                                <%= cliente.pacote.nome %>
+                            <% } else { %>
+                                Nenhum
+                            <% } %>
+                        </td>
                         <td>
                             <a href="/administrador/clientes/detalhes/<%= cliente.id %>"
                                 class="btn btn-sm btn-success">Detalhes</a>

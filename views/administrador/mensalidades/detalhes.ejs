@@ -29,7 +29,7 @@
                     </div>
                     <div class="form-group col-md-3">
                         <label for="inputCPF">Pacote</label>
-                        <input value="<%= pacote.nome %>" type="text" class="form-control" name="inputCPF" disabled>
+                        <input value="<% if(pacote != null){ %><%= pacote.nome %><% } else { %>Nenhum<% } %>" type="text" class="form-control" name="inputCPF" disabled>
                     </div>
                 </div>
 

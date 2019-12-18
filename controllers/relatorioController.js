@@ -22,6 +22,14 @@ router.get("/administrador/relatorios/listar", adminAut, (req, res) => {
 
     // NÚMERO MENSALIDADES 
     Mensalidade.findAll({
+        include: [
+            {
+                model: Cliente, required: true,
+                where: {
+                    AcademiumId: admin.idAcademia
+                }
+            }
+        ]
     }).then(mensalidades => {
         mensalidades.forEach(mensalidade => {
             if (mensalidade.status == 'Pago') {
@@ -38,6 +46,14 @@ router.get("/administrador/relatorios/listar", adminAut, (req, res) => {
 
     // VALOR MENSALIDADES
     Mensalidade.findAll({
+        include: [
+            {
+                model: Cliente, required: true,
+                where: {
+                    AcademiumId: admin.idAcademia
+                }
+            }
+        ]
     }).then(mensalidades => {
         mensalidades.forEach(mensalidade => {
             if (mensalidade.status == 'Pago') {
@@ -53,7 +69,11 @@ router.get("/administrador/relatorios/listar", adminAut, (req, res) => {
     });
 
     // NUMERO CLIENTES
-    Cliente.findAll().then(clientes => {
+    Cliente.findAll({
+        where: {
+            AcademiumId: admin.idAcademia
+        }
+    }).then(clientes => {
         clientes.forEach(cliente => {
             relatorio.numClientes++;
 

@@ -10,8 +10,10 @@ const adminAut = require("../middlewares/adminAut");
 
 // LISTAR TODOS OS CLIENTES INCLUINDO O PACOTE E O ENDEREÇO
 router.get("/administrador/clientes/listar", adminAut, (req, res) => {
-    
     Cliente.findAll({
+        where: {
+            AcademiumId: admin.idAcademia
+        },
         order: [
             ['nome', 'ASC']
         ],
@@ -31,6 +33,9 @@ router.get("/administrador/clientes/listar", adminAut, (req, res) => {
 // LISTAR OS CLIENTES ATIVOS INCLUINDO O PACOTE E O ENDEREÇO
 router.get("/administrador/clientes/ativos", adminAut, (req, res) => {
     Cliente.findAll({
+        where: {
+            AcademiumId: admin.idAcademia
+        },
         order: [
             ['nome', 'ASC']
         ],
@@ -50,6 +55,9 @@ router.get("/administrador/clientes/ativos", adminAut, (req, res) => {
 // LISTAR OS CLIENTES INATIVOS INCLUINDO O PACOTE E O ENDEREÇO
 router.get("/administrador/clientes/inativos", adminAut, (req, res) => {
     Cliente.findAll({
+        where: {
+            AcademiumId: admin.idAcademia
+        },
         order: [
             ['nome', 'ASC']
         ],
@@ -68,7 +76,11 @@ router.get("/administrador/clientes/inativos", adminAut, (req, res) => {
 
 // FORMULÁRIO DE CADASTRO DO CLIENTE INCLUINDO O PACOTE
 router.get("/administrador/clientes/cadastro", adminAut, (req, res) => {
-    Pacote.findAll().then(pacote => {
+    Pacote.findAll({
+        where: {
+            AcademiumId: admin.idAcademia
+        }
+    }).then(pacote => {
         res.render("administrador/clientes/cadastro", { pacote: pacote });
     });
 });
@@ -100,7 +112,7 @@ router.post("/clientes/salvar", adminAut, (req, res) => {
         cpf: cpf,
         telefone: telefone,
         email: email,
-        AcademiumId: '1',
+        AcademiumId: admin.idAcademia,
         pacoteId: pacoteId
     }).then((cliente) => { //SE CADASTRAR O CLIENTE, CADASTRE O ENDEREÇO
         
@@ -162,7 +174,11 @@ router.get("/administrador/clientes/detalhes/:id", adminAut, (req, res) => {
 
 // EDITAR UM CLIENTE SELECIONADO NA TABELA
 router.get("/administrador/clientes/editar/:id", adminAut, (req, res) => {
-    Pacote.findAll().then(pacote => {
+    Pacote.findAll({
+        where: {
+            AcademiumId: admin.idAcademia
+        }
+    }).then(pacote => {
 
         var id = req.params.id;
 

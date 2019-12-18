@@ -13,7 +13,10 @@ router.get("/administrador/mensalidades/aberto", adminAut, (req, res) => {
         ],
         include: [
             {
-                model: Cliente
+                model: Cliente, required: true,
+                where: {
+                    AcademiumId: admin.idAcademia
+                }
             }
         ]
     }).then(mensalidades => {
@@ -30,7 +33,10 @@ router.get("/administrador/mensalidades/atraso", adminAut, (req, res) => {
         ],
         include: [
             {
-                model: Cliente
+                model: Cliente, required: true,
+                where: {
+                    AcademiumId: admin.idAcademia
+                }
             }
         ]
     }).then(mensalidades => {
@@ -47,7 +53,10 @@ router.get("/administrador/mensalidades/pago", adminAut, (req, res) => {
         ],
         include: [
             {
-                model: Cliente
+                model: Cliente, required: true,
+                where: {
+                    AcademiumId: admin.idAcademia
+                }
             }
         ]
     }).then(mensalidades => {

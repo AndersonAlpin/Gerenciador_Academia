@@ -7,6 +7,9 @@ const adminAut = require("../middlewares/adminAut");
 // LISTAR PACOTES
 router.get("/administrador/pacotes/listar", adminAut, (req, res) => {
     Pacote.findAll({
+        where: {
+            AcademiumId: admin.idAcademia
+        },
         order: [
             ['taxaDesconto', 'DESC']
         ]
@@ -26,21 +29,13 @@ router.post("/pacotes/delete", adminAut, (req, res) => {
         if (!isNaN(id)) { //SE FOR UM NÚMERO  
 
             // ATUALIZAR OS CLIENTES QUE POSSUEM O PACOTE A SER DELETADO
-            Cliente.update({ pacoteId: 1 }, {
+            // DELETE O PACOTE
+            Pacote.destroy({
                 where: {
-                    pacoteId: id
+                    id: id
                 }
             }).then(() => {
-
-                // DELETE O PACOTE
-                Pacote.destroy({
-                    where: {
-                        id: id
-                    }
-                }).then(() => {
-                    res.redirect("/administrador/pacotes/listar");
-                });
-
+                res.redirect("/administrador/pacotes/listar");
             });
 
         } else {
@@ -67,7 +62,8 @@ router.post("/pacote/salvar", adminAut, (req, res) => {
         Pacote.create({
             nome: nome,
             descricao: descricao,
-            taxaDesconto: desconto
+            taxaDesconto: desconto,
+            AcademiumId: admin.idAcademia
         }).then(function () {
             res.redirect("/administrador/pacotes/listar");
         }).catch(function (erro) {
