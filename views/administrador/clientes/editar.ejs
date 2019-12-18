@@ -123,7 +123,6 @@
                     <div class="form-group col-md-3">
                         <label for="inputPacote">Pacote</label>
                         <select class="form-control" name="" id="selectPacote" required>
-                            <option value="">Nenhum</option>
                             <% pacote.forEach(pacote => { %>
                             <option value="<%= pacote.id %>"><%= pacote.nome %></option>
                             <% }) %>
@@ -136,7 +135,7 @@
         </div>
     </div>
     <script>
-        $('#inputCPF').mask("999.999.999.99", { placeholder: "000.000.000-00" });
+        $('#inputCPF').mask("999.999.999-99", { placeholder: "000.000.000-00" });
         $('#inputTelefone').mask("(99)99999-9999", { placeholder: "(00)00000-0000" });
         $('#inputCEP').mask("99999-999", { placeholder: "00000-000" });
     </script>
