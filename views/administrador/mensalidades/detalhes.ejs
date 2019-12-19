@@ -8,7 +8,7 @@
         <h2 class="titulos">Detalhes da Mensalidade</h2>
         <hr>
         <div class="formularios">
-            <form action="/mensalidades/validar" method="POST">
+            <form action="/mensalidades/validar" method="POST" onsubmit="confirmarDelecao(event, this)">
                 <input type="hidden" name="inputID" value="<%= mensalidade.id %>">
                 <input type="hidden" name="inputPagamento" id="inputPagamento">
                 <div class="form-row">
@@ -90,3 +90,12 @@
     </div>
 </body>
 <%- include ../../partials/footer.ejs %>
+<script>
+    function confirmarDelecao(event, form) {
+        event.preventDefault();
+        var decisao = confirm("Você quer validar esta mensalidade?");
+        if (decisao) {
+            form.submit();
+        }
+    }
+</script>
