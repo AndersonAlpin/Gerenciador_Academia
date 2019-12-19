@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcryptjs");
 const Administrador = require("../models/Administrador");
+const EnderecoAdministrador = require("../models/EnderecoAdministrador");
 const Login = require("../models/Login");
 const adminAut = require("../middlewares/adminAut");
 const enviarEmail = require("../email/send");
@@ -20,32 +21,45 @@ router.post("/autenticacao", (req, res) => {
         where: { email: email },
         include: [
             {
-                model: Administrador
+                model: Administrador, required: true,
+                include: [
+                    {
+                        model: EnderecoAdministrador
+                    }
+                ]
             }
         ]
     }).then(login => {
         if (login != undefined) { // SE O EMAIL EXISTIR
             // VALIDAR SENHA
             var correct = bcrypt.compareSync(senha, login.senha);
-            
+
             if (correct) {
                 req.session.login = {
                     id: login.id,
                     idAdmin: login.administrador.id,
+                    idEndereco: login.administrador.enderecoadministrador.id,
                     idAcademia: login.administrador.AcademiumId,
-                    email: login.email,
+
                     nome: login.administrador.nome,
                     sobrenome: login.administrador.sobrenome,
+                    sexo: login.administrador.sexo,
                     dataNascimento: login.administrador.dataNascimento,
                     cpf: login.administrador.cpf,
                     telefone: login.administrador.telefone,
                     email: login.administrador.email,
                     tipo: login.administrador.tipo,
-                    ativo: login.administrador.ativo
+                    ativo: login.administrador.ativo,
+
+                    logradouro: login.administrador.enderecoadministrador.logradouro,
+                    numero: login.administrador.enderecoadministrador.numero,
+                    cidade: login.administrador.enderecoadministrador.cidade,
+                    bairro: login.administrador.enderecoadministrador.bairro,
+                    cep: login.administrador.enderecoadministrador.cep,
+                    uf: login.administrador.enderecoadministrador.uf
                 }
                 res.redirect("/administrador/home");
                 global.admin = req.session.login;
-                console.log(admin.idAcademia);
             } else {
                 req.flash('error', 'Senha incorreta!');
                 res.redirect("/");
@@ -127,6 +141,12 @@ router.post("/administrador/dados/update", adminAut, (req, res) => {
     var cpf = req.body.inputCPF;
     var telefone = req.body.inputTelefone;
     var email = req.body.inputEmail;
+    var cep = req.body.inputCEP;
+    var logradouro = req.body.inputLogradouro;
+    var cidade = req.body.inputCidade;
+    var bairro = req.body.inputBairro;
+    var numero = req.body.inputNumero;
+    var uf = req.body.inputUF;
 
     Administrador.update({
         nome: nome,
@@ -148,17 +168,40 @@ router.post("/administrador/dados/update", adminAut, (req, res) => {
                 administradorId: admin.idAdmin
             }
         }).then(() => {
-            global.admin = {
-                id: admin.id,
-                idAdmin: admin.idAdmin,
-                email: email,
-                nome: nome,
-                sobrenome: sobrenome,
-                dataNascimento: dataNascimento,
-                cpf: cpf,
-                telefone: telefone,
-            }
-            res.redirect("/administrador/perfil");
+
+            EnderecoAdministrador.update({
+                cep: cep,
+                logradouro: logradouro,
+                cidade: cidade,
+                bairro: bairro,
+                numero: numero,
+                uf: uf
+            },{
+                where: {
+                    administradorId: admin.idAdmin
+                }
+            }).then((endereco) => {
+
+                global.admin = {
+                    id: admin.id,
+                    idAdmin: admin.idAdmin,
+                    email: email,
+                    nome: nome,
+                    sobrenome: sobrenome,
+                    dataNascimento: dataNascimento,
+                    cpf: cpf,
+                    telefone: telefone,
+                    cep: cep,
+                    logradouro: logradouro,
+                    cidade: cidade,
+                    bairro: bairro,
+                    numero: numero,
+                    uf: uf
+                }
+                res.redirect("/administrador/perfil");
+
+            });
+
         });
 
     });

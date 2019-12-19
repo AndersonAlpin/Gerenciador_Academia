@@ -25,12 +25,16 @@
                     </div>
                     <div class="form-group col-md-3">
                         <label for="selectSexo">Sexo</label>
-                        <select class="form-control" name="selectSexo" id="selectSexo" required>
-                            <option value="" selected disabled>Selecione</option>
-                            <option value="">Masculino</option>
-                            <option value="">Feminino</option>
+                        <select class="form-control" name="selectSexo" id="selectSexo">
+                            <% if(cliente.sexo === 'Masculino'){ %>
+                                <option selected value="">Masculino</option>
+                                <option value="">Feminino</option>
+                                <% }else { %>
+                                    <option selected value="">Feminino</option>
+                                    <option value="">Masculino</option>
+                                <% } %>
                         </select>
-                        <input type="hidden" name="inputSexo" value="" id="inputSexo" required>
+                        <input type="hidden" name="inputSexo" value="<%= cliente.sexo %>" id="inputSexo" required>
                     </div>
                     <div class="form-group col-md-3">
                         <label for="inputDate">Data de Nascimento</label>

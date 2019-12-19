@@ -14,6 +14,10 @@ const Administrador = connection.define('administrador', {
         type: Sequelize.STRING,
         allowNull: false
     },
+    sexo: {
+        type: Sequelize.STRING,
+        allowNull: true
+    },
     sobrenome: {
         type: Sequelize.STRING,
         allowNull: false
