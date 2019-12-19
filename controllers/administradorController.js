@@ -2,10 +2,10 @@ const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcryptjs");
 const Administrador = require("../models/Administrador");
+const MensalidadeAcademia = require("../models/MensalidadeAcademia");
 const Login = require("../models/Login");
 const adminAut = require("../middlewares/adminAut");
 const enviarEmail = require("../email/send");
-const connection = require("../database/connection");
 
 // HOME DO ADMINISTRADOR
 router.get("/administrador/home", adminAut, (req, res) => {
