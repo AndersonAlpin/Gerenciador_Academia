@@ -113,4 +113,24 @@ router.post("/mensalidades/validar", adminAut, (req, res) => {
 
 });
 
+// REVERTER A MENSALIDADE
+router.post("/mensalidades/reverter", adminAut, (req, res) => {
+    var id = req.body.inputID;
+
+    Mensalidade.update({
+        formaPagamento: null,
+        status: 'Em aberto',
+        dataPagamento: null
+    }, {
+        where: {
+            id: id
+        }
+    }).then(() => {
+        res.redirect("/administrador/mensalidades/detalhes/" + id);
+    });
+
+});
+
+
+
 module.exports = router;

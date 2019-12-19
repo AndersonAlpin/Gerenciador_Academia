@@ -8,7 +8,7 @@
         <h2 class="titulos">Detalhes da Mensalidade</h2>
         <hr>
         <div class="formularios">
-            <form action="/mensalidades/validar" method="POST" onsubmit="confirmarDelecao(event, this)">
+            <form action="/mensalidades/validar" method="POST" onsubmit="confirmarValidacao(event, this)">
                 <input type="hidden" name="inputID" value="<%= mensalidade.id %>">
                 <input type="hidden" name="inputPagamento" id="inputPagamento">
                 <div class="form-row">
@@ -81,19 +81,33 @@
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-3">
-                        <button class="btn btn-success">Validar</button>
+                        <button class="btn btn-warning">Validar</button>
                     </div>
                 </div>
                 <% } %>
+            </form>
+            <form action="/mensalidades/reverter" method="POST" onsubmit="confirmarReversao(event, this)">
+                <input type="hidden" name="inputID" value="<%= mensalidade.id %>">
+                <% if(mensalidade.status === 'Pago'){ %>
+                    <button class="btn btn-danger">Reverter</button>
+                <%}%>
             </form>
         </div>
     </div>
 </body>
 <%- include ../../partials/footer.ejs %>
 <script>
-    function confirmarDelecao(event, form) {
+    function confirmarValidacao(event, form) {
         event.preventDefault();
         var decisao = confirm("Você quer validar esta mensalidade?");
+        if (decisao) {
+            form.submit();
+        }
+    }
+    
+    function confirmarReversao(event, form) {
+        event.preventDefault();
+        var decisao = confirm("Você quer reverter esta mensalidade?");
         if (decisao) {
             form.submit();
         }
