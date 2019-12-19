@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcryptjs");
 const Administrador = require("../models/Administrador");
-const EnderecoAcademia = require("../models/EnderecoAcademia");
 const Login = require("../models/Login");
 const adminAut = require("../middlewares/adminAut");
 const enviarEmail = require("../email/send");
