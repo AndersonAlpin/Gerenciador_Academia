@@ -423,7 +423,7 @@ body {
     }
 }
 
-@media screen and (min-width: 570px){
+/* @media screen and (min-width: 570px){
     .side-bar {
         height: 1200px;
     }
@@ -469,7 +469,7 @@ body {
     .side-bar {
         height: 100vh;
     }
-}
+} */
 
 @media screen and (min-width: 1000px) {
     .side-bar {
