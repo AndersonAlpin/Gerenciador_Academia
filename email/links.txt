@@ -1,4 +1,0 @@
-https://bognarjunior.wordpress.com/2017/05/21/nodejs-enviando-email-no-node-js-utilizando-o-nodemailer/
-
-E-mail: academiaprojetoweb@gmail.com
-Senha: Web123321 
