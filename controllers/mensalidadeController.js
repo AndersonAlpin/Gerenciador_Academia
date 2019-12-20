@@ -131,6 +131,52 @@ router.post("/mensalidades/reverter", adminAut, (req, res) => {
 
 });
 
+// LISTAR TODOS OS CLIENTES INCLUINDO O PACOTE
+router.get("/administrador/mensalidades/listar/clientes", adminAut, (req, res) => {
+    Cliente.findAll({
+        where: {
+            AcademiumId: admin.idAcademia
+        },
+        order: [
+            ['nome', 'ASC']
+        ],
+        include: [
+            {
+                model: Pacote
+            }
+        ]
+    }).then(clientes => {
+        res.render("administrador/mensalidades/listar", { clientes: clientes });
+    });
+});
+
+// DETALHAR O CLIENTE SELECIONADO NA TABELA
+router.get("/administrador/mensalidades/antecipar/:id", adminAut, (req, res) => {
+    var id = req.params.id;
+
+    if (isNaN(id)) {
+        res.redirect("/administrador/mensalidades/listar");
+    }
+
+    Cliente.findByPk(id, {
+        include: [
+            {
+                model: Pacote
+            },
+            {
+                model: Mensalidade
+            }
+        ]
+    }).then(cliente => {
+        if (cliente != undefined) {
+            res.render("administrador/mensalidades/antecipar", { cliente: cliente });
+        } else {
+            res.redirect("/administrador/mensalidades/listar");
+        }
+    }).catch(erro => {
+        res.redirect("/administrador/mensalidades/listar");
+    });
+});
 
 
 module.exports = router;

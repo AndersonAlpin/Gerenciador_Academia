@@ -1,0 +1,47 @@
+<%- include ../../partials/header.ejs %>
+<%- include ../../partials/navbar.ejs %>
+<%- include ../../partials/sidebar.ejs %>
+<%- include ../../partials/background.ejs %>
+
+<body>
+    <div class="main-content">
+        <h2 class="titulos">Antecipar Mensalidade</h2>
+        <hr>
+        <div class="formularios">
+            <form action="/pacote/salvar" method="POST">
+                <div class="form-row">
+                    <div class="form-group col-md-3">
+                        <label for="inputNome">Nome</label>
+                        <input value="<%= cliente.nome %>" type="text" class="form-control" name="inputNome" disabled>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="inputSobrenome">Sobrenome</label>
+                        <input value="<%= cliente.sobrenome %>" type="text" class="form-control" name="inputSobrenome"
+                            disabled>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="inputCPF">CPF</label>
+                        <input value="<%= cliente.cpf %>" type="text" class="form-control" name="inputCPF" disabled>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="inputEmail">Email</label>
+                        <input value="<%= cliente.email %>" type="text" class="form-control" name="inputEmail" disabled>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-3">
+                        <label for="inputDataVencimento">Data de Vencimento</label>
+                        <input value="" type="date" class="form-control" name="inputDataVencimento">
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-warning">Antecipar</button>
+            </form>
+        </div>
+
+    </div>
+    <script>
+        $('#inputDesconto').mask("999", { placeholder: "0" });
+    </script>
+</body>
+<%- include ../../partials/footer.ejs %>

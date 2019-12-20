@@ -128,7 +128,11 @@ router.post("/clientes/salvar", adminAut, (req, res) => {
             connection.query(`call primeiraMensalidadePaga('${pacoteId}', '${formaPagamento}')`, {
                 type: Sequelize.DataTypes.INSERT
             }).then(() => {
-                res.redirect("/administrador/clientes/listar");
+                connection.query('call primeiraMensalidadeAberta()', {
+                    type: Sequelize.DataTypes.INSERT
+                }).then(() => {
+                    res.redirect("/administrador/clientes/listar");
+                });
             }).catch((erro) => {
                 res.redirect("/administrador/clientes/cadastro");
                 console.log('Não foi possível gerar mensalidade: ' + erro);
