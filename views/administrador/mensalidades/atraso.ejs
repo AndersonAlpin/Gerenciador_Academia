@@ -13,7 +13,7 @@
             <option value="/administrador/mensalidades/pago">Pagas</option>
         </select>
         <hr>
-        
+
         <div class="form-group" id="filtros">
             <div class="input-group">
                 <div class="input-group-prepend">
@@ -40,10 +40,10 @@
                 </thead>
                 <tbody>
                     <% mensalidades.forEach(mensalidade => { %>
-                    
+
                     <% var d = new Date(mensalidade.dataVencimento) %>
                     <% var dataAtualizada = (d.getDate() + 1) + "/" + (d.getMonth()+1) + "/" + d.getFullYear(); %>
-                    
+
                     <% var v = mensalidade.valor %>
                     <% var real = v.toLocaleString('pt-br', {style: 'currency', currency: 'BRL'}) %>
 
@@ -56,7 +56,8 @@
                         <td> <%= dataAtualizada %> </td>
                         <td class="ocultar-colunas"> <%= mensalidade.status %> </td>
                         <td>
-                            <a href="/administrador/mensalidades/detalhes/<%= mensalidade.id %>" class="btn btn-sm btn-success">Detalhes</a>
+                            <a href="/administrador/mensalidades/detalhes/<%= mensalidade.id %>"
+                                class="btn btn-sm btn-success">Detalhes</a>
                         </td>
                     </tr>
                     <% } %>
@@ -64,6 +65,12 @@
                 </tbody>
             </table>
         </div>
+        <form class="d-inline" action="/administrador/mensalidades/listarClientesAntecipacao" method="GET">
+            <button class="btn btn-info mb-2">Antecipar mensalidade</button>
+        </form>
+        <form class="d-inline" action="/administrador/mensalidades/listarClientesAlteracaoVencimento" method="GET">
+            <button class="btn btn-info mb-2">Alterar Vencimento</button>
+        </form>
     </div>
     <script>
         $(document).ready(function () {

@@ -67,22 +67,24 @@
                 </tbody>
             </table>
         </div>
-        <form action="/administrador/mensalidades/listar/clientes" method="GET">
-            <button class="btn btn-info">Antecipar mensalidade</button>
-        </div>
-    </form>
-    <script>
-        $(document).ready(function () {
+        <form class="d-inline" action="/administrador/mensalidades/listarClientesAntecipacao" method="GET">
+            <button class="btn btn-info mb-2">Antecipar mensalidade</button>
+        </form>
+        <form class="d-inline" action="/administrador/mensalidades/listarClientesAlteracaoVencimento" method="GET">
+            <button class="btn btn-info mb-2">Alterar Vencimento</button>
+        </form>
+        <script>
+            $(document).ready(function () {
 
-            $('#select').on('change', function () {
-                var url = $(this).val();
-                if (url) {
-                    window.open(url, '_self');
-                }
-                return false;
+                $('#select').on('change', function () {
+                    var url = $(this).val();
+                    if (url) {
+                        window.open(url, '_self');
+                    }
+                    return false;
+                });
             });
-        });
-    </script>
+        </script>
 </body>
 
 <%- include ../../partials/footer.ejs %>

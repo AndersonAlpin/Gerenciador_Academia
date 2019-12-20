@@ -11,7 +11,7 @@ const Sequelize = require("sequelize");
 router.get("/administrador/mensalidades/aberto", adminAut, (req, res) => {
     Mensalidade.findAll({
         order: [
-            ['dataVencimento', 'ASC']
+            ['dataVencimento', 'DESC']
         ],
         include: [
             {
@@ -31,7 +31,7 @@ router.get("/administrador/mensalidades/aberto", adminAut, (req, res) => {
 router.get("/administrador/mensalidades/atraso", adminAut, (req, res) => {
     Mensalidade.findAll({
         order: [
-            ['dataVencimento', 'ASC']
+            ['dataVencimento', 'DESC']
         ],
         include: [
             {
@@ -51,7 +51,7 @@ router.get("/administrador/mensalidades/atraso", adminAut, (req, res) => {
 router.get("/administrador/mensalidades/pago", adminAut, (req, res) => {
     Mensalidade.findAll({
         order: [
-            ['dataVencimento', 'ASC']
+            ['dataVencimento', 'DESC']
         ],
         include: [
             {
@@ -150,8 +150,23 @@ router.post("/mensalidades/antecipar", adminAut, (req, res) => {
 
 });
 
-// LISTAR TODOS OS CLIENTES INCLUINDO O PACOTE
-router.get("/administrador/mensalidades/listar/clientes", adminAut, (req, res) => {
+// SALVAR A NOVA DATA DE VENCIMENTO NO BANCO DE DADOS
+router.post("/mensalidades/alterarVencimento", adminAut, (req, res) => {
+    let id = req.body.inputID;
+    let dataVencimento = req.body.inputDataVencimento;
+
+    connection.query(`call alterarVencimento('${id}', '${dataVencimento}')`, {
+        type: Sequelize.DataTypes.INSERT
+    }).then(() => {
+        res.redirect("/administrador/mensalidades/alterarVencimento/" + id); 
+    }).catch(err => {
+        console.log('Ocorreu um erro ao tentar alterar a data de vencimento: ' + err);
+    })
+
+});
+
+// LISTAR TODOS OS CLIENTES INCLUINDO O PACOTE PARA ANTECIPAÇÃO
+router.get("/administrador/mensalidades/listarClientesAntecipacao", adminAut, (req, res) => {
     Cliente.findAll({
         where: {
             AcademiumId: admin.idAcademia,
@@ -166,7 +181,27 @@ router.get("/administrador/mensalidades/listar/clientes", adminAut, (req, res) =
             }
         ]
     }).then(clientes => {
-        res.render("administrador/mensalidades/listar", { clientes: clientes });
+        res.render("administrador/mensalidades/listarClientesAntecipacao", { clientes: clientes });
+    });
+});
+
+// LISTAR TODOS OS CLIENTES INCLUINDO O PACOTE PARA ALTERAÇÃO DO VENCIMENTO
+router.get("/administrador/mensalidades/listarClientesAlteracaoVencimento", adminAut, (req, res) => {
+    Cliente.findAll({
+        where: {
+            AcademiumId: admin.idAcademia,
+            ativo: 1
+        },
+        order: [
+            ['nome', 'ASC']
+        ],
+        include: [
+            {
+                model: Pacote
+            }
+        ]
+    }).then(clientes => {
+        res.render("administrador/mensalidades/listarClientesAlteracaoVencimento", { clientes: clientes });
     });
 });
 
@@ -175,7 +210,7 @@ router.get("/administrador/mensalidades/antecipar/:id", adminAut, (req, res) => 
     var id = req.params.id;
 
     if (isNaN(id)) {
-        res.redirect("/administrador/mensalidades/listar");
+        res.redirect("/administrador/mensalidades/listarClientesAntecipacao");
     }
 
 
@@ -209,10 +244,56 @@ router.get("/administrador/mensalidades/antecipar/:id", adminAut, (req, res) => 
             });
 
         } else {
-            res.redirect("/administrador/mensalidades/listar");
+            res.redirect("/administrador/mensalidades/listarClientesAntecipacao");
         }
     }).catch(erro => {
-        res.redirect("/administrador/mensalidades/listar");
+        res.redirect("/administrador/mensalidades/listarClientesAntecipacao");
+    });
+});
+
+// LISTAR AS MENSALIDADES DO CLIENTE E PREENCHER OS DADOS DE ALTERAÇÃO DE VENCIMENTO
+router.get("/administrador/mensalidades/alterarVencimento/:id", adminAut, (req, res) => {
+    var id = req.params.id;
+
+    if (isNaN(id)) {
+        res.redirect("/administrador/mensalidades/listarClientesAlteracaoVencimento");
+    }
+
+
+    Cliente.findByPk(id, {
+        include: [
+            {
+                model: Pacote
+            },
+            {
+                model: Mensalidade
+            }
+        ]
+    }).then(cliente => {
+        if (cliente != undefined) {
+
+            Pacote.findAll({
+                where: {
+                    AcademiumId: admin.idAcademia
+                }
+            }).then((pacotes) => {
+                Mensalidade.findAll({
+                    where: {
+                        clienteId: id
+                    },
+                    order: [
+                        ['dataVencimento', 'DESC']
+                    ]
+                }).then(mensalidades => {
+                    res.render("administrador/mensalidades/alterarVencimento", { cliente: cliente, pacotes: pacotes, mensalidades: mensalidades });
+                });
+            });
+
+        } else {
+            res.redirect("/administrador/mensalidades/listarClientesAlterarVencimento");
+        }
+    }).catch(erro => {
+        res.redirect("/administrador/mensalidades/listarClientesAlterarVencimento");
     });
 });
 

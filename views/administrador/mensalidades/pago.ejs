@@ -13,7 +13,7 @@
             <option value="/administrador/mensalidades/atraso">Em atraso</option>
         </select>
         <hr>
-        
+
         <div class="form-group" id="filtros">
             <div class="input-group">
                 <div class="input-group-prepend">
@@ -65,6 +65,12 @@
                 </tbody>
             </table>
         </div>
+        <form class="d-inline" action="/administrador/mensalidades/listarClientesAntecipacao" method="GET">
+            <button class="btn btn-info mb-2">Antecipar mensalidade</button>
+        </form>
+        <form class="d-inline" action="/administrador/mensalidades/listarClientesAlteracaoVencimento" method="GET">
+            <button class="btn btn-info mb-2">Alterar Vencimento</button>
+        </form>
     </div>
     <script>
         $(document).ready(function () {

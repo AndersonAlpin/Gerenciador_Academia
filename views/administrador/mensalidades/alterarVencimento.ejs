@@ -5,7 +5,7 @@
 
 <body>
     <div class="main-content">
-        <h2 class="titulos">Antecipar Mensalidade</h2>
+        <h2 class="titulos">Alterar Vencimento</h2>
         <br>
 
         <div class="table-responsive-md tabelas">
@@ -44,38 +44,17 @@
         <hr>
 
         <div class="formularios" style="margin-top: -15px;">
-            <form action="/mensalidades/antecipar" method="POST" onsubmit="confirmarAntecipacao(event, this)">
+            <form action="/mensalidades/alterarVencimento" method="POST" onsubmit="confirmarAlteracao(event, this)">
 
                 <div class="form-row">
                     <div class="form-group col-md-3">
-                        <label for="selectPacote">Pacote</label>
-                        <select class="form-control" name="selectPacote" id="selectPacote" required>
-                            <option selected disabled value="">Selecione</option>
-                            <% pacotes.forEach(pacote => { %>
-                            <option value="<%= pacote.id %>"><%= pacote.nome %></option>
-                            <% }) %>
-                        </select>
-                        <input name="inputPacote" id="inputPacote" type="hidden" value="">
-                    </div>
-                    <div class="form-group col-md-3">
-                        <label for="inputDataVencimento">Data de Antecipação</label>
+                        <label for="inputDataVencimento">Novo Vencimento</label>
                         <input value="" type="date" class="form-control" name="inputDataVencimento"
                             id="inputDataVencimento" required>
                     </div>
-                    <div class="form-group col-md-3">
-                        <label for="selectPagamento">Forma de Pagamento</label>
-                        <select class="form-control" name="selectPagamento" id="selectPagamento" required>
-                            <option selected disabled value="">Selecione</option>
-                            <option value="">Cartão</option>
-                            <option value="">Depósito</option>
-                            <option value="">Dinheiro</option>
-                            <option value="">Transferência</option>
-                        </select>
-                        <input type="hidden" name="inputPagamento" value="Dinheiro" id="inputPagamento">
-                    </div>
                     <input type="hidden" value="<%= cliente.id %>" name="inputID">
                 </div>
-                <button type="submit" class="btn btn-warning">Antecipar</button>
+                <button type="submit" class="btn btn-warning">Alterar</button>
             </form>
         </div>
 
@@ -83,9 +62,9 @@
 </body>
 <%- include ../../partials/footer.ejs %>
 <script>
-    function confirmarAntecipacao(event, form) {
+    function confirmarAlteracao(event, form) {
         event.preventDefault();
-        var decisao = confirm("Você deseja antecipar esta mensalidade?");
+        var decisao = confirm("Você deseja alterar a data de vencimento?");
         if (decisao) {
             form.submit();
         }
