@@ -32,8 +32,19 @@
                 <div class="form-row">
                     <div class="form-group col-md-3">
                         <label for="inputDataVencimento">Data de Vencimento</label>
-                        <input value="" type="date" class="form-control" name="inputDataVencimento">
+                        <input value="" type="date" class="form-control" name="inputDataVencimento"   id="inputDataVencimento" required>
                     </div>
+                    <div class="form-group col-md-3">
+                        <label for="selectPacote">Pacote</label>
+                        <select class="form-control" name="selectPacote" id="selectPacote" required>
+                            <option selected disabled value="">Selecione</option>
+                            <% pacotes.forEach(pacote => { %>
+                            <option value="<%= pacote.id %>"><%= pacote.nome %></option>
+                            <% }) %>
+                        </select>
+                        <input name="inputPacote" id="inputPacote" type="hidden" value="">
+                    </div>
+                    <input type="hidden" value="<%= cliente.id %>" name="inputID">
                 </div>
                 <button type="submit" class="btn btn-warning">Antecipar</button>
             </form>

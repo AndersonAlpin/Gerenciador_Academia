@@ -158,6 +158,7 @@ router.get("/administrador/mensalidades/antecipar/:id", adminAut, (req, res) => 
         res.redirect("/administrador/mensalidades/listar");
     }
 
+
     Cliente.findByPk(id, {
         include: [
             {
@@ -169,7 +170,15 @@ router.get("/administrador/mensalidades/antecipar/:id", adminAut, (req, res) => 
         ]
     }).then(cliente => {
         if (cliente != undefined) {
-            res.render("administrador/mensalidades/antecipar", { cliente: cliente });
+
+            Pacote.findAll({
+                where: {
+                    AcademiumId: admin.idAcademia
+                }
+            }).then((pacotes) => {
+                res.render("administrador/mensalidades/antecipar", { cliente: cliente, pacotes: pacotes });
+            });
+
         } else {
             res.redirect("/administrador/mensalidades/listar");
         }

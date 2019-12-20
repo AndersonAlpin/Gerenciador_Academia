@@ -127,11 +127,12 @@
                     <div class="form-group col-md-3">
                         <label for="inputPacote">Pacote</label>
                         <select class="form-control" name="" id="selectPacote" required>
+                            <option selected disabled value="">Selecione</option>
                             <% pacote.forEach(pacote => { %>
                             <option value="<%= pacote.id %>"><%= pacote.nome %></option>
                             <% }) %>
                         </select>
-                        <input name="inputPacote" id="inputPacote" type="hidden" value="1" required>
+                        <input name="inputPacote" id="inputPacote" type="hidden" value="">
                     </div>
                 </div>
                 <button class="btn btn-success">Atualizar</button>
