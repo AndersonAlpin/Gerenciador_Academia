@@ -135,7 +135,8 @@ router.post("/mensalidades/reverter", adminAut, (req, res) => {
 router.get("/administrador/mensalidades/listar/clientes", adminAut, (req, res) => {
     Cliente.findAll({
         where: {
-            AcademiumId: admin.idAcademia
+            AcademiumId: admin.idAcademia,
+            ativo: 1
         },
         order: [
             ['nome', 'ASC']
