@@ -1,42 +1,29 @@
 var nodemailer = require('nodemailer');
 
-var $usuario = 'academiaprojetoweb@gmail.com';
-var $senha = 'Web123321';
-
-var transporter = nodemailer.createTransport({
-    service: 'gmail',
+let transporter = nodemailer.createTransport({
+    host: "smtp.gmail.com",
+    port: 587,
+    secure: false,
     auth: {
-        user: $usuario,
-        pass: $senha
+        user: "academiaprojetoweb@gmail.com",
+        pass: "Web123321"
     }
 });
 
-
-module.exports = {
-
-    bemvindo: function (email, nome, sobrenome) {
-        var $destinatario = email;
-
-        var mailOptions = {
-            from: $usuario,
-            to: $destinatario,
-            subject: 'Academia IronFit',
-            text: 'Bem-vindo(a) ' + nome + ' ' + sobrenome,
-            html: '',
-            attachments: [
-                {
-                    filename: 'bemvindo.jpg',
-                    path: __dirname + '/bemvindo.jpg'
-                }
-            ]
-        };
-
-        transporter.sendMail(mailOptions, function (error, info) {
-            if (error) {
-                console.log(error);
-            } else {
-                console.log('Email enviado: ' + info.response);
-            }
-        });
-    }
-}
+transporter.sendMail({
+    from: "Academia IronFit <academiaprojetoweb@gmail.com>",
+    to: "anderalpin@gmail.com",
+    subject: "Este é um email de teste",
+    text: "Esse é um email de teste novamente",
+    html: "Esse é um email de teste mais uma vez",
+    attachments: [
+        {
+            filename: 'bemvindo.jpg',
+            path: __dirname + '/bemvindo.jpg'
+        }
+    ]
+}).then(message => {
+    console.log(message);
+}).catch(err => {
+    console.log(err);
+});

@@ -4,6 +4,8 @@ const Cliente = require("../models/Cliente");
 const Mensalidade = require("../models/Mensalidade");
 const Pacote = require("../models/Pacote");
 const adminAut = require("../middlewares/adminAut");
+const connection = require("../database/connection");
+const Sequelize = require("sequelize");
 
 // MENSALIDADES EM ABERTO
 router.get("/administrador/mensalidades/aberto", adminAut, (req, res) => {
@@ -113,7 +115,7 @@ router.post("/mensalidades/validar", adminAut, (req, res) => {
 
 });
 
-// REVERTER A MENSALIDADE
+// REVERTER A MENSALIDADE PAGA
 router.post("/mensalidades/reverter", adminAut, (req, res) => {
     var id = req.body.inputID;
 
@@ -128,6 +130,23 @@ router.post("/mensalidades/reverter", adminAut, (req, res) => {
     }).then(() => {
         res.redirect("/administrador/mensalidades/detalhes/" + id);
     });
+
+});
+
+// SALVAR A ANTECIPAÇÃO DA MENSALIDADE NO BANCO DE DADOS
+router.post("/mensalidades/antecipar", adminAut, (req, res) => {
+    let id = req.body.inputID;
+    let idPacote = req.body.inputPacote;
+    let dataVencimento = req.body.inputDataVencimento;
+    let formaPagamento = req.body.inputPagamento;
+
+    connection.query(`call anteciparMensalidade('${id}', '${idPacote}', '${formaPagamento}', '${dataVencimento}')`, {
+        type: Sequelize.DataTypes.INSERT
+    }).then(() => {
+        res.redirect("/administrador/mensalidades/antecipar/" + id); 
+    }).catch(err => {
+        console.log('Ocorreu um erro ao tentar salvar a antecipação da mensalidade: ' + err);
+    })
 
 });
 
@@ -151,7 +170,7 @@ router.get("/administrador/mensalidades/listar/clientes", adminAut, (req, res) =
     });
 });
 
-// DETALHAR O CLIENTE SELECIONADO NA TABELA
+// LISTAR AS MENSALIDADES DO CLIENTE E PREENCHER OS DADOS DE ANTECIPAÇÃO
 router.get("/administrador/mensalidades/antecipar/:id", adminAut, (req, res) => {
     var id = req.params.id;
 
@@ -177,7 +196,16 @@ router.get("/administrador/mensalidades/antecipar/:id", adminAut, (req, res) => 
                     AcademiumId: admin.idAcademia
                 }
             }).then((pacotes) => {
-                res.render("administrador/mensalidades/antecipar", { cliente: cliente, pacotes: pacotes });
+                Mensalidade.findAll({
+                    where: {
+                        clienteId: id
+                    },
+                    order: [
+                        ['dataVencimento', 'DESC']
+                    ]
+                }).then(mensalidades => {
+                    res.render("administrador/mensalidades/antecipar", { cliente: cliente, pacotes: pacotes, mensalidades: mensalidades });
+                });
             });
 
         } else {

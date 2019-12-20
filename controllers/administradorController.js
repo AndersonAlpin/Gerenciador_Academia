@@ -5,7 +5,6 @@ const Administrador = require("../models/Administrador");
 const EnderecoAdministrador = require("../models/EnderecoAdministrador");
 const Login = require("../models/Login");
 const adminAut = require("../middlewares/adminAut");
-const enviarEmail = require("../email/send");
 
 // HOME DO ADMINISTRADOR
 router.get("/administrador/home", adminAut, (req, res) => {
