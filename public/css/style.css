@@ -198,6 +198,7 @@ body {
     height: 100vh;
     z-index: 3;
     padding-top: 55px;
+    position: fixed;
 }
 
 .side-bar ul {
@@ -225,6 +226,9 @@ body {
 }
 
 /* =================================== */
+#carouselHome  {
+    margin: auto;
+}
 
 /* =========RELATÓRIOS======= */
 
