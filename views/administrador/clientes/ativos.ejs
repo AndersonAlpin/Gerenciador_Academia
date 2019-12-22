@@ -63,18 +63,6 @@
         </div>
         <a class="btn btn-info" href="/administrador/clientes/cadastro">Cadastrar cliente</a>
     </div>
-    <script>
-        $(document).ready(function () {
-
-            $('#select').on('change', function () {
-                var url = $(this).val();
-                if (url) {
-                    window.open(url, '_self');
-                }
-                return false;
-            });
-        });
-    </script>
 </body>
 
 <%- include ../../partials/footer.ejs %>

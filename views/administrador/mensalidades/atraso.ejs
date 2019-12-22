@@ -72,18 +72,6 @@
             <button class="btn btn-info mb-2">Alterar Vencimento</button>
         </form>
     </div>
-    <script>
-        $(document).ready(function () {
-
-            $('#select').on('change', function () {
-                var url = $(this).val();
-                if (url) {
-                    window.open(url, '_self');
-                }
-                return false;
-            });
-        });
-    </script>
 </body>
 
 <%- include ../../partials/footer.ejs %>

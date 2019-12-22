@@ -73,18 +73,7 @@
         <form class="d-inline" action="/administrador/mensalidades/listarClientesAlteracaoVencimento" method="GET">
             <button class="btn btn-info mb-2">Alterar Vencimento</button>
         </form>
-        <script>
-            $(document).ready(function () {
-
-                $('#select').on('change', function () {
-                    var url = $(this).val();
-                    if (url) {
-                        window.open(url, '_self');
-                    }
-                    return false;
-                });
-            });
-        </script>
+    </div>
 </body>
 
 <%- include ../../partials/footer.ejs %>

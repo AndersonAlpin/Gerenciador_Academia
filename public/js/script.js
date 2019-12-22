@@ -1,4 +1,6 @@
-// Filtros
+// ============================================================================================
+// FILTROS ====================================================================================
+
 window.onload = function () {
     // FILTAR POR NOME
     var filtroNome = document.getElementById('buscarNome');
@@ -60,3 +62,17 @@ window.onload = function () {
         };
     }
 }
+
+// ===========================================================
+// ALTERNAR ENTRE AS TELAS DE CLIENTES(TODOS, ATIVOS, INATIVOS)
+// ALTERNAR ENTRE AS TELAS DE MENSALIDADES(ABERTAS, PAGAS, EM ATRASO)
+$(document).ready(function () {
+
+    $('#select').on('change', function () {
+        var url = $(this).val();
+        if (url) {
+            window.open(url, '_self');
+        }
+        return false;
+    });
+});
