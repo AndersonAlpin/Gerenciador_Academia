@@ -10,7 +10,6 @@
         <div class="formularios">
             <form action="/mensalidades/validar" method="POST" onsubmit="confirmarValidacao(event, this)">
                 <input type="hidden" name="inputID" value="<%= mensalidade.id %>">
-                <input type="hidden" name="inputPagamento" id="inputPagamento">
                 <div class="form-row">
                     <div class="form-group col-md-3">
                         <label for="inputNome">Nome</label>
@@ -29,7 +28,8 @@
                     </div>
                     <div class="form-group col-md-3">
                         <label for="inputCPF">Pacote</label>
-                        <input value="<% if(pacote != null){ %><%= pacote.nome %><% } else { %>Nenhum<% } %>" type="text" class="form-control" name="inputCPF" disabled>
+                        <input value="<% if(pacote != null){ %><%= pacote.nome %><% } else { %>Nenhum<% } %>"
+                            type="text" class="form-control" name="inputCPF" disabled>
                     </div>
                 </div>
 
@@ -71,11 +71,11 @@
                     <div class="form-group col-md-3">
                         <label for="inputCPF">Forma de Pagamento</label>
                         <select class="form-control" name="selectPagamento" id="selectPagamento" required>
-                            <option value="">Selecione</option>
-                            <option value="">Cartão</option>
-                            <option value="">Depósito</option>
-                            <option value="">Dinheiro</option>
-                            <option value="">Transferência</option>
+                            <option value="Selecione">Selecione</option>
+                            <option value="Cartão">Cartão</option>
+                            <option value="Depósito">Depósito</option>
+                            <option value="Dinheiro">Dinheiro</option>
+                            <option value="Transferência">Transferência</option>
                         </select>
                     </div>
                 </div>
@@ -89,27 +89,27 @@
             <form action="/mensalidades/reverter" method="POST" onsubmit="confirmarReversao(event, this)">
                 <input type="hidden" name="inputID" value="<%= mensalidade.id %>">
                 <% if(mensalidade.status === 'Pago'){ %>
-                    <button class="btn btn-danger">Reverter</button>
+                <button class="btn btn-danger">Reverter</button>
                 <%}%>
             </form>
         </div>
     </div>
 </body>
 <%- include ../../partials/footer.ejs %>
-<script>
-    function confirmarValidacao(event, form) {
-        event.preventDefault();
-        var decisao = confirm("Você quer validar esta mensalidade?");
-        if (decisao) {
-            form.submit();
-        }
-    }
-    
-    function confirmarReversao(event, form) {
-        event.preventDefault();
-        var decisao = confirm("Você quer reverter esta mensalidade?");
-        if (decisao) {
-            form.submit();
-        }
-    }
-</script>
+                <script>
+                    function confirmarValidacao(event, form) {
+                        event.preventDefault();
+                        var decisao = confirm("Você quer validar esta mensalidade?");
+                        if (decisao) {
+                            form.submit();
+                        }
+                    }
+
+                    function confirmarReversao(event, form) {
+                        event.preventDefault();
+                        var decisao = confirm("Você quer reverter esta mensalidade?");
+                        if (decisao) {
+                            form.submit();
+                        }
+                    }
+                </script>

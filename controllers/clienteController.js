@@ -90,19 +90,19 @@ router.post("/clientes/salvar", adminAut, (req, res) => {
     
     var nome = req.body.inputNome
     var sobrenome = req.body.inputSobrenome;
-    var sexo = req.body.inputSexo;
+    var sexo = req.body.selectSexo;
     var dataNascimento = req.body.inputDate;
     var cpf = req.body.inputCPF;
     var telefone = req.body.inputTelefone;
     var email = req.body.inputEmail;
-    var pacoteId = req.body.inputPacote;
-    var formaPagamento = req.body.inputPagamento;
+    var pacoteId = req.body.selectPacote;
+    var formaPagamento = req.body.selectPagamento;
     var logradouro = req.body.inputLogradouro;
     var numero = req.body.inputNumero;
     var cidade = req.body.inputCidade;
     var bairro = req.body.inputBairro;
     var cep = req.body.inputCEP;
-    var uf = req.body.inputUF;
+    var uf = req.body.selectUF;
 
     Cliente.create({
         nome: nome,
@@ -217,18 +217,18 @@ router.post("/administrador/clientes/update", adminAut, (req, res) => {
     var id = req.body.inputID;
     var nome = req.body.inputNome
     var sobrenome = req.body.inputSobrenome;
-    var sexo = req.body.inputSexo;
+    var sexo = req.body.selectSexo;
     var dataNascimento = req.body.inputDate;
     var cpf = req.body.inputCPF;
     var telefone = req.body.inputTelefone;
     var email = req.body.inputEmail;
-    var pacoteId = req.body.inputPacote;
+    var pacoteId = req.body.selectPacote;
     var logradouro = req.body.inputLogradouro;
     var numero = req.body.inputNumero;
     var cidade = req.body.inputCidade;
     var bairro = req.body.inputBairro;
     var cep = req.body.inputCEP;
-    var uf = req.body.inputUF;
+    var uf = req.body.selectUF;
 
     Cliente.update({
         nome: nome,

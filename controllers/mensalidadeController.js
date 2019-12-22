@@ -99,7 +99,7 @@ router.get("/administrador/mensalidades/detalhes/:id", adminAut, (req, res) => {
 // VALIDAR A MENSALIDADE
 router.post("/mensalidades/validar", adminAut, (req, res) => {
     var id = req.body.inputID;
-    var forma = req.body.inputPagamento;
+    var forma = req.body.selectPagamento;
 
     Mensalidade.update({
         formaPagamento: forma,
@@ -138,7 +138,7 @@ router.post("/mensalidades/antecipar", adminAut, (req, res) => {
     let id = req.body.inputID;
     let idPacote = req.body.inputPacote;
     let dataVencimento = req.body.inputDataVencimento;
-    let formaPagamento = req.body.inputPagamento;
+    let formaPagamento = req.body.selectPagamento;
 
     connection.query(`call anteciparMensalidade('${id}', '${idPacote}', '${formaPagamento}', '${dataVencimento}')`, {
         type: Sequelize.DataTypes.INSERT
