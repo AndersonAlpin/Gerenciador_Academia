@@ -22,16 +22,15 @@
                     </div>
                     <div class="form-group col-md-3">
                         <label for="selectSexo">Sexo</label>
-                        <select class="form-control" name="selectSexo" id="selectSexo">
+                        <select class="form-control" name="selectSexo" id="selectSexo" required>
                             <% if(admin.sexo === 'Masculino'){ %>
-                            <option selected value="">Masculino</option>
-                            <option value="">Feminino</option>
+                            <option selected value="Masculino">Masculino</option>
+                            <option value="Feminino">Feminino</option>
                             <% }else { %>
-                                <option selected value="">Feminino</option>
-                                <option value="">Masculino</option>
+                                <option selected value="Feminino">Feminino</option>
+                                <option value="Masculino">Masculino</option>
                             <% } %>
                         </select>
-                        <input type="hidden" name="inputSexo" value="<%= admin.sexo %>" id="inputSexo" required>
                     </div>
                     <div class="form-group col-md-3">
                         <label for="inputDate">Data de Nascimento</label>
@@ -81,37 +80,35 @@
                     </div>
                     <div class="form-group col-md-3">
                         <label for="inputUF">UF</label>
-                        <select class="form-control" name="" id="selectUF" required>
+                        <select class="form-control" name="selectUF" id="selectUF" required>
                             <option selected disabled value="">Selecione</option>
-                            <option value="">AC</option>
-                            <option value="">AL</option>
-                            <option value="">AP</option>
-                            <option value="">AM</option>
-                            <option value="">BA</option>
-                            <option value="">CE</option>
-                            <option value="">DF</option>
-                            <option value="">ES</option>
-                            <option value="">GO</option>
-                            <option value="">MA</option>
-                            <option value="">MT</option>
-                            <option value="">MS</option>
-                            <option value="">MG</option>
-                            <option value="">PA</option>
-                            <option value="">PB</option>
-                            <option value="">PR</option>
-                            <option value="">PE</option>
-                            <option value="">PI</option>
-                            <option value="">RJ</option>
-                            <option value="">RN</option>
-                            <option value="">RS</option>
-                            <option value="">RO</option>
-                            <option value="">RR</option>
-                            <option value="">SC</option>
-                            <option value="">SP</option>
-                            <option value="">SE</option>
-                            <option value="">TO</option>
+                            <option value="AC">AC</option>
+                            <option value="AL">AL</option>
+                            <option value="AP">AP</option>
+                            <option value="AM">AM</option>
+                            <option value="BA">BA</option>
+                            <option value="CE">CE</option>
+                            <option value="DF">DF</option>
+                            <option value="ES">ES</option>
+                            <option value="GO">GO</option>
+                            <option value="MA">MA</option>
+                            <option value="MT">MT</option>
+                            <option value="MS">MS</option>
+                            <option value="MG">MG</option>
+                            <option value="PB">PB</option>
+                            <option value="PR">PR</option>
+                            <option value="PE">PE</option>
+                            <option value="PI">PI</option>
+                            <option value="RJ">RJ</option>
+                            <option value="RN">RN</option>
+                            <option value="RS">RS</option>
+                            <option value="RO">RO</option>
+                            <option value="RR">RR</option>
+                            <option value="SC">SC</option>
+                            <option value="SP">SP</option>
+                            <option value="SE">SE</option>
+                            <option value="TO">TO</option>
                         </select>
-                        <input type="hidden" name="inputUF" id="inputUF" required>
                     </div>
                 </div>
                 <button class="btn btn-success">Atualizar</button>

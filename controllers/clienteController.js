@@ -26,7 +26,7 @@ router.get("/administrador/clientes/listar", adminAut, (req, res) => {
             }
         ]
     }).then(clientes => {
-        res.render("administrador/clientes/listar", { clientes: clientes });
+        res.render("administrador/clientes/listar", { clientes });
     });
 });
 
@@ -48,7 +48,7 @@ router.get("/administrador/clientes/ativos", adminAut, (req, res) => {
             }
         ]
     }).then(clientes => {
-        res.render("administrador/clientes/ativos", { clientes: clientes });
+        res.render("administrador/clientes/ativos", { clientes });
     });
 });
 
@@ -70,7 +70,7 @@ router.get("/administrador/clientes/inativos", adminAut, (req, res) => {
             }
         ]
     }).then(clientes => {
-        res.render("administrador/clientes/inativos", { clientes: clientes });
+        res.render("administrador/clientes/inativos", { clientes });
     });
 });
 
@@ -81,7 +81,7 @@ router.get("/administrador/clientes/cadastro", adminAut, (req, res) => {
             AcademiumId: admin.idAcademia
         }
     }).then(pacote => {
-        res.render("administrador/clientes/cadastro", { pacote: pacote });
+        res.render("administrador/clientes/cadastro", { pacote });
     });
 });
 
@@ -105,24 +105,24 @@ router.post("/clientes/salvar", adminAut, (req, res) => {
     var uf = req.body.selectUF;
 
     Cliente.create({
-        nome: nome,
-        sobrenome: sobrenome,
-        sexo: sexo,
-        dataNascimento: dataNascimento,
-        cpf: cpf,
-        telefone: telefone,
-        email: email,
+        nome,
+        sobrenome,
+        sexo,
+        dataNascimento,
+        cpf,
+        telefone,
+        email,
         AcademiumId: admin.idAcademia,
-        pacoteId: pacoteId
+        pacoteId
     }).then((cliente) => { //SE CADASTRAR O CLIENTE, CADASTRE O ENDEREÇO
         
         EnderecoCliente.create({
-            logradouro: logradouro,
-            numero: numero,
-            cidade: cidade,
-            bairro: bairro,
-            cep: cep,
-            uf: uf,
+            logradouro,
+            numero,
+            cidade,
+            bairro,
+            cep,
+            uf,
             clienteId: cliente.id
         }).then(() => { //SE CADASTRAR REDIRECIONE PARA A LISTA
             connection.query(`call primeiraMensalidadePaga('${pacoteId}', '${formaPagamento}')`, {
@@ -167,7 +167,7 @@ router.get("/administrador/clientes/detalhes/:id", adminAut, (req, res) => {
         ]
     }).then(cliente => {
         if (cliente != undefined) {
-            res.render("administrador/clientes/detalhes", { cliente: cliente });
+            res.render("administrador/clientes/detalhes", { cliente });
         } else {
             res.redirect("/administrador/clientes/listar");
         }
@@ -201,7 +201,7 @@ router.get("/administrador/clientes/editar/:id", adminAut, (req, res) => {
             ]
         }).then(cliente => {
             if (cliente != undefined) {
-                res.render("administrador/clientes/editar", { cliente: cliente, pacote: pacote });
+                res.render("administrador/clientes/editar", { cliente, pacote });
             } else {
                 res.redirect("/administrador/clientes/listar");
             }
@@ -231,27 +231,27 @@ router.post("/administrador/clientes/update", adminAut, (req, res) => {
     var uf = req.body.selectUF;
 
     Cliente.update({
-        nome: nome,
-        sobrenome: sobrenome,
-        sexo: sexo,
-        dataNascimento: dataNascimento,
-        cpf: cpf,
-        telefone: telefone,
-        email: email,
-        pacoteId: pacoteId
+        nome,
+        sobrenome,
+        sexo,
+        dataNascimento,
+        cpf,
+        telefone,
+        email,
+        pacoteId
     }, {
         where: {
-            id: id
+            id
         }
     }).then(() => {
 
         EnderecoCliente.update({
-            logradouro: logradouro,
-            numero: numero,
-            cidade: cidade,
-            bairro: bairro,
-            cep: cep,
-            uf: uf
+            logradouro,
+            numero,
+            cidade,
+            bairro,
+            cep,
+            uf
         }, {
             where: {
                 clienteId: id
@@ -280,7 +280,7 @@ router.post("/administrador/clientes/status/update", (req, res) => {
         ativo: newStatus
     }, {
         where: {
-            id: id
+            id
         }
     }).then(() => {
         res.redirect("/administrador/clientes/detalhes/" + id);

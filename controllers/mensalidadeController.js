@@ -11,7 +11,7 @@ const Sequelize = require("sequelize");
 router.get("/administrador/mensalidades/aberto", adminAut, (req, res) => {
     Mensalidade.findAll({
         order: [
-            ['dataVencimento', 'DESC']
+            ['dataVencimento', 'ASC']
         ],
         include: [
             {
@@ -22,8 +22,7 @@ router.get("/administrador/mensalidades/aberto", adminAut, (req, res) => {
             }
         ]
     }).then(mensalidades => {
-        console.log(mensalidades)
-        res.render("administrador/mensalidades/aberto", { mensalidades: mensalidades })
+        res.render("administrador/mensalidades/aberto", { mensalidades })
     });
 });
 
@@ -31,7 +30,7 @@ router.get("/administrador/mensalidades/aberto", adminAut, (req, res) => {
 router.get("/administrador/mensalidades/atraso", adminAut, (req, res) => {
     Mensalidade.findAll({
         order: [
-            ['dataVencimento', 'DESC']
+            ['dataVencimento', 'ASC']
         ],
         include: [
             {
@@ -43,7 +42,7 @@ router.get("/administrador/mensalidades/atraso", adminAut, (req, res) => {
         ]
     }).then(mensalidades => {
         console.log(mensalidades)
-        res.render("administrador/mensalidades/atraso", { mensalidades: mensalidades })
+        res.render("administrador/mensalidades/atraso", { mensalidades })
     });
 });
 
@@ -51,7 +50,7 @@ router.get("/administrador/mensalidades/atraso", adminAut, (req, res) => {
 router.get("/administrador/mensalidades/pago", adminAut, (req, res) => {
     Mensalidade.findAll({
         order: [
-            ['dataVencimento', 'DESC']
+            ['dataVencimento', 'ASC']
         ],
         include: [
             {
@@ -62,7 +61,7 @@ router.get("/administrador/mensalidades/pago", adminAut, (req, res) => {
             }
         ]
     }).then(mensalidades => {
-        res.render("administrador/mensalidades/pago", { mensalidades: mensalidades })
+        res.render("administrador/mensalidades/pago", { mensalidades })
     });
 });
 
@@ -86,7 +85,7 @@ router.get("/administrador/mensalidades/detalhes/:id", adminAut, (req, res) => {
     }).then(mensalidade => {
         if (mensalidade != undefined) {
             Pacote.findByPk(mensalidade.cliente.pacoteId, {}).then(pacote => {
-                res.render("administrador/mensalidades/detalhes", { mensalidade: mensalidade, pacote: pacote });
+                res.render("administrador/mensalidades/detalhes", { mensalidade, pacote });
             });
         } else {
             res.redirect("/administrador/mensalidades/aberto");
@@ -99,15 +98,15 @@ router.get("/administrador/mensalidades/detalhes/:id", adminAut, (req, res) => {
 // VALIDAR A MENSALIDADE
 router.post("/mensalidades/validar", adminAut, (req, res) => {
     var id = req.body.inputID;
-    var forma = req.body.selectPagamento;
+    var formaPagamento = req.body.selectPagamento;
 
     Mensalidade.update({
-        formaPagamento: forma,
+        formaPagamento,
         status: 'Pago',
         dataPagamento: Date()
     }, {
         where: {
-            id: id
+            id
         }
     }).then(() => {
         res.redirect("/administrador/mensalidades/detalhes/" + id);
@@ -125,7 +124,7 @@ router.post("/mensalidades/reverter", adminAut, (req, res) => {
         dataPagamento: null
     }, {
         where: {
-            id: id
+            id
         }
     }).then(() => {
         res.redirect("/administrador/mensalidades/detalhes/" + id);
@@ -136,7 +135,7 @@ router.post("/mensalidades/reverter", adminAut, (req, res) => {
 // SALVAR A ANTECIPAÇÃO DA MENSALIDADE NO BANCO DE DADOS
 router.post("/mensalidades/antecipar", adminAut, (req, res) => {
     let id = req.body.inputID;
-    let idPacote = req.body.inputPacote;
+    let idPacote = req.body.selectPacote;
     let dataVencimento = req.body.inputDataVencimento;
     let formaPagamento = req.body.selectPagamento;
 
@@ -181,7 +180,7 @@ router.get("/administrador/mensalidades/listarClientesAntecipacao", adminAut, (r
             }
         ]
     }).then(clientes => {
-        res.render("administrador/mensalidades/listarClientesAntecipacao", { clientes: clientes });
+        res.render("administrador/mensalidades/listarClientesAntecipacao", { clientes });
     });
 });
 
@@ -201,7 +200,7 @@ router.get("/administrador/mensalidades/listarClientesAlteracaoVencimento", admi
             }
         ]
     }).then(clientes => {
-        res.render("administrador/mensalidades/listarClientesAlteracaoVencimento", { clientes: clientes });
+        res.render("administrador/mensalidades/listarClientesAlteracaoVencimento", { clientes });
     });
 });
 
@@ -236,10 +235,10 @@ router.get("/administrador/mensalidades/antecipar/:id", adminAut, (req, res) => 
                         clienteId: id
                     },
                     order: [
-                        ['dataVencimento', 'DESC']
+                        ['dataVencimento', 'ASC']
                     ]
                 }).then(mensalidades => {
-                    res.render("administrador/mensalidades/antecipar", { cliente: cliente, pacotes: pacotes, mensalidades: mensalidades });
+                    res.render("administrador/mensalidades/antecipar", { cliente, pacotes, mensalidades });
                 });
             });
 
@@ -282,10 +281,10 @@ router.get("/administrador/mensalidades/alterarVencimento/:id", adminAut, (req, 
                         clienteId: id
                     },
                     order: [
-                        ['dataVencimento', 'DESC']
+                        ['dataVencimento', 'ASC']
                     ]
                 }).then(mensalidades => {
-                    res.render("administrador/mensalidades/alterarVencimento", { cliente: cliente, pacotes: pacotes, mensalidades: mensalidades });
+                    res.render("administrador/mensalidades/alterarVencimento", { cliente, pacotes, mensalidades });
                 });
             });
 

@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const Pacote = require("../models/Pacote");
-const Cliente = require("../models/Cliente");
 const adminAut = require("../middlewares/adminAut");
 
 // LISTAR PACOTES
@@ -14,7 +13,7 @@ router.get("/administrador/pacotes/listar", adminAut, (req, res) => {
             ['taxaDesconto', 'DESC']
         ]
     }).then(pacotes => {
-        res.render("administrador/pacotes/listar", { pacotes: pacotes });
+        res.render("administrador/pacotes/listar", { pacotes });
     });
 });
 
@@ -32,7 +31,7 @@ router.post("/pacotes/delete", adminAut, (req, res) => {
             // DELETE O PACOTE
             Pacote.destroy({
                 where: {
-                    id: id
+                    id
                 }
             }).then(() => {
                 res.redirect("/administrador/pacotes/listar");
@@ -50,20 +49,20 @@ router.post("/pacotes/delete", adminAut, (req, res) => {
 router.post("/pacote/salvar", adminAut, (req, res) => {
     var nome = req.body.inputNome;
     var descricao = req.body.inputDescricao;
-    var desconto = req.body.inputDesconto;
+    var taxaDesconto = req.body.inputDesconto;
 
     validar = 1;
 
-    if (nome == "" || descricao == "" || desconto == "") {
+    if (nome == "" || descricao == "" || taxaDesconto == "") {
         validar = 0;
     }
 
     if (validar == 1) {
         Pacote.create({
-            nome: nome,
-            descricao: descricao,
-            taxaDesconto: desconto,
-            AcademiumId: admin.idAcademia
+            nome,
+            descricao,
+            taxaDesconto,
+            AcademiumId: admin.idAcademia // NÃO QUER SALVAR O ID DA ACADEMIA NA TABELA PACOTE
         }).then(function () {
             res.redirect("/administrador/pacotes/listar");
         }).catch(function (erro) {
@@ -86,7 +85,7 @@ router.get("/administrador/pacotes/editar/:id", adminAut, (req, res) => {
 
     Pacote.findByPk(id).then(pacote => {
         if (pacote != undefined) {
-            res.render("administrador/pacotes/editar", { pacote: pacote });
+            res.render("administrador/pacotes/editar", { pacote });
         } else {
             res.redirect("/administrador/pacotes/listar")
         }
@@ -99,16 +98,16 @@ router.get("/administrador/pacotes/editar/:id", adminAut, (req, res) => {
 router.post("/pacote/update", adminAut, (req, res) => {
     var nome = req.body.inputNome;
     var descricao = req.body.inputDescricao;
-    var desconto = req.body.inputDesconto
+    var taxaDesconto = req.body.inputDesconto
     var id = req.body.inputID;
 
     Pacote.update({
-        nome: nome,
-        descricao: descricao,
-        taxaDesconto: desconto
+        nome,
+        descricao,
+        taxaDesconto
     }, {
         where: {
-            id: id
+            id
         }
     }).then(function () {
         res.redirect("/administrador/pacotes/listar");

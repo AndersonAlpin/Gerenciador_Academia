@@ -17,7 +17,7 @@ router.post("/autenticacao", (req, res) => {
     var senha = req.body.senha;
 
     Login.findOne({
-        where: { email: email },
+        where: { email },
         include: [
             {
                 model: Administrador, required: true,
@@ -136,6 +136,7 @@ router.post("/administrador/senha/update", adminAut, (req, res) => {
 router.post("/administrador/dados/update", adminAut, (req, res) => {
     var nome = req.body.inputNome;
     var sobrenome = req.body.inputSobrenome;
+    var sexo = req.body.selectSexo;
     var dataNascimento = req.body.inputDate;
     var cpf = req.body.inputCPF;
     var telefone = req.body.inputTelefone;
@@ -145,15 +146,16 @@ router.post("/administrador/dados/update", adminAut, (req, res) => {
     var cidade = req.body.inputCidade;
     var bairro = req.body.inputBairro;
     var numero = req.body.inputNumero;
-    var uf = req.body.inputUF;
+    var uf = req.body.selectUF;
 
     Administrador.update({
-        nome: nome,
-        sobrenome: sobrenome,
-        dataNascimento: dataNascimento,
-        cpf: cpf,
-        telefone: telefone,
-        email: email
+        nome,
+        sobrenome,
+        sexo,
+        dataNascimento,
+        cpf,
+        telefone,
+        email
     }, {
         where: {
             id: admin.idAdmin
@@ -161,7 +163,7 @@ router.post("/administrador/dados/update", adminAut, (req, res) => {
     }).then(() => {
 
         Login.update({
-            email: email
+            email
         }, {
             where: {
                 administradorId: admin.idAdmin
@@ -169,12 +171,12 @@ router.post("/administrador/dados/update", adminAut, (req, res) => {
         }).then(() => {
 
             EnderecoAdministrador.update({
-                cep: cep,
-                logradouro: logradouro,
-                cidade: cidade,
-                bairro: bairro,
-                numero: numero,
-                uf: uf
+                cep,
+                logradouro,
+                cidade,
+                bairro,
+                numero,
+                uf
             },{
                 where: {
                     administradorId: admin.idAdmin
@@ -184,18 +186,19 @@ router.post("/administrador/dados/update", adminAut, (req, res) => {
                 global.admin = {
                     id: admin.id,
                     idAdmin: admin.idAdmin,
-                    email: email,
-                    nome: nome,
-                    sobrenome: sobrenome,
-                    dataNascimento: dataNascimento,
-                    cpf: cpf,
-                    telefone: telefone,
-                    cep: cep,
-                    logradouro: logradouro,
-                    cidade: cidade,
-                    bairro: bairro,
-                    numero: numero,
-                    uf: uf
+                    email,
+                    nome,
+                    sobrenome,
+                    sexo,
+                    dataNascimento,
+                    cpf,
+                    telefone,
+                    cep,
+                    logradouro,
+                    cidade,
+                    bairro,
+                    numero,
+                    uf
                 }
                 res.redirect("/administrador/perfil");
 

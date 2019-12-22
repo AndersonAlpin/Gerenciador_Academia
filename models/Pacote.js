@@ -1,5 +1,6 @@
 const Sequelize = require("sequelize");
 const connection = require("../database/connection");
+const Academia = require("../models/Academia");
 
 // Tabela Pacote
 const Pacote = connection.define('pacote', {
@@ -23,7 +24,11 @@ const Pacote = connection.define('pacote', {
     }
 });
 
+// Gerando chave estrangeira de Academia na tabela Administrador
+Academia.hasMany(Pacote);
+Pacote.belongsTo(Academia); 
+
 // Necessário para criar a base de dados. Comentar este trecho após executar o servidor
-// Pacote.sync({force: true});
+// Pacote.sync({force: false});
 
 module.exports = Pacote;

@@ -55,7 +55,6 @@
                             <option value="<%= pacote.id %>"><%= pacote.nome %></option>
                             <% }) %>
                         </select>
-                        <input name="inputPacote" id="inputPacote" type="hidden" value="">
                     </div>
                     <div class="form-group col-md-3">
                         <label for="inputDataVencimento">Data de Antecipação</label>
@@ -66,10 +65,10 @@
                         <label for="selectPagamento">Forma de Pagamento</label>
                         <select class="form-control" name="selectPagamento" id="selectPagamento" required>
                             <option selected disabled value="">Selecione</option>
-                            <option value="">Cartão</option>
-                            <option value="">Depósito</option>
-                            <option value="">Dinheiro</option>
-                            <option value="">Transferência</option>
+                            <option value="Cartão">Cartão</option>
+                            <option value="Depósito">Depósito</option>
+                            <option value="Dinheiro">Dinheiro</option>
+                            <option value="Transferência">Transferência</option>
                         </select>
                     </div>
                     <input type="hidden" value="<%= cliente.id %>" name="inputID">
