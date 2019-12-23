@@ -111,7 +111,7 @@ router.post("/administrador/senha/update", adminAut, (req, res) => {
         res.redirect("/administrador/editar/senha");
     }
 
-    let alterSenha = async () => {
+    let atalizarSenha = async () => {
 
         let login = await Login.findOne({
             where: {
@@ -147,7 +147,7 @@ router.post("/administrador/senha/update", adminAut, (req, res) => {
         }
     }
 
-    alterSenha();
+    atalizarSenha();
 });
 
 // SALVAR DADOS DA EDIÇÃO
@@ -166,66 +166,59 @@ router.post("/administrador/dados/update", adminAut, (req, res) => {
     var numero = req.body.inputNumero;
     var uf = req.body.selectUF;
 
-    Administrador.update({
-        nome,
-        sobrenome,
-        sexo,
-        dataNascimento,
-        cpf,
-        telefone,
-        email
-    }, {
-        where: {
-            id: admin.idAdmin
-        }
-    }).then(() => {
+    let atualizarDados = async () => {
 
-        Login.update({
+        let administrador = Administrador.update({
+            nome,
+            sobrenome,
+            sexo,
+            dataNascimento,
+            cpf,
+            telefone,
             email
         }, {
-            where: {
-                administradorId: admin.idAdmin
-            }
-        }).then(() => {
-
-            EnderecoAdministrador.update({
-                cep,
-                logradouro,
-                cidade,
-                bairro,
-                numero,
-                uf
-            }, {
-                where: {
-                    administradorId: admin.idAdmin
-                }
-            }).then((endereco) => {
-
-                global.admin = {
-                    idLogin: admin.idLogin,
-                    idAdmin: admin.idAdmin,
-                    email,
-                    nome,
-                    sobrenome,
-                    sexo,
-                    dataNascimento,
-                    cpf,
-                    telefone,
-                    cep,
-                    logradouro,
-                    cidade,
-                    bairro,
-                    numero,
-                    uf
-                }
-                res.redirect("/administrador/perfil");
-
-            });
-
+            where: { id: admin.idAdmin }
         });
 
-    });
+        let login = Login.update({
+            email
+        }, {
+            where: { administradorId: admin.idAdmin }
+        });
 
+        let enderecoAdministrador = await EnderecoAdministrador.update({
+            cep,
+            logradouro,
+            cidade,
+            bairro,
+            numero,
+            uf
+        }, {
+            where: { administradorId: admin.idAdmin }
+        });
+
+        global.admin = {
+            idLogin: admin.idLogin,
+            idAdmin: admin.idAdmin,
+            email,
+            nome,
+            sobrenome,
+            sexo,
+            dataNascimento,
+            cpf,
+            telefone,
+            cep,
+            logradouro,
+            cidade,
+            bairro,
+            numero,
+            uf
+        }
+
+        res.redirect("/administrador/perfil");
+    }
+
+    atualizarDados();
 });
 
 // ENVIAR CÓDIGO DE RECUPERAÇÃO PARA O EMAIL
