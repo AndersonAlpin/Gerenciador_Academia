@@ -10,113 +10,126 @@ const adminAut = require("../middlewares/adminAut");
 
 // LISTAR TODOS OS CLIENTES INCLUINDO O PACOTE E O ENDEREÇO
 router.get("/administrador/clientes/listar", adminAut, (req, res) => {
-    Cliente.findAll({
-        where: {
-            AcademiumId: admin.idAcademia
-        },
-        order: [
-            ['nome', 'ASC']
-        ],
-        include: [
-            {
-                model: EnderecoCliente
-            },
-            {
-                model: Pacote
-            }
-        ]
-    }).then(clientes => {
+
+    let listarClientes = async () => {
+        let clientes = await Cliente.findAll({
+            where: { AcademiumId: admin.idAcademia },
+            order: [['nome', 'ASC']],
+            include: [
+                {
+                    model: EnderecoCliente
+                },
+                {
+                    model: Pacote
+                }
+            ]
+        });
+
         res.render("administrador/clientes/listar", { clientes });
-    });
+    }
+
+    listarClientes();
+
 });
 
 // LISTAR OS CLIENTES ATIVOS INCLUINDO O PACOTE E O ENDEREÇO
 router.get("/administrador/clientes/ativos", adminAut, (req, res) => {
-    Cliente.findAll({
-        where: {
-            AcademiumId: admin.idAcademia
-        },
-        order: [
-            ['nome', 'ASC']
-        ],
-        include: [
-            {
-                model: EnderecoCliente
-            },
-            {
-                model: Pacote
-            }
-        ]
-    }).then(clientes => {
+
+    let listarClientes = async () => {
+        let clientes = await Cliente.findAll({
+            where: { AcademiumId: admin.idAcademia },
+            order: [['nome', 'ASC']],
+            include: [
+                {
+                    model: EnderecoCliente
+                },
+                {
+                    model: Pacote
+                }
+            ]
+        });
+
         res.render("administrador/clientes/ativos", { clientes });
-    });
+    }
+    listarClientes();
+
 });
 
 // LISTAR OS CLIENTES INATIVOS INCLUINDO O PACOTE E O ENDEREÇO
 router.get("/administrador/clientes/inativos", adminAut, (req, res) => {
-    Cliente.findAll({
-        where: {
-            AcademiumId: admin.idAcademia
-        },
-        order: [
-            ['nome', 'ASC']
-        ],
-        include: [
-            {
-                model: EnderecoCliente
-            },
-            {
-                model: Pacote
-            }
-        ]
-    }).then(clientes => {
+
+    let listarClientes = async () => {
+        let clientes = await Cliente.findAll({
+            where: { AcademiumId: admin.idAcademia },
+            order: [['nome', 'ASC']],
+            include: [
+                {
+                    model: EnderecoCliente
+                },
+                {
+                    model: Pacote
+                }
+            ]
+        });
+
         res.render("administrador/clientes/inativos", { clientes });
-    });
+    }
+
+    listarClientes();
 });
 
 // FORMULÁRIO DE CADASTRO DO CLIENTE INCLUINDO O PACOTE
 router.get("/administrador/clientes/cadastro", adminAut, (req, res) => {
-    Pacote.findAll({
-        where: {
-            AcademiumId: admin.idAcademia
-        }
-    }).then(pacote => {
+
+    let formularioCadastro = async () => {
+
+        let pacote = await Pacote.findAll({
+            where: { AcademiumId: admin.idAcademia }
+        });
+
         res.render("administrador/clientes/cadastro", { pacote });
-    });
+    }
+
+    formularioCadastro();
 });
 
 // SALVAR O CLIENTE APÓS PREENCHER O FORMULÁRIO
 router.post("/clientes/salvar", adminAut, (req, res) => {
-    
-    var nome = req.body.inputNome
-    var sobrenome = req.body.inputSobrenome;
-    var sexo = req.body.selectSexo;
-    var dataNascimento = req.body.inputDate;
-    var cpf = req.body.inputCPF;
-    var telefone = req.body.inputTelefone;
-    var email = req.body.inputEmail;
-    var pacoteId = req.body.selectPacote;
-    var formaPagamento = req.body.selectPagamento;
-    var logradouro = req.body.inputLogradouro;
-    var numero = req.body.inputNumero;
-    var cidade = req.body.inputCidade;
-    var bairro = req.body.inputBairro;
-    var cep = req.body.inputCEP;
-    var uf = req.body.selectUF;
 
-    Cliente.create({
-        nome,
-        sobrenome,
-        sexo,
-        dataNascimento,
-        cpf,
-        telefone,
-        email,
-        AcademiumId: admin.idAcademia,
-        pacoteId
-    }).then((cliente) => { //SE CADASTRAR O CLIENTE, CADASTRE O ENDEREÇO
-        
-        EnderecoCliente.create({
+    let nome = req.body.inputNome
+    let sobrenome = req.body.inputSobrenome;
+    let sexo = req.body.selectSexo;
+    let dataNascimento = req.body.inputDate;
+    let cpf = req.body.inputCPF;
+    let telefone = req.body.inputTelefone;
+    let email = req.body.inputEmail;
+    let pacoteId = req.body.selectPacote;
+    let formaPagamento = req.body.selectPagamento;
+    let logradouro = req.body.inputLogradouro;
+    let numero = req.body.inputNumero;
+    let cidade = req.body.inputCidade;
+    let bairro = req.body.inputBairro;
+    let cep = req.body.inputCEP;
+    let uf = req.body.selectUF;
+
+    let salvarCliente = async () => {
+
+        let cliente = await Cliente.create({
+            nome,
+            sobrenome,
+            sexo,
+            dataNascimento,
+            cpf,
+            telefone,
+            email,
+            AcademiumId: admin.idAcademia,
+            pacoteId
+        }).catch(err => {
+            res.redirect("/administrador/clientes/cadastro");
+            console.log('Não foi possível cadastrar o cliente: ' + err);
+        });
+
+        let enderecoCliente = await EnderecoCliente.create({
             logradouro,
             numero,
             cidade,
@@ -124,73 +137,36 @@ router.post("/clientes/salvar", adminAut, (req, res) => {
             cep,
             uf,
             clienteId: cliente.id
-        }).then(() => { //SE CADASTRAR REDIRECIONE PARA A LISTA
-            connection.query(`call primeiraMensalidadePaga('${pacoteId}', '${formaPagamento}')`, {
-                type: Sequelize.DataTypes.INSERT
-            }).then(() => {
-                connection.query('call primeiraMensalidadeAberta()', {
-                    type: Sequelize.DataTypes.INSERT
-                }).then(() => {
-                    res.redirect("/administrador/clientes/listar");
-                });
-            }).catch((erro) => {
-                res.redirect("/administrador/clientes/cadastro");
-                console.log('Não foi possível gerar mensalidade: ' + erro);
-            });
-        }).catch((erro) => {// SE NÃO CADASTRAR REDIRECIONE PARA O CADASTRO
+        }).catch(err => {
             res.redirect("/administrador/clientes/cadastro");
             console.log('Não foi possível cadastrar o endereço: ' + erro);
         });
-    }).catch((erro) => {// SE DER ERRO REDIRECION PARA O CADASTRO
-        res.redirect("/administrador/clientes/cadastro");
-        console.log('Não foi possível cadastrar o cliente: ' + erro);
-    });
 
+        connection.query(`call primeiraMensalidadePaga('${pacoteId}', '${formaPagamento}')`, {
+            type: Sequelize.DataTypes.INSERT
+        });
+
+        connection.query('call primeiraMensalidadeAberta()', {
+            type: Sequelize.DataTypes.INSERT
+        });
+
+        res.redirect("/administrador/clientes/listar");
+    }
+
+    salvarCliente();
 });
 
 // DETALHAR O CLIENTE SELECIONADO NA TABELA
 router.get("/administrador/clientes/detalhes/:id", adminAut, (req, res) => {
-    var id = req.params.id;
+    let id = req.params.id;
 
     if (isNaN(id)) {
         res.redirect("/administrador/clientes/listar");
     }
 
-    Cliente.findByPk(id, {
-        include: [
-            {
-                model: Pacote
-            },
-            {
-                model: EnderecoCliente
-            }
-        ]
-    }).then(cliente => {
-        if (cliente != undefined) {
-            res.render("administrador/clientes/detalhes", { cliente });
-        } else {
-            res.redirect("/administrador/clientes/listar");
-        }
-    }).catch(erro => {
-        res.redirect("/administrador/clientes/listar");
-    });
-});
+    let detalharCliente = async () => {
 
-// EDITAR UM CLIENTE SELECIONADO NA TABELA
-router.get("/administrador/clientes/editar/:id", adminAut, (req, res) => {
-    Pacote.findAll({
-        where: {
-            AcademiumId: admin.idAcademia
-        }
-    }).then(pacote => {
-
-        var id = req.params.id;
-
-        if (isNaN(id)) {
-            res.redirect("/administrador/clientes/editar");
-        }
-
-        Cliente.findByPk(id, {
+        let cliente = await Cliente.findByPk(id, {
             include: [
                 {
                     model: Pacote
@@ -199,53 +175,101 @@ router.get("/administrador/clientes/editar/:id", adminAut, (req, res) => {
                     model: EnderecoCliente
                 }
             ]
-        }).then(cliente => {
-            if (cliente != undefined) {
-                res.render("administrador/clientes/editar", { cliente, pacote });
-            } else {
-                res.redirect("/administrador/clientes/listar");
-            }
-        }).catch(erro => {
+        }).catch(err => {
             res.redirect("/administrador/clientes/listar");
+            console.log('Não foi possível continuar com a busca do cliente: ' + err);
         });
-    });
 
+        if (cliente != undefined) {
+            res.render("administrador/clientes/detalhes", { cliente });
+        } else {
+            res.redirect("/administrador/clientes/listar");
+        }
+
+    }
+
+    detalharCliente();
+});
+
+// EDITAR UM CLIENTE SELECIONADO NA TABELA
+router.get("/administrador/clientes/editar/:id", adminAut, (req, res) => {
+
+    let id = req.params.id;
+
+    if (isNaN(id)) {
+        res.redirect("/administrador/clientes/editar");
+    }
+
+    let formularioEdicao = async () => {
+
+        let pacote = await Pacote.findAll({
+            where: { AcademiumId: admin.idAcademia }
+        }).catch(err => {
+            res.redirect("/administrador/clientes/listar");
+            console.log('Não foi possível continuar a busca do pacote: ' + err);
+        });
+
+        let cliente = await Cliente.findByPk(id, {
+            include: [
+                {
+                    model: Pacote
+                },
+                {
+                    model: EnderecoCliente
+                }
+            ]
+        }).catch(err => {
+            res.redirect("/administrador/clientes/listar");
+            console.log('Não foi possível continuar a busca do cliente: ' + err);
+        });
+
+        if (cliente != undefined) {
+            res.render("administrador/clientes/editar", { cliente, pacote });
+        } else {
+            res.redirect("/administrador/clientes/listar");
+        }
+
+    }
+
+    formularioEdicao();
 });
 
 // SALVAR DADOS DA EDIÇÃO
 router.post("/administrador/clientes/update", adminAut, (req, res) => {
-    var id = req.body.inputID;
-    var nome = req.body.inputNome
-    var sobrenome = req.body.inputSobrenome;
-    var sexo = req.body.selectSexo;
-    var dataNascimento = req.body.inputDate;
-    var cpf = req.body.inputCPF;
-    var telefone = req.body.inputTelefone;
-    var email = req.body.inputEmail;
-    var pacoteId = req.body.selectPacote;
-    var logradouro = req.body.inputLogradouro;
-    var numero = req.body.inputNumero;
-    var cidade = req.body.inputCidade;
-    var bairro = req.body.inputBairro;
-    var cep = req.body.inputCEP;
-    var uf = req.body.selectUF;
+    let id = req.body.inputID;
+    let nome = req.body.inputNome
+    let sobrenome = req.body.inputSobrenome;
+    let sexo = req.body.selectSexo;
+    let dataNascimento = req.body.inputDate;
+    let cpf = req.body.inputCPF;
+    let telefone = req.body.inputTelefone;
+    let email = req.body.inputEmail;
+    let pacoteId = req.body.selectPacote;
+    let logradouro = req.body.inputLogradouro;
+    let numero = req.body.inputNumero;
+    let cidade = req.body.inputCidade;
+    let bairro = req.body.inputBairro;
+    let cep = req.body.inputCEP;
+    let uf = req.body.selectUF;
 
-    Cliente.update({
-        nome,
-        sobrenome,
-        sexo,
-        dataNascimento,
-        cpf,
-        telefone,
-        email,
-        pacoteId
-    }, {
-        where: {
-            id
-        }
-    }).then(() => {
+    let atualizarDados = async () => {
 
-        EnderecoCliente.update({
+        let cliente = await Cliente.update({
+            nome,
+            sobrenome,
+            sexo,
+            dataNascimento,
+            cpf,
+            telefone,
+            email,
+            pacoteId
+        }, {
+            where: { id }
+        }).catch(err => {
+            console.log('Ocorreu um erro ao tentar atualizar os dados: ' + err);
+        });
+
+        let enderecoCliente = await EnderecoCliente.update({
             logradouro,
             numero,
             cidade,
@@ -253,29 +277,30 @@ router.post("/administrador/clientes/update", adminAut, (req, res) => {
             cep,
             uf
         }, {
-            where: {
-                clienteId: id
-            }
-        }).then(() => {
-            res.redirect("/administrador/clientes/detalhes/" + id)
+            where: { clienteId: id }
+        }).catch(err => {
+            console.log('Ocorreu um erro ao tentar atualizar os dados: ' + err);
         });
 
-    });
+        res.redirect("/administrador/clientes/detalhes/" + id)
 
+    }
+
+    atualizarDados();
 });
 
 // ATIVAR/INATIVAR CLIENTE
 router.post("/administrador/clientes/status/update", (req, res) => {
-    var id = req.body.inputID;
-    var status = req.body.inputStatus;
-    var newStatus;
+    let id = req.body.inputID;
+    let status = req.body.inputStatus;
+    let newStatus;
 
-    if(status.toString() == 'false'){
+    if (status.toString() == 'false') {
         newStatus = true;
-    }else {
+    } else {
         newStatus = false;
     }
-    
+
     Cliente.update({
         ativo: newStatus
     }, {
