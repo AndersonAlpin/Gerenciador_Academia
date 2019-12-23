@@ -36,11 +36,14 @@ router.post("/autenticacao", (req, res) => {
                     sessao(login);
                     res.redirect("/administrador/home");
                 } else {
-                    req.flash('error', 'Senha incorreta!');
+                    req.flash('senhaInvalida', 'Senha inválida');
+                    req.flash('eValido', 'border: 1px solid green');
+                    req.flash('sInvalida', 'border: 1px solid red');
                     res.redirect("/");
                 }
             } else {
-                req.flash('error', 'Este email não existe!');
+                req.flash('emailInvalido', 'Email inválido');
+                req.flash('eInvalido', 'border: 1px solid red');
                 res.redirect("/");
             }
         } catch (err) {

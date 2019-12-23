@@ -36,21 +36,24 @@
 
                   <form action="/autenticacao" method="POST" class="col-12">
                     <div class="form-group inputIcon" id="user-group">
-                      <input id="email" type="email" name="email" class="form-control" placeholder="Email" required>
+                      <input id="email" type="email" name="email" class="form-control" placeholder="Email" required
+                        style="<%= messages.eValido %> <%= messages.eInvalido %>">
                       <i class="fas fa-at fa-lg fa-fw" aria-hidden="true"></i>
                     </div>
 
                     <div class="form-group inputIcon" id="password-group">
-                      <input id="senha" type="password" name="senha" class="form-control" placeholder="Senha" required>
+                      <input id="senha" type="password" name="senha" class="form-control" placeholder="Senha" required
+                        style="<%= messages.sInvalida %>">
                       <i class="fas fa-lock fa-lg fa-fw" aria-hidden="true"></i>
                     </div>
 
-                    <div id="error" class="error" style="color: red;">
-                      <%= messages.error %>
+                    <div id="mensagem" class="mensagem" style="color: red; font-size: 14px;">
+                      <%= messages.senhaInvalida %>
+                      <%= messages.emailInvalido %>
                     </div>
 
                     <div class="form-group">
-                      <input type="submit" class="btn btn-primary btn-block btn-lg mt-4" value="Entrar">
+                      <input type="submit" class="btn btn-primary btn-block btn-lg mt-3" value="Entrar">
                     </div>
                     <div class="">
                       <span class="text-light">Esqueceu sua senha? <a href="#">Clique aqui!</a></span>
@@ -67,16 +70,5 @@
       </div>
     </div>
   </section>
-  <script>
-    var mensagemEmail = document.getElementById("email");
-    var mensagemSenha = document.getElementById("senha");
-
-    mensagemEmail.addEventListener("focus", apagarMensagem, true);
-    mensagemSenha.addEventListener("focus", apagarMensagem, true);
-
-    function apagarMensagem() {
-      document.getElementById("error").innerHTML = "";
-    }
-  </script>
 </body>
 <%- include partials/footer.ejs %>
