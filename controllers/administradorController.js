@@ -13,61 +13,70 @@ router.get("/administrador/home", adminAut, (req, res) => {
 
 // AUTENTICAÇÃO
 router.post("/autenticacao", (req, res) => {
-    var email = req.body.email;
-    var senha = req.body.senha;
+    let email = req.body.email;
+    let senha = req.body.senha;
 
-    Login.findOne({
-        where: { email },
-        include: [
-            {
-                model: Administrador, required: true,
-                include: [
-                    {
-                        model: EnderecoAdministrador
-                    }
-                ]
-            }
-        ]
-    }).then(login => {
-        if (login != undefined) { // SE O EMAIL EXISTIR
-            // VALIDAR SENHA
-            var correct = bcrypt.compareSync(senha, login.senha);
+    let autenticarUsuario = async () => {
 
-            if (correct) {
-                req.session.login = {
-                    id: login.id,
-                    idAdmin: login.administrador.id,
-                    idEndereco: login.administrador.enderecoadministrador.id,
-                    idAcademia: login.administrador.AcademiumId,
-
-                    nome: login.administrador.nome,
-                    sobrenome: login.administrador.sobrenome,
-                    sexo: login.administrador.sexo,
-                    dataNascimento: login.administrador.dataNascimento,
-                    cpf: login.administrador.cpf,
-                    telefone: login.administrador.telefone,
-                    email: login.administrador.email,
-                    tipo: login.administrador.tipo,
-                    ativo: login.administrador.ativo,
-
-                    logradouro: login.administrador.enderecoadministrador.logradouro,
-                    numero: login.administrador.enderecoadministrador.numero,
-                    cidade: login.administrador.enderecoadministrador.cidade,
-                    bairro: login.administrador.enderecoadministrador.bairro,
-                    cep: login.administrador.enderecoadministrador.cep,
-                    uf: login.administrador.enderecoadministrador.uf
+        let login = await Login.findOne({
+            where: { email },
+            include: [
+                {
+                    model: Administrador, require: true,
+                    include: [{ model: EnderecoAdministrador }]
                 }
-                res.redirect("/administrador/home");
-                global.admin = req.session.login;
+            ]
+        });
+
+        try {
+            if (login != undefined) {
+                let correct = bcrypt.compareSync(senha, login.senha);
+
+                if (correct) {
+                    sessao(login);
+                    res.redirect("/administrador/home");
+                } else {
+                    req.flash('error', 'Senha incorreta!');
+                    res.redirect("/");
+                }
             } else {
-                req.flash('error', 'Senha incorreta!');
+                req.flash('error', 'Este email não existe!');
                 res.redirect("/");
             }
-        } else {
-            req.flash('error', 'Este email não existe!');
-            res.redirect("/");
+        } catch (err) {
+            console.log('Ocorreu um erro durante a validação: ' + err);
         }
-    });
+
+    }
+
+    let sessao = (login) => {
+        req.session.login = {
+            idLogin: login.id,
+            idAdmin: login.administrador.id,
+            idEndereco: login.administrador.enderecoadministrador.id,
+            idAcademia: login.administrador.AcademiumId,
+
+            nome: login.administrador.nome,
+            sobrenome: login.administrador.sobrenome,
+            sexo: login.administrador.sexo,
+            dataNascimento: login.administrador.dataNascimento,
+            cpf: login.administrador.cpf,
+            telefone: login.administrador.telefone,
+            email: login.administrador.email,
+            tipo: login.administrador.tipo,
+            ativo: login.administrador.ativo,
+
+            logradouro: login.administrador.enderecoadministrador.logradouro,
+            numero: login.administrador.enderecoadministrador.numero,
+            cidade: login.administrador.enderecoadministrador.cidade,
+            bairro: login.administrador.enderecoadministrador.bairro,
+            cep: login.administrador.enderecoadministrador.cep,
+            uf: login.administrador.enderecoadministrador.uf
+        }
+        global.admin = req.session.login;
+    }
+
+    autenticarUsuario();
 });
 
 // PERFIL
@@ -103,7 +112,7 @@ router.post("/administrador/senha/update", adminAut, (req, res) => {
 
     Login.findOne({
         where: {
-            id: admin.id
+            id: admin.idLogin
         }
     }).then(login => {
         if (login != undefined) {
@@ -115,7 +124,7 @@ router.post("/administrador/senha/update", adminAut, (req, res) => {
                     senha: hash
                 }, {
                     where: {
-                        id: admin.id
+                        id: admin.idLogin
                     }
                 }).then(() => {
                     res.redirect("/administrador/perfil")
@@ -177,14 +186,14 @@ router.post("/administrador/dados/update", adminAut, (req, res) => {
                 bairro,
                 numero,
                 uf
-            },{
+            }, {
                 where: {
                     administradorId: admin.idAdmin
                 }
             }).then((endereco) => {
 
                 global.admin = {
-                    id: admin.id,
+                    idLogin: admin.idLogin,
                     idAdmin: admin.idAdmin,
                     email,
                     nome,
