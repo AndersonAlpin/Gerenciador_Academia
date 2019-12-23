@@ -99,8 +99,6 @@ router.get("/administrador/editar/senha", adminAut, (req, res) => {
 
 // SALVAR NOVA SENHA
 router.post("/administrador/senha/update", adminAut, (req, res) => {
-    console.log("certo")
-
     var senhaAtual = req.body.senhaAtual;
     var novaSenha = req.body.novaSenha;
     var confirmarNovaSenha = req.body.confirmarNovaSenha;
@@ -113,35 +111,43 @@ router.post("/administrador/senha/update", adminAut, (req, res) => {
         res.redirect("/administrador/editar/senha");
     }
 
-    Login.findOne({
-        where: {
-            id: admin.idLogin
-        }
-    }).then(login => {
-        if (login != undefined) {
+    let alterSenha = async () => {
 
-            var correct = bcrypt.compareSync(senhaAtual, login.senha);
+        let login = await Login.findOne({
+            where: {
+                id: admin.idLogin
+            }
+        });
 
-            if (correct) {
-                Login.update({
-                    senha: hash
-                }, {
-                    where: {
-                        id: admin.idLogin
-                    }
-                }).then(() => {
-                    res.redirect("/administrador/perfil")
-                });
+        try {
+            if (login != undefined) {
+
+                var correct = bcrypt.compareSync(senhaAtual, login.senha);
+
+                if (correct) {
+                    Login.update({
+                        senha: hash
+                    }, {
+                        where: {
+                            id: admin.idLogin
+                        }
+                    }).then(() => {
+                        res.redirect("/administrador/perfil")
+                    });
+                } else {
+                    req.flash('error', 'Senha inválida!');
+                    res.redirect("/administrador/editar/senha");
+                }
+
             } else {
-                req.flash('error', 'Senha inválida!');
                 res.redirect("/administrador/editar/senha");
             }
-
-        } else {
-            res.redirect("/administrador/editar/senha");
+        } catch (err) {
+            console.log('Ocorreu um erro durante a alteração da senha' + err);
         }
-    });
+    }
 
+    alterSenha();
 });
 
 // SALVAR DADOS DA EDIÇÃO

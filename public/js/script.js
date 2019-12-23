@@ -79,13 +79,13 @@ $(document).ready(function () {
 
 // ================================================================
 // REMOVER AS BORDAS DO INPUT E AS MENSAGENS NO FORMULÁRIO DE LOGIN
-var mensagemEmail = document.getElementById("email");
-var mensagemSenha = document.getElementById("senha");
+let mensagemEmail = document.getElementById("email");
+let mensagemSenha = document.getElementById("senha");
 
 mensagemEmail.addEventListener("focus", apagarMensagem, true);
 mensagemSenha.addEventListener("focus", apagarMensagem, true);
 
-function apagarMensagem() {
+let apagarMensagem = () => {
     document.getElementById("mensagem").innerHTML = "";
     document.getElementById("email").style.border = ""
     document.getElementById("senha").style.border = ""
