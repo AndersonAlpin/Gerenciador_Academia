@@ -67,7 +67,7 @@ router.get("/administrador/mensalidades/pago", adminAut, (req, res) => {
 
 // DETALHAR A MENSALIDADE
 router.get("/administrador/mensalidades/detalhes/:id", adminAut, (req, res) => {
-    var id = req.params.id;
+    let id = req.params.id;
 
     if (isNaN(id)) {
         res.redirect("/administrador/mensalidades/aberto");
@@ -97,8 +97,8 @@ router.get("/administrador/mensalidades/detalhes/:id", adminAut, (req, res) => {
 
 // VALIDAR A MENSALIDADE
 router.post("/mensalidades/validar", adminAut, (req, res) => {
-    var id = req.body.inputID;
-    var formaPagamento = req.body.selectPagamento;
+    let id = req.body.inputID;
+    let formaPagamento = req.body.selectPagamento;
 
     Mensalidade.update({
         formaPagamento,
@@ -116,7 +116,7 @@ router.post("/mensalidades/validar", adminAut, (req, res) => {
 
 // REVERTER A MENSALIDADE PAGA
 router.post("/mensalidades/reverter", adminAut, (req, res) => {
-    var id = req.body.inputID;
+    let id = req.body.inputID;
 
     Mensalidade.update({
         formaPagamento: null,
@@ -206,7 +206,7 @@ router.get("/administrador/mensalidades/listarClientesAlteracaoVencimento", admi
 
 // LISTAR AS MENSALIDADES DO CLIENTE E PREENCHER OS DADOS DE ANTECIPAÇÃO
 router.get("/administrador/mensalidades/antecipar/:id", adminAut, (req, res) => {
-    var id = req.params.id;
+    let id = req.params.id;
 
     if (isNaN(id)) {
         res.redirect("/administrador/mensalidades/listarClientesAntecipacao");
@@ -252,7 +252,7 @@ router.get("/administrador/mensalidades/antecipar/:id", adminAut, (req, res) => 
 
 // LISTAR AS MENSALIDADES DO CLIENTE E PREENCHER OS DADOS DE ALTERAÇÃO DE VENCIMENTO
 router.get("/administrador/mensalidades/alterarVencimento/:id", adminAut, (req, res) => {
-    var id = req.params.id;
+    let id = req.params.id;
 
     if (isNaN(id)) {
         res.redirect("/administrador/mensalidades/listarClientesAlteracaoVencimento");
