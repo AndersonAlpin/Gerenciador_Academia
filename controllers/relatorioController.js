@@ -6,74 +6,51 @@ const Mensalidade = require("../models/Mensalidade");
 
 router.get("/administrador/relatorios/listar", adminAut, (req, res) => {
 
-    var relatorio = new Object();
+    var relatorio = {
+        numClientes: 0,
+        numClientesAtivos: 0,
+        numClientesInativos: 0,
+        numMensalidadePago: 0, 
+        numMensalidadeAtraso: 0,
+        numMensalidadeReceber: 0,
+        totalEntradas: 0,
+        totalReceber: 0,
+        totalAtraso: 0
+    }
 
-    relatorio.numClientes = 0;
-    relatorio.numClientesAtivos = 0;
-    relatorio.numClientesInativos = 0;
-
-    relatorio.numMensalidadePago = 0;
-    relatorio.numMensalidadeAtraso = 0;
-    relatorio.numMensalidadeReceber = 0;
-
-    relatorio.totalEntradas = 0;
-    relatorio.totalReceber = 0;
-    relatorio.totalAtraso = 0;
-
-    // NÚMERO MENSALIDADES 
-    Mensalidade.findAll({
-        include: [
-            {
-                model: Cliente, required: true,
-                where: {
-                    AcademiumId: admin.idAcademia
+    let gerarRelatorios = async () => {
+        
+        let mensalidades = await Mensalidade.findAll({
+            include: [
+                {
+                    model: Cliente, required: true,
+                    where: { AcademiumId: admin.idAcademia }
                 }
-            }
-        ]
-    }).then(mensalidades => {
+            ]
+        });
+
         mensalidades.forEach(mensalidade => {
+
+            // NÚMERO MENSALIDADES 
             if (mensalidade.status == 'Pago') {
                 relatorio.numMensalidadePago++;
-            } else {
-                if (mensalidade.status == 'Em aberto') {
-                    relatorio.numMensalidadeReceber++;
-                } else {
-                    relatorio.numMensalidadeAtraso++;
-                }
-            }
-        });
-    });
-
-    // VALOR MENSALIDADES
-    Mensalidade.findAll({
-        include: [
-            {
-                model: Cliente, required: true,
-                where: {
-                    AcademiumId: admin.idAcademia
-                }
-            }
-        ]
-    }).then(mensalidades => {
-        mensalidades.forEach(mensalidade => {
-            if (mensalidade.status == 'Pago') {
                 relatorio.totalEntradas += mensalidade.valor;
             } else {
                 if (mensalidade.status == 'Em aberto') {
+                    relatorio.numMensalidadeReceber++;
                     relatorio.totalReceber += mensalidade.valor;
                 } else {
+                    relatorio.numMensalidadeAtraso++;
                     relatorio.totalAtraso += mensalidade.valor;
                 }
             }
         });
-    });
 
-    // NUMERO CLIENTES
-    Cliente.findAll({
-        where: {
-            AcademiumId: admin.idAcademia
-        }
-    }).then(clientes => {
+        let clientes = await Cliente.findAll({
+            where: { AcademiumId: admin.idAcademia }
+        });
+
+        // NUMERO CLIENTES
         clientes.forEach(cliente => {
             relatorio.numClientes++;
 
@@ -83,10 +60,11 @@ router.get("/administrador/relatorios/listar", adminAut, (req, res) => {
                 relatorio.numClientesInativos++;
             }
         });
-        res.render("administrador/relatorios/listar", {
-            relatorio: relatorio
-        });
-    });
+
+        res.render("administrador/relatorios/listar", { relatorio });
+    }
+
+    gerarRelatorios();
 });
 
 module.exports = router;
