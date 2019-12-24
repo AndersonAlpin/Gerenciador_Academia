@@ -6,29 +6,25 @@ const adminAut = require("../middlewares/adminAut");
 // LISTAR PACOTES
 router.get("/administrador/pacotes/listar", adminAut, (req, res) => {
     Pacote.findAll({
-        where: {
-            AcademiumId: admin.idAcademia
-        },
-        order: [
-            ['taxaDesconto', 'DESC']
-        ]
+        where: { AcademiumId: admin.idAcademia },
+        order: [['taxaDesconto', 'DESC']]
     }).then(pacotes => {
         res.render("administrador/pacotes/listar", { pacotes });
     });
 });
 
+// ROTA DE FORMULÁRIO DE CADASTRO
 router.get("/administrador/pacotes/cadastro", (req, res) => {
     res.render("administrador/pacotes/cadastro")
 });
 
 // DELETAR UM PACOTE
 router.post("/pacotes/delete", adminAut, (req, res) => {
-    var id = req.body.id;
+    let id = req.body.id;
+
     if (id != undefined) { //SE FOR DIFERENTE DE NULO
         if (!isNaN(id)) { //SE FOR UM NÚMERO  
 
-            // ATUALIZAR OS CLIENTES QUE POSSUEM O PACOTE A SER DELETADO
-            // DELETE O PACOTE
             Pacote.destroy({
                 where: {
                     id
@@ -47,9 +43,9 @@ router.post("/pacotes/delete", adminAut, (req, res) => {
 
 // SALVAR O PACOTE APÓS PREENCHER O FORMULÁRIO
 router.post("/pacote/salvar", adminAut, (req, res) => {
-    var nome = req.body.inputNome;
-    var descricao = req.body.inputDescricao;
-    var taxaDesconto = req.body.inputDesconto;
+    let nome = req.body.inputNome;
+    let descricao = req.body.inputDescricao;
+    let taxaDesconto = req.body.inputDesconto;
 
     validar = 1;
 
@@ -77,7 +73,7 @@ router.post("/pacote/salvar", adminAut, (req, res) => {
 
 // EDITAR OS DADOS DE UM PACOTE
 router.get("/administrador/pacotes/editar/:id", adminAut, (req, res) => {
-    var id = req.params.id;
+    let id = req.params.id;
 
     if (isNaN(id)) {
         res.redirect("/administrador/pacotes/listar")
@@ -96,10 +92,10 @@ router.get("/administrador/pacotes/editar/:id", adminAut, (req, res) => {
 
 // SALVAR PACOTE APÓS EDIÇÃO
 router.post("/pacote/update", adminAut, (req, res) => {
-    var nome = req.body.inputNome;
-    var descricao = req.body.inputDescricao;
-    var taxaDesconto = req.body.inputDesconto
-    var id = req.body.inputID;
+    let nome = req.body.inputNome;
+    let descricao = req.body.inputDescricao;
+    let taxaDesconto = req.body.inputDesconto
+    let id = req.body.inputID;
 
     Pacote.update({
         nome,

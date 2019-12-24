@@ -99,12 +99,12 @@ router.get("/administrador/editar/senha", adminAut, (req, res) => {
 
 // SALVAR NOVA SENHA
 router.post("/administrador/senha/update", adminAut, (req, res) => {
-    var senhaAtual = req.body.senhaAtual;
-    var novaSenha = req.body.novaSenha;
-    var confirmarNovaSenha = req.body.confirmarNovaSenha;
+    let senhaAtual = req.body.senhaAtual;
+    let novaSenha = req.body.novaSenha;
+    let confirmarNovaSenha = req.body.confirmarNovaSenha;
 
-    var salt = bcrypt.genSaltSync(10);
-    var hash = bcrypt.hashSync(novaSenha, salt);
+    let salt = bcrypt.genSaltSync(10);
+    let hash = bcrypt.hashSync(novaSenha, salt);
 
     if (novaSenha != confirmarNovaSenha) {
         req.flash('error', 'As senhas não coincidem!');
@@ -122,7 +122,7 @@ router.post("/administrador/senha/update", adminAut, (req, res) => {
         try {
             if (login != undefined) {
 
-                var correct = bcrypt.compareSync(senhaAtual, login.senha);
+                let correct = bcrypt.compareSync(senhaAtual, login.senha);
 
                 if (correct) {
                     Login.update({
@@ -152,19 +152,19 @@ router.post("/administrador/senha/update", adminAut, (req, res) => {
 
 // SALVAR DADOS DA EDIÇÃO
 router.post("/administrador/dados/update", adminAut, (req, res) => {
-    var nome = req.body.inputNome;
-    var sobrenome = req.body.inputSobrenome;
-    var sexo = req.body.selectSexo;
-    var dataNascimento = req.body.inputDate;
-    var cpf = req.body.inputCPF;
-    var telefone = req.body.inputTelefone;
-    var email = req.body.inputEmail;
-    var cep = req.body.inputCEP;
-    var logradouro = req.body.inputLogradouro;
-    var cidade = req.body.inputCidade;
-    var bairro = req.body.inputBairro;
-    var numero = req.body.inputNumero;
-    var uf = req.body.selectUF;
+    let nome = req.body.inputNome;
+    let sobrenome = req.body.inputSobrenome;
+    let sexo = req.body.selectSexo;
+    let dataNascimento = req.body.inputDate;
+    let cpf = req.body.inputCPF;
+    let telefone = req.body.inputTelefone;
+    let email = req.body.inputEmail;
+    let cep = req.body.inputCEP;
+    let logradouro = req.body.inputLogradouro;
+    let cidade = req.body.inputCidade;
+    let bairro = req.body.inputBairro;
+    let numero = req.body.inputNumero;
+    let uf = req.body.selectUF;
 
     let atualizarDados = async () => {
 
@@ -238,16 +238,16 @@ router.get("/logout", (req, res) => {
 });
 
 // GERAR UM ADMINISTRADOR
-// var nome = 'Admin';
-// var sobrenome = 'IronFit';
-// var cpf = '045.123.451-15';
-// var telefone = '(73)95543-1256';
-// var AcademiumId = '1';
-// var email = 'adminironfit@gmail.com';
-// var senha = 'admin2001';
+// let nome = 'Admin';
+// let sobrenome = 'IronFit';
+// let cpf = '045.123.451-15';
+// let telefone = '(73)95543-1256';
+// let AcademiumId = '1';
+// let email = 'adminironfit@gmail.com';
+// let senha = 'admin2001';
 
-// var salt = bcrypt.genSaltSync(10);
-// var hash = bcrypt.hashSync(senha, salt);
+// let salt = bcrypt.genSaltSync(10);
+// let hash = bcrypt.hashSync(senha, salt);
 
 // Administrador.create({
 //     nome: nome,

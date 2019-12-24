@@ -6,7 +6,7 @@ const Mensalidade = require("../models/Mensalidade");
 
 router.get("/administrador/relatorios/listar", adminAut, (req, res) => {
 
-    var relatorio = {
+    let relatorio = {
         numClientes: 0,
         numClientesAtivos: 0,
         numClientesInativos: 0,
