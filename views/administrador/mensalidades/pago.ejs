@@ -7,11 +7,16 @@
     <div class="main-content">
         <h2 class="titulos">Mensalidades</h2>
         <br>
-        <select id="select" name="marca" class="form-control" required>
-            <option value="/administrador/mensalidades/aberto">Em aberto</option>
-            <option value="/administrador/mensalidades/atraso">Em atraso</option>
-            <option selected value="/administrador/mensalidades/pago">Pagas</option>
-        </select>
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Filtro</span>
+            </div>
+            <select id="select" name="marca" class="form-control" required>
+                <option value="/administrador/mensalidades/aberto">Em aberto</option>
+                <option value="/administrador/mensalidades/atraso">Em atraso</option>
+                <option selected value="/administrador/mensalidades/pago">Pagas</option>
+            </select>
+        </div>
         <hr>
 
         <div class="form-group" id="filtros">

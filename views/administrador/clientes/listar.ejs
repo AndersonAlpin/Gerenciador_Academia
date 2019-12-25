@@ -8,11 +8,16 @@
         <h2 class="titulos">Clientes</h2>
 
         <br>
-        <select id="select" name="marca" class="form-control" required>
-            <option selected value="/administrador/clientes/listar">Todos</option>
-            <option value="/administrador/clientes/ativos">Ativos</option>
-            <option value="/administrador/clientes/inativos">Inativos</option>
-        </select>
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Filtro</span>
+            </div>
+            <select id="select" name="marca" class="form-control" required>
+                <option selected value="/administrador/clientes/listar">Todos</option>
+                <option value="/administrador/clientes/ativos">Ativos</option>
+                <option value="/administrador/clientes/inativos">Inativos</option>
+            </select>
+        </div>
         <hr>
 
         <div class="form-group" id="filtros">
