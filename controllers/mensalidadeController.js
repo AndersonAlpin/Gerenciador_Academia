@@ -16,9 +16,7 @@ router.get("/administrador/mensalidades/aberto", adminAut, (req, res) => {
         include: [
             {
                 model: Cliente, required: true,
-                where: {
-                    AcademiumId: admin.idAcademia
-                }
+                where: { AcademiumId: admin.idAcademia }
             }
         ]
     }).then(mensalidades => {
@@ -35,9 +33,7 @@ router.get("/administrador/mensalidades/atraso", adminAut, (req, res) => {
         include: [
             {
                 model: Cliente, required: true,
-                where: {
-                    AcademiumId: admin.idAcademia
-                }
+                where: {  AcademiumId: admin.idAcademia }
             }
         ]
     }).then(mensalidades => {
@@ -55,9 +51,7 @@ router.get("/administrador/mensalidades/pago", adminAut, (req, res) => {
         include: [
             {
                 model: Cliente, required: true,
-                where: {
-                    AcademiumId: admin.idAcademia
-                }
+                where: { AcademiumId: admin.idAcademia }
             }
         ]
     }).then(mensalidades => {
@@ -105,9 +99,7 @@ router.post("/mensalidades/validar", adminAut, (req, res) => {
         status: 'Pago',
         dataPagamento: Date()
     }, {
-        where: {
-            id
-        }
+        where: { id }
     }).then(() => {
         res.redirect("/administrador/mensalidades/detalhes/" + id);
     });
@@ -123,9 +115,7 @@ router.post("/mensalidades/reverter", adminAut, (req, res) => {
         status: 'Em aberto',
         dataPagamento: null
     }, {
-        where: {
-            id
-        }
+        where: { id }
     }).then(() => {
         res.redirect("/administrador/mensalidades/detalhes/" + id);
     });
@@ -231,9 +221,7 @@ router.get("/administrador/mensalidades/antecipar/:id", adminAut, (req, res) => 
                 }
             }).then((pacotes) => {
                 Mensalidade.findAll({
-                    where: {
-                        clienteId: id
-                    },
+                    where: { clienteId: id },
                     order: [
                         ['dataVencimento', 'ASC']
                     ]
@@ -277,9 +265,7 @@ router.get("/administrador/mensalidades/alterarVencimento/:id", adminAut, (req, 
                 }
             }).then((pacotes) => {
                 Mensalidade.findAll({
-                    where: {
-                        clienteId: id
-                    },
+                    where: { clienteId: id },
                     order: [
                         ['dataVencimento', 'ASC']
                     ]

@@ -114,9 +114,7 @@ router.post("/administrador/senha/update", adminAut, (req, res) => {
     let atalizarSenha = async () => {
 
         let login = await Login.findOne({
-            where: {
-                id: admin.idLogin
-            }
+            where: { id: admin.idLogin }
         });
 
         try {
@@ -128,9 +126,7 @@ router.post("/administrador/senha/update", adminAut, (req, res) => {
                     Login.update({
                         senha: hash
                     }, {
-                        where: {
-                            id: admin.idLogin
-                        }
+                        where: { id: admin.idLogin }
                     }).then(() => {
                         res.redirect("/administrador/perfil")
                     });
