@@ -15,7 +15,17 @@ router.get("/administrador/relatorios/listar", adminAut, (req, res) => {
         numMensalidadeReceber: 0,
         totalEntradas: 0,
         totalReceber: 0,
-        totalAtraso: 0
+        totalAtraso: 0,
+        numHomens: 0,
+        numMulheres: 0,
+        numCartao: 0,
+        numDinheiro: 0,
+        numDeposito: 0,
+        numTransferencia: 0,
+        valorCartao: 0,
+        valorDinheiro: 0,
+        valorDeposito: 0,
+        valorTransferencia: 0
     }
 
     let gerarRelatorios = async () => {
@@ -44,6 +54,30 @@ router.get("/administrador/relatorios/listar", adminAut, (req, res) => {
                     relatorio.totalAtraso += mensalidade.valor;
                 }
             }
+
+            
+            // FORMAS DE PAGAMENTO
+            let forma = mensalidade.formaPagamento;
+            console.log(forma)
+
+            switch(forma){
+                case 'Dinheiro':
+                    relatorio.numDinheiro++;
+                    relatorio.valorDinheiro += mensalidade.valor;
+                    break;
+                case 'Cartão':
+                    relatorio.numCartao++;
+                    relatorio.valorCartao += mensalidade.valor;
+                    break;
+                case 'Depósito':
+                    relatorio.numDeposito++;
+                    relatorio.valorDeposito += mensalidade.valor;
+                    break;
+                case 'Transferencia':
+                    relatorio.numTransferencia++;
+                    relatorio.valorTransferencia += mensalidade.valor;
+                    break;
+            }
         });
 
         let clientes = await Cliente.findAll({
@@ -54,10 +88,18 @@ router.get("/administrador/relatorios/listar", adminAut, (req, res) => {
         clientes.forEach(cliente => {
             relatorio.numClientes++;
 
+            // ATIVOS/INATIVOS
             if (cliente.ativo == '1') {
                 relatorio.numClientesAtivos++
             } else {
                 relatorio.numClientesInativos++;
+            }
+
+            // HOMENS/MULHERES
+            if(cliente.sexo == 'Masculino'){
+                relatorio.numHomens++;
+            }else{
+                relatorio.numMulheres++;
             }
         });
 

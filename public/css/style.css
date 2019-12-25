@@ -233,7 +233,7 @@ body {
 /* =========RELATÓRIOS======= */
 
 .card {
-    margin-bottom: 25px;
+    margin-bottom: 25px
 }
 
 .lista-cards span {
@@ -247,6 +247,7 @@ body {
 
 .card-header {
     background-color: #363636;
+    text-align: center;
 }
 
 /* ========================== */

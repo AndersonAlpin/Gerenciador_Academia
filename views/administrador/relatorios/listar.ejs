@@ -7,14 +7,42 @@
 
     <div class="main-content">
         <div class="container">
+
+            <h2 class="titulos">Relatório Geral</h2>
+
+            <br>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Filtro</span>
+                </div>
+                <select id="select" name="marca" class="form-control" required>
+                    <option value="/administrador/relatorios/listar">Todos</option>
+                    <!-- <option value="01">Janeiro</option>
+                    <option value="02">Fevereiro</option>
+                    <option value="03">Março</option>
+                    <option value="04">Abril</option>
+                    <option value="05">Maio</option>
+                    <option value="06">Junho</option>
+                    <option value="07">Julho</option>
+                    <option value="08">Agosto</option>
+                    <option value="09">Setembro</option>
+                    <option value="10">Outubro</option>
+                    <option value="11">Novembro</option>
+                    <option value="12">Dezembro</option> -->
+                </select>
+            </div>
+            <hr>
+
             <!-- CARDS -->
 
             <!-- REFERENTE A CLIENTES -->
+            <h4 class="text-light" class="">Clientes</h4>
+
             <div class="row lista-cards">
                 <div class="col-sm-6 col-md-4">
                     <div class="card card-colors">
                         <h5 class="card-header"><a class="nav-link text-light"
-                                href="/administrador/clientes/listar">Total de clientes</a></h5>
+                                href="/administrador/clientes/listar">Total</a></h5>
                         <div class="card-body text-center">
                             <span class="card-text display-4"><%= relatorio.numClientes %></span>
                         </div>
@@ -24,7 +52,7 @@
                 <div class="col-sm-6 col-md-4">
                     <div class="card card-colors">
                         <h5 class="card-header"><a class="nav-link text-light"
-                                href="/administrador/clientes/ativos">Clientes ativos</a></h5>
+                                href="/administrador/clientes/ativos">Ativos</a></h5>
                         <div class="card-body text-center">
                             <span class="card-text display-4"><%= relatorio.numClientesAtivos %></span>
                         </div>
@@ -34,20 +62,41 @@
                 <div class="col-sm-12 col-md-4">
                     <div class="card card-colors">
                         <h5 class="card-header"><a class="nav-link text-light"
-                                href="/administrador/clientes/inativos">Clientes inativos</a></h5>
+                                href="/administrador/clientes/inativos">Inativos</a></h5>
                         <div class="card-body text-center">
                             <span class="card-text display-4"><%= relatorio.numClientesInativos %></span>
                         </div>
                     </div>
                 </div>
+
+                <div class="col-sm-12 col-md-4">
+                    <div class="card card-colors">
+                        <h5 class="card-header"><a class="nav-link text-light">Homens</a></h5>
+                        <div class="card-body text-center">
+                            <span class="card-text display-4"><%= relatorio.numHomens %></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-12 col-md-4">
+                    <div class="card card-colors">
+                        <h5 class="card-header"><a class="nav-link text-light">Mulheres</a></h5>
+                        <div class="card-body text-center">
+                            <span class="card-text display-4"><%= relatorio.numMulheres %></span>
+                        </div>
+                    </div>
+                </div>
             </div>
+            <hr>
 
             <!-- REFERENTE A MENSALIDADES -->
+            <h4 class="text-light" class="">Mensalidades</h4>
+
             <div class="row lista-cards">
                 <div class="col-sm-6 col-md-4">
                     <div class="card card-colors">
                         <h5 class="card-header"><a class="nav-link text-light"
-                                href="/administrador/mensalidades/aberto">Mensalidades em aberto</a></h5>
+                                href="/administrador/mensalidades/aberto">Em aberto</a></h5>
                         <div class="card-body text-center">
                             <span class="card-text display-4"><%= relatorio.numMensalidadeReceber %></span>
                         </div>
@@ -57,7 +106,7 @@
                 <div class="col-sm-6 col-md-4">
                     <div class="card card-colors">
                         <h5 class="card-header"><a class="nav-link text-light"
-                                href="/administrador/mensalidades/pago">Mensalidades pagas</a></h5>
+                                href="/administrador/mensalidades/pago">Pagas</a></h5>
                         <div class="card-body text-center">
                             <span class="card-text display-4"><%= relatorio.numMensalidadePago %></span>
                         </div>
@@ -67,7 +116,7 @@
                 <div class="col-sm-12 col-md-4">
                     <div class="card card-colors">
                         <h5 class="card-header"><a class="nav-link text-light"
-                                href="/administrador/mensalidades/atraso">Mensalidades atrasadas</a></h5>
+                                href="/administrador/mensalidades/atraso">Em atraso</a></h5>
                         <div class="card-body text-center">
                             <span class="card-text display-4"><%= relatorio.numMensalidadeAtraso %></span>
                         </div>
@@ -79,8 +128,7 @@
             <div class="row lista-cards">
                 <div class="col-sm-6 col-md-4">
                     <div class="card card-colors">
-                        <h5 class="card-header"><a class="nav-link text-light"
-                                href="">Valor a receber</a></h5>
+                        <h5 class="card-header"><a class="nav-link text-light">A receber</a></h5>
                         <div class="card-body text-center">
                             <% var valorReceber = relatorio.totalReceber.toLocaleString('pt-br', {style: 'currency', currency: 'BRL'}) %>
 
@@ -91,8 +139,7 @@
 
                 <div class="col-sm-6 col-md-4">
                     <div class="card card-colors">
-                        <h5 class="card-header"><a class="nav-link text-light"
-                                href="">Valor recebido</a></h5>
+                        <h5 class="card-header"><a class="nav-link text-light">Recebido</a></h5>
                         <div class="card-body text-center">
                             <% var valorPago = relatorio.totalEntradas.toLocaleString('pt-br', {style: 'currency', currency: 'BRL'}) %>
 
@@ -103,8 +150,7 @@
 
                 <div class="col-sm-12 col-md-4">
                     <div class="card card-colors">
-                        <h5 class="card-header"><a class="nav-link text-light"
-                                href="">Valor em atraso</a></h5>
+                        <h5 class="card-header"><a class="nav-link text-light">Em atraso</a></h5>
                         <div class="card-body text-center">
                             <% var valorAtraso = relatorio.totalAtraso.toLocaleString('pt-br', {style: 'currency', currency: 'BRL'}) %>
 
@@ -112,6 +158,101 @@
                         </div>
                     </div>
                 </div>
+            </div>
+            <hr>
+
+            <!-- REFERENTE A FORMAS DE PAGAMENTOS -->
+            <h4 class="text-light" class="">Formas de pagamentos</h4>
+
+            <div class="row lista-cards">
+                <div class="col-sm-6 col-md-4">
+                    <div class="card card-colors">
+                        <h5 class="card-header"><a class="nav-link text-light">Dinheiro</a></h5>
+                        <div class="card-body text-center">
+                            <span class="card-text display-4"><%= relatorio.numDinheiro %></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6 col-md-4">
+                    <div class="card card-colors">
+                        <h5 class="card-header"><a class="nav-link text-light">Cartão</a></h5>
+                        <div class="card-body text-center">
+                            <span class="card-text display-4"><%= relatorio.numCartao %></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-12 col-md-4">
+                    <div class="card card-colors">
+                        <h5 class="card-header"><a class="nav-link text-light">Depósito</a></h5>
+                        <div class="card-body text-center">
+                            <span class="card-text display-4"><%= relatorio.numDeposito %></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-12 col-md-4">
+                    <div class="card card-colors">
+                        <h5 class="card-header"><a class="nav-link text-light">Transferência</a></h5>
+                        <div class="card-body text-center">
+                            <span class="card-text display-4"><%= relatorio.numTransferencia %></span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <hr>
+
+            <!-- REFERENTE AOS VALORES EM CADA FORMA DE PAGAMENTO -->
+            <h4 class="text-light" class="">Valores recebidos</h4>
+
+            <div class="row lista-cards">
+
+                <div class="col-sm-6 col-md-4">
+                    <div class="card card-colors">
+                        <h5 class="card-header"><a class="nav-link text-light">Dinheiro</a></h5>
+                        <div class="card-body text-center">
+                            <% var valorDinheiro = relatorio.valorDinheiro.toLocaleString('pt-br', {style: 'currency', currency: 'BRL'}) %>
+
+                            <span class="card-text display-4"><%= valorDinheiro %></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6 col-md-4">
+                    <div class="card card-colors">
+                        <h5 class="card-header"><a class="nav-link text-light">Cartão</a></h5>
+                        <div class="card-body text-center">
+                            <% var valorCartao = relatorio.valorCartao.toLocaleString('pt-br', {style: 'currency', currency: 'BRL'}) %>
+
+                            <span class="card-text display-4"><%= valorCartao %></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-12 col-md-4">
+                    <div class="card card-colors">
+                        <h5 class="card-header"><a class="nav-link text-light">Depósito</a></h5>
+                        <div class="card-body text-center">
+                            <% var valorDeposito = relatorio.valorDeposito.toLocaleString('pt-br', {style: 'currency', currency: 'BRL'}) %>
+
+                            <span class="card-text display-4"><%= valorDeposito %></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-12 col-md-4">
+                    <div class="card card-colors">
+                        <h5 class="card-header"><a class="nav-link text-light">Transferência</a></h5>
+                        <div class="card-body text-center">
+                            <% var valorTransferencia = relatorio.valorTransferencia.toLocaleString('pt-br', {style: 'currency', currency: 'BRL'}) %>
+
+                            <span class="card-text display-4"><%= valorTransferencia %></span>
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
         </div>

@@ -26,9 +26,7 @@ router.post("/pacotes/delete", adminAut, (req, res) => {
         if (!isNaN(id)) { //SE FOR UM NÚMERO  
 
             Pacote.destroy({
-                where: {
-                    id
-                }
+                where: { id }
             }).then(() => {
                 res.redirect("/administrador/pacotes/listar");
             });
