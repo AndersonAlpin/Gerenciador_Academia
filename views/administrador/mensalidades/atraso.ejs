@@ -46,9 +46,6 @@
                 <tbody>
                     <% mensalidades.forEach(mensalidade => { %>
 
-                    <% var d = new Date(mensalidade.dataVencimento) %>
-                    <% var dataAtualizada = (d.getDate() + 1) + "/" + (d.getMonth()+1) + "/" + d.getFullYear(); %>
-
                     <% var v = mensalidade.valor %>
                     <% var real = v.toLocaleString('pt-br', {style: 'currency', currency: 'BRL'}) %>
 
@@ -58,7 +55,7 @@
                         <td> <%= mensalidade.cliente.sobrenome %> </td>
                         <td> <%= mensalidade.cliente.cpf %> </td>
                         <td> <%= real %> </td>
-                        <td> <%= dataAtualizada %> </td>
+                        <td> <input type="date" value="<%= mensalidade.dataVencimento %>" disabled> </td>
                         <td class="ocultar-colunas"> <%= mensalidade.status %> </td>
                         <td>
                             <a href="/administrador/mensalidades/detalhes/<%= mensalidade.id %>"
