@@ -43,7 +43,7 @@
                     </div>
                     <div class="form-group col-md-3">
                         <% var de = new Date(mensalidade.dataEmissao) %>
-                        <% var deAtualizada = (de.getDate() +1) + "/" + (de.getMonth()+1) + "/" + de.getFullYear(); %>
+                        <% var deAtualizada = (de.getDate() ) + "/" + (de.getMonth()) + "/" + de.getFullYear(); %>
 
                         <label for="inputSobrenome">Data de Emissão</label>
                         <input value="<%= deAtualizada %>" type="text" class="form-control" name="inputSobrenome"
@@ -51,7 +51,7 @@
                     </div>
                     <div class="form-group col-md-3">
                         <% var dv = new Date(mensalidade.dataVencimento) %>
-                        <% var dvAtualizada = (dv.getDate() +1) + "/" + (dv.getMonth()+1) + "/" + dv.getFullYear(); %>
+                        <% var dvAtualizada = (dv.getDate() ) + "/" + (dv.getMonth()) + "/" + dv.getFullYear(); %>
 
                         <label for="inputCPF">Data de Vencimento</label>
                         <input value="<%= dvAtualizada %>" type="text" class="form-control" name="inputCPF" disabled>
@@ -59,7 +59,7 @@
                     <div class="form-group col-md-3">
                         <% if(mensalidade.dataPagamento !== null) { %>
                         <% var dp = new Date(mensalidade.dataPagamento) %>
-                        <% var dpAtualizada = (dp.getDate() +1) + "/" + (de.getMonth()+1) + "/" + de.getFullYear(); %>
+                        <% var dpAtualizada = (dp.getDate() ) + "/" + (de.getMonth()) + "/" + de.getFullYear(); %>
                         <%}%>
 
                         <label for="inputCPF">Data de Pagamento</label>
