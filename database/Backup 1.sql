@@ -63,10 +63,10 @@ CREATE TABLE `administradors` (
   `ativo` tinyint(1) NOT NULL DEFAULT '1',
   `createdAt` datetime NOT NULL,
   `updatedAt` datetime NOT NULL,
-  `AcademiumId` int(11) DEFAULT NULL,
+  `academiumId` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `AcademiumId` (`AcademiumId`),
-  CONSTRAINT `administradors_ibfk_1` FOREIGN KEY (`AcademiumId`) REFERENCES `academia` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
+  KEY `academiumId` (`academiumId`),
+  CONSTRAINT `administradors_ibfk_1` FOREIGN KEY (`academiumId`) REFERENCES `academia` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -99,12 +99,12 @@ CREATE TABLE `clientes` (
   `ativo` tinyint(1) NOT NULL DEFAULT '1',
   `createdAt` datetime NOT NULL,
   `updatedAt` datetime NOT NULL,
-  `AcademiumId` int(11) DEFAULT NULL,
+  `academiumId` int(11) DEFAULT NULL,
   `pacoteId` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `AcademiumId` (`AcademiumId`),
+  KEY `academiumId` (`academiumId`),
   KEY `pacoteId` (`pacoteId`),
-  CONSTRAINT `clientes_ibfk_1` FOREIGN KEY (`AcademiumId`) REFERENCES `academia` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT `clientes_ibfk_1` FOREIGN KEY (`academiumId`) REFERENCES `academia` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
   CONSTRAINT `clientes_ibfk_2` FOREIGN KEY (`pacoteId`) REFERENCES `pacotes` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -136,10 +136,10 @@ CREATE TABLE `enderecoacademia` (
   `uf` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `createdAt` datetime NOT NULL,
   `updatedAt` datetime NOT NULL,
-  `AcademiumId` int(11) DEFAULT NULL,
+  `academiumId` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `AcademiumId` (`AcademiumId`),
-  CONSTRAINT `enderecoacademia_ibfk_1` FOREIGN KEY (`AcademiumId`) REFERENCES `academia` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
+  KEY `academiumId` (`academiumId`),
+  CONSTRAINT `enderecoacademia_ibfk_1` FOREIGN KEY (`academiumId`) REFERENCES `academia` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -268,10 +268,10 @@ CREATE TABLE `mensalidadeacademia` (
   `status` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'Em aberto',
   `createdAt` datetime NOT NULL,
   `updatedAt` datetime NOT NULL,
-  `AcademiumId` int(11) DEFAULT NULL,
+  `academiumId` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `AcademiumId` (`AcademiumId`),
-  CONSTRAINT `mensalidadeacademia_ibfk_1` FOREIGN KEY (`AcademiumId`) REFERENCES `academia` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
+  KEY `academiumId` (`academiumId`),
+  CONSTRAINT `mensalidadeacademia_ibfk_1` FOREIGN KEY (`academiumId`) REFERENCES `academia` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -331,7 +331,7 @@ CREATE TABLE `pacotes` (
   `nome` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `descricao` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `taxaDesconto` double NOT NULL,
-  `AcademiumId` int(11) DEFAULT NULL,
+  `academiumId` int(11) DEFAULT NULL,
   `createdAt` datetime NOT NULL,
   `updatedAt` datetime NOT NULL,
   PRIMARY KEY (`id`)
@@ -364,73 +364,140 @@ DELIMITER ;;
 /*!50003 SET sql_mode              = 'NO_ENGINE_SUBSTITUTION' */ ;;
 /*!50003 SET @saved_time_zone      = @@time_zone */ ;;
 /*!50003 SET time_zone             = 'SYSTEM' */ ;;
-/*!50106 CREATE*/ /*!50117 DEFINER=`academiaironfit`@`%`*/ /*!50106 EVENT `eventGerarMensalidades` ON SCHEDULE EVERY 10 SECOND STARTS '2019-12-12 12:47:17' ON COMPLETION NOT PRESERVE ENABLE COMMENT 'Responsável por gerar mensalidades mensalmente' DO BEGIN
-
-  START TRANSACTION;
-
-    SET @minID = (SELECT MIN(id) FROM clientes);
-
-    SET @maxID = (SELECT MAX(id) FROM clientes);
-
-
-    WHILE @minID <= @maxID DO
-
-      SET @clienteID = @minID;
-
-      SET @pacoteID = (SELECT pacoteId from clientes WHERE id = @clienteID);
-
-      SET @mensalidadeID = (SELECT MAX(id) FROM mensalidades WHERE clienteId = @clienteID);
-
-
-      SET @isAtivo = (SELECT ativo FROM clientes WHERE id = @clienteID);
- 
-
-      SET @valor = (SELECT COLUMN_DEFAULT AS valor FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = 'academiaironfit'  AND TABLE_NAME = 'mensalidades' AND COLUMN_NAME = 'valor');
-
-      SET @taxaDesconto = (SELECT taxaDesconto FROM pacotes WHERE id = @pacoteID);
-
-    	SET @valorMensalidade = (@valor - @taxaDesconto / 100 * @valor);
-      
-
-      SET @dataVencimento = (SELECT DATE_ADD(CURDATE(), INTERVAL 1 MONTH));
-
-      SET @dataVencimentoAtual = (SELECT dataVencimento FROM mensalidades WHERE id = @mensalidadeID);
-      
-      SET @dataEmissao = (SELECT dataEmissao FROM mensalidades WHERE id = @mensalidadeID);
-
-      SET @dataAtual = (SELECT CURDATE());
-      
-      SET @mesEmissao = (SELECT MONTH(@dataEmissao));
-
-      #SET @diaVencimento = (SELECT DAY(@dataVencimentoAtual));
-
-      #SET @mesVencimento = (SELECT MONTH(@dataVencimentoAtual));
-
-      #SET @diaAtual = (SELECT DAY(CURDATE()));
-
-      SET @mesAtual = (SELECT MONTH(CURDATE()));
-    
-
-      IF @clienteID > 0 AND @isAtivo = 1 THEN
-
-        IF @dataAtual >= @dataVencimentoAtual AND @mesEmissao != @mesAtual THEN
-
-          INSERT INTO mensalidades (valor, dataEmissao, dataVencimento, status,  createdAt, updatedAt, clienteId)
-
-          VALUES (@valorMensalidade, NOW(), @dataVencimento, 'Em aberto', NOW(), NOW(), @clienteID);
-
-        END IF;
-
-      END IF;    
-
-      SET @minID = @minID + 1; 
-
-    END WHILE;
-
-    
-
-  COMMIT;
-
+/*!50106 CREATE*/ /*!50117 DEFINER=`academiaironfit`@`%`*/ /*!50106 EVENT `eventGerarMensalidades` ON SCHEDULE EVERY 10 SECOND STARTS '2019-12-12 12:47:17' ON COMPLETION NOT PRESERVE ENABLE COMMENT 'Responsável por gerar mensalidades mensalmente' DO BEGIN
+
+
+
+  START TRANSACTION;
+
+
+
+    SET @minID = (SELECT MIN(id) FROM clientes);
+
+
+
+    SET @maxID = (SELECT MAX(id) FROM clientes);
+
+
+
+
+
+    WHILE @minID <= @maxID DO
+
+
+
+      SET @clienteID = @minID;
+
+
+
+      SET @pacoteID = (SELECT pacoteId from clientes WHERE id = @clienteID);
+
+
+
+      SET @mensalidadeID = (SELECT MAX(id) FROM mensalidades WHERE clienteId = @clienteID);
+
+
+
+
+
+      SET @isAtivo = (SELECT ativo FROM clientes WHERE id = @clienteID);
+
+ 
+
+
+
+      SET @valor = (SELECT COLUMN_DEFAULT AS valor FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = 'academiaironfit'  AND TABLE_NAME = 'mensalidades' AND COLUMN_NAME = 'valor');
+
+
+
+      SET @taxaDesconto = (SELECT taxaDesconto FROM pacotes WHERE id = @pacoteID);
+
+
+
+    	SET @valorMensalidade = (@valor - @taxaDesconto / 100 * @valor);
+
+      
+
+
+
+      SET @dataVencimento = (SELECT DATE_ADD(CURDATE(), INTERVAL 1 MONTH));
+
+
+
+      SET @dataVencimentoAtual = (SELECT dataVencimento FROM mensalidades WHERE id = @mensalidadeID);
+
+      
+
+      SET @dataEmissao = (SELECT dataEmissao FROM mensalidades WHERE id = @mensalidadeID);
+
+
+
+      SET @dataAtual = (SELECT CURDATE());
+
+      
+
+      SET @mesEmissao = (SELECT MONTH(@dataEmissao));
+
+
+
+      #SET @diaVencimento = (SELECT DAY(@dataVencimentoAtual));
+
+
+
+      #SET @mesVencimento = (SELECT MONTH(@dataVencimentoAtual));
+
+
+
+      #SET @diaAtual = (SELECT DAY(CURDATE()));
+
+
+
+      SET @mesAtual = (SELECT MONTH(CURDATE()));
+
+    
+
+
+
+      IF @clienteID > 0 AND @isAtivo = 1 THEN
+
+
+
+        IF @dataAtual >= @dataVencimentoAtual AND @mesEmissao != @mesAtual THEN
+
+
+
+          INSERT INTO mensalidades (valor, dataEmissao, dataVencimento, status,  createdAt, updatedAt, clienteId)
+
+
+
+          VALUES (@valorMensalidade, NOW(), @dataVencimento, 'Em aberto', NOW(), NOW(), @clienteID);
+
+
+
+        END IF;
+
+
+
+      END IF;    
+
+
+
+      SET @minID = @minID + 1; 
+
+
+
+    END WHILE;
+
+
+
+    
+
+
+
+  COMMIT;
+
+
+
 END */ ;;
 /*!50003 SET time_zone             = @saved_time_zone */ ;;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;;
@@ -449,50 +516,94 @@ DELIMITER ;;
 /*!50003 SET sql_mode              = 'NO_ENGINE_SUBSTITUTION' */ ;;
 /*!50003 SET @saved_time_zone      = @@time_zone */ ;;
 /*!50003 SET time_zone             = 'SYSTEM' */ ;;
-/*!50106 CREATE*/ /*!50117 DEFINER=`academiaironfit`@`%`*/ /*!50106 EVENT `eventVerificarMensalidades` ON SCHEDULE EVERY 10 SECOND STARTS '2019-12-17 10:06:44' ON COMPLETION NOT PRESERVE ENABLE COMMENT 'Responsável por verificar mensalidades diariamente' DO BEGIN
-
-  START TRANSACTION;
-
-    SET @minID = (SELECT MIN(id) FROM mensalidades);
-
-    SET @maxID = (SELECT MAX(id) FROM mensalidades);
-
-    
-
-    WHILE @minID <= @maxID DO
-
-    
-
-      SET @statusMensalidade = (SELECT status FROM mensalidades WHERE id = @minID);
-
-      SET @vencimento = (SELECT dataVencimento FROM mensalidades WHERE id = @minID);
-
-      
-
-      IF @minID > 0 THEN
-
-        IF @statusMensalidade = 'Em aberto' AND @vencimento < CURDATE() THEN
-
-          UPDATE mensalidades
-
-          SET status = 'Em atraso'
-
-          WHERE ID = @minID;
-
-        END IF;
-
-      END IF;
-
-      
-
-      SET @minID = @minID + 1;
-
-    END WHILE;
-
-    
-
-  COMMIT;
-
+/*!50106 CREATE*/ /*!50117 DEFINER=`academiaironfit`@`%`*/ /*!50106 EVENT `eventVerificarMensalidades` ON SCHEDULE EVERY 10 SECOND STARTS '2019-12-17 10:06:44' ON COMPLETION NOT PRESERVE ENABLE COMMENT 'Responsável por verificar mensalidades diariamente' DO BEGIN
+
+
+
+  START TRANSACTION;
+
+
+
+    SET @minID = (SELECT MIN(id) FROM mensalidades);
+
+
+
+    SET @maxID = (SELECT MAX(id) FROM mensalidades);
+
+
+
+    
+
+
+
+    WHILE @minID <= @maxID DO
+
+
+
+    
+
+
+
+      SET @statusMensalidade = (SELECT status FROM mensalidades WHERE id = @minID);
+
+
+
+      SET @vencimento = (SELECT dataVencimento FROM mensalidades WHERE id = @minID);
+
+
+
+      
+
+
+
+      IF @minID > 0 THEN
+
+
+
+        IF @statusMensalidade = 'Em aberto' AND @vencimento < CURDATE() THEN
+
+
+
+          UPDATE mensalidades
+
+
+
+          SET status = 'Em atraso'
+
+
+
+          WHERE ID = @minID;
+
+
+
+        END IF;
+
+
+
+      END IF;
+
+
+
+      
+
+
+
+      SET @minID = @minID + 1;
+
+
+
+    END WHILE;
+
+
+
+    
+
+
+
+  COMMIT;
+
+
+
 END */ ;;
 /*!50003 SET time_zone             = @saved_time_zone */ ;;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;;
@@ -515,22 +626,37 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`academiaironfit`@`%` PROCEDURE `alterarVencimento`(
-  idCliente int(11),
-  dataVenc date
+CREATE DEFINER=`academiaironfit`@`%` PROCEDURE `alterarVencimento`(
+
+  idCliente int(11),
+
+  dataVenc date
+
 )
-BEGIN
-  
-  SET @dataVencimento = dataVenc;
-  
-  SET @idCliente = idCliente;
-  
-  SET @idMensalidade = (SELECT MAX(id) FROM mensalidades WHERE clienteId = @idCliente);
-
-  UPDATE mensalidades
-  SET dataVencimento = @dataVencimento
-  WHERE id = @idMensalidade;
-
+BEGIN
+
+  
+
+  SET @dataVencimento = dataVenc;
+
+  
+
+  SET @idCliente = idCliente;
+
+  
+
+  SET @idMensalidade = (SELECT MAX(id) FROM mensalidades WHERE clienteId = @idCliente);
+
+
+
+  UPDATE mensalidades
+
+  SET dataVencimento = @dataVencimento
+
+  WHERE id = @idMensalidade;
+
+
+
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -547,36 +673,65 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`academiaironfit`@`%` PROCEDURE `anteciparMensalidade`(
-  idCliente int(11), 
-  idPacote int(11),
-  forma varchar(250),
-  dataVenc date
+CREATE DEFINER=`academiaironfit`@`%` PROCEDURE `anteciparMensalidade`(
+
+  idCliente int(11), 
+
+  idPacote int(11),
+
+  forma varchar(250),
+
+  dataVenc date
+
 )
-BEGIN
-
-  SET @valor = (SELECT `COLUMN_DEFAULT` AS 'valor' FROM `INFORMATION_SCHEMA`.`COLUMNS` WHERE `TABLE_SCHEMA` = 'academiaironfit' AND `TABLE_NAME` = 'mensalidades' AND `COLUMN_NAME` = 'valor');
-
-  SET @taxaDesconto = (SELECT `taxaDesconto` FROM `pacotes` WHERE `id` = idPacote);
-
-  SET @valorMensalidade = (@valor - @taxaDesconto / 100 * @valor);
-
-  SET @forma = forma;
-  
-  SET @dataVencimento = dataVenc;
-  
-  SET @idCliente = idCliente;
-
-  INSERT
-
-    INTO `mensalidades`
-
-    (`valor`, `dataEmissao`, `dataVencimento`, `dataPagamento`, `formaPagamento`, `status`, `createdAt`, `updatedAt`, `clienteID`)
-
-  VALUES
-
-    (@valorMensalidade, CURDATE(), @dataVencimento, CURDATE(), @forma, 'Pago', NOW(), NOW(), @idCliente);
-
+BEGIN
+
+
+
+  SET @valor = (SELECT `COLUMN_DEFAULT` AS 'valor' FROM `INFORMATION_SCHEMA`.`COLUMNS` WHERE `TABLE_SCHEMA` = 'academiaironfit' AND `TABLE_NAME` = 'mensalidades' AND `COLUMN_NAME` = 'valor');
+
+
+
+  SET @taxaDesconto = (SELECT `taxaDesconto` FROM `pacotes` WHERE `id` = idPacote);
+
+
+
+  SET @valorMensalidade = (@valor - @taxaDesconto / 100 * @valor);
+
+
+
+  SET @forma = forma;
+
+  
+
+  SET @dataVencimento = dataVenc;
+
+  
+
+  SET @idCliente = idCliente;
+
+
+
+  INSERT
+
+
+
+    INTO `mensalidades`
+
+
+
+    (`valor`, `dataEmissao`, `dataVencimento`, `dataPagamento`, `formaPagamento`, `status`, `createdAt`, `updatedAt`, `clienteID`)
+
+
+
+  VALUES
+
+
+
+    (@valorMensalidade, CURDATE(), @dataVencimento, CURDATE(), @forma, 'Pago', NOW(), NOW(), @idCliente);
+
+
+
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -594,30 +749,54 @@ DELIMITER ;
 /*!50003 SET sql_mode              = 'NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`academiaironfit`@`%` PROCEDURE `primeiraMensalidadeAberta`()
-BEGIN
-
-  SET @valor = (SELECT `COLUMN_DEFAULT` AS 'valor' FROM `INFORMATION_SCHEMA`.`COLUMNS` WHERE `TABLE_SCHEMA` = 'academiaironfit' AND `TABLE_NAME` = 'mensalidades' AND `COLUMN_NAME` = 'valor');
-
-  SET @ultimoID = (SELECT MAX(`id`) FROM `clientes`);
-
-  SET @idPacote = (SELECT pacoteId FROM clientes WHERE id = @ultimoID);
-
-  SET @taxaDesconto = (SELECT `taxaDesconto` FROM `pacotes` WHERE `id` = @idPacote);
-
-  SET @valorMensalidade = (@valor - @taxaDesconto / 100 * @valor);
-
-  SET @dataVencimento = (SELECT DATE_ADD(CURDATE(), INTERVAL 1 MONTH));
-
-  INSERT
-
-    INTO `mensalidades`
-
-    (`valor`, `dataEmissao`, `dataVencimento`, `status`, `createdAt`, `updatedAt`, `clienteID`)
-
-  VALUES
-
-    (@valorMensalidade, CURDATE(), @dataVencimento, 'Em aberto', NOW(), NOW(), @ultimoID);
-
+BEGIN
+
+
+
+  SET @valor = (SELECT `COLUMN_DEFAULT` AS 'valor' FROM `INFORMATION_SCHEMA`.`COLUMNS` WHERE `TABLE_SCHEMA` = 'academiaironfit' AND `TABLE_NAME` = 'mensalidades' AND `COLUMN_NAME` = 'valor');
+
+
+
+  SET @ultimoID = (SELECT MAX(`id`) FROM `clientes`);
+
+
+
+  SET @idPacote = (SELECT pacoteId FROM clientes WHERE id = @ultimoID);
+
+
+
+  SET @taxaDesconto = (SELECT `taxaDesconto` FROM `pacotes` WHERE `id` = @idPacote);
+
+
+
+  SET @valorMensalidade = (@valor - @taxaDesconto / 100 * @valor);
+
+
+
+  SET @dataVencimento = (SELECT DATE_ADD(CURDATE(), INTERVAL 1 MONTH));
+
+
+
+  INSERT
+
+
+
+    INTO `mensalidades`
+
+
+
+    (`valor`, `dataEmissao`, `dataVencimento`, `status`, `createdAt`, `updatedAt`, `clienteID`)
+
+
+
+  VALUES
+
+
+
+    (@valorMensalidade, CURDATE(), @dataVencimento, 'Em aberto', NOW(), NOW(), @ultimoID);
+
+
+
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -635,28 +814,50 @@ DELIMITER ;
 /*!50003 SET sql_mode              = 'NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`academiaironfit`@`%` PROCEDURE `primeiraMensalidadePaga`(idPacote int(11), forma varchar(250))
-BEGIN
-
-  SET @valor = (SELECT `COLUMN_DEFAULT` AS 'valor' FROM `INFORMATION_SCHEMA`.`COLUMNS` WHERE `TABLE_SCHEMA` = 'academiaironfit' AND `TABLE_NAME` = 'mensalidades' AND `COLUMN_NAME` = 'valor');
-
-  SET @taxaDesconto = (SELECT `taxaDesconto` FROM `pacotes` WHERE `id` = idPacote);
-
-  SET @ultimoID = (SELECT MAX(`id`) FROM `clientes`);
-
-  SET @valorMensalidade = (@valor - @taxaDesconto / 100 * @valor);
-
-  SET @forma = forma;
-
-  INSERT
-
-    INTO `mensalidades`
-
-    (`valor`, `dataEmissao`, `dataVencimento`, `dataPagamento`, `formaPagamento`, `status`, `createdAt`, `updatedAt`, `clienteID`)
-
-  VALUES
-
-    (@valorMensalidade, CURDATE(), CURDATE(), CURDATE(), @forma, 'Pago', NOW(), NOW(), @ultimoID);
-
+BEGIN
+
+
+
+  SET @valor = (SELECT `COLUMN_DEFAULT` AS 'valor' FROM `INFORMATION_SCHEMA`.`COLUMNS` WHERE `TABLE_SCHEMA` = 'academiaironfit' AND `TABLE_NAME` = 'mensalidades' AND `COLUMN_NAME` = 'valor');
+
+
+
+  SET @taxaDesconto = (SELECT `taxaDesconto` FROM `pacotes` WHERE `id` = idPacote);
+
+
+
+  SET @ultimoID = (SELECT MAX(`id`) FROM `clientes`);
+
+
+
+  SET @valorMensalidade = (@valor - @taxaDesconto / 100 * @valor);
+
+
+
+  SET @forma = forma;
+
+
+
+  INSERT
+
+
+
+    INTO `mensalidades`
+
+
+
+    (`valor`, `dataEmissao`, `dataVencimento`, `dataPagamento`, `formaPagamento`, `status`, `createdAt`, `updatedAt`, `clienteID`)
+
+
+
+  VALUES
+
+
+
+    (@valorMensalidade, CURDATE(), CURDATE(), CURDATE(), @forma, 'Pago', NOW(), NOW(), @ultimoID);
+
+
+
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;

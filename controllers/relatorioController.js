@@ -39,7 +39,7 @@ router.get("/administrador/relatorios/listar", adminAut, (req, res) => {
             include: [
                 {
                     model: Cliente, required: true,
-                    where: { AcademiumId: admin.idAcademia }
+                    where: { academiumId: admin.idAcademia }
                 }
             ]
         });
@@ -85,7 +85,7 @@ router.get("/administrador/relatorios/listar", adminAut, (req, res) => {
         });
 
         let clientes = await Cliente.findAll({
-            where: { AcademiumId: admin.idAcademia }
+            where: { academiumId: admin.idAcademia }
         });
 
         // NUMERO CLIENTES

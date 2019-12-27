@@ -6,7 +6,7 @@ const adminAut = require("../middlewares/adminAut");
 // LISTAR PACOTES
 router.get("/administrador/pacotes/listar", adminAut, (req, res) => {
     Pacote.findAll({
-        where: { AcademiumId: admin.idAcademia },
+        where: { academiumId: admin.idAcademia },
         order: [['taxaDesconto', 'DESC']]
     }).then(pacotes => {
         res.render("administrador/pacotes/listar", { pacotes });
@@ -56,7 +56,7 @@ router.post("/pacote/salvar", adminAut, (req, res) => {
             nome,
             descricao,
             taxaDesconto,
-            AcademiumId: admin.idAcademia // NÃO QUER SALVAR O ID DA ACADEMIA NA TABELA PACOTE
+            academiumId: admin.idAcademia // NÃO QUER SALVAR O ID DA ACADEMIA NA TABELA PACOTE
         }).then(function () {
             res.redirect("/administrador/pacotes/listar");
         }).catch(function (erro) {

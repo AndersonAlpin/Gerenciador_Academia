@@ -13,7 +13,7 @@ router.get("/administrador/clientes/listar", adminAut, (req, res) => {
 
     let listarClientes = async () => {
         let clientes = await Cliente.findAll({
-            where: { AcademiumId: admin.idAcademia },
+            where: { academiumId: admin.idAcademia },
             order: [['nome', 'ASC']],
             include: [
                 {
@@ -37,7 +37,7 @@ router.get("/administrador/clientes/ativos", adminAut, (req, res) => {
 
     let listarClientes = async () => {
         let clientes = await Cliente.findAll({
-            where: { AcademiumId: admin.idAcademia },
+            where: { academiumId: admin.idAcademia },
             order: [['nome', 'ASC']],
             include: [
                 {
@@ -60,7 +60,7 @@ router.get("/administrador/clientes/inativos", adminAut, (req, res) => {
 
     let listarClientes = async () => {
         let clientes = await Cliente.findAll({
-            where: { AcademiumId: admin.idAcademia },
+            where: { academiumId: admin.idAcademia },
             order: [['nome', 'ASC']],
             include: [
                 {
@@ -84,7 +84,7 @@ router.get("/administrador/clientes/cadastro", adminAut, (req, res) => {
     let formularioCadastro = async () => {
 
         let pacote = await Pacote.findAll({
-            where: { AcademiumId: admin.idAcademia }
+            where: { academiumId: admin.idAcademia }
         });
 
         res.render("administrador/clientes/cadastro", { pacote });
@@ -122,7 +122,7 @@ router.post("/clientes/salvar", adminAut, (req, res) => {
             cpf,
             telefone,
             email,
-            AcademiumId: admin.idAcademia,
+            academiumId: admin.idAcademia,
             pacoteId
         }).catch(err => {
             res.redirect("/administrador/clientes/cadastro");
@@ -203,7 +203,7 @@ router.get("/administrador/clientes/editar/:id", adminAut, (req, res) => {
     let formularioEdicao = async () => {
 
         let pacote = await Pacote.findAll({
-            where: { AcademiumId: admin.idAcademia }
+            where: { academiumId: admin.idAcademia }
         }).catch(err => {
             res.redirect("/administrador/clientes/listar");
             console.log('Não foi possível continuar a busca do pacote: ' + err);

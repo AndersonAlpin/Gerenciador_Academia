@@ -12,7 +12,7 @@ const enviarEmail = require('../email/send');
 router.get("/administrador/home", adminAut, (req, res) => {
 
     Pacote.findAll({
-        where: { AcademiumId: admin.idAcademia }
+        where: { academiumId: admin.idAcademia }
     }).then(pacotes => {
         res.render("administrador/home", { pacotes });
     })
@@ -65,7 +65,7 @@ router.post("/autenticacao", (req, res) => {
             idLogin: login.id,
             idAdmin: login.administrador.id,
             idEndereco: login.administrador.enderecoadministrador.id,
-            idAcademia: login.administrador.AcademiumId,
+            idAcademia: login.administrador.academiumId,
 
             nome: login.administrador.nome,
             sobrenome: login.administrador.sobrenome,
@@ -266,7 +266,7 @@ router.get("/logout", (req, res) => {
 // let sobrenome = 'IronFit';
 // let cpf = '045.123.451-15';
 // let telefone = '(73)95543-1256';
-// let AcademiumId = '1';
+// let academiumId = '1';
 // let email = 'adminironfit@gmail.com';
 // let senha = 'admin2001';
 

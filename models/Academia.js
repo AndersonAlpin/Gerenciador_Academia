@@ -2,7 +2,7 @@ const Sequelize = require("sequelize");
 const connection = require("../database/connection");
 
 // Tabela Login
-const Academia = connection.define('Academia', {
+const Academia = connection.define('academia', {
     id: {
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -16,6 +16,6 @@ const Academia = connection.define('Academia', {
 });
 
 // Necessário para criar a base de dados. Comentar este trecho após executar o servidor
-// Academia.sync({force: true}); 
+// Academia.sync({force: false}); 
 
 module.exports = Academia;

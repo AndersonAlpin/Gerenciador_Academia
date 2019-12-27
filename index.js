@@ -12,6 +12,7 @@ const clienteController = require("./controllers/clienteController");
 const relatorioController = require("./controllers/relatorioController");
 const mensalidadeController = require("./controllers/mensalidadeController");
 const adminController = require("./controllers/administradorController");
+const ferramentaController = require("./controllers/ferramentaController");
 // /////////////////////////////////////////////////////////////////////////////////
 
 // VIEW ENGINE
@@ -45,6 +46,7 @@ app.use("/", clienteController);
 app.use("/", relatorioController);
 app.use("/", mensalidadeController);
 app.use("/", adminController);
+app.use("/", ferramentaController);
 //////////////////////////////////////
 
 
@@ -56,6 +58,7 @@ const Pacote = require("./models/Pacote");
 const Cliente = require("./models/Cliente");
 const EnderecoClientecoCliente = require("./models/EnderecoCliente");
 const Mensalidade = require("./models/Mensalidade");
+const Gasto = require("./models/Gasto");
 /////////////////////////////////////////////////////////////////////
 
 // Database
