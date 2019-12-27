@@ -2,13 +2,21 @@ const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcryptjs");
 const Administrador = require("../models/Administrador");
+const Pacote = require("../models/Pacote");
 const EnderecoAdministrador = require("../models/EnderecoAdministrador");
 const Login = require("../models/Login");
 const adminAut = require("../middlewares/adminAut");
+const enviarEmail = require('../email/send');
 
 // HOME DO ADMINISTRADOR
 router.get("/administrador/home", adminAut, (req, res) => {
-    res.render("administrador/home");
+
+    Pacote.findAll({
+        where: { AcademiumId: admin.idAcademia }
+    }).then(pacotes => {
+        res.render("administrador/home", { pacotes });
+    })
+
 });
 
 // AUTENTICAÇÃO
@@ -76,6 +84,7 @@ router.post("/autenticacao", (req, res) => {
             cep: login.administrador.enderecoadministrador.cep,
             uf: login.administrador.enderecoadministrador.uf
         }
+
         global.admin = req.session.login;
     }
 
@@ -217,13 +226,32 @@ router.post("/administrador/dados/update", adminAut, (req, res) => {
     atualizarDados();
 });
 
+// INFORMAR O EMAIL QUE FOI ESQUECIDO
+router.get("/administrador/resetPassword/email", (req, res) => {
+    res.render("administrador/resetPassword/email");
+});
+
 // ENVIAR CÓDIGO DE RECUPERAÇÃO PARA O EMAIL
-router.get("/administrador/resetPassword/code", (req, res) => {
+router.post("/enviarCodigo", (req, res) => {
+    let email = req.body.email;
+    let codigo = Math.floor(Math.random() * 100000);
+
+    req.session.alterarSenha = {
+        code: codigo
+    }
+
+    enviarEmail.enviarCodigo(email, codigo);
+
     res.render("administrador/resetPassword/code");
 });
 
+// VALIDAR CÓDIGO
+router.get("/administrador/resetPassword/code", (req, res) => {
+    res.render("administrador/resetPassword/alterPassword");
+});
+
 // ALTERAR A SENHA
-router.get("/administrador/resetPassword/alterPassword", (req, res) => {
+router.post("/administrador/resetPassword/alterPassword", (req, res) => {
     res.render("administrador/resetPassword/alterPassword");
 });
 

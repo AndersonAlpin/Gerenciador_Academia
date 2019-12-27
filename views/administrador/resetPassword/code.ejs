@@ -34,10 +34,13 @@
                 <div class="modal-content" style="height: 350px;">
                   <span class="h4 mb-5 text-light login-titulo text-center">Recuperação de Senha</span>
 
-                  <form action="/autenticacao" method="POST" class="col-12">
+                  <form action="/administrador/resetPassword/code" method="POST" class="col-12">
                     <div>
                       <label class="text-light" for="codigo">Informe o código enviado para o seu email:</label>
-                      <input type="text" class="form-control" id="codigo">
+                      <input type="text" class="form-control" id="codigo" name="codigo" required>
+                    </div>
+                    <div id="mensagem" class="mensagem" style="color: red; font-size: 14px;">
+                      <%= messages.codigoInvalido %>
                     </div>
                     <div class="form-group mt-4">
                       <input type="submit" class="btn btn-primary btn-block btn-lg mt-4" value="Confirmar">

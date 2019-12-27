@@ -10,20 +10,41 @@ let transporter = nodemailer.createTransport({
     }
 });
 
-transporter.sendMail({
-    from: "Academia IronFit <academiaprojetoweb@gmail.com>",
-    to: "anderalpin@gmail.com",
-    subject: "Este é um email de teste",
-    text: "Esse é um email de teste novamente",
-    html: "Esse é um email de teste mais uma vez",
-    attachments: [
-        {
-            filename: 'bemvindo.jpg',
-            path: __dirname + '/bemvindo.jpg'
-        }
-    ]
-}).then(message => {
-    console.log(message);
-}).catch(err => {
-    console.log(err);
-});
+// transporter.sendMail({
+//     from: "Academia IronFit <academiaprojetoweb@gmail.com>",
+//     to: "anderalpin@gmail.com",
+//     subject: "Este é um email de teste",
+//     text: "Esse é um email de teste novamente",
+//     html: "Esse é um email de teste mais uma vez",
+//     attachments: [
+//         {
+//             filename: 'bemvindo.jpg',
+//             path: __dirname + '/bemvindo.jpg'
+//         }
+//     ]
+// }).then(message => {
+//     console.log(message);
+// }).catch(err => {
+//     console.log(err);
+// });
+
+
+module.exports = {
+
+    enviarCodigo: function (email, codigo) {
+        transporter.sendMail({
+            from: "Gerenciador de Academia <academiaprojetoweb@gmail.com>",
+            to: email,
+            subject: "Código de recuperação",
+            text: "",
+            html: `
+                <h2>Código de recuperação: </h2> <h3 style="color: red;">${codigo}</h3>
+            `
+        }).then(message => {
+            console.log(message);
+        }).catch(err => {
+            console.log(err);
+        });
+    }
+
+}
