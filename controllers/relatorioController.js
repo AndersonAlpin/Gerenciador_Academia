@@ -3,6 +3,7 @@ const router = express.Router();
 const adminAut = require("../middlewares/adminAut");
 const Cliente = require("../models/Cliente");
 const Mensalidade = require("../models/Mensalidade");
+const Gasto = require("../models/Gasto");
 const Sequelize = require("sequelize");
 const connection = require("../database/connection");
 
@@ -30,7 +31,8 @@ router.get("/administrador/relatorios/listar", adminAut, (req, res) => {
         valorCartao: 0,
         valorDinheiro: 0,
         valorDeposito: 0,
-        valorTransferencia: 0
+        valorTransferencia: 0,
+        valorGasto: 0
     }
 
     let gerarRelatorios = async () => {
@@ -107,7 +109,16 @@ router.get("/administrador/relatorios/listar", adminAut, (req, res) => {
             }
         });
 
-        res.render("administrador/relatorios/listar", { relatorio });
+        // SAÍDAS
+        let gastos = await Gasto.findAll({
+            where: { academiumId: admin.idAcademia }
+        });
+
+        gastos.forEach(gasto => {
+            relatorio.valorGasto += gasto.valor;
+        });
+
+        res.render("administrador/relatorios/listar", { relatorio, gastos });
         
     }
 
@@ -140,7 +151,8 @@ router.get("/administrador/relatorios/listar/:mes", adminAut, (req, res) => {
         valorCartao: 0,
         valorDinheiro: 0,
         valorDeposito: 0,
-        valorTransferencia: 0
+        valorTransferencia: 0,
+        valorGasto: 0
     }
 
     let gerarRelatorios = async () => {
@@ -214,7 +226,17 @@ router.get("/administrador/relatorios/listar/:mes", adminAut, (req, res) => {
             }
         });
 
-        res.render("administrador/relatorios/listar", { relatorio });
+        // SAÍDAS
+        let gastos = await connection.query(`
+        call relatorioGastos('${admin.idAcademia}', '${mes}')`, {
+        type: Sequelize.DataTypes.SELECT
+    });
+
+        gastos.forEach(gasto => {
+            relatorio.valorGasto += gasto.valor;
+        });
+
+        res.render("administrador/relatorios/listar", { relatorio, gastos });
     }
 
     gerarRelatorios();

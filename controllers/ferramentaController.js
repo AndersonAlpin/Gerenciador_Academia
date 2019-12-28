@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const adminAut = require("../middlewares/adminAut");
+const Gasto = require("../models/Gasto");
 const Academia = require("../models/Academia");
 const EnderecoAcademia = require("../models/EnderecoAcademia");
 const Sequelize = require("sequelize");
@@ -68,6 +69,26 @@ router.post("/atualizarAcademia", (req, res) => {
     }
 
     atualizarDados();
-})
+});
+
+
+// CADASTRAR OS GASTOS DA ACADEMIA
+router.post("/inserirGastos", (req, res) => {
+    var valor =  req.body.inputValor.replace(',', '.');
+    var descricao =  req.body.inputDescricao;
+
+    let atualizarDados = async () => {
+
+        await Gasto.create({
+           valor,
+           descricao,
+           academiumId: admin.idAcademia
+        });
+
+        res.redirect("/administrador/ferramentas");
+    }
+
+    atualizarDados();
+});
 
 module.exports = router;

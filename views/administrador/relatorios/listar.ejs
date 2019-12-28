@@ -228,7 +228,7 @@
             <hr>
 
             <div class="table-responsive-md tabelas">
-                <table class="table table-sm" id="tabela">
+                <table class="table table-sm">
                     <caption class="text-white-50">Relatório de clientes</caption>
                     <thead class="tabela-head">
                         <tr>
@@ -251,10 +251,8 @@
                 </table>
             </div>
 
-           
-
             <div class="table-responsive-md tabelas">
-                <table class="table table-sm" id="tabela">
+                <table class="table table-sm">
                     <caption class="text-white-50">Relatório de mensalidades</caption>
                     <thead class="tabela-head">
                         <tr>
@@ -270,17 +268,17 @@
                         <tr class="tabelas-linhas">
                             <td><%= relatorio.numMensalidadeReceber %></td>
                             <td>
-                                <% var valorReceber = relatorio.totalReceber.toLocaleString('pt-br', {style: 'currency', currency: 'BRL'}) %>
+                                <% let valorReceber = relatorio.totalReceber.toLocaleString('pt-br', {style: 'currency', currency: 'BRL'}) %>
                                 <%= valorReceber %>
                             </td>
                             <td><%= relatorio.numMensalidadePago %></td>
                             <td>
-                                <% var valorPago = relatorio.totalEntradas.toLocaleString('pt-br', {style: 'currency', currency: 'BRL'}) %>
-                                <%= valorPago %>
+                                <% let valorEntradas = relatorio.totalEntradas.toLocaleString('pt-br', {style: 'currency', currency: 'BRL'}) %>
+                                <%= valorEntradas %>
                             </td>
                             <td><%= relatorio.numMensalidadeAtraso %></td>
                             <td>
-                                <% var valorAtraso = relatorio.totalAtraso.toLocaleString('pt-br', {style: 'currency', currency: 'BRL'}) %>
+                                <% let valorAtraso = relatorio.totalAtraso.toLocaleString('pt-br', {style: 'currency', currency: 'BRL'}) %>
                                 <%= valorAtraso %>
                             </td>
                         </tr>
@@ -288,10 +286,8 @@
                 </table>
             </div>
 
-            
-
             <div class="table-responsive-md tabelas">
-                <table class="table table-sm" id="tabela">
+                <table class="table table-sm">
                     <caption class="text-white-50">Relatório de formas de pagamentos</caption>
                     <thead class="tabela-head">
                         <tr>
@@ -309,32 +305,87 @@
                         <tr class="tabelas-linhas">
                             <td><%= relatorio.numDinheiro %></td>
                             <td>
-                                <% var valorDinheiro = relatorio.valorDinheiro.toLocaleString('pt-br', {style: 'currency', currency: 'BRL'}) %>
+                                <% let valorDinheiro = relatorio.valorDinheiro.toLocaleString('pt-br', {style: 'currency', currency: 'BRL'}) %>
                                 <%= valorDinheiro %>
                             </td>
                             <td><%= relatorio.numCartao %></td>
                             <td>
-                                <% var valorCartao = relatorio.valorCartao.toLocaleString('pt-br', {style: 'currency', currency: 'BRL'}) %>
+                                <% let valorCartao = relatorio.valorCartao.toLocaleString('pt-br', {style: 'currency', currency: 'BRL'}) %>
                                 <%= valorCartao %>
                             </td>
                             <td><%= relatorio.numDeposito %></td>
                             <td>
-                                <% var valorDeposito = relatorio.valorDeposito.toLocaleString('pt-br', {style: 'currency', currency: 'BRL'}) %>
+                                <% let valorDeposito = relatorio.valorDeposito.toLocaleString('pt-br', {style: 'currency', currency: 'BRL'}) %>
                                 <%= valorDeposito %>
                             </td>
                             <td><%= relatorio.numTransferencia %></td>
                             <td>
-                                <% var valorTransferencia = relatorio.valorTransferencia.toLocaleString('pt-br', {style: 'currency', currency: 'BRL'}) %>
+                                <% let valorTransferencia = relatorio.valorTransferencia.toLocaleString('pt-br', {style: 'currency', currency: 'BRL'}) %>
                                 <%= valorTransferencia %>
                             </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
+            <% let totalGasto = 0 %>
+            <div class="table-responsive-md tabelas">
 
+                <table class="table table-sm">
+                    <caption class="text-white-50"> Relatório de gastos </caption>
+                    <thead class="tabela-head">
+                        <tr>
+                            <th>Valor</th>
+                            <th>Descrição</th>
+                            <th>Data</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% gastos.forEach(gasto => {%>
+                        <% totalGasto = totalGasto + gasto.valor %>
+                        <% let data = new Date(gasto.createdAt) %>
+                        <% let dataFormatada = data.getDate() + "/" + (data.getMonth() + 1) + "/" + data.getFullYear() %>
+
+                        <tr class="tabelas-linhas">
+                            <td><%= 
+                                gasto.valor.toLocaleString('pt-br', {style: 'currency', currency: 'BRL'})
+                                %></td>
+                            <td><%= gasto.descricao %></td>
+                            <td><%= dataFormatada %></td>
+                        </tr>
+                        <%}) %>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="table-responsive-md tabelas">
+                <table class="table table-sm">
+                    <caption class="text-white-50">Relatório de lucros</caption>
+                    <thead class="tabela-head">
+                        <tr>
+                            <th>Receita</th>
+                            <th>Despesas</th>
+                            <th>Lucro</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="tabelas-linhas">
+                            <td>
+                                <% valorEntradas = relatorio.totalEntradas.toLocaleString('pt-br', {style: 'currency', currency: 'BRL'}) %>
+                                <%= valorEntradas %>
+                            </td>
+                            <td>
+                                <% let valorGasto = totalGasto.toLocaleString('pt-br', {style: 'currency', currency: 'BRL'}); %>
+                                <%= valorGasto %>
+                            </td>
+                            <td>
+                                <% let lucro = relatorio.totalEntradas - totalGasto%>
+                                <%= lucro.toLocaleString('pt-br', {style: 'currency', currency: 'BRL'}); %>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
-
-    </div>
     </div>
 </body>
 <%- include ../../partials/footer.ejs %>

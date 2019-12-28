@@ -233,23 +233,14 @@ body {
 
 /* =========RELATÓRIOS======= */
 
-.card {
-    margin-bottom: 25px
+.relatorio-total-gasto {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: -25px;
+    font-size: 1.2em;
+    color: #fff;
 }
 
-.lista-cards span {
-    font-size: 2em;
-}
-
-.card-colors {
-    background-color: #ffffff;
-    border:1px solid rgb(148, 155, 161);
-}
-
-.card-header {
-    background-color: #363636;
-    text-align: center;
-}
 
 /* ========================== */
 

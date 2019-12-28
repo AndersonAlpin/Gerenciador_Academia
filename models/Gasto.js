@@ -21,8 +21,8 @@ const Gasto = connection.define('gasto', {
 });
 
 // Gerando chave estrangeira de Academia na tabela Administrador
-// Academia.hasMany(Gasto);
-// Gasto.belongsTo(Academia); 
+Academia.hasMany(Gasto);
+Gasto.belongsTo(Academia); 
 
 // Necessário para criar a base de dados. Comentar este trecho após executar o servidor
 // Gasto.sync({force: false});

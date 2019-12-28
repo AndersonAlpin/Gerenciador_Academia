@@ -8,7 +8,7 @@
         <h2 class="titulos">Academia</h2>
         <br>
         <div class="formularios">
-            <form method="POST" action="/atualizarAcademia">
+            <form id="formularioAcademia" method="POST" action="/atualizarAcademia">
 
                 <div class="form-row">
                     <div class="form-group col-md-3">
@@ -22,11 +22,11 @@
                         <% var valor = valorFloat.toLocaleString('pt-br', {style: 'currency', currency: 'BRL'}) %>
 
                         <label for="inputValor">Valor da Mensalidade</label>
-                        
-                        <input id="inputValorFormatado" value="<%= valor %>" type="text" class="form-control" name="inputValor"
-                            disabled>
-                            <input  id="inputValor" value="<%= valorFloat %>" type="text" class="form-control" name="inputValor" style="display: none;"
-                            required>
+
+                        <input id="inputValorFormatado" value="<%= valor %>" type="text" class="form-control"
+                            name="inputValor" disabled>
+                        <input id="inputValor" value="<%= valorFloat %>" type="text" class="form-control"
+                            name="inputValor" style="display: none;" required>
                     </div>
                     <div class="form-group col-md-3">
                         <label for="inputLogradouro">Logradouro</label>
@@ -98,6 +98,23 @@
                 <button id="salvarDados" style="display: none;" class="btn btn-warning">Atualizar</button>
             </form>
             <button id="editarDados" class="btn btn-warning">Editar dados</button>
+            <button style="display: inline;" id="bntInserirGastos" class="btn btn-info">Inserir Gastos</button>
+        </div>
+
+        <div style="display: none;" id="formularioGastos" class="formularios">
+            <form action="/inserirGastos" method="POST">
+                <div class="form-row">
+                    <div class="form-group col-md-3">
+                        <label for="inputValor">Valor</label>
+                        <input type="text" placeholder="R$ 0,00" name="inputValor" class="form-control" required>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="inputDescricao">Descrição</label>
+                        <input type="text" placeholder="Descrição" name="inputDescricao" class="form-control" required>
+                    </div>
+                </div>
+                <button class="btn btn-warning">Inserir</button>
+            </form>
         </div>
 
     </div>
@@ -118,5 +135,14 @@
         document.getElementById("selectUF").style.display = 'block'
         document.getElementById("editarDados").style.display = 'none'
         document.getElementById("salvarDados").style.display = 'inline'
+        document.getElementById("bntInserirGastos").style.display = 'none'
+        document.getElementById("formularioGastos").style.display = 'none'
+    });
+
+    document.getElementById("bntInserirGastos").addEventListener('click', () => {
+        document.getElementById("bntInserirGastos").style.display = 'none'
+        document.getElementById("formularioAcademia").style.display = 'none'
+        document.getElementById("editarDados").style.display = 'none'
+        document.getElementById("formularioGastos").style.display = 'block'
     });
 </script>
