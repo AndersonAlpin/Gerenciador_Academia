@@ -39,7 +39,7 @@ module.exports = {
             text: "",
             html: `
                 <h2>Para alterar sua senha, acesse o link abaixo, o link expira em 10 minutos.</h2>
-                <a href="http://localhost:3000/administrador/password/reset">Alterar senha</a>
+                <a href="/administrador/password/reset">Alterar senha</a>
             `
         }).then(message => {
             console.log(message);
