@@ -227,32 +227,90 @@ router.post("/administrador/dados/update", adminAut, (req, res) => {
 });
 
 // INFORMAR O EMAIL QUE FOI ESQUECIDO
-router.get("/administrador/resetPassword/email", (req, res) => {
-    res.render("administrador/resetPassword/email");
+router.get("/administrador/password/email", (req, res) => {
+    res.render("administrador/password/email");
 });
 
-// ENVIAR CÓDIGO DE RECUPERAÇÃO PARA O EMAIL
-router.post("/enviarCodigo", (req, res) => {
+// ENVIAR LINK DE RECUPERAÇÃO
+router.post("/send/link/reset", (req, res) => {
     let email = req.body.email;
-    let codigo = Math.floor(Math.random() * 100000);
+    let codigo = Math.floor(Math.random() * 100000).toString();
 
-    req.session.alterarSenha = {
-        code: codigo
-    }
+    let salt = bcrypt.genSaltSync(10);
+    let hash = bcrypt.hashSync(codigo, salt);
 
-    enviarEmail.enviarCodigo(email, codigo);
+    Login.findOne({
+        where: {
+            email
+        }
+    }).then(login => {
+        if (login != undefined) {
 
-    res.render("administrador/resetPassword/code");
+            req.session.hash = hash;
+            req.session.email = email;
+
+            enviarEmail.enviarLink(email);
+
+            req.flash("ocultar", "display: none;");
+            req.flash("color", "color: green;");
+            req.flash("mensagemEmail", "Um link de recuperação foi enviado para o email informado.");
+            res.redirect("/administrador/password/email");
+
+        }else {
+            req.flash("color", "color: red;");
+            req.flash("mensagemEmail", "Email inválido.");
+            res.redirect("/administrador/password/email");
+        }
+    })
+
 });
 
-// VALIDAR CÓDIGO
-router.get("/administrador/resetPassword/code", (req, res) => {
-    res.render("administrador/resetPassword/alterPassword");
+// INFORMAR NOVA SENHA
+router.get("/administrador/password/reset", (req, res) => {
+    if (req.session.hash != undefined) {
+        res.render("administrador/password/reset");
+    } else {
+        req.flash("ocultar", "display: none;")
+        req.flash("color", "color: red;");
+        req.flash("mensagemEmail", "O link de recuperação de senha expirou!");
+        res.redirect("/administrador/password/email");
+    }
 });
 
 // ALTERAR A SENHA
-router.post("/administrador/resetPassword/alterPassword", (req, res) => {
-    res.render("administrador/resetPassword/alterPassword");
+router.post("/salvar/nova-senha", (req, res) => {
+    let novaSenha = req.body.novaSenha;
+    let confirmarSenha = req.body.confirmarSenha;
+
+    let salt = bcrypt.genSaltSync(10);
+    let hash = bcrypt.hashSync(novaSenha, salt);
+
+    if (novaSenha != confirmarSenha) {
+        req.flash('senhaInvalida', 'As senhas não coincidem!');
+        res.redirect("/administrador/password/reset");
+    }
+
+    if (req.session.hash != undefined) {
+
+        Login.update({
+            senha: hash
+        }, {
+            where: {
+                email: req.session.email
+            }
+        }).then(() => {
+            req.session.hash = null;
+            req.session.email = null;
+            res.redirect("/");
+        })
+
+    } else {
+        req.flash("ocultar", "display: none;")
+        req.flash("color", "color: red;");
+        req.flash("mensagemEmail", "O link de recuperação de senha expirou!");
+        res.redirect("/administrador/password/email");
+    }
+
 });
 
 // DESLOGAR

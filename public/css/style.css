@@ -117,7 +117,7 @@ body {
     transition: 2s;
 }
 
-.inputIcon input[type=text]:focus+i,
+.inputIcon input[type=email]:focus+i,
 .inputIcon input[type=password]:focus+i {
     color: dodgerblue;
 }

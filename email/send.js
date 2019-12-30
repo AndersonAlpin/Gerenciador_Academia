@@ -31,14 +31,15 @@ let transporter = nodemailer.createTransport({
 
 module.exports = {
 
-    enviarCodigo: function (email, codigo) {
+    enviarLink: function (email) {
         transporter.sendMail({
             from: "Gerenciador de Academia <academiaprojetoweb@gmail.com>",
             to: email,
-            subject: "Código de recuperação",
+            subject: "Link de Recuperação de Senha",
             text: "",
             html: `
-                <h2>Código de recuperação: </h2> <h3 style="color: red;">${codigo}</h3>
+                <h2>Para alterar sua senha, acesse o link abaixo, o link expira em 10 minutos.</h2>
+                <a href="http://localhost:3000/administrador/password/reset">Alterar senha</a>
             `
         }).then(message => {
             console.log(message);
