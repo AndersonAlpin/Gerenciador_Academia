@@ -36,6 +36,11 @@ router.post("/autenticacao", (req, res) => {
             ]
         });
 
+        if (login.administrador.ativo != 1) {
+            req.flash('emailInativo', 'O usuário informado está inativo.');
+            res.redirect("/");
+        }
+
         try {
             if (login != undefined) {
                 let correct = bcrypt.compareSync(senha, login.senha);
@@ -91,19 +96,140 @@ router.post("/autenticacao", (req, res) => {
     autenticarUsuario();
 });
 
+// LISTAR TODOS OS ADMINISTRADORES INCLUINDO O ENDEREÇO
+router.get("/administrador/admins/listar", adminAut, (req, res) => {
+
+    let listarAdministradores = async () => {
+        let administradores = await Administrador.findAll({
+            where: { academiumId: admin.idAcademia, tipo: 'funcionario' },
+            order: [['nome', 'ASC']],
+            include: [
+                {
+                    model: EnderecoAdministrador
+                }
+            ]
+        });
+
+        res.render("administrador/admins/listar", { administradores });
+    }
+
+    listarAdministradores();
+
+});
+
+// DETALHAR O ADMINISTRADOR SELECIONADO NA TABELA
+router.get("/administrador/admins/detalhes/:id", adminAut, (req, res) => {
+    let id = req.params.id;
+
+    if (isNaN(id)) {
+        res.redirect("/administrador/admins/listar");
+    }
+
+    let detalharAdministrador = async () => {
+
+        let administrador = await Administrador.findByPk(id, {
+            include: [
+                {
+                    model: EnderecoAdministrador
+                }
+            ]
+        }).catch(err => {
+            res.redirect("/administrador/admins/listar");
+            console.log('Não foi possível continuar com a busca do administrador: ' + err);
+        });
+
+        if (administrador != undefined) {
+            res.render("administrador/admins/detalhes", { administrador });
+        } else {
+            res.redirect("/administrador/admins/listar");
+        }
+
+    }
+
+    detalharAdministrador();
+});
+
+// FORMULÁRIO DE CADASTRO DO ADMINISTRADOR INCLUINDO
+router.get("/administrador/admins/cadastro", adminAut, (req, res) => {
+    res.render("administrador/admins/cadastro");
+});
+
+// SALVAR O ADMINISTRADOR APÓS PREENCHER O FORMULÁRIO
+router.post("/administrador/salvar", adminAut, (req, res) => {
+
+    let nome = req.body.inputNome
+    let sobrenome = req.body.inputSobrenome;
+    let sexo = req.body.selectSexo;
+    let dataNascimento = req.body.inputDate;
+    let cpf = req.body.inputCPF;
+    let telefone = req.body.inputTelefone;
+    let email = req.body.inputEmail;
+    let senha = req.body.inputSenha;
+    let logradouro = req.body.inputLogradouro;
+    let numero = req.body.inputNumero;
+    let cidade = req.body.inputCidade;
+    let bairro = req.body.inputBairro;
+    let cep = req.body.inputCEP;
+    let uf = req.body.selectUF;
+
+    let salt = bcrypt.genSaltSync(10);
+    let hash = bcrypt.hashSync(senha, salt);
+
+    let salvarAdministrador = async () => {
+
+        let administrador = await Administrador.create({
+            nome,
+            sobrenome,
+            sexo,
+            dataNascimento,
+            cpf,
+            telefone,
+            email,
+            tipo: 'funcionario',
+            academiumId: admin.idAcademia
+        }).catch(err => {
+            res.redirect("/administrador/admins/cadastro");
+            console.log('Não foi possível cadastrar o administrador: ' + err);
+        });
+
+        await EnderecoAdministrador.create({
+            logradouro,
+            numero,
+            cidade,
+            bairro,
+            cep,
+            uf,
+            administradorId: administrador.id
+        }).catch(err => {
+            res.redirect("/administrador/admins/cadastro");
+            console.log('Não foi possível cadastrar o endereço: ' + erro);
+        });
+
+        await Login.create({
+            administradorId: administrador.id,
+            email: email,
+            senha: hash
+        })
+
+        res.redirect("/administrador/admins/listar");
+    }
+
+    salvarAdministrador();
+});
+
 // PERFIL
 router.get("/administrador/perfil", adminAut, (req, res) => {
-    res.render("administrador/perfil")
+    res.render("administrador/admins/perfil")
 });
 
 // EDITAR OS DADOS DO ADMINISTRADOR
 router.get("/administrador/editar/dados", adminAut, (req, res) => {
-    res.render("administrador/editarDados");
+    res.render("administrador/admins/editarDados");
 });
 
 // EDITAR SENHA DO ADMINISTRADOR
 router.get("/administrador/editar/senha", adminAut, (req, res) => {
-    res.render("administrador/editarSenha");
+    res.render("administrador/admins/editarSenha");
 });
 
 // SALVAR NOVA SENHA
@@ -256,7 +382,7 @@ router.post("/send/link/reset", (req, res) => {
             req.flash("mensagemEmail", "Um link de recuperação foi enviado para o email informado.");
             res.redirect("/administrador/password/email");
 
-        }else {
+        } else {
             req.flash("color", "color: red;");
             req.flash("mensagemEmail", "Email inválido.");
             res.redirect("/administrador/password/email");

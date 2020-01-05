@@ -385,6 +385,34 @@
                     </tbody>
                 </table>
             </div>
+
+            <div class="table-responsive-md tabelas">
+                <table class="table table-sm">
+                    <caption class="text-white-50">Relatório Diário</caption>
+                    <thead class="tabela-head">
+                        <tr>
+                            <th>Mensalidades</th>
+                            <th>Receita</th>
+                            <th>Data</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="tabelas-linhas">
+                            <td>
+                                <%= entradaDiaria[0].numMensalidades %>
+                            </td>
+                            <td>
+                                <%= entradaDiaria[0].valor.toLocaleString('pt-br', {style: 'currency', currency: 'BRL'}) %>
+                            </td>
+                            <td>
+                                <% let dataAtual = new Date() %>
+                                <% let dataAtualFormatada = dataAtual.getDate() + "/" + (dataAtual.getMonth() + 1) + "/" + dataAtual.getFullYear() %> 
+                                <%= dataAtualFormatada %>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </body>

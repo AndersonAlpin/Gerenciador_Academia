@@ -118,8 +118,14 @@ router.get("/administrador/relatorios/listar", adminAut, (req, res) => {
             relatorio.valorGasto += gasto.valor;
         });
 
-        res.render("administrador/relatorios/listar", { relatorio, gastos });
-        
+        // ENTRADA DIÁRIA
+        let entradaDiaria = await connection.query(`
+        call relatorioDiarioEntradas('${admin.idAcademia}')`, {
+            type: Sequelize.DataTypes.SELECT
+        });
+
+        res.render("administrador/relatorios/listar", { relatorio, gastos, entradaDiaria });
+
     }
 
     gerarRelatorios();
@@ -229,14 +235,20 @@ router.get("/administrador/relatorios/listar/:mes", adminAut, (req, res) => {
         // SAÍDAS
         let gastos = await connection.query(`
         call relatorioGastos('${admin.idAcademia}', '${mes}')`, {
-        type: Sequelize.DataTypes.SELECT
-    });
+            type: Sequelize.DataTypes.SELECT
+        });
 
         gastos.forEach(gasto => {
             relatorio.valorGasto += gasto.valor;
         });
 
-        res.render("administrador/relatorios/listar", { relatorio, gastos });
+        // ENTRADA DIÁRIA
+        let entradaDiaria = await connection.query(`
+            call relatorioDiarioEntradas('${admin.idAcademia}')`, {
+            type: Sequelize.DataTypes.SELECT
+        });
+
+        res.render("administrador/relatorios/listar", { relatorio, gastos, entradaDiaria });
     }
 
     gerarRelatorios();
