@@ -20,7 +20,7 @@ router.get("/administrador/ferramentas", adminAut, (req, res) => {
             ]
         });
 
-        let mensalidade = await connection.query('SELECT * FROM viewMensalidade', {
+        let mensalidade = await connection.query('SELECT * FROM viewmensalidade', {
             raw: true,
             type: Sequelize.QueryTypes.SELECT
         });
