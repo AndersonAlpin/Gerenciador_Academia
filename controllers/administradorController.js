@@ -352,6 +352,29 @@ router.post("/administrador/dados/update", adminAut, (req, res) => {
     atualizarDados();
 });
 
+// ATIVAR/INATIVAR ADMINISTRADOR
+router.post("/administrador/admins/status/update", (req, res) => {
+    let id = req.body.inputID;
+    let status = req.body.inputStatus;
+    let newStatus;
+
+    if (status.toString() == 'false') {
+        newStatus = true;
+    } else {
+        newStatus = false;
+    }
+
+    Administrador.update({
+        ativo: newStatus
+    }, {
+        where: {
+            id
+        }
+    }).then(() => {
+        res.redirect("/administrador/admins/detalhes/" + id);
+    });
+});
+
 // INFORMAR O EMAIL QUE FOI ESQUECIDO
 router.get("/administrador/password/email", (req, res) => {
     res.render("administrador/password/email");
@@ -444,32 +467,5 @@ router.get("/logout", (req, res) => {
     req.session.login = undefined;
     res.redirect("/");
 });
-
-// GERAR UM ADMINISTRADOR
-// let nome = 'Admin';
-// let sobrenome = 'IronFit';
-// let cpf = '045.123.451-15';
-// let telefone = '(73)95543-1256';
-// let academiumId = '1';
-// let email = 'adminironfit@gmail.com';
-// let senha = 'admin2001';
-
-// let salt = bcrypt.genSaltSync(10);
-// let hash = bcrypt.hashSync(senha, salt);
-
-// Administrador.create({
-//     nome: nome,
-//     sobrenome: sobrenome,
-//     cpf: cpf,
-//     telefone: telefone
-// }).then((administrador) => {
-
-//     Login.create({
-//         administradorId: administrador.id,
-//         email: email,
-//         senha: hash
-//     })
-
-// });
 
 module.exports = router;

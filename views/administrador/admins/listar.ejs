@@ -39,6 +39,7 @@
                         <th>Sobrenome</th>
                         <th>CPF</th>
                         <th>Email</th>
+                        <th>Status</th>
                         <th>Ações</th>
                     </tr>
                 </thead>
@@ -50,8 +51,15 @@
                         <td> <%= administrador.cpf %> </td>
                         <td> <%= administrador.email %> </td>
                         <td>
+                            <% if( administrador.ativo == 1){ %>
+                                Ativo
+                            <%} else {%>
+                                Inativo
+                            <%}%>
+                        </td>
+                        <td>
                             <a href="/administrador/admins/detalhes/<%= administrador.id %>"
-                                class="btn btn-sm btn-success">Detalhes</a>
+                            class="btn btn-sm btn-success">Detalhes</a>
                         </td>
                     </tr>
                     <% }) %>

@@ -402,11 +402,16 @@
                                 <%= entradaDiaria[0].numMensalidades %>
                             </td>
                             <td>
-                                <%= entradaDiaria[0].valor.toLocaleString('pt-br', {style: 'currency', currency: 'BRL'}) %>
+                                <% if(entradaDiaria[0].vaor != null) {%>
+                                    <%= entradaDiaria[0].valor.toLocaleString('pt-br', {style: 'currency', currency: 'BRL'}) %>
+                                <%}else {%>
+                                    <% let nenhum = 0 %>
+                                    <%= nenhum.toLocaleString('pt-br', {style: 'currency', currency: 'BRL'}) %>
+                                <%}%>
                             </td>
                             <td>
                                 <% let dataAtual = new Date() %>
-                                <% let dataAtualFormatada = dataAtual.getDate() + "/" + (dataAtual.getMonth() + 1) + "/" + dataAtual.getFullYear() %> 
+                                <% let dataAtualFormatada = dataAtual.getDate() + "/" + (dataAtual.getMonth() + 1) + "/" + dataAtual.getFullYear() %>
                                 <%= dataAtualFormatada %>
                             </td>
                         </tr>
