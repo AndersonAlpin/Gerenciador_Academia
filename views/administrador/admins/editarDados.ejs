@@ -27,8 +27,8 @@
                             <option selected value="Masculino">Masculino</option>
                             <option value="Feminino">Feminino</option>
                             <% }else { %>
-                                <option selected value="Feminino">Feminino</option>
-                                <option value="Masculino">Masculino</option>
+                            <option selected value="Feminino">Feminino</option>
+                            <option value="Masculino">Masculino</option>
                             <% } %>
                         </select>
                     </div>
@@ -110,6 +110,9 @@
                             <option value="TO">TO</option>
                         </select>
                     </div>
+                </div>
+                <div class="mb-2" style="color: red;">
+                    <%= messages.emailExistente %>
                 </div>
                 <button class="btn btn-success">Atualizar</button>
             </form>

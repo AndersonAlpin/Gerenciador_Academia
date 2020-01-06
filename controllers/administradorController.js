@@ -172,49 +172,58 @@ router.post("/administrador/salvar", adminAut, (req, res) => {
     let cep = req.body.inputCEP;
     let uf = req.body.selectUF;
 
-    let salt = bcrypt.genSaltSync(10);
-    let hash = bcrypt.hashSync(senha, salt);
+    Login.findOne({ where: { email } }).then(email => {
+        if (email == undefined) {
 
-    let salvarAdministrador = async () => {
+            let salt = bcrypt.genSaltSync(10);
+            let hash = bcrypt.hashSync(senha, salt);
 
-        let administrador = await Administrador.create({
-            nome,
-            sobrenome,
-            sexo,
-            dataNascimento,
-            cpf,
-            telefone,
-            email,
-            tipo: 'funcionario',
-            academiumId: admin.idAcademia
-        }).catch(err => {
+            let salvarAdministrador = async () => {
+
+                let administrador = await Administrador.create({
+                    nome,
+                    sobrenome,
+                    sexo,
+                    dataNascimento,
+                    cpf,
+                    telefone,
+                    email,
+                    tipo: 'funcionario',
+                    academiumId: admin.idAcademia
+                }).catch(err => {
+                    res.redirect("/administrador/admins/cadastro");
+                    console.log('Não foi possível cadastrar o administrador: ' + err);
+                });
+
+                await EnderecoAdministrador.create({
+                    logradouro,
+                    numero,
+                    cidade,
+                    bairro,
+                    cep,
+                    uf,
+                    administradorId: administrador.id
+                }).catch(err => {
+                    res.redirect("/administrador/admins/cadastro");
+                    console.log('Não foi possível cadastrar o endereço: ' + erro);
+                });
+
+                await Login.create({
+                    administradorId: administrador.id,
+                    email: email,
+                    senha: hash
+                })
+
+                res.redirect("/administrador/admins/listar");
+            }
+
+            salvarAdministrador();
+
+        } else {
+            req.flash("emailExistente", "O email informado já existe.")
             res.redirect("/administrador/admins/cadastro");
-            console.log('Não foi possível cadastrar o administrador: ' + err);
-        });
-
-        await EnderecoAdministrador.create({
-            logradouro,
-            numero,
-            cidade,
-            bairro,
-            cep,
-            uf,
-            administradorId: administrador.id
-        }).catch(err => {
-            res.redirect("/administrador/admins/cadastro");
-            console.log('Não foi possível cadastrar o endereço: ' + erro);
-        });
-
-        await Login.create({
-            administradorId: administrador.id,
-            email: email,
-            senha: hash
-        })
-
-        res.redirect("/administrador/admins/listar");
-    }
-
-    salvarAdministrador();
+        }
+    })
 });
 
 // PERFIL
@@ -297,59 +306,68 @@ router.post("/administrador/dados/update", adminAut, (req, res) => {
     let numero = req.body.inputNumero;
     let uf = req.body.selectUF;
 
-    let atualizarDados = async () => {
+    Login.findOne({where: {email}}).then(login => {
+        if(login != undefined && login.email == admin.email){
 
-        let administrador = Administrador.update({
-            nome,
-            sobrenome,
-            sexo,
-            dataNascimento,
-            cpf,
-            telefone,
-            email
-        }, {
-            where: { id: admin.idAdmin }
-        });
+            let atualizarDados = async () => {
 
-        let login = Login.update({
-            email
-        }, {
-            where: { administradorId: admin.idAdmin }
-        });
+                let administrador = Administrador.update({
+                    nome,
+                    sobrenome,
+                    sexo,
+                    dataNascimento,
+                    cpf,
+                    telefone,
+                    email
+                }, {
+                    where: { id: admin.idAdmin }
+                });
+        
+                let login = Login.update({
+                    email
+                }, {
+                    where: { administradorId: admin.idAdmin }
+                });
+        
+                let enderecoAdministrador = await EnderecoAdministrador.update({
+                    cep,
+                    logradouro,
+                    cidade,
+                    bairro,
+                    numero,
+                    uf
+                }, {
+                    where: { administradorId: admin.idAdmin }
+                });
+        
+                global.admin = {
+                    idLogin: admin.idLogin,
+                    idAdmin: admin.idAdmin,
+                    email,
+                    nome,
+                    sobrenome,
+                    sexo,
+                    dataNascimento,
+                    cpf,
+                    telefone,
+                    cep,
+                    logradouro,
+                    cidade,
+                    bairro,
+                    numero,
+                    uf
+                }
+        
+                res.redirect("/administrador/perfil");
+            }
+        
+            atualizarDados();
 
-        let enderecoAdministrador = await EnderecoAdministrador.update({
-            cep,
-            logradouro,
-            cidade,
-            bairro,
-            numero,
-            uf
-        }, {
-            where: { administradorId: admin.idAdmin }
-        });
-
-        global.admin = {
-            idLogin: admin.idLogin,
-            idAdmin: admin.idAdmin,
-            email,
-            nome,
-            sobrenome,
-            sexo,
-            dataNascimento,
-            cpf,
-            telefone,
-            cep,
-            logradouro,
-            cidade,
-            bairro,
-            numero,
-            uf
+        }else{
+            req.flash("emailExistente", "O email informado já existe.");
+            res.redirect("/administrador/editar/dados");
         }
-
-        res.redirect("/administrador/perfil");
-    }
-
-    atualizarDados();
+    })
 });
 
 // ATIVAR/INATIVAR ADMINISTRADOR
