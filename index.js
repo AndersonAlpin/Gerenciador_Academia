@@ -13,6 +13,7 @@ const relatorioController = require("./controllers/relatorioController");
 const mensalidadeController = require("./controllers/mensalidadeController");
 const adminController = require("./controllers/administradorController");
 const ferramentaController = require("./controllers/ferramentaController");
+const exameBiometricoController = require("./controllers/exameBiometricoController");
 // /////////////////////////////////////////////////////////////////////////////////
 
 // VIEW ENGINE
@@ -47,6 +48,7 @@ app.use("/", relatorioController);
 app.use("/", mensalidadeController);
 app.use("/", adminController);
 app.use("/", ferramentaController);
+app.use("/", exameBiometricoController);
 //////////////////////////////////////
 
 
@@ -59,6 +61,7 @@ const Cliente = require("./models/Cliente");
 const EnderecoClientecoCliente = require("./models/EnderecoCliente");
 const Mensalidade = require("./models/Mensalidade");
 const Gasto = require("./models/Gasto");
+const ExameBiometrico = require("./models/ExameBiometrico");
 /////////////////////////////////////////////////////////////////////
 
 // Database
@@ -70,7 +73,6 @@ connection
         console.log(error)
     })
 //////////////////////////////////////////////////
-
 
 // ROTA PRINCIPAL
 app.get("/", (req, res) => {
