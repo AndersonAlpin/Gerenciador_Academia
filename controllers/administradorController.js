@@ -36,13 +36,14 @@ router.post("/autenticacao", (req, res) => {
             ]
         });
 
-        if (login.administrador.ativo != 1) {
-            req.flash('emailInativo', 'O usuário informado está inativo.');
-            res.redirect("/");
-        }
-
         try {
             if (login != undefined) {
+
+                if (login.administrador.ativo != 1) {
+                    req.flash('emailInativo', 'O usuário informado está inativo.');
+                    res.redirect("/");
+                }
+
                 let correct = bcrypt.compareSync(senha, login.senha);
 
                 if (correct) {
