@@ -98,8 +98,6 @@
                         <input type="hidden" name="inputStatus" id="" value="<%= administrador.ativo %>">
                         <input type="hidden" name="inputID" id="" value="<%= administrador.id %>">
                         <div>
-                            <a href="/administrador/editar/<%= administrador.id %>"
-                                class="btn btn-warning mr-1">Editar</a>
                             <% if(administrador.ativo == 1){ %>
                             <button class="btn btn-danger">Inativar</button>
                             <% }else{ %>
