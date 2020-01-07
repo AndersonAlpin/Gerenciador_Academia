@@ -308,7 +308,7 @@ router.post("/administrador/dados/update", adminAut, (req, res) => {
     let uf = req.body.selectUF;
 
     Login.findOne({where: {email}}).then(login => {
-        if(login != undefined && login.email == admin.email){
+        if(login != undefined || login.email == admin.email){
 
             let atualizarDados = async () => {
 

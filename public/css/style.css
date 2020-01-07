@@ -166,8 +166,8 @@ body {
 
 .menu-topo i {
     color: #D3D3D3;
-    margin: 0 10px;
-    font-size: 22px;
+    margin: 0 4px;
+    font-size: 18px;
 }
 
 #border-none {
@@ -360,7 +360,7 @@ body {
     #perfil {
         background-color: rgba(20, 20, 20);
         padding: 0 15px;
-        margin: 0 -16px;
+        margin: -15px -16px;
         border-top: 1px dotted #aaa;
     }
     /* .logo {

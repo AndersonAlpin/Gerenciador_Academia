@@ -402,7 +402,7 @@
                                 <%= entradaDiaria[0].numMensalidades %>
                             </td>
                             <td>
-                                <% if(entradaDiaria[0].vaor != null) {%>
+                                <% if(entradaDiaria[0].valor != null) {%>
                                     <%= entradaDiaria[0].valor.toLocaleString('pt-br', {style: 'currency', currency: 'BRL'}) %>
                                 <%}else {%>
                                     <% let nenhum = 0 %>
