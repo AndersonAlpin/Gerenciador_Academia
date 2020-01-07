@@ -5,8 +5,8 @@ let transporter = nodemailer.createTransport({
     port: 587,
     secure: false,
     auth: {
-        user: "academiaprojetoweb@gmail.com",
-        pass: "Web123321"
+        user: "startupinnovation2020@gmail.com",
+        pass: "20Inno20vation"
     }
 });
 
@@ -33,13 +33,13 @@ module.exports = {
 
     enviarLink: function (email) {
         transporter.sendMail({
-            from: "Gerenciador de Academia <academiaprojetoweb@gmail.com>",
+            from: "Sublime <startupinnovation2020@gmail.com>",
             to: email,
             subject: "Link de Recuperação de Senha",
             text: "",
             html: `
                 <h2>Para alterar sua senha, acesse o link abaixo, o link expira em 10 minutos.</h2>
-                <a href="http://gerenciaracademia-com-br.umbler.net/administrador/password/reset">Alterar senha</a>
+                <a href="http://sublimemanager-com-br.umbler.net/administrador/password/reset">Alterar senha</a>
             `
         }).then(message => {
             console.log(message);
