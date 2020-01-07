@@ -1,6 +1,6 @@
 const Sequelize = require("sequelize");
 
-const connection = new Sequelize('sublimeteste', 'sublimeteste', '542xB7aF', {
+const connection = new Sequelize('sublimemanager', 'innovation', '74abN1729.X#', {
     // host: 'localhost',
     // dialect: 'mysql',
     // timezone: "-03:00"

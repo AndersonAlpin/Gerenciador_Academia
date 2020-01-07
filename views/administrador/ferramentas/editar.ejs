@@ -16,7 +16,7 @@
                         <input name="inputNome" value="<%= academia.nome %>" type="text" class="form-control" id="inputNome" disabled>
                     </div>
                     <div class="form-group col-md-3">
-                        <% var valorString = mensalidade[0].valor %>
+                        <% var valorString = academia.valor %>
                         <% var valorFloat = parseFloat(valorString) %>
                         <% var valor = valorFloat.toLocaleString('pt-br', {style: 'currency', currency: 'BRL'}) %>
                         

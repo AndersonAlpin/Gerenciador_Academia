@@ -12,6 +12,11 @@ const Academia = connection.define('academia', {
     nome: {
         type: Sequelize.STRING,
         allowNull: false
+    },
+    valor: {
+        type: Sequelize.DOUBLE,
+        allowNull: false,
+        defaultValue: 50
     }
 });
 

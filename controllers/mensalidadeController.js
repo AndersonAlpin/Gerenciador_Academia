@@ -129,7 +129,7 @@ router.post("/mensalidades/antecipar", adminAut, (req, res) => {
     let dataVencimento = req.body.inputDataVencimento;
     let formaPagamento = req.body.selectPagamento;
 
-    connection.query(`call anteciparMensalidade('${id}', '${idPacote}', '${formaPagamento}', '${dataVencimento}')`, {
+    connection.query(`call anteciparMensalidade('${admin.idAcademia}','${id}', '${idPacote}', '${formaPagamento}', '${dataVencimento}')`, {
         type: Sequelize.DataTypes.INSERT
     }).then(() => {
         res.redirect("/administrador/mensalidades/antecipar/" + id); 

@@ -20,12 +20,7 @@ router.get("/administrador/ferramentas", adminAut, (req, res) => {
             ]
         });
 
-        let mensalidade = await connection.query('SELECT * FROM viewmensalidade', {
-            raw: true,
-            type: Sequelize.QueryTypes.SELECT
-        });
-
-        res.render("administrador/ferramentas/index", {academia, mensalidade});
+        res.render("administrador/ferramentas/index", {academia});
     }
 
     dadosAcademia();
@@ -45,7 +40,8 @@ router.post("/atualizarAcademia", (req, res) => {
     let atualizarDados = async () => {
 
         await Academia.update({
-           nome 
+           nome,
+           valor
         }, {
             where: {id: admin.idAcademia}
         });
@@ -59,10 +55,6 @@ router.post("/atualizarAcademia", (req, res) => {
             uf
         }, {
             where: {academiumId: admin.idAcademia}
-        });
-
-        await connection.query(`ALTER TABLE mensalidades ALTER valor SET DEFAULT ${valor}`, {
-            type: Sequelize.DataTypes.INSERT
         });
 
         res.redirect("/administrador/ferramentas");
