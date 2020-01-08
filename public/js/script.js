@@ -77,11 +77,11 @@ $(document).ready(function () {
     });
 
     // // REDIRECIONAR URL DE "HTTP" PARA "HTTPS" 
-    // if (location.protocol !== 'https:') {
-    //     const httpsURL = 'https://' + location.href.split('//')[1]
-    //     location.replace(httpsURL)
-    //     console.log(httpsURL)
-    // }
+    if (location.protocol !== 'https:') {
+        const httpsURL = 'https://' + location.href.split('//')[1]
+        location.replace(httpsURL)
+        console.log(httpsURL)
+    }
 });
 
 // ================================================================

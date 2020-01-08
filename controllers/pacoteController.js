@@ -5,17 +5,21 @@ const adminAut = require("../middlewares/adminAut");
 
 // LISTAR PACOTES
 router.get("/administrador/pacotes/listar", adminAut, (req, res) => {
+    let admin = req.session.login;
+
     Pacote.findAll({
         where: { academiumId: admin.idAcademia },
         order: [['taxaDesconto', 'DESC']]
     }).then(pacotes => {
-        res.render("administrador/pacotes/listar", { pacotes });
+        res.render("administrador/pacotes/listar", { pacotes, admin });
     });
 });
 
 // ROTA DE FORMULÁRIO DE CADASTRO
 router.get("/administrador/pacotes/cadastro", (req, res) => {
-    res.render("administrador/pacotes/cadastro")
+    let admin = req.session.login;
+
+    res.render("administrador/pacotes/cadastro", { admin })
 });
 
 // DELETAR UM PACOTE
@@ -41,6 +45,8 @@ router.post("/pacotes/delete", adminAut, (req, res) => {
 
 // SALVAR O PACOTE APÓS PREENCHER O FORMULÁRIO
 router.post("/pacote/salvar", adminAut, (req, res) => {
+    let admin = req.session.login;
+
     let nome = req.body.inputNome;
     let descricao = req.body.inputDescricao;
     let taxaDesconto = req.body.inputDesconto;
@@ -56,7 +62,7 @@ router.post("/pacote/salvar", adminAut, (req, res) => {
             nome,
             descricao,
             taxaDesconto,
-            academiumId: admin.idAcademia // NÃO QUER SALVAR O ID DA ACADEMIA NA TABELA PACOTE
+            academiumId: admin.idAcademia
         }).then(function () {
             res.redirect("/administrador/pacotes/listar");
         }).catch(function (erro) {
@@ -71,6 +77,8 @@ router.post("/pacote/salvar", adminAut, (req, res) => {
 
 // EDITAR OS DADOS DE UM PACOTE
 router.get("/administrador/pacotes/editar/:id", adminAut, (req, res) => {
+    let admin = req.session.login;
+
     let id = req.params.id;
 
     if (isNaN(id)) {
@@ -79,7 +87,7 @@ router.get("/administrador/pacotes/editar/:id", adminAut, (req, res) => {
 
     Pacote.findByPk(id).then(pacote => {
         if (pacote != undefined) {
-            res.render("administrador/pacotes/editar", { pacote });
+            res.render("administrador/pacotes/editar", { pacote, admin });
         } else {
             res.redirect("/administrador/pacotes/listar")
         }

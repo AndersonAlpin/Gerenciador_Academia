@@ -150,14 +150,14 @@ body {
     background-color: rgba(20, 20, 20);
 }
 
-/* .logo {
-    width: 150px;
+.logo {
+    width: 158px;
     height: 55px;
     margin-left: -10px;
     margin-top: 10px;
     background: url('../img/logo.png') no-repeat center;
     text-indent: -3000px;
-} */
+}
 
 .menu-topo a {
     border-right: 1px solid #333;
@@ -363,9 +363,9 @@ body {
         margin: -15px -16px;
         border-top: 1px dotted #aaa;
     }
-    /* .logo {
+    .logo {
         margin-top: -10px;
-    } */
+    }
     .navbar-toggler {
         margin-top: 0px;
         margin-bottom: 22px;
@@ -385,10 +385,10 @@ body {
         margin: 0 -16px;
         margin-top: -15px;
     }
-    /* .logo {
+    .logo {
         margin-top: -12px;
         display: block;
-    } */
+    }
     .navbar-toggler {
         margin-top: 0px;
     }
@@ -421,9 +421,9 @@ body {
     #perfil {
         background-color: transparent;
     }
-    /* .logo{
+    .logo{
         margin-top: 10px;
-    } */
+    }
     .ocultar-colunas {
         display: table-cell;
     }

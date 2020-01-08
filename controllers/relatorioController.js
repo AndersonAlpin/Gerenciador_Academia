@@ -9,8 +9,9 @@ const connection = require("../database/connection");
 
 // RELATÓRIO GERAL
 router.get("/administrador/relatorios/listar", adminAut, (req, res) => {
+    let admin = req.session.login;
 
-    global.selecionado = 00;
+    selecionado = 00;
 
     let relatorio = {
         numClientes: 0,
@@ -124,19 +125,23 @@ router.get("/administrador/relatorios/listar", adminAut, (req, res) => {
             type: Sequelize.DataTypes.SELECT
         });
 
-        res.render("administrador/relatorios/listar", { relatorio, gastos, entradaDiaria });
+        res.render("administrador/relatorios/listar", { relatorio, gastos, entradaDiaria, admin, selecionado });
 
     }
 
     gerarRelatorios();
 });
 
+
+
+
 // RELATÓRIO MENSAL
 router.get("/administrador/relatorios/listar/:mes", adminAut, (req, res) => {
+    let admin = req.session.login;
 
     let mes = req.params.mes;
 
-    global.selecionado = mes;
+    selecionado = mes;
 
     let relatorio = {
         numClientes: 0,
@@ -248,7 +253,7 @@ router.get("/administrador/relatorios/listar/:mes", adminAut, (req, res) => {
             type: Sequelize.DataTypes.SELECT
         });
 
-        res.render("administrador/relatorios/listar", { relatorio, gastos, entradaDiaria });
+        res.render("administrador/relatorios/listar", { relatorio, gastos, entradaDiaria, admin, selecionado });
     }
 
     gerarRelatorios();

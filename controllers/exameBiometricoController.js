@@ -9,6 +9,8 @@ const connection = require("../database/connection");
 
 // LISTAR TODOS OS CLIENTES INCLUINDO O PACOTE
 router.get("/administrador/exame/clientes", adminAut, (req, res) => {
+    let admin = req.session.login;
+
     Cliente.findAll({
         where: {
             academiumId: admin.idAcademia,
@@ -23,12 +25,14 @@ router.get("/administrador/exame/clientes", adminAut, (req, res) => {
             }
         ]
     }).then(clientes => {
-        res.render("administrador/exame/clientes", { clientes });
+        res.render("administrador/exame/clientes", { clientes, admin });
     });
 });
 
 // LISTAR O IMC DO CLIENTE
 router.get("/administrador/exame/listar/:id", adminAut, (req, res) => {
+    let admin = req.session.login;
+
     let clienteId = req.params.id;
 
     ExameBiometrico.findAll({
@@ -36,8 +40,7 @@ router.get("/administrador/exame/listar/:id", adminAut, (req, res) => {
         order: [['id', 'DESC']],
         include: [{model: Cliente}]
     }).then(exameBiometrico => {
-        console.log(exameBiometrico)
-        res.render("administrador/exame/listar", {exameBiometrico, clienteId});
+        res.render("administrador/exame/listar", {exameBiometrico, clienteId, admin});
     });
 });
 

@@ -28,8 +28,8 @@
                         <td><%= exame.cliente.nome %></td>
                         <td><%= exame.cliente.sobrenome %></td>
                         <td><%= exame.cliente.cpf %></td>
-                        <td><%= exame.peso %></td>
-                        <td><%= exame.altura %></td>
+                        <td><%= exame.peso.toFixed(3) %></td>
+                        <td><%= exame.altura.toFixed(2) %></td>
                         <td><%= exame.imc.toFixed(2) %></td>
                     </tr>
                     <%})%>

@@ -10,6 +10,7 @@ const adminAut = require("../middlewares/adminAut");
 
 // LISTAR TODOS OS CLIENTES INCLUINDO O PACOTE E O ENDEREÇO
 router.get("/administrador/clientes/listar", adminAut, (req, res) => {
+    let admin = req.session.login;
 
     let listarClientes = async () => {
         let clientes = await Cliente.findAll({
@@ -25,7 +26,7 @@ router.get("/administrador/clientes/listar", adminAut, (req, res) => {
             ]
         });
 
-        res.render("administrador/clientes/listar", { clientes });
+        res.render("administrador/clientes/listar", { clientes, admin });
     }
 
     listarClientes();
@@ -34,6 +35,7 @@ router.get("/administrador/clientes/listar", adminAut, (req, res) => {
 
 // LISTAR OS CLIENTES ATIVOS INCLUINDO O PACOTE E O ENDEREÇO
 router.get("/administrador/clientes/ativos", adminAut, (req, res) => {
+    let admin = req.session.login;
 
     let listarClientes = async () => {
         let clientes = await Cliente.findAll({
@@ -49,7 +51,7 @@ router.get("/administrador/clientes/ativos", adminAut, (req, res) => {
             ]
         });
 
-        res.render("administrador/clientes/ativos", { clientes });
+        res.render("administrador/clientes/ativos", { clientes, admin });
     }
     listarClientes();
 
@@ -57,6 +59,7 @@ router.get("/administrador/clientes/ativos", adminAut, (req, res) => {
 
 // LISTAR OS CLIENTES INATIVOS INCLUINDO O PACOTE E O ENDEREÇO
 router.get("/administrador/clientes/inativos", adminAut, (req, res) => {
+    let admin = req.session.login;
 
     let listarClientes = async () => {
         let clientes = await Cliente.findAll({
@@ -72,7 +75,7 @@ router.get("/administrador/clientes/inativos", adminAut, (req, res) => {
             ]
         });
 
-        res.render("administrador/clientes/inativos", { clientes });
+        res.render("administrador/clientes/inativos", { clientes, admin });
     }
 
     listarClientes();
@@ -80,6 +83,7 @@ router.get("/administrador/clientes/inativos", adminAut, (req, res) => {
 
 // FORMULÁRIO DE CADASTRO DO CLIENTE INCLUINDO O PACOTE
 router.get("/administrador/clientes/cadastro", adminAut, (req, res) => {
+    let admin = req.session.login;
 
     let formularioCadastro = async () => {
 
@@ -87,7 +91,7 @@ router.get("/administrador/clientes/cadastro", adminAut, (req, res) => {
             where: { academiumId: admin.idAcademia }
         });
 
-        res.render("administrador/clientes/cadastro", { pacote });
+        res.render("administrador/clientes/cadastro", { pacote, admin });
     }
 
     formularioCadastro();
@@ -95,6 +99,7 @@ router.get("/administrador/clientes/cadastro", adminAut, (req, res) => {
 
 // SALVAR O CLIENTE APÓS PREENCHER O FORMULÁRIO
 router.post("/clientes/salvar", adminAut, (req, res) => {
+    let admin = req.session.login;
 
     let nome = req.body.inputNome
     let sobrenome = req.body.inputSobrenome;
@@ -158,6 +163,8 @@ router.post("/clientes/salvar", adminAut, (req, res) => {
 
 // DETALHAR O CLIENTE SELECIONADO NA TABELA
 router.get("/administrador/clientes/detalhes/:id", adminAut, (req, res) => {
+    let admin = req.session.login;
+
     let id = req.params.id;
 
     if (isNaN(id)) {
@@ -181,7 +188,7 @@ router.get("/administrador/clientes/detalhes/:id", adminAut, (req, res) => {
         });
 
         if (cliente != undefined) {
-            res.render("administrador/clientes/detalhes", { cliente });
+            res.render("administrador/clientes/detalhes", { cliente, admin });
         } else {
             res.redirect("/administrador/clientes/listar");
         }
@@ -193,6 +200,7 @@ router.get("/administrador/clientes/detalhes/:id", adminAut, (req, res) => {
 
 // EDITAR UM CLIENTE SELECIONADO NA TABELA
 router.get("/administrador/clientes/editar/:id", adminAut, (req, res) => {
+    let admin = req.session.login;
 
     let id = req.params.id;
 
@@ -224,7 +232,7 @@ router.get("/administrador/clientes/editar/:id", adminAut, (req, res) => {
         });
 
         if (cliente != undefined) {
-            res.render("administrador/clientes/editar", { cliente, pacote });
+            res.render("administrador/clientes/editar", { cliente, pacote, admin });
         } else {
             res.redirect("/administrador/clientes/listar");
         }
@@ -282,7 +290,7 @@ router.post("/administrador/clientes/update", adminAut, (req, res) => {
             console.log('Ocorreu um erro ao tentar atualizar os dados: ' + err);
         });
 
-        res.redirect("/administrador/clientes/detalhes/" + id)
+        res.redirect("/administrador/clientes/detalhes/" + id);
 
     }
 

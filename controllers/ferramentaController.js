@@ -9,6 +9,7 @@ const connection = require("../database/connection");
 
 // ROTA DE FERRAMENTAS
 router.get("/administrador/ferramentas", adminAut, (req, res) => {
+    let admin = req.session.login;
 
     let dadosAcademia = async () => {
         let academia = await Academia.findOne({
@@ -20,7 +21,7 @@ router.get("/administrador/ferramentas", adminAut, (req, res) => {
             ]
         });
 
-        res.render("administrador/ferramentas/index", {academia});
+        res.render("administrador/ferramentas/index", {academia, admin});
     }
 
     dadosAcademia();
@@ -28,6 +29,8 @@ router.get("/administrador/ferramentas", adminAut, (req, res) => {
 
 // ROTA DE ATUALIZAR DADOS
 router.post("/atualizarAcademia", (req, res) => {
+    let admin = req.session.login;
+
     var nome =  req.body.inputNome;
     var valor =  req.body.inputValor.replace(',', '.');
     var logradouro =  req.body.inputLogradouro;
@@ -66,6 +69,8 @@ router.post("/atualizarAcademia", (req, res) => {
 
 // CADASTRAR OS GASTOS DA ACADEMIA
 router.post("/inserirGastos", (req, res) => {
+    let admin = req.session.login;
+    
     var valor =  req.body.inputValor.replace(',', '.');
     var descricao =  req.body.inputDescricao;
 

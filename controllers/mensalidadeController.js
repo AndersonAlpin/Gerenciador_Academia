@@ -9,6 +9,8 @@ const Sequelize = require("sequelize");
 
 // MENSALIDADES EM ABERTO
 router.get("/administrador/mensalidades/aberto", adminAut, (req, res) => {
+    let admin = req.session.login;
+
     Mensalidade.findAll({
         order: [
             ['dataVencimento', 'ASC']
@@ -20,12 +22,14 @@ router.get("/administrador/mensalidades/aberto", adminAut, (req, res) => {
             }
         ]
     }).then(mensalidades => {
-        res.render("administrador/mensalidades/aberto", { mensalidades })
+        res.render("administrador/mensalidades/aberto", { mensalidades, admin })
     });
 });
 
 // MENSALIDADES EM ATRASO
 router.get("/administrador/mensalidades/atraso", adminAut, (req, res) => {
+    let admin = req.session.login;
+
     Mensalidade.findAll({
         order: [
             ['dataVencimento', 'ASC']
@@ -37,13 +41,14 @@ router.get("/administrador/mensalidades/atraso", adminAut, (req, res) => {
             }
         ]
     }).then(mensalidades => {
-        console.log(mensalidades)
-        res.render("administrador/mensalidades/atraso", { mensalidades })
+        res.render("administrador/mensalidades/atraso", { mensalidades, admin })
     });
 });
 
 // MENSALIDADES PAGAS
 router.get("/administrador/mensalidades/pago", adminAut, (req, res) => {
+    let admin = req.session.login;
+    
     Mensalidade.findAll({
         order: [
             ['dataVencimento', 'ASC']
@@ -55,12 +60,14 @@ router.get("/administrador/mensalidades/pago", adminAut, (req, res) => {
             }
         ]
     }).then(mensalidades => {
-        res.render("administrador/mensalidades/pago", { mensalidades })
+        res.render("administrador/mensalidades/pago", { mensalidades, admin })
     });
 });
 
 // DETALHAR A MENSALIDADE
 router.get("/administrador/mensalidades/detalhes/:id", adminAut, (req, res) => {
+    let admin = req.session.login;
+    
     let id = req.params.id;
 
     if (isNaN(id)) {
@@ -78,8 +85,8 @@ router.get("/administrador/mensalidades/detalhes/:id", adminAut, (req, res) => {
         ]
     }).then(mensalidade => {
         if (mensalidade != undefined) {
-            Pacote.findByPk(mensalidade.cliente.pacoteId, {}).then(pacote => {
-                res.render("administrador/mensalidades/detalhes", { mensalidade, pacote });
+            Pacote.findByPk(mensalidade.cliente.pacoteId).then(pacote => {
+                res.render("administrador/mensalidades/detalhes", { mensalidade, pacote, admin });
             });
         } else {
             res.redirect("/administrador/mensalidades/aberto");
@@ -124,6 +131,8 @@ router.post("/mensalidades/reverter", adminAut, (req, res) => {
 
 // SALVAR A ANTECIPAÇÃO DA MENSALIDADE NO BANCO DE DADOS
 router.post("/mensalidades/antecipar", adminAut, (req, res) => {
+    let admin = req.session.login;
+    
     let id = req.body.inputID;
     let idPacote = req.body.selectPacote;
     let dataVencimento = req.body.inputDataVencimento;
@@ -156,6 +165,8 @@ router.post("/mensalidades/alterarVencimento", adminAut, (req, res) => {
 
 // LISTAR TODOS OS CLIENTES INCLUINDO O PACOTE PARA ANTECIPAÇÃO
 router.get("/administrador/mensalidades/listarClientesAntecipacao", adminAut, (req, res) => {
+    let admin = req.session.login;
+    
     Cliente.findAll({
         where: {
             academiumId: admin.idAcademia,
@@ -170,12 +181,14 @@ router.get("/administrador/mensalidades/listarClientesAntecipacao", adminAut, (r
             }
         ]
     }).then(clientes => {
-        res.render("administrador/mensalidades/listarClientesAntecipacao", { clientes });
+        res.render("administrador/mensalidades/listarClientesAntecipacao", { clientes, admin });
     });
 });
 
 // LISTAR TODOS OS CLIENTES INCLUINDO O PACOTE PARA ALTERAÇÃO DO VENCIMENTO
 router.get("/administrador/mensalidades/listarClientesAlteracaoVencimento", adminAut, (req, res) => {
+    let admin = req.session.login;
+    
     Cliente.findAll({
         where: {
             academiumId: admin.idAcademia,
@@ -190,12 +203,14 @@ router.get("/administrador/mensalidades/listarClientesAlteracaoVencimento", admi
             }
         ]
     }).then(clientes => {
-        res.render("administrador/mensalidades/listarClientesAlteracaoVencimento", { clientes });
+        res.render("administrador/mensalidades/listarClientesAlteracaoVencimento", { clientes, admin });
     });
 });
 
 // LISTAR AS MENSALIDADES DO CLIENTE E PREENCHER OS DADOS DE ANTECIPAÇÃO
 router.get("/administrador/mensalidades/antecipar/:id", adminAut, (req, res) => {
+    let admin = req.session.login;
+    
     let id = req.params.id;
 
     if (isNaN(id)) {
@@ -223,10 +238,10 @@ router.get("/administrador/mensalidades/antecipar/:id", adminAut, (req, res) => 
                 Mensalidade.findAll({
                     where: { clienteId: id },
                     order: [
-                        ['dataVencimento', 'ASC']
+                        ['dataVencimento', 'DESC']
                     ]
                 }).then(mensalidades => {
-                    res.render("administrador/mensalidades/antecipar", { cliente, pacotes, mensalidades });
+                    res.render("administrador/mensalidades/antecipar", { cliente, pacotes, mensalidades, admin });
                 });
             });
 
@@ -240,6 +255,8 @@ router.get("/administrador/mensalidades/antecipar/:id", adminAut, (req, res) => 
 
 // LISTAR AS MENSALIDADES DO CLIENTE E PREENCHER OS DADOS DE ALTERAÇÃO DE VENCIMENTO
 router.get("/administrador/mensalidades/alterarVencimento/:id", adminAut, (req, res) => {
+    let admin = req.session.login;
+    
     let id = req.params.id;
 
     if (isNaN(id)) {
@@ -267,10 +284,10 @@ router.get("/administrador/mensalidades/alterarVencimento/:id", adminAut, (req, 
                 Mensalidade.findAll({
                     where: { clienteId: id },
                     order: [
-                        ['dataVencimento', 'ASC']
+                        ['dataVencimento', 'DESC']
                     ]
                 }).then(mensalidades => {
-                    res.render("administrador/mensalidades/alterarVencimento", { cliente, pacotes, mensalidades });
+                    res.render("administrador/mensalidades/alterarVencimento", { cliente, pacotes, mensalidades, admin });
                 });
             });
 

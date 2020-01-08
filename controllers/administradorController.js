@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcryptjs");
 const Administrador = require("../models/Administrador");
-const Pacote = require("../models/Pacote");
 const EnderecoAdministrador = require("../models/EnderecoAdministrador");
 const Login = require("../models/Login");
 const adminAut = require("../middlewares/adminAut");
@@ -108,7 +107,7 @@ router.get("/administrador/admins/listar", adminAut, (req, res) => {
             ]
         });
 
-        res.render("administrador/admins/listar", { administradores, admin});
+        res.render("administrador/admins/listar", { administradores, admin });
     }
 
     listarAdministradores();
@@ -117,6 +116,8 @@ router.get("/administrador/admins/listar", adminAut, (req, res) => {
 
 // DETALHAR O ADMINISTRADOR SELECIONADO NA TABELA
 router.get("/administrador/admins/detalhes/:id", adminAut, (req, res) => {
+    let admin = req.session.login;
+
     let id = req.params.id;
 
     if (isNaN(id)) {
@@ -137,7 +138,7 @@ router.get("/administrador/admins/detalhes/:id", adminAut, (req, res) => {
         });
 
         if (administrador != undefined) {
-            res.render("administrador/admins/detalhes", { administrador });
+            res.render("administrador/admins/detalhes", { administrador, admin });
         } else {
             res.redirect("/administrador/admins/listar");
         }
@@ -149,11 +150,13 @@ router.get("/administrador/admins/detalhes/:id", adminAut, (req, res) => {
 
 // FORMULÁRIO DE CADASTRO DO ADMINISTRADOR INCLUINDO
 router.get("/administrador/admins/cadastro", adminAut, (req, res) => {
-    res.render("administrador/admins/cadastro");
+    let admin = req.session.login;
+    res.render("administrador/admins/cadastro", { admin });
 });
 
 // SALVAR O ADMINISTRADOR APÓS PREENCHER O FORMULÁRIO
 router.post("/administrador/salvar", adminAut, (req, res) => {
+    let admin = req.session.login;
 
     let nome = req.body.inputNome
     let sobrenome = req.body.inputSobrenome;
@@ -170,8 +173,8 @@ router.post("/administrador/salvar", adminAut, (req, res) => {
     let cep = req.body.inputCEP;
     let uf = req.body.selectUF;
 
-    Login.findOne({ where: { email } }).then(email => {
-        if (email == undefined) {
+    Login.findOne({ where: { email } }).then(emailAtual => {
+        if (emailAtual == undefined) {
 
             let salt = bcrypt.genSaltSync(10);
             let hash = bcrypt.hashSync(senha, salt);
@@ -203,14 +206,17 @@ router.post("/administrador/salvar", adminAut, (req, res) => {
                     administradorId: administrador.id
                 }).catch(err => {
                     res.redirect("/administrador/admins/cadastro");
-                    console.log('Não foi possível cadastrar o endereço: ' + erro);
+                    console.log('Não foi possível cadastrar o endereço: ' + err);
                 });
 
                 await Login.create({
-                    administradorId: administrador.id,
-                    email: email,
-                    senha: hash
-                })
+                    email,
+                    senha: hash,
+                    administradorId: administrador.id
+                }).catch(err => {
+                    res.redirect("/administrador/admins/cadastro");
+                    console.log('Não foi possível cadastrar o login: ' + err);
+                });
 
                 res.redirect("/administrador/admins/listar");
             }
@@ -227,21 +233,51 @@ router.post("/administrador/salvar", adminAut, (req, res) => {
 // PERFIL
 router.get("/administrador/perfil", adminAut, (req, res) => {
     let admin = req.session.login;
-    res.render("administrador/admins/perfil", { admin })
+
+    Administrador.findOne({
+        where: {
+            id: admin.idAdmin
+        },
+        include: [
+            {
+                model: EnderecoAdministrador
+            }
+        ]
+    }).then(administrador => {
+        res.render("administrador/admins/perfil", { administrador, admin })
+    });
+
 });
 
 // EDITAR OS DADOS DO ADMINISTRADOR
 router.get("/administrador/editar/dados", adminAut, (req, res) => {
-    res.render("administrador/admins/editarDados");
+    let admin = req.session.login;
+
+    Administrador.findOne({
+        where: {
+            id: admin.idAdmin
+        },
+        include: [
+            {
+                model: EnderecoAdministrador
+            }
+        ]
+    }).then(administrador => {
+        res.render("administrador/admins/editarDados", { administrador, admin });
+    });
+
 });
 
 // EDITAR SENHA DO ADMINISTRADOR
 router.get("/administrador/editar/senha", adminAut, (req, res) => {
-    res.render("administrador/admins/editarSenha");
+    let admin = req.session.login;
+    res.render("administrador/admins/editarSenha", { admin });
 });
 
 // SALVAR NOVA SENHA
 router.post("/administrador/senha/update", adminAut, (req, res) => {
+    let admin = req.session.login;
+
     let senhaAtual = req.body.senhaAtual;
     let novaSenha = req.body.novaSenha;
     let confirmarNovaSenha = req.body.confirmarNovaSenha;
@@ -260,29 +296,25 @@ router.post("/administrador/senha/update", adminAut, (req, res) => {
             where: { id: admin.idLogin }
         });
 
-        try {
-            if (login != undefined) {
+        if (login != undefined) {
 
-                let correct = bcrypt.compareSync(senhaAtual, login.senha);
+            let correct = bcrypt.compareSync(senhaAtual, login.senha);
 
-                if (correct) {
-                    Login.update({
-                        senha: hash
-                    }, {
-                        where: { id: admin.idLogin }
-                    }).then(() => {
-                        res.redirect("/administrador/perfil")
-                    });
-                } else {
-                    req.flash('error', 'Senha inválida!');
-                    res.redirect("/administrador/editar/senha");
-                }
-
+            if (correct) {
+                Login.update({
+                    senha: hash
+                }, {
+                    where: { id: admin.idLogin }
+                }).then(login => {
+                    res.redirect("/administrador/perfil")
+                });
             } else {
+                req.flash('error', 'Senha inválida!');
                 res.redirect("/administrador/editar/senha");
             }
-        } catch (err) {
-            console.log('Ocorreu um erro durante a alteração da senha' + err);
+
+        } else {
+            res.redirect("/administrador/editar/senha");
         }
     }
 
@@ -291,6 +323,8 @@ router.post("/administrador/senha/update", adminAut, (req, res) => {
 
 // SALVAR DADOS DA EDIÇÃO
 router.post("/administrador/dados/update", adminAut, (req, res) => {
+    let admin = req.session.login;
+
     let nome = req.body.inputNome;
     let sobrenome = req.body.inputSobrenome;
     let sexo = req.body.selectSexo;
@@ -306,11 +340,11 @@ router.post("/administrador/dados/update", adminAut, (req, res) => {
     let uf = req.body.selectUF;
 
     Login.findOne({ where: { email } }).then(login => {
-        if (login != undefined || login.email == admin.email) {
+        if (login == undefined || email == admin.email) {
 
             let atualizarDados = async () => {
 
-                let administrador = Administrador.update({
+                await Administrador.update({
                     nome,
                     sobrenome,
                     sexo,
@@ -322,13 +356,13 @@ router.post("/administrador/dados/update", adminAut, (req, res) => {
                     where: { id: admin.idAdmin }
                 });
 
-                let login = Login.update({
+                await Login.update({
                     email
                 }, {
                     where: { administradorId: admin.idAdmin }
                 });
 
-                let enderecoAdministrador = await EnderecoAdministrador.update({
+                await EnderecoAdministrador.update({
                     cep,
                     logradouro,
                     cidade,
@@ -338,24 +372,6 @@ router.post("/administrador/dados/update", adminAut, (req, res) => {
                 }, {
                     where: { administradorId: admin.idAdmin }
                 });
-
-                global.admin = {
-                    idLogin: admin.idLogin,
-                    idAdmin: admin.idAdmin,
-                    email,
-                    nome,
-                    sobrenome,
-                    sexo,
-                    dataNascimento,
-                    cpf,
-                    telefone,
-                    cep,
-                    logradouro,
-                    cidade,
-                    bairro,
-                    numero,
-                    uf
-                }
 
                 res.redirect("/administrador/perfil");
             }
