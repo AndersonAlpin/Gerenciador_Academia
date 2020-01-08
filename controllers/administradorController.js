@@ -10,13 +10,8 @@ const enviarEmail = require('../email/send');
 
 // HOME DO ADMINISTRADOR
 router.get("/administrador/home", adminAut, (req, res) => {
-
-    Pacote.findAll({
-        where: { academiumId: admin.idAcademia }
-    }).then(pacotes => {
-        res.render("administrador/home", { pacotes });
-    })
-
+    let admin = req.session.login;
+    res.render("administrador/home", { admin });
 });
 
 // AUTENTICAÇÃO
@@ -48,7 +43,6 @@ router.post("/autenticacao", (req, res) => {
 
                 if (correct) {
                     sessao(login);
-                    res.redirect("/administrador/home");
                 } else {
                     req.flash('senhaInvalida', 'Senha inválida');
                     req.flash('eValido', 'border: 1px solid green');
@@ -91,7 +85,9 @@ router.post("/autenticacao", (req, res) => {
             uf: login.administrador.enderecoadministrador.uf
         }
 
-        global.admin = req.session.login;
+        let admin = req.session.login;
+
+        res.render("administrador/home", { admin });
     }
 
     autenticarUsuario();
@@ -99,6 +95,7 @@ router.post("/autenticacao", (req, res) => {
 
 // LISTAR TODOS OS ADMINISTRADORES INCLUINDO O ENDEREÇO
 router.get("/administrador/admins/listar", adminAut, (req, res) => {
+    let admin = req.session.login;
 
     let listarAdministradores = async () => {
         let administradores = await Administrador.findAll({
@@ -111,7 +108,7 @@ router.get("/administrador/admins/listar", adminAut, (req, res) => {
             ]
         });
 
-        res.render("administrador/admins/listar", { administradores });
+        res.render("administrador/admins/listar", { administradores, admin});
     }
 
     listarAdministradores();
@@ -229,7 +226,8 @@ router.post("/administrador/salvar", adminAut, (req, res) => {
 
 // PERFIL
 router.get("/administrador/perfil", adminAut, (req, res) => {
-    res.render("administrador/admins/perfil")
+    let admin = req.session.login;
+    res.render("administrador/admins/perfil", { admin })
 });
 
 // EDITAR OS DADOS DO ADMINISTRADOR
@@ -307,8 +305,8 @@ router.post("/administrador/dados/update", adminAut, (req, res) => {
     let numero = req.body.inputNumero;
     let uf = req.body.selectUF;
 
-    Login.findOne({where: {email}}).then(login => {
-        if(login != undefined || login.email == admin.email){
+    Login.findOne({ where: { email } }).then(login => {
+        if (login != undefined || login.email == admin.email) {
 
             let atualizarDados = async () => {
 
@@ -323,13 +321,13 @@ router.post("/administrador/dados/update", adminAut, (req, res) => {
                 }, {
                     where: { id: admin.idAdmin }
                 });
-        
+
                 let login = Login.update({
                     email
                 }, {
                     where: { administradorId: admin.idAdmin }
                 });
-        
+
                 let enderecoAdministrador = await EnderecoAdministrador.update({
                     cep,
                     logradouro,
@@ -340,7 +338,7 @@ router.post("/administrador/dados/update", adminAut, (req, res) => {
                 }, {
                     where: { administradorId: admin.idAdmin }
                 });
-        
+
                 global.admin = {
                     idLogin: admin.idLogin,
                     idAdmin: admin.idAdmin,
@@ -358,13 +356,13 @@ router.post("/administrador/dados/update", adminAut, (req, res) => {
                     numero,
                     uf
                 }
-        
+
                 res.redirect("/administrador/perfil");
             }
-        
+
             atualizarDados();
 
-        }else{
+        } else {
             req.flash("emailExistente", "O email informado já existe.");
             res.redirect("/administrador/editar/dados");
         }
