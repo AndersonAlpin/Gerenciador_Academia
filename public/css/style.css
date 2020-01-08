@@ -53,7 +53,8 @@ body {
 }
 
 .jumbotron {
-    height: 350px;
+    margin-top: -25px;
+    height: 400px;
 }
 
 .logo-login{
