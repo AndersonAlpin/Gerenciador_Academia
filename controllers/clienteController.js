@@ -142,7 +142,7 @@ router.post("/clientes/salvar", adminAut, (req, res) => {
             console.log('Não foi possível cadastrar o endereço: ' + erro);
         });
 
-        connection.query(`call primeiraMensalidadePaga('${admin.idAcademia}','${pacoteId}', '${formaPagamento}')`, {
+        await connection.query(`call primeiraMensalidadePaga('${admin.idAcademia}','${pacoteId}', '${formaPagamento}')`, {
             type: Sequelize.DataTypes.INSERT
         });
 

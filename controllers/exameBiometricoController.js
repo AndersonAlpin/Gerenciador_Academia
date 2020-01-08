@@ -44,8 +44,8 @@ router.get("/administrador/exame/listar/:id", adminAut, (req, res) => {
 // SALVAR OS DADOS PARA CALCULAR O IMC
 router.post("/insert/imc", adminAut, (req, res) => {
     let clienteId = req.body.inputID;
-    let peso = req.body.inputPeso;
-    let altura = req.body.inputAltura;
+    let peso = req.body.inputPeso.replace(",", ".");
+    let altura = req.body.inputAltura.replace(",", ".");
 
     
     connection.query(`
