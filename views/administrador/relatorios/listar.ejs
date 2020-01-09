@@ -11,6 +11,7 @@
             <h2 class="titulos">Relatórios</h2>
 
             <br>
+
             <div class="input-group">
                 <div class="input-group-prepend">
                     <span class="input-group-text">Filtro</span>
@@ -225,7 +226,8 @@
                     <% }%>
                 </select>
             </div>
-            <hr>
+
+            <br>
 
             <div class="table-responsive-md tabelas">
                 <table class="table table-sm">
@@ -386,9 +388,13 @@
                 </table>
             </div>
 
+            <h2 class="titulos">Relatórios Diários</h2>
+
+            <br>
+
             <div class="table-responsive-md tabelas">
                 <table class="table table-sm">
-                    <caption class="text-white-50">Relatório Diário</caption>
+                    <caption class="text-white-50">Relatório diário de mensalidades</caption>
                     <thead class="tabela-head">
                         <tr>
                             <th>Mensalidades</th>
@@ -418,6 +424,27 @@
                     </tbody>
                 </table>
             </div>
+
+            <div class="table-responsive-md tabelas">
+                <table class="table table-sm">
+                    <caption class="text-white-50">Relatório diário de clientes</caption>
+                    <thead class="tabela-head">
+                        <tr>
+                            <th>Total de clientes</th>
+                            <th>Homens</th>
+                            <th>Mulheres</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="tabelas-linhas">
+                            <td><%= relatorio.numClientesDiario %></td>
+                            <td><%= relatorio.numHomensDiario %></td>
+                            <td><%= relatorio.numMulheresDiario %></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
         </div>
     </div>
 </body>

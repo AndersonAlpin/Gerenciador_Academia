@@ -17,6 +17,7 @@ router.get("/administrador/relatorios/listar", adminAut, (req, res) => {
         numClientes: 0,
         numClientesAtivos: 0,
         numClientesInativos: 0,
+        numClientesDiario: 0,
         numMensalidadePago: 0,
         numMensalidadeAtraso: 0,
         numMensalidadeReceber: 0,
@@ -25,6 +26,8 @@ router.get("/administrador/relatorios/listar", adminAut, (req, res) => {
         totalAtraso: 0,
         numHomens: 0,
         numMulheres: 0,
+        numHomensDiario: 0,
+        numMulheresDiario: 0,
         numCartao: 0,
         numDinheiro: 0,
         numDeposito: 0,
@@ -110,6 +113,24 @@ router.get("/administrador/relatorios/listar", adminAut, (req, res) => {
             }
         });
 
+        // ========================================================
+        let clientesDiario = await connection.query(`
+        call relatorioDiarioClientes('${admin.idAcademia}')`, {
+            type: Sequelize.DataTypes.SELECT
+        });
+
+        // NUMERO CLIENTES DIÁRIO
+        clientesDiario.forEach(cliente => {
+            relatorio.numClientesDiario++;
+
+            // HOMENS/MULHERES
+            if (cliente.sexo == 'Masculino') {
+                relatorio.numHomensDiario++;
+            } else {
+                relatorio.numMulheresDiario++;
+            }
+        });
+
         // SAÍDAS
         let gastos = await Gasto.findAll({
             where: { academiumId: admin.idAcademia }
@@ -147,6 +168,7 @@ router.get("/administrador/relatorios/listar/:mes", adminAut, (req, res) => {
         numClientes: 0,
         numClientesAtivos: 0,
         numClientesInativos: 0,
+        numClientesDiario: 0,
         numMensalidadePago: 0,
         numMensalidadeAtraso: 0,
         numMensalidadeReceber: 0,
@@ -155,6 +177,8 @@ router.get("/administrador/relatorios/listar/:mes", adminAut, (req, res) => {
         totalAtraso: 0,
         numHomens: 0,
         numMulheres: 0,
+        numHomensDiario: 0,
+        numMulheresDiario: 0,
         numCartao: 0,
         numDinheiro: 0,
         numDeposito: 0,
@@ -234,6 +258,24 @@ router.get("/administrador/relatorios/listar/:mes", adminAut, (req, res) => {
                 relatorio.numHomens++;
             } else {
                 relatorio.numMulheres++;
+            }
+        });
+        
+        // ====================================================
+        let clientesDiario = await connection.query(`
+        call relatorioDiarioClientes('${admin.idAcademia}')`, {
+            type: Sequelize.DataTypes.SELECT
+        });
+
+        // NUMERO CLIENTES DIÁRIO
+        clientesDiario.forEach(cliente => {
+            relatorio.numClientesDiario++;
+
+            // HOMENS/MULHERES
+            if (cliente.sexo == 'Masculino') {
+                relatorio.numHomensDiario++;
+            } else {
+                relatorio.numMulheresDiario++;
             }
         });
 
