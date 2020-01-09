@@ -84,9 +84,7 @@ router.post("/autenticacao", (req, res) => {
             uf: login.administrador.enderecoadministrador.uf
         }
 
-        let admin = req.session.login;
-
-        res.render("administrador/home", { admin });
+        res.redirect("administrador/home");
     }
 
     autenticarUsuario();
