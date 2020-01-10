@@ -128,13 +128,11 @@ body {
 /* FORMATAÇÕES DO NAVBAR */
 
 .header {
-    /* position: absolute; */
     height: 55px;
     width: 100%;
     margin-bottom: -55px;
     color: #ffffff;
     z-index: 4;
-    /* border-bottom: 1px solid #ffffff; */
 }
 
 .header a {
@@ -194,7 +192,6 @@ body {
 /* FORMATAÇÕES DO SIDEBAR */
 
 .side-bar {
-    position: absolute;
     width: 100%;
     background-color: #141414;
     height: 100vh;
@@ -227,11 +224,6 @@ body {
     background: #363636;
 }
 
-/* =================================== */
-#carouselHome  {
-    margin: auto;
-}
-
 /* =========RELATÓRIOS======= */
 
 .relatorio-total-gasto {
@@ -247,11 +239,6 @@ body {
 
 
 /* ===== TABELAS ============== */
-.titulo-tabelas {
-    font-size: 1.2em;
-    font-weight: 500;
-}
-
 .tabelas {
     overflow: auto;
     margin-bottom: 15px;
@@ -260,6 +247,11 @@ body {
 
 .table {
     min-width: 700px;
+}
+
+.titulo-tabelas {
+    font-size: 1.2em;
+    font-weight: 500;
 }
 
 .tabelas-linhas {
@@ -296,22 +288,7 @@ body {
 
 /* FORMULÁRIOS */
 
-.inline {
-    display: inline;
-}
-
-#detalhesCliente div {
-    padding: 5px;
-    font-size: 18px;
-}
-
-/* TELA DETALHES */
-#detalhesCliente span {
-    color: #000;
-}
-
 .formularios {
-    border-radius: 5px;
     color: #fff;
     padding: 15px;
 }
@@ -324,10 +301,6 @@ body {
 
 .formularios label {
     font-size: 17px;
-}
-
-#detalhesCliente span {
-    font-weight: bold;
 }
 
 /* ======================================== */

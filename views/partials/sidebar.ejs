@@ -34,7 +34,6 @@
                         <span>Mensalidades</span>
                     </a>
                 </li>
-                <% if(admin.tipo === 'chefe'){ %>
                 <li>
                     <a title="Pacotes" href="/administrador/pacotes/listar">
                         <span><i class="fas fa-percent"></i></span>
@@ -42,7 +41,6 @@
                     </a>
 
                 </li>
-                <% } %>
                 <% if(admin.tipo === 'chefe'){ %>
                 <li>
                     <a title="Relatórios" href="/administrador/relatorios/listar">
