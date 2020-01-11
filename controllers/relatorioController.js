@@ -146,7 +146,13 @@ router.get("/administrador/relatorios/listar", adminAut, (req, res) => {
             type: Sequelize.DataTypes.SELECT
         });
 
-        res.render("administrador/relatorios/listar", { relatorio, gastos, entradaDiaria, admin, selecionado });
+        // ANIVERSARIANTES
+        let aniversariantes = await connection.query(`
+        call relatorioAniversariantes('${admin.idAcademia}')`, {
+            type: Sequelize.DataTypes.SELECT
+        });
+
+        res.render("administrador/relatorios/listar", { relatorio, gastos, entradaDiaria, admin, selecionado, aniversariantes });
 
     }
 
