@@ -60,4 +60,27 @@ router.post("/insert/imc", adminAut, (req, res) => {
     
 });
 
+// DELETAR UM IMC
+router.post("/exame/delete", adminAut, (req, res) => {
+    let id = req.body.exameId;
+    let clienteId = req.body.clienteId;
+
+    if (id != undefined) { //SE FOR DIFERENTE DE NULO
+        if (!isNaN(id)) { //SE FOR UM NÚMERO  
+
+            ExameBiometrico.destroy({
+                where: { id }
+            }).then(() => {
+                res.redirect("/administrador/exame/listar/" + clienteId);
+            });
+
+        } else {
+            res.redirect("/administrador/exame/listar/" + clienteId);
+        }
+    } else {
+        res.redirect("/administrador/exame/listar/" + clienteId);
+    }
+    
+});
+
 module.exports = router;

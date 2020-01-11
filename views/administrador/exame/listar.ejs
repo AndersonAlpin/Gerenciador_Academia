@@ -15,11 +15,11 @@
                     <tr>
                         <th>Nome</th>
                         <th>Sobrenome</th>
-                        <th>CPF</th>
                         <th>Peso</th>
                         <th>Altura</th>
                         <th>IMC</th>
                         <th>Data</th>
+                        <th>Ações</th>
                     </tr>
                 </thead>
                 <tbody id="tbody">
@@ -28,7 +28,6 @@
                     <tr class="tabelas-linhas">
                         <td><%= exame.cliente.nome %></td>
                         <td><%= exame.cliente.sobrenome %></td>
-                        <td><%= exame.cliente.cpf %></td>
                         <td><%= exame.peso.toFixed(3) %></td>
                         <td><%= exame.altura.toFixed(2) %></td>
                         <td><%= exame.imc.toFixed(2) %></td>
@@ -36,6 +35,14 @@
                             <% let dataAtual = new Date(exame.createdAt) %>
                             <% let dataAtualFormatada = dataAtual.getDate() + "/" + (dataAtual.getMonth() + 1) + "/" + dataAtual.getFullYear() %>
                             <%= dataAtualFormatada %>
+                        </td>
+                        <td>
+                            <form class="inline" method="POST" action="/exame/delete"
+                                onsubmit="confirmarDelecao(event, this)">
+                                <input type="hidden" name="exameId" value="<%= exame.id %>">
+                                <input type="hidden" name="clienteId" value="<%= exame.cliente.id %>">
+                                <button class="btn btn-sm btn-danger">Deletar</button>
+                            </form>
                         </td>
                     </tr>
                     <%})%>
@@ -46,7 +53,7 @@
         <hr>
 
         <div class="formularios" style="margin-top: -15px;">
-            <form action="/insert/imc" method="POST" onsubmit="confirmarAlteracao(event, this)">
+            <form action="/insert/imc" method="POST" onsubmit="confirmarInsercao(event, this)">
 
                 <div class="form-row">
                     <div class="form-group col-md-3">
@@ -70,9 +77,17 @@
 
 <%- include ../../partials/footer.ejs %>
 <script>
-    function confirmarAlteracao(event, form) {
+    function confirmarInsercao(event, form) {
         event.preventDefault();
         var decisao = confirm("Você deseja calcular um novo IMC?");
+        if (decisao) {
+            form.submit();
+        }
+    }
+
+    function confirmarDelecao(event, form) {
+        event.preventDefault();
+        var decisao = confirm("Você quer deletar este IMC?");
         if (decisao) {
             form.submit();
         }
