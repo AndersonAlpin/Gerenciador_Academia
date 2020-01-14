@@ -21,7 +21,7 @@
         <div class="table-responsive-md tabelas">
             <table class="table table-sm" id="tabela">
                 <thead class="tabela-head">
-                    <tr class="">
+                    <tr>
                         <th>Nome</th>
                         <th>Descrição</th>
                         <th>Taxa de Desconto</th>
@@ -36,10 +36,10 @@
                         <td> <%= pacote.descricao %> </td>
                         <td> <%= pacote.taxaDesconto %> </td>
                         <td width="180px">
-                            <a href="/administrador/pacotes/editar/<%= pacote.id %>"
-                                class="btn btn-sm btn-warning">Editar</a>
                             <form class="inline" method="POST" action="/pacotes/delete"
                                 onsubmit="confirmarDelecao(event, this)">
+                                <a href="/administrador/pacotes/editar/<%= pacote.id %>"
+                                    class="btn btn-sm btn-warning">Editar</a>
                                 <input type="hidden" name="id" value="<%= pacote.id %>">
                                 <button class="btn btn-sm btn-danger">Deletar</button>
                             </form>
