@@ -24,7 +24,7 @@
                     <tr>
                         <th>Nome</th>
                         <th>Descrição</th>
-                        <th>Taxa de Desconto</th>
+                        <th>Valor do Desconto</th>
                         <th>Ações</th>
                     </tr>
                 </thead>
@@ -34,7 +34,9 @@
                     <tr class="tabelas-linhas">
                         <td> <%= pacote.nome %> </td>
                         <td> <%= pacote.descricao %> </td>
-                        <td> <%= pacote.taxaDesconto %> </td>
+                        <td>
+                            <%= pacote.taxaDesconto.toLocaleString('pt-br', {style: 'currency', currency: 'BRL'}) %>
+                        </td>
                         <td width="180px">
                             <form class="inline" method="POST" action="/pacotes/delete"
                                 onsubmit="confirmarDelecao(event, this)">
