@@ -147,12 +147,12 @@ router.get("/administrador/relatorios/listar", adminAut, (req, res) => {
         });
 
         // ANIVERSARIANTES
-        let aniversariantes = await connection.query(`
+        /*let aniversariantes = await connection.query(`
         call relatorioAniversariantes('${admin.idAcademia}')`, {
             type: Sequelize.DataTypes.SELECT
-        });
+        });*/
 
-        res.render("administrador/relatorios/listar", { relatorio, gastos, entradaDiaria, admin, selecionado, aniversariantes });
+        res.render("administrador/relatorios/listar", { relatorio, gastos, entradaDiaria, admin, selecionado /*,aniversariantes*/ });
 
     }
 
@@ -302,12 +302,12 @@ router.get("/administrador/relatorios/listar/:mes", adminAut, (req, res) => {
         });
 
         // ANIVERSARIANTES
-        let aniversariantes = await connection.query(`
+        /*let aniversariantes = await connection.query(`
         call relatorioAniversariantes('${admin.idAcademia}')`, {
             type: Sequelize.DataTypes.SELECT
-        });
+        });*/
 
-        res.render("administrador/relatorios/listar", { relatorio, gastos, entradaDiaria, admin, selecionado, aniversariantes });
+        res.render("administrador/relatorios/listar", { relatorio, gastos, entradaDiaria, admin, selecionado /*, aniversariantes*/ });
     }
 
     gerarRelatorios();

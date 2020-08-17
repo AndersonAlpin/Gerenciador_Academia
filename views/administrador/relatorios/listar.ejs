@@ -445,33 +445,6 @@
                 </table>
             </div>
 
-            <div class="table-responsive-md tabelas">
-                <table class="table table-sm" id="tabela">
-                    <caption class="text-white-50">Aniversariantes do dia</caption>
-                    <thead class="tabela-head">
-                        <tr>
-                            <th>Nome</th>
-                            <th>Sobrenome</th>
-                            <th>Data de Nascimento</th>
-                            <th>Ações</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tbody">
-                        <% aniversariantes.forEach(cliente => { %>
-                        <tr class="tabelas-linhas">
-                            <td> <%= cliente.nome %> </td>
-                            <td> <%= cliente.sobrenome %> </td>
-                            <td> <input type="date" value="<%= cliente.dataNascimento %>" disabled> </td>
-                            <td>
-                                <a href="/administrador/clientes/detalhes/<%= cliente.id %>"
-                                    class="btn btn-sm btn-success">Detalhes</a>
-                            </td>
-                        </tr>
-                        <% }) %>
-                    </tbody>
-                </table>
-            </div>
-
         </div>
     </div>
 </body>
