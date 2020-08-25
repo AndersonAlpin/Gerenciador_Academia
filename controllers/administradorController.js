@@ -406,6 +406,27 @@ router.post("/administrador/admins/status/update", (req, res) => {
     });
 });
 
+// DELETAR UM ADMINISTRADOR
+router.post("/administrador/admins/delete", adminAut, (req, res) => {
+    let id = req.body.id;
+
+    if (id != undefined) { //SE FOR DIFERENTE DE NULO
+        if (!isNaN(id)) { //SE FOR UM NÚMERO  
+
+            Administrador.destroy({
+                where: { id }
+            }).then(() => {
+                res.redirect("/administrador/admins/listar");
+            });
+
+        } else {
+            res.redirect("/administrador/admins/listar");
+        }
+    } else {
+        res.redirect("/administrador/admins/listar");
+    }
+});
+
 // INFORMAR O EMAIL QUE FOI ESQUECIDO
 router.get("/administrador/password/email", (req, res) => {
     res.render("administrador/password/email");

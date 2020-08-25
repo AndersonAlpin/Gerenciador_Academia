@@ -303,6 +303,10 @@ body {
     font-size: 17px;
 }
 
+.btnDeletarCliente, .btnDeletarAdministrador {
+    margin-left: -25px;
+}
+
 /* ======================================== */
 
 

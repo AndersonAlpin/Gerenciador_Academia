@@ -299,6 +299,7 @@ router.post("/administrador/clientes/update", adminAut, (req, res) => {
 
 // ATIVAR/INATIVAR CLIENTE
 router.post("/administrador/clientes/status/update", (req, res) => {
+    let admin = req.session.login;
     let id = req.body.inputID;
     let status = req.body.inputStatus;
     let newStatus;
@@ -316,8 +317,34 @@ router.post("/administrador/clientes/status/update", (req, res) => {
             id
         }
     }).then(() => {
+
+        connection.query(`call gerarExcluirMensalidade(${id}, ${admin.idAcademia})`, {
+            type: Sequelize.DataTypes.INSERT
+        });
+
         res.redirect("/administrador/clientes/detalhes/" + id);
     });
+});
+
+// DELETAR UM CLIENTE
+router.post("/administrador/clientes/delete", adminAut, (req, res) => {
+    let id = req.body.id;
+
+    if (id != undefined) { //SE FOR DIFERENTE DE NULO
+        if (!isNaN(id)) { //SE FOR UM NÚMERO  
+
+            Cliente.destroy({
+                where: { id }
+            }).then(() => {
+                res.redirect("/administrador/clientes/listar");
+            });
+
+        } else {
+            res.redirect("/administrador/clientes/listar");
+        }
+    } else {
+        res.redirect("/administrador/clientes/listar");
+    }
 });
 
 module.exports = router;
