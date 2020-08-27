@@ -307,6 +307,13 @@ body {
     margin-left: -25px;
 }
 
+.jumbotronBackground {
+    text-align: center;
+    color: rgb(255, 251, 251);
+    background-color: rgb(26, 25, 25);
+    opacity: 0.8;
+}
+
 /* ======================================== */
 
 

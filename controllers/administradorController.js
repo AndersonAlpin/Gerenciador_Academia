@@ -3,6 +3,7 @@ const router = express.Router();
 const bcrypt = require("bcryptjs");
 const Administrador = require("../models/Administrador");
 const EnderecoAdministrador = require("../models/EnderecoAdministrador");
+const Academia = require('../models/Academia');
 const Login = require("../models/Login");
 const adminAut = require("../middlewares/adminAut");
 const enviarEmail = require('../email/send');
@@ -10,7 +11,14 @@ const enviarEmail = require('../email/send');
 // HOME DO ADMINISTRADOR
 router.get("/administrador/home", adminAut, (req, res) => {
     let admin = req.session.login;
-    res.render("administrador/home", { admin });
+
+    let home = async () => {
+        let academia = await Academia.findByPk(admin.idAcademia);
+
+        res.render("administrador/home", { admin, academia });
+    }
+
+    home();
 });
 
 // AUTENTICAÇÃO
