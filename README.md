@@ -1,5 +1,5 @@
 # Primeiro projeto da disciplina de Desenvolvimento WEB 4º Semestre
-Sistema Web destinado ao gerenciamento de academias desenvolvido utilizando a engine EJS e o banco de dados MySQL<br>
+Sistema Web responsivo destinado ao gerenciamento de academias desenvolvido utilizando a engine EJS e o banco de dados MySQL<br>
 ## Funcionalidades
 1. Cadastro de clientes
 2. Cadastro de funcionários
